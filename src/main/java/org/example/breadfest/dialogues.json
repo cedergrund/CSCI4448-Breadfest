@@ -1,0 +1,27 @@
+{
+  "greeting": [
+    "Hello!",
+    "Hi there!",
+    "Greetings!"
+  ],
+  "farewell": [
+    "Goodbye!",
+    "See you later!",
+    "Farewell!"
+  ],
+  "question": [
+    "How can I help you?",
+    "What do you need assistance with?",
+    "Is there anything I can assist you with?"
+  ],
+  "taunt": [
+    "How can I help you?",
+    "What do you need assistance with?",
+    "Is there anything I can assist you with?"
+  ],
+  "question": [
+    "How can I help you?",
+    "What do you need assistance with?",
+    "Is there anything I can assist you with?"
+  ]
+}
