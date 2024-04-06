@@ -1,4 +1,7 @@
 {
+  "test": [
+    "Hello!"
+  ],
   "greeting": [
     "Hello!",
     "Hi there!",
