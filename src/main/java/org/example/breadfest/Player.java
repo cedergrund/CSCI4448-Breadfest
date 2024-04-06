@@ -1,12 +1,20 @@
 package org.example.breadfest;
 
+import org.example.breadfest.dice.Dice;
+import org.example.breadfest.ingredients.Ingredients;
+
 import java.util.ArrayList;
 
 public class Player {
 
     private static final Player player = new Player();
 
-    private final ArrayList<String> inventory;
+    private final ArrayList<Ingredients> ingredient_inventory;
+
+    // dice_inventory is all die that player has, while active_dice_inventory are the 3 that they currently use
+    private final ArrayList<Dice> dice_inventory;
+
+    private final Dice[] active_dice_inventory;
 
     // base patience is starting patience at every time you enter maze
     private int base_patience;
@@ -17,7 +25,11 @@ public class Player {
     private Player() {
         base_patience = 100;
         curr_patience = base_patience;
-        inventory = new ArrayList<String>();
+
+        this.ingredient_inventory = new ArrayList<Ingredients>();
+
+        this.dice_inventory = new ArrayList<>();
+        this.active_dice_inventory = new Dice[3];
     }
 
     // singleton player
@@ -41,6 +53,67 @@ public class Player {
     public void upgradeBasePatience(int upgrade_amount){
         this.base_patience += upgrade_amount;
     }
+
+    public int rollDice(int selected_die){
+        return this.active_dice_inventory[selected_die-1].rollDice();
+    }
+
+    public void fightDinosaur(Dinosaur dinosaur){
+
+        // prompt selection of which die to use {1, 2, or 3 (if have 3 dice, do check on availability here)}
+        int selected_die = 1;
+
+        // roll two die
+        int player_roll = this.rollDice(selected_die);
+        int dino_roll = dinosaur.rollDie();
+
+        // compare the two rolls
+        int roll_difference = player_roll - dino_roll;
+
+        if (roll_difference >= 5){ // embarrassing win
+            // print whatever output
+            if (dinosaur.changeCurrPatience(-40)){
+                // dino "died", address
+                return;
+            };
+        }
+        else if (roll_difference > 0){ // normal win
+            // print whatever output
+            if (dinosaur.changeCurrPatience(-20)){
+                // dino "died", address
+                return;
+            };
+        }
+        else if (roll_difference == 0){ // tie
+            // print whatever output
+            if (this.changeCurrPatience(-10)){
+                // player "died", address
+                return;
+            };
+            if (dinosaur.changeCurrPatience(-10)){
+                // dino "died", address
+                return;
+            };
+        }
+        else if (roll_difference > -5){ // normal loss
+            // print whatever output
+            if(this.changeCurrPatience(-20)){
+                // player "died", address
+                return;
+            };
+        }
+        else { // embarrassing loss
+            // print whatever output
+            if(this.changeCurrPatience(-40)){
+                // player "died", address
+                return;
+            };
+        }
+
+        // print any other thing? maybe dino dialogue?
+    }
+
+
 
 
 }

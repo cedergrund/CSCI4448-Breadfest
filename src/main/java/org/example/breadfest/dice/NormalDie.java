@@ -1,8 +1,8 @@
-package org.example.breadfest;
+package org.example.breadfest.dice;
 
 import java.util.Random;
 
-public class NormalDie implements Dice{
+public class NormalDie implements Dice {
 
     @Override
     public int rollDice() {

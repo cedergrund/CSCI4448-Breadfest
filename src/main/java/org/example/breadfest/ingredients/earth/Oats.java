@@ -1,0 +1,16 @@
+package org.example.breadfest.ingredients.earth;
+
+import org.example.breadfest.ingredients.IngredientTypes;
+import org.example.breadfest.ingredients.Ingredients;
+
+public class Oats implements Ingredients {
+    @Override
+    public int getTastiness() {
+        return 10;
+    }
+
+    @Override
+    public IngredientTypes getType() {
+        return IngredientTypes.Earth;
+    }
+}

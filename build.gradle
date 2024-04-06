@@ -39,13 +39,13 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
+  // logger
+  implementation 'ch.qos.logback:logback-classic:1.4.14'
+
   // jackson for dialogue read from file
-//  // Jackson Core
-  implementation 'com.fasterxml.jackson.core:jackson-core:2.12.5'
-//  implementation 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
-//  // Jackson Databind
-  implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
-//  implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.0'
+  implementation 'com.fasterxml.jackson.core:jackson-core:2.16.1'
+  implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+
 
 }
 
