@@ -1,6 +1,7 @@
 package org.example.breadfest;
 
 import org.example.breadfest.dice.Dice;
+import org.example.breadfest.dinosaurs.Dinosaur;
 import org.example.breadfest.ingredients.Ingredients;
 
 import java.util.ArrayList;
@@ -22,9 +23,13 @@ public class Player {
     // curr patience starts at base patience and then is updated as you lose it, until turn is over
     private int curr_patience;
 
+    // damage modifier in fights
+    private double damage_modifier;
+
     private Player() {
-        base_patience = 100;
-        curr_patience = base_patience;
+        this.base_patience = 100;
+        this.curr_patience = base_patience;
+        this.damage_modifier = 1.0;
 
         this.ingredient_inventory = new ArrayList<Ingredients>();
 
@@ -72,14 +77,14 @@ public class Player {
 
         if (roll_difference >= 5){ // embarrassing win
             // print whatever output
-            if (dinosaur.changeCurrPatience(-40)){
+            if (dinosaur.changeCurrPatience((int) (-40*this.damage_modifier))){
                 // dino "died", address
                 return;
             };
         }
         else if (roll_difference > 0){ // normal win
             // print whatever output
-            if (dinosaur.changeCurrPatience(-20)){
+            if (dinosaur.changeCurrPatience((int) (-20*this.damage_modifier))){
                 // dino "died", address
                 return;
             };

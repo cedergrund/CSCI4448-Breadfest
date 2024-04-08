@@ -1,9 +1,9 @@
-package org.example.breadfest.ingredients.earth;
+package org.example.breadfest.ingredients.salt;
 
 import org.example.breadfest.ingredients.IngredientTypes;
 import org.example.breadfest.ingredients.Ingredients;
 
-public class Rye implements Ingredients {
+public class Ginger implements Ingredients {
     @Override
     public int getTastiness() {
         return 10;
@@ -11,6 +11,6 @@ public class Rye implements Ingredients {
 
     @Override
     public IngredientTypes getType() {
-        return IngredientTypes.Earth;
+        return IngredientTypes.Fire;
     }
 }
