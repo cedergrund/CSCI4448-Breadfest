@@ -12,6 +12,7 @@ import java.util.*;
 public class Room {
 
     private final int depth;
+
     private char entry_direction;
 
     private Map<Character, Room> neighboring_rooms;
@@ -73,7 +74,6 @@ public class Room {
         double chance_for_dead_end = this.depth*0.1;
         double chance_for_connected_room = (1-chance_for_dead_end)/3;
 
-        Random random_seed = new Random();
         double random_roll = random_seed.nextDouble();
 
         if (random_roll < this.depth*0.1){

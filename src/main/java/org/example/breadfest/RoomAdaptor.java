@@ -39,6 +39,7 @@ public class RoomAdaptor {
         fxmlContent += "</font>\n";
         fxmlContent += "</Label>\n";
         List<Room> neighboringRooms = room.getNeighboringRooms();
+        if(this.existNorthNeighbor())
         fxmlContent += generateButton("Move North", neighboringRooms.contains(room.getNorthNeighbor()));
         fxmlContent += generateButton("Move South", neighboringRooms.contains(room.getSouthNeighbor()));
         fxmlContent += generateButton("Move West", neighboringRooms.contains(room.getWestNeighbor()));
@@ -60,5 +61,18 @@ public class RoomAdaptor {
         buttonXML += "</font>\n";
         buttonXML += "</Button>\n";
         return buttonXML;
+    }
+
+    public boolean existNorthNeighbor(){
+        return this.room.getRoomNeighbor('N') != null;
+    }
+    public boolean existSouthNeighbor(){
+        return this.room.getRoomNeighbor('S') != null;
+    }
+    public boolean existEastNeighbor(){
+        return this.room.getRoomNeighbor('E') != null;
+    }
+    public boolean existWestNeighbor(){
+        return this.room.getRoomNeighbor('W') != null;
     }
 }
