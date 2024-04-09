@@ -1,19 +1,18 @@
-package org.example.breadfest.*;
+package org.example.breadfest;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.List;
+import javafx.scene.Parent;
 
-public class RoomAdapter {
+public class RoomAdaptor {
     private Room room;
 
-    public RoomAdapter(Room room) {
+    public RoomAdaptor(Room room) {
         this.room = room;
     }
-
     // Method to load FXML content dynamically for the room
     public void loadRoomFXML() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Room.fxml"));
@@ -22,7 +21,7 @@ public class RoomAdapter {
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Room " + room.getRoomNumber());
+            stage.setTitle("Room " + room.getRoomNumber()); // hypothetical room number function? Perhaps room name? Talk to Gus about this
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
