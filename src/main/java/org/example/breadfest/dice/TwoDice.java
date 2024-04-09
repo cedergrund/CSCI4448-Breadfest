@@ -2,7 +2,7 @@ package org.example.breadfest.dice;
 
 import java.util.Random;
 
-public class DoubleDie implements Dice {
+public class TwoDice implements Dice {
     @Override
     public int rollDice() {
         Random random_seed = new Random();

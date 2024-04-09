@@ -4,8 +4,9 @@ import org.example.breadfest.ingredients.IngredientTypes;
 
 public interface Ingredients {
 
-    int getTastiness();
+    int getScore();
 
     IngredientTypes getType();
 
+    IngredientRarity getRarity();
 }

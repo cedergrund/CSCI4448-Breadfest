@@ -1,4 +1,4 @@
-package org.example.breadfest.ingredients.fire;
+package org.example.breadfest.ingredients.salt;
 
 import org.example.breadfest.ingredients.IngredientTypes;
 import org.example.breadfest.ingredients.Ingredients;

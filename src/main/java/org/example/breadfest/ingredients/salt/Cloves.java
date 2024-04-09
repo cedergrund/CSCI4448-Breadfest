@@ -1,9 +1,9 @@
-package org.example.breadfest.ingredients.fire;
+package org.example.breadfest.ingredients.salt;
 
 import org.example.breadfest.ingredients.IngredientTypes;
 import org.example.breadfest.ingredients.Ingredients;
 
-public class Ginger implements Ingredients {
+public class Cloves implements Ingredients {
     @Override
     public int getTastiness() {
         return 10;
