@@ -26,9 +26,21 @@ public class Room {
     private DinosaurFactory dinosaur_factory;
 
 
+
     public Room(int depth){
         // depth of room from cave-room 0
         this.depth = depth;
+        this.neighboring_rooms = new HashMap<>();
+
+    }
+
+    public boolean areThereNeighbors(){
+        if (this.neighboring_rooms == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
 
     }
 
