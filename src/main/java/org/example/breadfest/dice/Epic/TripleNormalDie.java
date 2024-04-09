@@ -1,4 +1,6 @@
-package org.example.breadfest.dice;
+package org.example.breadfest.dice.Epic;
+
+import org.example.breadfest.dice.Dice;
 
 import java.util.Random;
 

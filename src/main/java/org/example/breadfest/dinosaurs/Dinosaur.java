@@ -60,7 +60,8 @@ public abstract class Dinosaur {
         if (!this.dialogues_loaded) {
             ObjectMapper mapper = new ObjectMapper();
             String DIALOGUE_FILE_PATH = "dialogues.json";
-            dialogue = mapper.readValue(new File(DIALOGUE_FILE_PATH), new TypeReference<Map<String, List<String>>>() {});
+            dialogue = mapper.readValue(new File(DIALOGUE_FILE_PATH), new TypeReference<>() {
+            });
             this.dialogues_loaded = true;
         }
     }
@@ -102,7 +103,15 @@ public abstract class Dinosaur {
         return die.rollDice();
     }
 
-    public DinosaurTypes getType_of_dinosaur() {
-        return type_of_dinosaur;
+    public DinosaurTypes getDinosaurType() {
+        return this.type_of_dinosaur;
+    }
+
+    public Dice getRewardDie(){
+        return this.reward_die;
+    }
+
+    public Ingredients getRewardIngredient() {
+        return this.reward_ingredient;
     }
 }

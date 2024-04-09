@@ -143,7 +143,7 @@ public enum DinosaurTypes {
     public Ingredients getRewardIngredient() throws Exception {
         IngredientTypes random_ingredient_type = IngredientTypes.getRandomIngredientType();
         IngredientRarity ingredient_rarity = this.getIngredientRarity();
-        return ingredient_factory.IngredientFactory(random_ingredient_type,ingredient_rarity);
+        return ingredient_factory.makeIngredientByType(random_ingredient_type,ingredient_rarity);
     }
 
 }

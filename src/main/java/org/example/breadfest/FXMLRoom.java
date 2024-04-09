@@ -1,4 +1,11 @@
 package org.example.breadfest;
 
-public class FXMLRoom {
+public interface FXMLRoom {
+
+    String getBackgroundImage();
+
+    boolean existNorthNeighbor();
+    boolean existSouthNeighbor();
+    boolean existEastNeighbor();
+    boolean existWestNeighbor();
 }

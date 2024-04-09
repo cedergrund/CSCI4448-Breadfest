@@ -63,6 +63,24 @@ public class Player {
         return this.active_dice_inventory[selected_die-1].rollDice();
     }
 
+    private void beatDinosaur(Dinosaur dinosaur){
+        Ingredients reward_ingredient = dinosaur.getRewardIngredient();
+        Dice reward_die = dinosaur.getRewardDie();
+
+        if (reward_ingredient != null){
+            this.ingredient_inventory.add(reward_ingredient);
+        }
+        if (reward_die != null){
+            this.dice_inventory.add(reward_die);
+            // TODO: address active dice inventory
+        }
+
+    }
+
+    private void playerLost(){
+
+    }
+
     public void fightDinosaur(Dinosaur dinosaur){
 
         // prompt selection of which die to use {1, 2, or 3 (if have 3 dice, do check on availability here)}

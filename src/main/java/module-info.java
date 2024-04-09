@@ -12,4 +12,10 @@ module org.example.breadfest {
     opens org.example.breadfest.ingredients to javafx.fxml;
     exports org.example.breadfest.dinosaurs;
     opens org.example.breadfest.dinosaurs to javafx.fxml;
+    exports org.example.breadfest.dice.Common;
+    opens org.example.breadfest.dice.Common to javafx.fxml;
+    exports org.example.breadfest.dice.Rare;
+    opens org.example.breadfest.dice.Rare to javafx.fxml;
+    exports org.example.breadfest.dice.Epic;
+    opens org.example.breadfest.dice.Epic to javafx.fxml;
 }
