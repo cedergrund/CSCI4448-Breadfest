@@ -1,56 +1,71 @@
 package org.example.breadfest;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 public class RoomApplication extends Application {
+    private static final ExecutorService executor = Executors.newSingleThreadExecutor();
+
+    public void populateAndLoad(Stage stage) {
+        // Generate FXML content
+        FXMLBuilder my_fxml_Builder = new FXMLBuilder();
+        List<Character> sample_room_direction = List.of('N', 'S');
+        StringBuilder contentBuilder = my_fxml_Builder.generateFXMLContent(sample_room_direction);
+
+        // Convert the StringBuilder to a String
+        String content = contentBuilder.toString();
+        // Write content to FXML file
+        executor.execute(() -> {
+            FXMLContent.wipeFileContent("dynamic_room_test.fxml");
+            FXMLContent.writeToFxmlFile("dynamic_room_test.fxml", content);
+            // Load FXML file after content is written
+            Platform.runLater(() -> loadFXML(stage));
+        });
+    }
+
+    private void loadFXML(Stage stage) {
+        try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("home_room.fxml"));
+            Parent root = loader.load();
+
+            // Set up the scene
+            Scene scene = new Scene(root, 2000, 2000);
+
+            // Set the stage title
+            stage.setTitle("Room Application Test");
+
+            // Set the scene
+            stage.setScene(scene);
+
+            // Show the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
-    public void start(Stage stage) throws IOException {
-
-        FXMLContent.writeToFxmlFile("dynamic_room.fxml", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "\n" +
-                "<?import javafx.scene.layout.StackPane?>\n" +
-                "<?import javafx.scene.control.Label?>\n" +
-                "\n" +
-                "<StackPane xmlns=\"http://javafx.com/javafx\"\n" +
-                "            xmlns:fx=\"http://javafx.com/fxml\"\n" +
-                "            fx:controller=\"com.example.Controller\"\n" +
-                "            prefWidth=\"400\" prefHeight=\"300\">\n" +
-                "    <Label text=\"Hello, World!\" />\n" +
-                "</StackPane>");
-
-        // Load the FXML file
-        FXMLLoader root = new FXMLLoader(getClass().getResource("dynamic_room.fxml"));
-
-        // Set up the scene
-        Scene scene = new Scene(root.load(), 400, 300);
-
-        // Set the stage title
-        stage.setTitle("Room Application");
-
-        // Set the scene
-        stage.setScene(scene);
-
-        // Show the stage
-        stage.show();
-
-
-
-//        FXMLLoader fxmlLoader = new FXMLLoader(RoomApplication.class.getResource("template_scene.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 2000, 2000);
-//        stage.setTitle("Welcome to the Breadfest video game!");
-//        stage.setScene(scene);
-//        stage.show();
+    public void start(Stage stage) {
+        // Populate and load FXML
+        populateAndLoad(stage);
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
+        executor.shutdown();
     }
 }

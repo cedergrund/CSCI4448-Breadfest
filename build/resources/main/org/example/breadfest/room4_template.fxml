@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.Double?>
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.breadfest.RoomController" prefWidth="600" prefHeight="400">
+
+    <children>
+        <Label layoutX="200.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" text="Welcome to Room 4" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="90.0" AnchorPane.bottomAnchor="90.0">
+            <font>
+                <Font size="48.0" />
+            </font>
+        </Label>
+        <Button text="North" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="700" AnchorPane.rightAnchor="700" onAction="#move_north"/>
+        <Button text="South" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="700" AnchorPane.rightAnchor="700" onAction="#move_south"/>
+        <Button text="West" AnchorPane.topAnchor="300" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="300" onAction="#move_east"/>
+        <Button text="East" AnchorPane.topAnchor="300" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="300" onAction="#move_west"/>
+    </children>
+</AnchorPane>
