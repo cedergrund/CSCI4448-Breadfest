@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.breadfest.RoomController" minWidth="1700" minHeight="1300">
+
+    <children>
+        <Label layoutX="400.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" text="Welcome to the Home Room!" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="90.0" AnchorPane.bottomAnchor="90.0">
+            <font>
+                <Font size="48.0" />
+            </font>
+        </Label>
+        <ImageView layoutX="800">
+            <image>
+                <Image url="@Images/dinosaur_sample.jpeg"/>
+            </image>
+        </ImageView>
+        <Button text="Enter Cave!" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="700" AnchorPane.rightAnchor="700" onAction="#move_north"/>
+    </children>
+</AnchorPane>
