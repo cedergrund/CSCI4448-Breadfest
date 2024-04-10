@@ -5,12 +5,15 @@ import java.util.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.breadfest.JSONReading;
 import org.example.breadfest.dice.Dice;
-import org.example.breadfest.ingredients.Ingredients;
+import org.example.breadfest.ingredients.Ingredient;
 
 import java.io.File;
 
-public abstract class Dinosaur {
+public class Dinosaur {
+
+    private final String name;
 
     private final DinosaurTypes type_of_dinosaur;
     private int curr_patience;
@@ -21,9 +24,10 @@ public abstract class Dinosaur {
     Dice die;
 
     Dice reward_die;
-    Ingredients reward_ingredient;
+    Ingredient reward_ingredient;
 
-    public Dinosaur(DinosaurTypes type_of_dinosaur) throws Exception {
+    public Dinosaur(String name, DinosaurTypes type_of_dinosaur) throws Exception {
+        this.name = name;
         this.dialogues_loaded = false;
 
         // base stats
@@ -60,8 +64,7 @@ public abstract class Dinosaur {
         if (!this.dialogues_loaded) {
             ObjectMapper mapper = new ObjectMapper();
             String DIALOGUE_FILE_PATH = "dialogues.json";
-            dialogue = mapper.readValue(new File(DIALOGUE_FILE_PATH), new TypeReference<>() {
-            });
+            dialogue = mapper.readValue(new File(DIALOGUE_FILE_PATH), new TypeReference<>() {});
             this.dialogues_loaded = true;
         }
     }
@@ -83,7 +86,7 @@ public abstract class Dinosaur {
         // TODO: implement odds of dialogue
         // TODO: implements odds of each dialogue type
 
-        return generateDialogueOfType("");
+        return JSONReading.generateRandomElementFromJSON(this.dialogue, "");
     }
 
     public int getCurrPatience() {
@@ -111,7 +114,7 @@ public abstract class Dinosaur {
         return this.reward_die;
     }
 
-    public Ingredients getRewardIngredient() {
+    public Ingredient getRewardIngredient() {
         return this.reward_ingredient;
     }
 }

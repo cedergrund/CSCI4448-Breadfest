@@ -2,11 +2,9 @@ package org.example.breadfest.dinosaurs;
 
 import org.example.breadfest.dice.Dice;
 import org.example.breadfest.dice.DieFactory;
-import org.example.breadfest.ingredients.IngredientFactory;
-import org.example.breadfest.ingredients.IngredientRarity;
-import org.example.breadfest.ingredients.IngredientTypes;
-import org.example.breadfest.ingredients.Ingredients;
+import org.example.breadfest.ingredients.*;
 
+import java.io.IOException;
 import java.util.Random;
 
 public enum DinosaurTypes {
@@ -26,7 +24,11 @@ public enum DinosaurTypes {
         this.base_patience = base_patience;
         this.damage_modifier = damage_modifier;
         this.die_factory = new DieFactory();
-        this.ingredient_factory = new IngredientFactory();
+        try {
+            this.ingredient_factory = new IngredientFactory();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -140,7 +142,7 @@ public enum DinosaurTypes {
         return die_factory.DieFactory(this.getNextTypeForDie());
     }
 
-    public Ingredients getRewardIngredient() throws Exception {
+    public Ingredient getRewardIngredient() throws Exception {
         IngredientTypes random_ingredient_type = IngredientTypes.getRandomIngredientType();
         IngredientRarity ingredient_rarity = this.getIngredientRarity();
         return ingredient_factory.makeIngredientByType(random_ingredient_type,ingredient_rarity);

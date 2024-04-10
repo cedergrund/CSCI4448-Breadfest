@@ -1,14 +1,27 @@
 package org.example.breadfest.ingredients;
 
-import org.example.breadfest.dinosaurs.DinosaurFactory;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.breadfest.JSONReading;
 
-import java.lang.reflect.Constructor;
+import java.io.IOException;
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 
 public class IngredientFactory {
 
-    public Ingredients makeIngredient() throws Exception {
+    private final Map<String, List<String>> ingredient_names;
+
+    public IngredientFactory() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String DIALOGUE_FILE_PATH = "src/main/java/org/example/breadfest/ingredients/ingredients.json";
+        ingredient_names = mapper.readValue(new File(DIALOGUE_FILE_PATH), new TypeReference<>() {});
+    }
+
+
+    public Ingredient makeIngredient() throws Exception {
 
         IngredientTypes ingredient_type = IngredientTypes.getRandomIngredientType();
         IngredientRarity ingredient_rarity = IngredientRarity.getRandomIngredientRarity();
@@ -17,17 +30,18 @@ public class IngredientFactory {
 
     }
 
-    public Ingredients makeIngredientByType(IngredientTypes ingredient_type, IngredientRarity ingredient_rarity) throws Exception {
+    public Ingredient makeIngredientByType(IngredientTypes ingredient_type, IngredientRarity ingredient_rarity) throws Exception {
 
-        // grab folder of ingredients with correct type/rarity, and load classes
-        String file_path_name = ingredient_type.toString() + "/" + ingredient_rarity.toString();
-        File directory = new File(file_path_name);
-        Constructor<?> constructor = DinosaurFactory.grabRandomClassConstructor(directory);
-        return (Ingredients) constructor.newInstance();
+        String type = ingredient_type.toString() + ingredient_rarity.toString();
+        String ingredient_name = JSONReading.generateRandomElementFromJSON(this.ingredient_names, type);
+
+        return new Ingredient(ingredient_name, ingredient_type, ingredient_rarity);
 
     }
 
-    public Ingredients makeNuclearIngredient() throws Exception {
+    public Ingredient makeNuclearIngredient() throws Exception {
         return makeIngredientByType(IngredientTypes.getRandomIngredientType(), IngredientRarity.Nuclear);
     }
+
+
 }

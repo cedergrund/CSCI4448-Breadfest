@@ -1,0 +1,97 @@
+{
+
+  "WaterCommon": [
+    "Tap Water"
+  ],
+  "WaterRare": [
+    "Spring Water"
+  ],
+  "WaterEpic": [
+    "Enchanted Dewdrops"
+  ],
+  "WaterLegendary": [
+    "Hydration Elixir"
+  ],
+  "WaterChampion": [
+    "Tears of the Ancients"
+  ],
+  "WaterNuclear": [
+    "Plutonium-239"
+  ],
+
+  "FlourCommon": [
+    "All-Purpose Flour"
+  ],
+  "FlourRare":[
+    "Dwarven Cave Flour"
+  ],
+  "FlourEpic": [
+    "Eternal Farmer's Grains"
+  ],
+  "FlourLegendary": [
+    "Cosmic Dust"
+  ],
+  "FlourChampion": [
+    "Ashes of the Titans"
+  ],
+  "FlourNuclear": [
+    "Bomb"
+  ],
+
+  "YeastCommon": [
+    "Baker's Yeast"
+  ],
+  "YeastRare": [
+    "Baker's Yeast"
+  ],
+  "YeastEpic": [
+    "Fungal Spores"
+  ],
+  "YeastLegendary":[
+    "Fermented Skunk"
+  ],
+  "YeastChampion": [
+    "Chaos Yeast of the Void"
+  ],
+  "YeastNuclear": [
+    "Uranium-235"
+  ],
+
+  "SaltCommon": [
+    "Table Salt"
+  ],
+  "SaltRare": [
+    "Sea Salt"
+  ],
+  "SaltEpic" : [
+    "Desert Wind Salt"
+  ],
+  "SaltLegendary" : [
+    "Evaporated Salt of Pixie Tears"
+  ],
+  "SaltChampion" : [
+    "Timeless Salt of Preservation"
+  ],
+  "SaltNuclear" : [
+    "Hydrogen Gas"
+  ],
+
+  "ExtraCommon" : [
+    "Garden Herbs"
+  ],
+  "ExtraRare" : [
+    "Dragonfruit Chunks"
+  ],
+  "ExtraEpic" : [
+    "Starlight Glaze"
+  ],
+  "ExtraLegendary" : [
+    "Phoenix Feathers"
+  ],
+  "ExtraChampion" : [
+    "World Tree's Essence"
+  ],
+  "ExtraNuclear" : [
+    "Uranium-238"
+  ]
+}

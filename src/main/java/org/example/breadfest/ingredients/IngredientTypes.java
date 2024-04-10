@@ -3,11 +3,17 @@ package org.example.breadfest.ingredients;
 import java.util.Random;
 
 public enum IngredientTypes {
-    Flour,
-    Salt,
-    Yeast,
-    Water,
-    Extra;
+    Flour(5),
+    Salt(1),
+    Yeast(3),
+    Water(4),
+    Extra(1);
+
+    private final double ingredient_score_multiplier;
+
+    IngredientTypes(double ingredient_score_multiplier) {
+        this.ingredient_score_multiplier = ingredient_score_multiplier;
+    }
 
     public static IngredientTypes getRandomIngredientType(){
 
@@ -22,5 +28,9 @@ public enum IngredientTypes {
             default -> null;
         };
 
+    }
+
+    public double getIngredientMultiplier() {
+        return this.ingredient_score_multiplier;
     }
 }

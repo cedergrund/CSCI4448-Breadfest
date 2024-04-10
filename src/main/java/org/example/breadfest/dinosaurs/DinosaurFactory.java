@@ -1,12 +1,27 @@
 package org.example.breadfest.dinosaurs;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.breadfest.JSONReading;
+import org.example.breadfest.ingredients.Ingredient;
+
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class DinosaurFactory {
+
+    private final Map<String, List<String>> dinosaur_names;
+
+    public DinosaurFactory() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String DIALOGUE_FILE_PATH = "src/main/java/org/example/breadfest/dinosaurs/dinosaurs.json";
+        this.dinosaur_names = mapper.readValue(new File(DIALOGUE_FILE_PATH), new TypeReference<>() {});
+    }
 
     public Dinosaur makeADinosaurFromDepth(int room_depth) throws Exception {
 
@@ -16,33 +31,11 @@ public class DinosaurFactory {
 
     public Dinosaur makeADinosaurByType(DinosaurTypes dinosaur_type) throws Exception {
 
-        // grab folder of ingredients with correct type, and load classes
-        File directory = new File(dinosaur_type.toString());
-        Constructor<?> constructor = DinosaurFactory.grabRandomClassConstructor(directory);
+        String type = dinosaur_type.toString();
+        String dinosaur_name = JSONReading.generateRandomElementFromJSON(this.dinosaur_names, type);
 
-        return (Dinosaur) constructor.newInstance();
+        return new Dinosaur(dinosaur_name, dinosaur_type);
 
     }
 
-    public static Constructor<?> grabRandomClassConstructor(File directory) throws Exception {
-        File[] files = directory.listFiles();
-
-        List<Class<?>> classes = new ArrayList<>();
-        assert files != null;
-        for (File file : files) {
-            // Get the class name without the .class extension
-            String className = file.getName().replace(".class", "");
-
-            // Load the class
-            Class<?> loadedClass = Class.forName(className);
-            classes.add(loadedClass);
-        }
-
-        // randomly select an ingredient of the right type
-        Random random = new Random();
-        Class<?> selectedClass = classes.get(random.nextInt(classes.size()));
-
-        // grab constructor of ingredient and create ingredient of desired type
-        return selectedClass.getConstructor();
-    }
 }

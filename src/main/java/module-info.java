@@ -2,6 +2,8 @@ module org.example.breadfest {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
+    requires kotlin.stdlib;
+    requires java.compiler;
 
 
     opens org.example.breadfest to javafx.fxml;

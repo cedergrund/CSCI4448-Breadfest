@@ -2,7 +2,7 @@ package org.example.breadfest;
 
 import org.example.breadfest.dice.Dice;
 import org.example.breadfest.dinosaurs.Dinosaur;
-import org.example.breadfest.ingredients.Ingredients;
+import org.example.breadfest.ingredients.Ingredient;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class Player {
 
     private static final Player player = new Player();
 
-    private final ArrayList<Ingredients> ingredient_inventory;
+    private final ArrayList<Ingredient> ingredient_inventory;
 
     // dice_inventory is all die that player has, while active_dice_inventory are the 3 that they currently use
     private final ArrayList<Dice> dice_inventory;
@@ -31,7 +31,7 @@ public class Player {
         this.curr_patience = base_patience;
         this.damage_modifier = 1.0;
 
-        this.ingredient_inventory = new ArrayList<Ingredients>();
+        this.ingredient_inventory = new ArrayList<Ingredient>();
 
         this.dice_inventory = new ArrayList<>();
         this.active_dice_inventory = new Dice[3];
@@ -64,7 +64,7 @@ public class Player {
     }
 
     private void beatDinosaur(Dinosaur dinosaur){
-        Ingredients reward_ingredient = dinosaur.getRewardIngredient();
+        Ingredient reward_ingredient = dinosaur.getRewardIngredient();
         Dice reward_die = dinosaur.getRewardDie();
 
         if (reward_ingredient != null){
@@ -134,6 +134,10 @@ public class Player {
         }
 
         // print any other thing? maybe dino dialogue?
+    }
+
+    public void addToDamageModifier(int percent_change){
+        this.damage_modifier *= 1 + ((double) percent_change / 100);
     }
 
 

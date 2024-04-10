@@ -2,41 +2,34 @@ package org.example.breadfest;
 
 import org.example.breadfest.dinosaurs.Dinosaur;
 import org.example.breadfest.dinosaurs.DinosaurFactory;
+import org.example.breadfest.ingredients.Ingredient;
 import org.example.breadfest.ingredients.IngredientFactory;
-import org.example.breadfest.ingredients.Ingredients;
 
+import java.security.InvalidAlgorithmParameterException;
 import java.util.*;
 
 public class Room {
 
     private final int depth;
+    private boolean visited;
 
     private char entry_direction;
 
-    private Map<Character, Room> neighboring_rooms;
+    private final Map<Character, Room> neighboring_rooms;
 
     private String background_image;
 
-
     List<Integer> available_locations_for_entities;
-    private Ingredients[] ingredients_in_room_by_location;
+    private Ingredient[] ingredients_in_room_by_location;
     private Dinosaur[] dinosaurs_in_room_by_location;
 
 
     public Room(int depth){
         // depth of room from cave-room 0
         this.depth = depth;
+        this.visited = false;
         this.neighboring_rooms = new HashMap<>();
 
-    }
-
-    public boolean areThereNeighbors(){
-        if (this.neighboring_rooms == null) {
-            return false;
-        }
-        else {
-            return true;
-        }
     }
 
     private int generateNeighboringRoomsCount(){
@@ -150,6 +143,7 @@ public class Room {
                 int ingredient_location = this.available_locations_for_entities.remove(random_index);
                 this.ingredients_in_room_by_location[ingredient_location] = ingredient_factory.makeNuclearIngredient();
             }
+            return;
         }
 
         switch (this.generateIngredientCount()){
@@ -205,7 +199,7 @@ public class Room {
 
     }
 
-    private void generateNeighboringRoomsMap(){
+    public void generateNeighboringRoomsMap(){
 
         int num_rooms_to_generate = this.generateNeighboringRoomsCount();
 
@@ -220,7 +214,8 @@ public class Room {
             add('W');
         }};
 
-        available_directions.remove(this.entry_direction);
+        available_directions.remove((Character) this.entry_direction);
+
         Random random = new Random();
 
         switch (num_rooms_to_generate){
@@ -268,19 +263,22 @@ public class Room {
         this.generateDinosaurs();
 
         // add ingredients to room
-        this.ingredients_in_room_by_location = new Ingredients[8];
+        this.ingredients_in_room_by_location = new Ingredient[8];
         this.generateIngredients();
 
     }
 
+    public void enterRoom0() throws Exception {
+        enterRoom('W', null);
+    }
 
-    public void moveToRoom(char entry_direction, Room prev_room) throws Exception {
+    public void enterRoom(char entry_direction, Room prev_room) throws Exception {
 
+        this.visited = true;
         // direction from which player enter the room (in what direction cave-room 0 is)
         this.entry_direction = entry_direction;
 
         // generating new neighbors
-        this.neighboring_rooms = new HashMap<>();
         this.neighboring_rooms.put(entry_direction, prev_room);
 
         // generate neighboring rooms
@@ -291,6 +289,33 @@ public class Room {
 
         // populate the room
         this.populateRoom();
+    }
+
+    public Room move(char move_direction) throws Exception {
+        Room room_to_move_into = this.neighboring_rooms.get(move_direction);
+        if (room_to_move_into.hasRoomBeenVisited()){
+            return room_to_move_into;
+        }
+
+        return switch (move_direction) {
+            case 'W' -> {
+                room_to_move_into.enterRoom('E', this);
+                yield room_to_move_into;
+            }
+            case 'N' -> {
+                room_to_move_into.enterRoom('S', this);
+                yield room_to_move_into;
+            }
+            case 'E' -> {
+                room_to_move_into.enterRoom('W', this);
+                yield room_to_move_into;
+            }
+            case 'S' -> {
+                room_to_move_into.enterRoom('N', this);
+                yield room_to_move_into;
+            }
+            default -> throw new InvalidAlgorithmParameterException();
+        };
     }
 
 
@@ -304,11 +329,15 @@ public class Room {
         return depth;
     }
 
+    public boolean hasRoomBeenVisited() {
+        return this.visited;
+    }
+
     public String getBackgroundImage() {
         return this.background_image;
     }
 
-    public Ingredients[] getRoomIngredients() {
+    public Ingredient[] getRoomIngredients() {
         return ingredients_in_room_by_location;
     }
 
