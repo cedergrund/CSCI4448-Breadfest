@@ -5,24 +5,34 @@ import javafx.stage.Stage;
 
 
 
-public class FXMLCaveApplication extends Application {
+public class FXMLCaveApplication {
 
-    private final FXMLCaveGameAdaptor cave_game_adaptor = new FXMLCaveGameAdaptor(new CaveGame());
+    private final FXMLCave cave_game_adaptor;
+    private Stage stage;
 
-    public void generateCaveEntrance(Stage stage){
+    public FXMLCaveApplication(FXMLCave fxmlCave, Stage stage){
+        this.cave_game_adaptor = fxmlCave;
+        this.stage = stage;
+        stage.setResizable(false);
+    }
 
-        stage = new FXMLStageBuilder(this, stage)
+    public void runGame(){
+        this.generateCaveEntrance();
+    }
+
+    public void generateCaveEntrance(){
+
+        stage = new FXMLStageBuilder(this, this.stage)
                 .setBackgroundGreen()
                 .addWelcomeToBreadfestLabel()
-                .addCaveEntranceImages()
+                .addCaveEntranceButtonsAndImages()
                 .addPlayerWithInventoryButton("Entrance")
-                .addCave0Entrance()
                 .build();
 
         stage.show();
     }
 
-    public void generateCaveRoom(Stage stage){
+    public void generateCaveRoom(){
 
         stage = new FXMLStageBuilder(this,stage)
                 .setCaveBackground()
@@ -36,7 +46,7 @@ public class FXMLCaveApplication extends Application {
         stage.show();
     }
 
-    public void generateInventory(Stage stage, String location_where_pressed){
+    public void generateInventory(String location_where_pressed){
 
         stage = new FXMLStageBuilder(this, stage)
                 .setInventoryBackground()
@@ -48,22 +58,7 @@ public class FXMLCaveApplication extends Application {
     }
 
 
-
-    public static void main(String[] args) {
-
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage stage) {
-        // initial conditions on stage
-        stage.setResizable(false);
-
-        // load cave entrance
-        generateCaveEntrance(stage);
-    }
-
-    public FXMLCaveGameAdaptor getAdaptor(){
+    public FXMLCave getAdaptor(){
         return cave_game_adaptor;
     }
 }

@@ -76,22 +76,22 @@
     "Hydrogen Gas"
   ],
 
-  "ExtraCommon" : [
+  "ToppingCommon" : [
     "Garden Herbs"
   ],
-  "ExtraRare" : [
+  "ToppingRare" : [
     "Dragonfruit Chunks"
   ],
-  "ExtraEpic" : [
+  "ToppingEpic" : [
     "Starlight Glaze"
   ],
-  "ExtraLegendary" : [
+  "ToppingLegendary" : [
     "Phoenix Feathers"
   ],
-  "ExtraChampion" : [
+  "ToppingChampion" : [
     "World Tree's Essence"
   ],
-  "ExtraNuclear" : [
+  "ToppingNuclear" : [
     "Uranium-238"
   ]
 }
