@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.breadfest.RoomTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-11T03:19:31" hostname="Gustavs-MacBook-Pro.local" time="0.067">
-  <properties/>
-  <testcase name="moveToRoom()" classname="org.example.breadfest.RoomTest" time="0.067"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
