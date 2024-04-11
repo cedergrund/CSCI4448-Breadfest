@@ -24,28 +24,38 @@ public class Cave {
     private Dinosaur[] dinosaurs_in_room_by_location;
 
 
+
     public Cave(int depth){
         // depth of room from cave-room 0
         this.depth = depth;
         this.visited = false;
         this.neighboring_rooms = new HashMap<>();
+    }
 
+    public Map<Character, Cave> getNeighboring_rooms(){
+        return this.neighboring_rooms;
     }
 
     private int generateNeighboringRoomsCount(){
+        // if we're in the first room in the cave, automatically generate 3 neighbors
         if (this.depth == 0){
             return 3;
         }
-
+        // the chance for a dead end increases as you go further in the cave
         double chance_for_dead_end = this.depth*0.1;
+        // the chance for connected rooms also decreases as you explore greater depths
         double chance_for_connected_room = (1-chance_for_dead_end)/3;
 
         Random random_seed = new Random();
+        // random_roll is a random number from 0 inclusive to 1 not inclusive
         double random_roll = random_seed.nextDouble();
 
-        if (random_roll < this.depth*0.1){
+
+        // if our random_roll is less than our dead end chance of the room, it's a dead end!
+        if (random_roll < chance_for_dead_end){
             return 0;
         }
+        // the greater your depth is, the harder it is to generate a large number of neighboring rooms
         else if (random_roll < chance_for_dead_end+chance_for_connected_room){
             return 1;
         }
@@ -247,7 +257,6 @@ public class Cave {
 
         // TODO: add art for different room types, and randomly generate one based on num rooms
         this.background_image = "";
-
     }
 
     private void populateRoom() throws Exception {
