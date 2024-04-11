@@ -56,4 +56,20 @@ public class RoomController {
         stage.show();
     }
 
+    public void open_inventory(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("inventory.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void return_to_room(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("dynamic_room_test.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }

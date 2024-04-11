@@ -5,19 +5,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.breadfest.RoomController" minWidth="1700" minHeight="1300">
+<?import java.lang.Double?>
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.breadfest.RoomController"
+            minWidth="1366" minHeight="768" maxWidth="1366" maxHeight="768"
+            style="-fx-background-color: #2E8B57;">
 
     <children>
-        <Label layoutX="400.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" text="Welcome to the Home Room!" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="90.0" AnchorPane.bottomAnchor="90.0">
+        <Label text="Welcome to Breadfest!" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="20.0">
             <font>
-                <Font size="48.0" />
+                <Font size="32.0" />
             </font>
         </Label>
-        <ImageView layoutX="800">
+        <ImageView AnchorPane.bottomAnchor="20" AnchorPane.rightAnchor="20">
             <image>
                 <Image url="@Images/dinosaur_sample.jpeg"/>
             </image>
         </ImageView>
-        <Button text="Enter Cave!" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="700" AnchorPane.rightAnchor="700" onAction="#move_north"/>
+        <Button layoutX="621" layoutY="288" onAction="#open_inventory" style="-fx-background-color: transparent; -fx-background-insets: 0;">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@Images/lego_player.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <ImageView AnchorPane.topAnchor="80" AnchorPane.rightAnchor="200">
+            <image>
+                <Image url="@Images/cave_entrance.jpeg"/>
+            </image>
+        </ImageView>
+
+        <Button text="Enter Cave!" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="630" AnchorPane.rightAnchor="630" onAction="#move_north"/>
     </children>
 </AnchorPane>
