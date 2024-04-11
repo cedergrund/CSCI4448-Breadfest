@@ -268,8 +268,10 @@ public class Room {
 
     }
 
-    public void enterRoom0() throws Exception {
-        enterRoom('W', null);
+    public static Room enterRoom0() throws Exception {
+        Room room0 = new Room(0);
+        room0.enterRoom('W', null);
+        return room0;
     }
 
     public void enterRoom(char entry_direction, Room prev_room) throws Exception {
@@ -339,6 +341,15 @@ public class Room {
 
     public Ingredient[] getRoomIngredients() {
         return ingredients_in_room_by_location;
+    }
+
+    public void removeObjectFromLocation(int location){
+        if (this.dinosaurs_in_room_by_location[location] != null){
+            this.dinosaurs_in_room_by_location[location] = null;
+        }
+        else if (this.ingredients_in_room_by_location[location] != null){
+            this.ingredients_in_room_by_location[location] = null;
+        }
     }
 
     public Dinosaur[] getRoomDinosaurs() {

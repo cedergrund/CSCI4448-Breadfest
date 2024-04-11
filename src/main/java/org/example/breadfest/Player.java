@@ -141,6 +141,14 @@ public class Player {
     }
 
 
+    public ArrayList<Ingredient> getIngredientInventory() {
+        return this.ingredient_inventory;
+    }
+
+    public void addIngredientToInventory(Ingredient ingredient){
+        this.ingredient_inventory.add(ingredient);
+    }
+
 
 
 }

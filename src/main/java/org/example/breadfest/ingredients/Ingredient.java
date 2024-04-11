@@ -12,9 +12,9 @@ public class Ingredient {
         this.ingredient_rarity = ingredient_rarity;
     }
 
-//    public String getName(){
-//        return this.name;
-//    }
+    public String getName(){
+        return this.name;
+    }
 
     public IngredientTypes getType(){
         return this.ingredient_type;
