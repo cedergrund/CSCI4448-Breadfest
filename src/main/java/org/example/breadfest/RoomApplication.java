@@ -43,10 +43,10 @@ public class RoomApplication extends Application {
             Parent root = loader.load();
 
             // Set up the scene
-            Scene scene = new Scene(root, 2000, 2000);
+            Scene scene = new Scene(root, 1366, 768);
 
             // Set the stage title
-            stage.setTitle("Room Application Test");
+            stage.setTitle("Breadfest Game");
 
             // Set the scene
             stage.setScene(scene);

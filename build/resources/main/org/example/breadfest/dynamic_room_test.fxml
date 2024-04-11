@@ -4,12 +4,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import java.lang.Double?>
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.breadfest.RoomController" minWidth="1700" minHeight="1300">
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.breadfest.RoomController" minWidth="1366" minHeight="768"  maxWidth="1366" maxHeight="768" style="-fx-background-color: #808080;">
 
 <children>
-<Button text="North" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="700" AnchorPane.rightAnchor="700"/>
-<Button text="South" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="700" AnchorPane.rightAnchor="700"/>
-<Button text="Return Home" AnchorPane.topAnchor="20" AnchorPane.rightAnchor="20" onAction="#return_home"/>
+<Button text="North" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="630" AnchorPane.rightAnchor="630"/>
+<Button text="South" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="630" AnchorPane.rightAnchor="630"/>
+<Button text="Return Home" AnchorPane.topAnchor="20" AnchorPane.rightAnchor="50" onAction="#return_home"/>
 <Label layoutX="200.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" text="Testing Name" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="90.0" AnchorPane.bottomAnchor="90.0">
 <font>
 <Font size="48.0" />

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.breadfest.RoomController"
+            prefHeight="400.0" prefWidth="600.0"
+            style="-fx-background-color: #8B4513;"
+            minWidth="1366" minHeight="768" maxWidth="1366" maxHeight="768">
+
+            <Label layoutX="10" layoutY="100" text="Inventory" textFill="white"
+                   style="-fx-font-family: 'Arial Black'; -fx-font-size: 48px;">
+            </Label>
+            <Button text="Return Home" AnchorPane.topAnchor="20" AnchorPane.rightAnchor="50" onAction="#return_home"
+                    style="-fx-background-color: #F5DEB3; -fx-border-color: black; -fx-border-width: 1px;">
+            </Button>
+            <Button text="Return To Room" AnchorPane.bottomAnchor="20" AnchorPane.rightAnchor="50" onAction="#return_to_room"
+                    style="-fx-background-color: #F5DEB3; -fx-border-color: black; -fx-border-width: 1px;">
+            </Button>
+</AnchorPane>
