@@ -6,17 +6,16 @@ import org.example.breadfest.ingredients.Ingredient;
 import org.example.breadfest.ingredients.IngredientFactory;
 
 import java.security.InvalidAlgorithmParameterException;
-import java.security.Principal;
 import java.util.*;
 
-public class Room {
+public class Cave {
 
     private final int depth;
     private boolean visited;
 
     private char entry_direction;
 
-    private final Map<Character, Room> neighboring_rooms;
+    private final Map<Character, Cave> neighboring_rooms;
 
     private String background_image;
 
@@ -25,7 +24,7 @@ public class Room {
     private Dinosaur[] dinosaurs_in_room_by_location;
 
 
-    public Room(int depth){
+    public Cave(int depth){
         // depth of room from cave-room 0
         this.depth = depth;
         this.visited = false;
@@ -224,19 +223,19 @@ public class Room {
                 int direction_index = random.nextInt(available_directions.size());
                 char new_room_direction = available_directions.remove(direction_index);
 
-                this.neighboring_rooms.put(new_room_direction, new Room(this.depth+1));
+                this.neighboring_rooms.put(new_room_direction, new Cave(this.depth+1));
             }
             case 2:{
                 int direction_index = random.nextInt(available_directions.size());
                 char new_room_direction = available_directions.remove(direction_index);
 
-                this.neighboring_rooms.put(new_room_direction, new Room(this.depth+1));
+                this.neighboring_rooms.put(new_room_direction, new Cave(this.depth+1));
             }
             case 1:{
                 int direction_index = random.nextInt(available_directions.size());
                 char new_room_direction = available_directions.remove(direction_index);
 
-                this.neighboring_rooms.put(new_room_direction, new Room(this.depth+1));
+                this.neighboring_rooms.put(new_room_direction, new Cave(this.depth+1));
                 break;
             }
 
@@ -269,20 +268,20 @@ public class Room {
 
     }
 
-    public static Room enterRoom0() throws Exception {
-        Room room0 = new Room(0);
-        room0.enterRoom('S', null);
-        return room0;
+    public static Cave enterRoom0() throws Exception {
+        Cave cave0 = new Cave(0);
+        cave0.enterRoom('S', null);
+        return cave0;
     }
 
-    public void enterRoom(char entry_direction, Room prev_room) throws Exception {
+    public void enterRoom(char entry_direction, Cave prev_cave) throws Exception {
 
         this.visited = true;
         // direction from which player enter the room (in what direction cave-room 0 is)
         this.entry_direction = entry_direction;
 
         // generating new neighbors
-        this.neighboring_rooms.put(entry_direction, prev_room);
+        this.neighboring_rooms.put(entry_direction, prev_cave);
 
         // generate neighboring rooms
         this.generateNeighboringRoomsMap();
@@ -294,32 +293,32 @@ public class Room {
         this.populateRoom();
     }
 
-    public Room move(char move_direction) throws Exception {
-        Room room_to_move_into = this.neighboring_rooms.get(move_direction);
-        if (room_to_move_into.hasRoomBeenVisited()){
-            return room_to_move_into;
+    public Cave move(char move_direction) throws Exception {
+        Cave cave_to_move_into = this.neighboring_rooms.get(move_direction);
+        if (cave_to_move_into.hasRoomBeenVisited()){
+            return cave_to_move_into;
         }
 
         return switch (move_direction) {
             case 'W' -> {
-                room_to_move_into.enterRoom('E', this);
-                System.out.println("Moved to depth " + room_to_move_into.getDepth());
-                yield room_to_move_into;
+                cave_to_move_into.enterRoom('E', this);
+                System.out.println("Moved to depth " + cave_to_move_into.getDepth());
+                yield cave_to_move_into;
             }
             case 'N' -> {
-                room_to_move_into.enterRoom('S', this);
-                System.out.println("Moved to depth " + room_to_move_into.getDepth());
-                yield room_to_move_into;
+                cave_to_move_into.enterRoom('S', this);
+                System.out.println("Moved to depth " + cave_to_move_into.getDepth());
+                yield cave_to_move_into;
             }
             case 'E' -> {
-                room_to_move_into.enterRoom('W', this);
-                System.out.println("Moved to depth " + room_to_move_into.getDepth());
-                yield room_to_move_into;
+                cave_to_move_into.enterRoom('W', this);
+                System.out.println("Moved to depth " + cave_to_move_into.getDepth());
+                yield cave_to_move_into;
             }
             case 'S' -> {
-                room_to_move_into.enterRoom('N', this);
-                System.out.println("Moved to depth " + room_to_move_into.getDepth());
-                yield room_to_move_into;
+                cave_to_move_into.enterRoom('N', this);
+                System.out.println("Moved to depth " + cave_to_move_into.getDepth());
+                yield cave_to_move_into;
             }
             default -> throw new InvalidAlgorithmParameterException();
         };
@@ -328,7 +327,7 @@ public class Room {
 
 
     // getters
-    public Room getRoomNeighbor(char direction){
+    public Cave getRoomNeighbor(char direction){
         return this.neighboring_rooms.get(direction);
     }
 

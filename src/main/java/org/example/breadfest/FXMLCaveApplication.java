@@ -1,25 +1,19 @@
 package org.example.breadfest;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -27,15 +21,12 @@ import javafx.stage.Stage;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import javafx.scene.control.Button;
 
-import java.io.IOException;
 
-public class RoomApplication extends Application {
+public class FXMLCaveApplication extends Application {
 
-    private static final CaveGameAdaptor cave_game_adaptor = new CaveGameAdaptor(new CaveExplorationPortionGame());
+    private static final FXMLCaveGameAdaptor cave_game_adaptor = new FXMLCaveGameAdaptor(new CaveGame());
 
     public void generateCaveEntrance(Stage stage){
         // Create an AnchorPane as the root
@@ -54,18 +45,7 @@ public class RoomApplication extends Application {
         AnchorPane.setRightAnchor(dinosaur_image_view, 20.0);
 
         // Create button with lego player image
-        Button inventory_button = new Button();
-        inventory_button.setLayoutX(621);
-        inventory_button.setLayoutY(288);
-        inventory_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/lego_player.png"));
-        inventory_button.setGraphic(legoPlayerImageView);
-        inventory_button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                openInventoryFromCaveEntrance(stage);
-            }
-        });
+        Button inventory_button = createPlayerButton(stage, "Entrance");
 
         // Create image view for cave entrance
         ImageView caveEntranceImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/cave_entrance.jpeg"));
@@ -101,6 +81,13 @@ public class RoomApplication extends Application {
         // Create an AnchorPane as the root
         AnchorPane root = new AnchorPane();
         root.setStyle("-fx-background-color: #808080;");
+
+        // Create label
+        Label patience_meter = new Label("Player Patience: " + String.valueOf(cave_game_adaptor.getCurrPlayerPatience()));
+        patience_meter.setFont(new Font(32));
+        AnchorPane.setLeftAnchor(patience_meter, 20.0);
+        AnchorPane.setBottomAnchor(patience_meter, 20.0);
+        root.getChildren().add(patience_meter);
 
         List<Character> direction_list = cave_game_adaptor.getRoomExitDirections();
         System.out.println(direction_list);
@@ -172,18 +159,7 @@ public class RoomApplication extends Application {
         }
 
         // Create button with lego player image
-        Button inventory_button = new Button();
-        inventory_button.setLayoutX(621);
-        inventory_button.setLayoutY(288);
-        inventory_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/lego_player.png"));
-        inventory_button.setGraphic(legoPlayerImageView);
-        inventory_button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                openInventoryFromCave(stage);
-            }
-        });
+        Button inventory_button = createPlayerButton(stage, "Cave");
 
         Button return_home_button = new Button("Return Home");
         AnchorPane.setTopAnchor(return_home_button, 20.0);
@@ -207,6 +183,22 @@ public class RoomApplication extends Application {
         stage.show();
     }
 
+    private Button createPlayerButton(Stage stage, String location_of_button) {
+        Button inventory_button = new Button();
+        inventory_button.setLayoutX(621);
+        inventory_button.setLayoutY(288);
+        inventory_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/lego_player.png"));
+        inventory_button.setGraphic(legoPlayerImageView);
+        inventory_button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                openInventory(stage, location_of_button);
+            }
+        });
+        return inventory_button;
+    }
+
     public void generateInventory(Stage stage, String location_where_pressed){
 
         // Create an AnchorPane as the root
@@ -221,18 +213,7 @@ public class RoomApplication extends Application {
         inventoryLabel.setStyle("-fx-font-family: 'Arial Black'; -fx-font-size: 48px;");
 
         // Create button to return home
-        Button exit_button = new Button("");
-        exit_button.setLayoutX(1291);
-        exit_button.setLayoutY(20);
-        exit_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/Transparent_X.png"));
-        exit_button.setGraphic(legoPlayerImageView);
-        exit_button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                exitInventory(stage, location_where_pressed);
-            }
-        });
+        Button exit_button = getExitButton(stage, location_where_pressed);
         // Add nodes to root
         root.getChildren().addAll(inventoryLabel, exit_button);
 
@@ -259,49 +240,29 @@ public class RoomApplication extends Application {
         if (!data.isEmpty()) {
             int numColumns = ingredientsData.get(0).length;
             for (int column_index = 0; column_index < numColumns; column_index++) {
-                TableColumn<String[], String> column = null;
-                switch (column_index){
-                    case 0: {
-                        column = new TableColumn<>("Count");
-                        column.setPrefWidth(50);
-                        break;
-                    }
-                    case 1: {
-                        column = new TableColumn<>("Ingredient Name");
-                        column.setPrefWidth(246);
-                        break;
-                    }
-                    case 2: {
-                        column = new TableColumn<>("Ingredient Type");
-                        column.setPrefWidth(150);
-                        break;
-                    }
-                    default: {
-                        column = new TableColumn<>("Ingredient Rarity");
-                        column.setPrefWidth(150);
-                    }
-                }
-                int finalColumn_index = column_index;
-                column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[finalColumn_index]));
+                TableColumn<String[], String> column = getStringTableColumn(column_index);
 
                 tableView.getColumns().add(column);
             }
+            // Set data to TableView
+            tableView.setItems(data);
+
+            // Add TableView to StackPane
+            centerPane.getChildren().add(tableView);
+
+            // Apply table style
+            tableView.setStyle("-fx-border-color: #2E8B57; -fx-border-width: 2px;");
         }
         else {
             // If data is empty, display a message in the table
             System.out.println();
             Label noDataLabel = new Label("No ingredients to display");
+            noDataLabel.setFont(new Font(32));
+            AnchorPane.setLeftAnchor(noDataLabel, 80.0);
+            AnchorPane.setTopAnchor(noDataLabel, 20.0);
             centerPane.getChildren().add(noDataLabel);
         }
 
-        // Set data to TableView
-        tableView.setItems(data);
-
-        // Add TableView to StackPane
-        centerPane.getChildren().add(tableView);
-
-        // Apply table style
-        tableView.setStyle("-fx-border-color: #2E8B57; -fx-border-width: 2px;");
 
         // Create the scene
         Scene scene = new Scene(root, 1366, 768);
@@ -312,47 +273,51 @@ public class RoomApplication extends Application {
         stage.show();
     }
 
-    private void addDinosaurToLocation(Stage stage, AnchorPane root, int location){
-        Button dino_button = new Button("");;
-        switch (location) { // add the dinosaur to correct location
-            case 0:
-                dino_button.setLayoutX(233);
-                dino_button.setLayoutY(69);
-                break;
-            case 1:
-                dino_button.setLayoutX(233);
-                dino_button.setLayoutY(619);
-                break;
-            case 2:
-                dino_button.setLayoutX(383);
-                dino_button.setLayoutY(169);
-                break;
-            case 3:
-                dino_button.setLayoutX(383);
-                dino_button.setLayoutY(519);
-                break;
-            case 4:
-                dino_button.setLayoutX(883);
-                dino_button.setLayoutY(169);
-                break;
-            case 5:
-                dino_button.setLayoutX(883);
-                dino_button.setLayoutY(519);
-                break;
-            case 6:
-                dino_button.setLayoutX(1033);
-                dino_button.setLayoutY(69);
-                break;
-            case 7:
-                dino_button.setLayoutX(1033);
-                dino_button.setLayoutY(619);
-                break;
-            default:
-                // some sort of error here, we didn't get a valid input!
-                break;
-        }
+    private Button getExitButton(Stage stage, String location_where_pressed) {
+        Button exit_button = new Button("");
+        exit_button.setLayoutX(1291);
+        exit_button.setLayoutY(20);
+        exit_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/Transparent_X.png"));
+        exit_button.setGraphic(legoPlayerImageView);
+        exit_button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                exitInventory(stage, location_where_pressed);
+            }
+        });
+        return exit_button;
+    }
 
-        dino_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+    private static TableColumn<String[], String> getStringTableColumn(int column_index) {
+        TableColumn<String[], String> column = null;
+        switch (column_index){
+            case 0: {
+                column = new TableColumn<>("Count");
+                column.setPrefWidth(50);
+                break;
+            }
+            case 1: {
+                column = new TableColumn<>("Ingredient Name");
+                column.setPrefWidth(245);
+                break;
+            }
+            case 2: {
+                column = new TableColumn<>("Ingredient Type");
+                column.setPrefWidth(150);
+                break;
+            }
+            default: {
+                column = new TableColumn<>("Ingredient Rarity");
+                column.setPrefWidth(150);
+            }
+        }
+        column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[column_index]));
+        return column;
+    }
+
+    private void addDinosaurToLocation(Stage stage, AnchorPane root, int location){
+        Button dino_button = addButtonToLocation(location);
         ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino_button_image.png"));
         dino_button.setGraphic(legoPlayerImageView);
         dino_button.setOnAction(new EventHandler<ActionEvent>() {
@@ -366,46 +331,7 @@ public class RoomApplication extends Application {
 
 
     private void addIngredientToLocation(Stage stage, AnchorPane root, int location){
-        Button ingredient_button = new Button("");;
-        switch (location) { // add the dinosaur to correct location
-            case 0:
-                ingredient_button.setLayoutX(233);
-                ingredient_button.setLayoutY(69);
-                break;
-            case 1:
-                ingredient_button.setLayoutX(233);
-                ingredient_button.setLayoutY(619);
-                break;
-            case 2:
-                ingredient_button.setLayoutX(383);
-                ingredient_button.setLayoutY(169);
-                break;
-            case 3:
-                ingredient_button.setLayoutX(383);
-                ingredient_button.setLayoutY(519);
-                break;
-            case 4:
-                ingredient_button.setLayoutX(883);
-                ingredient_button.setLayoutY(169);
-                break;
-            case 5:
-                ingredient_button.setLayoutX(883);
-                ingredient_button.setLayoutY(519);
-                break;
-            case 6:
-                ingredient_button.setLayoutX(1033);
-                ingredient_button.setLayoutY(69);
-                break;
-            case 7:
-                ingredient_button.setLayoutX(1033);
-                ingredient_button.setLayoutY(619);
-                break;
-            default:
-                // some sort of error here, we didn't get a valid input!
-                break;
-        }
-
-        ingredient_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+        Button ingredient_button = addButtonToLocation(location);
         ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png"));
         ingredient_button.setGraphic(legoPlayerImageView);
         ingredient_button.setOnAction(new EventHandler<ActionEvent>() {
@@ -417,6 +343,49 @@ public class RoomApplication extends Application {
         root.getChildren().add(ingredient_button);
     }
 
+    private Button addButtonToLocation(int location){
+        Button button = new Button("");;
+        switch (location) { // add the dinosaur to correct location
+            case 0:
+                button.setLayoutX(233);
+                button.setLayoutY(69);
+                break;
+            case 1:
+                button.setLayoutX(233);
+                button.setLayoutY(619);
+                break;
+            case 2:
+                button.setLayoutX(383);
+                button.setLayoutY(169);
+                break;
+            case 3:
+                button.setLayoutX(383);
+                button.setLayoutY(519);
+                break;
+            case 4:
+                button.setLayoutX(883);
+                button.setLayoutY(169);
+                break;
+            case 5:
+                button.setLayoutX(883);
+                button.setLayoutY(519);
+                break;
+            case 6:
+                button.setLayoutX(1033);
+                button.setLayoutY(69);
+                break;
+            case 7:
+                button.setLayoutX(1033);
+                button.setLayoutY(619);
+                break;
+            default:
+                // some sort of error here, we didn't get a valid input!
+                break;
+        }
+
+        button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+        return button;
+    }
     private void collectIngredient(Stage stage, int location) {
         System.out.println("Collect ingredient " + Arrays.toString(cave_game_adaptor.getObjectByLocation(location)));
         cave_game_adaptor.clickLocation(location);
@@ -438,8 +407,13 @@ public class RoomApplication extends Application {
 
         System.out.println("Moving to a new room...");
         char direction = ((Button) event.getSource()).getId().charAt(0);
-        cave_game_adaptor.moveRoom(direction);
-        generateCaveRoom(stage);
+        if (cave_game_adaptor.moveRoom(direction)){
+            System.out.println("should move back to cave entrance");
+            generateCaveEntrance(stage);
+        }
+        else{
+            generateCaveRoom(stage);
+        }
     }
 
     // Event handler for exiting inventory
@@ -453,12 +427,8 @@ public class RoomApplication extends Application {
     }
 
     // Event handler for opening inventory
-    private void openInventoryFromCaveEntrance(Stage stage) {
-        generateInventory(stage, "Entrance");
-    }
-
-    private void openInventoryFromCave(Stage stage) {
-        generateInventory(stage, "Cave");
+    private void openInventory(Stage stage, String location_to_return_to_when_exiting) {
+        generateInventory(stage, location_to_return_to_when_exiting);
     }
 
     // Event handler for entering cave
@@ -483,7 +453,7 @@ public class RoomApplication extends Application {
         generateCaveEntrance(stage);
     }
 
-    public static CaveGameAdaptor getAdaptor(){
+    public static FXMLCaveGameAdaptor getAdaptor(){
         return cave_game_adaptor;
     }
 }

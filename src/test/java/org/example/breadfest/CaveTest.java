@@ -4,79 +4,79 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RoomTest {
+class CaveTest {
 
     @Test
     void testConstruction(){
 
-        Room test_room = new Room(0);
-        assertNotNull(test_room);
+        Cave test_cave = new Cave(0);
+        assertNotNull(test_cave);
     }
 
     @Test
     void getRoomNeighbor() {
-        Room test_room = new Room(0);
-        assertNull(test_room.getRoomNeighbor('N'));
+        Cave test_cave = new Cave(0);
+        assertNull(test_cave.getRoomNeighbor('N'));
     }
 
 
     @Test
     void moveToRoom() {
-        Room test_room = null;
+        Cave test_cave = null;
         try {
-            test_room = Room.enterRoom0();
+            test_cave = Cave.enterRoom0();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        assertNotNull(test_room.getRoomNeighbor('N'));
+        assertNotNull(test_cave.getRoomNeighbor('N'));
 
-        Room north_room = null;
+        Cave north_cave = null;
         try {
-            north_room = test_room.move('N');
+            north_cave = test_cave.move('N');
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        assertNotNull(north_room);
+        assertNotNull(north_cave);
     }
 
     @Test
     void moveToRoomExtended() {
-        Room test_room = new Room(0);
+        Cave test_cave = new Cave(0);
         try {
-            test_room.enterRoom0();
+            test_cave.enterRoom0();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        assertNotNull(test_room.getRoomNeighbor('N'));
+        assertNotNull(test_cave.getRoomNeighbor('N'));
 
-        Room north_room = null;
+        Cave north_cave = null;
         try {
-            north_room = test_room.move('N');
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        assertNotNull(north_room);
-
-        Room go_back_to_room0 = null;
-        try {
-            go_back_to_room0 = north_room.move('S');
+            north_cave = test_cave.move('N');
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        assertNotNull(go_back_to_room0);
-        assertEquals(go_back_to_room0, test_room);
+        assertNotNull(north_cave);
 
-        Room east_room = null;
+        Cave go_back_to_cave0 = null;
         try {
-            east_room = go_back_to_room0.move('E');
+            go_back_to_cave0 = north_cave.move('S');
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        assertNotNull(east_room);
+        assertNotNull(go_back_to_cave0);
+        assertEquals(go_back_to_cave0, test_cave);
+
+        Cave east_cave = null;
+        try {
+            east_cave = go_back_to_cave0.move('E');
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        assertNotNull(east_cave);
     }
 
     @Test

@@ -1,16 +1,12 @@
 package org.example.breadfest;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.example.breadfest.dinosaurs.Dinosaur;
-import org.example.breadfest.ingredients.Ingredient;
+public class FXMLCaveGameAdaptor implements FXMLCave {
 
-public class CaveGameAdaptor implements FXMLCavePortion {
+    private final CaveGame adapted_game_state;
 
-    private final CaveExplorationPortionGame adapted_game_state;
-
-    public CaveGameAdaptor(CaveExplorationPortionGame game_state) {
+    public FXMLCaveGameAdaptor(CaveGame game_state) {
         this.adapted_game_state = game_state;
     }
 
@@ -57,6 +53,10 @@ public class CaveGameAdaptor implements FXMLCavePortion {
 
     public void enterRoom0(){
         this.adapted_game_state.enterRoom0();
+    }
+
+    public int getCurrPlayerPatience(){
+        return adapted_game_state.getCurrPlayerPatience();
     }
 
 

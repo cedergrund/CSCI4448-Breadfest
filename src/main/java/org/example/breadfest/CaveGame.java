@@ -6,17 +6,17 @@ import org.example.breadfest.ingredients.Ingredient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CaveExplorationPortionGame {
+public class CaveGame {
 
     private final Player player;
-    private Room curr_room;
-    private Room room0;
+    private Cave curr_cave;
+    private Cave cave0;
 
-    public CaveExplorationPortionGame(){
+    public CaveGame(){
         this.player = Player.getInstance();
         try {
-            this.curr_room = Room.enterRoom0();
-            this.room0 = curr_room;
+            this.curr_cave = Cave.enterRoom0();
+            this.cave0 = curr_cave;
         }
         catch (Exception e){
             System.out.println("Error " + e);
@@ -29,27 +29,27 @@ public class CaveExplorationPortionGame {
     }
 
     public String getBackgroundImage() {
-        return this.curr_room.getBackgroundImage();
+        return this.curr_cave.getBackgroundImage();
     }
 
     public void playerCollectsIngredient(Ingredient ingredient, int location) {
         this.player.addIngredientToInventory(ingredient);
-        this.curr_room.removeObjectFromLocation(location);
+        this.curr_cave.removeObjectFromLocation(location);
     }
 
     public List<Character> getRoomExitDirections(){
         List<Character> room_exit_directions = new ArrayList<>();
 
-        if (this.curr_room.getRoomNeighbor('N') != null){
+        if (this.curr_cave.getRoomNeighbor('N') != null){
             room_exit_directions.add('N');
         }
-        if (this.curr_room.getRoomNeighbor('W') != null){
+        if (this.curr_cave.getRoomNeighbor('W') != null){
             room_exit_directions.add('W');
         }
-        if (this.curr_room.getRoomNeighbor('E') != null){
+        if (this.curr_cave.getRoomNeighbor('E') != null){
             room_exit_directions.add('E');
         }
-        if (this.curr_room.getRoomNeighbor('S') != null){
+        if (this.curr_cave.getRoomNeighbor('S') != null){
             room_exit_directions.add('S');
         }
 
@@ -59,8 +59,8 @@ public class CaveExplorationPortionGame {
 
     public List<String> getObjectsAtAllLocations(){
 
-        Dinosaur[] dinosaur_locations = this.curr_room.getRoomDinosaurs();
-        Ingredient[] ingredient_locations = this.curr_room.getRoomIngredients();
+        Dinosaur[] dinosaur_locations = this.curr_cave.getRoomDinosaurs();
+        Ingredient[] ingredient_locations = this.curr_cave.getRoomIngredients();
 
         List<String> objects_by_location = new ArrayList<>();
 
@@ -80,13 +80,13 @@ public class CaveExplorationPortionGame {
 
     public void clickLocation(int location){
 
-        if (this.curr_room.getRoomDinosaurs()[location] != null){
-            this.player.fightDinosaur(this.curr_room.getRoomDinosaurs()[location]);
-            this.curr_room.removeObjectFromLocation(location);
+        if (this.curr_cave.getRoomDinosaurs()[location] != null){
+            this.player.fightDinosaur(this.curr_cave.getRoomDinosaurs()[location]);
+            this.curr_cave.removeObjectFromLocation(location);
         }
-        else if (this.curr_room.getRoomIngredients()[location] != null){
-            this.player.addIngredientToInventory(this.curr_room.getRoomIngredients()[location]);
-            this.curr_room.removeObjectFromLocation(location);
+        else if (this.curr_cave.getRoomIngredients()[location] != null){
+            this.player.addIngredientToInventory(this.curr_cave.getRoomIngredients()[location]);
+            this.curr_cave.removeObjectFromLocation(location);
         }
 
     }
@@ -98,8 +98,12 @@ public class CaveExplorationPortionGame {
 
     public boolean moveRoom(char direction){
         try {
-            this.curr_room = this.curr_room.move(direction);
-            return true;
+            this.curr_cave = this.curr_cave.move(direction);
+            if (this.player.changeCurrPatience(-10)){
+                System.out.println("player patience run out.");
+                return true;
+            }
+            return false;
         }
         catch (Exception e){
             return false;
@@ -107,20 +111,21 @@ public class CaveExplorationPortionGame {
     }
 
     public void enterRoom0(){
-        this.curr_room = this.room0;
+        this.curr_cave = this.cave0;
+        this.player.resetPatience();
     }
 
     public String[] getObjectByLocation(int location) {
 
-        if (this.curr_room.getRoomDinosaurs()[location] != null){
-            Dinosaur dinosaur_at_location = this.curr_room.getRoomDinosaurs()[location];
+        if (this.curr_cave.getRoomDinosaurs()[location] != null){
+            Dinosaur dinosaur_at_location = this.curr_cave.getRoomDinosaurs()[location];
             String[] returned_list = new String[2];
             returned_list[0] = dinosaur_at_location.getName();
             returned_list[1] = dinosaur_at_location.getDinosaurType().toString();
             return returned_list;
         }
-        else if (this.curr_room.getRoomIngredients()[location] != null){
-            Ingredient ingredient_at_location = this.curr_room.getRoomIngredients()[location];
+        else if (this.curr_cave.getRoomIngredients()[location] != null){
+            Ingredient ingredient_at_location = this.curr_cave.getRoomIngredients()[location];
             String[] returned_list = new String[3];
             returned_list[0] = ingredient_at_location.getName();
             returned_list[1] = ingredient_at_location.getType().toString();
@@ -129,5 +134,9 @@ public class CaveExplorationPortionGame {
         }
 
         return null;
+    }
+
+    public int getCurrPlayerPatience(){
+        return this.player.getCurrPatience();
     }
 }

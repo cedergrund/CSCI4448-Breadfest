@@ -2,7 +2,7 @@ package org.example.breadfest;
 
 import java.util.List;
 
-public interface FXMLCavePortion {
+public interface FXMLCave {
 
     String getBackgroundImage();
 
