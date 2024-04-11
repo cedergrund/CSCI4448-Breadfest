@@ -91,9 +91,9 @@ public class Player {
 
     }
 
-    private void playerLost(){
-
-    }
+//    private void playerLost(){
+//
+//    }
 
     public void fightDinosaur(Dinosaur dinosaur){
 
