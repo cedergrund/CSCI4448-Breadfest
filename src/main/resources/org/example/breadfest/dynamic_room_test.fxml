@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import java.lang.Double?>
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.breadfest.RoomController" minWidth="1366" minHeight="768"  maxWidth="1366" maxHeight="768"style="-fx-background-color: #808080;">
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.breadfest.RoomController" minWidth="1366" minHeight="768"  maxWidth="1366" maxHeight="768" style="-fx-background-color: #808080;">
 
 <children>
 <Button text="North" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="630" AnchorPane.rightAnchor="630"/>
