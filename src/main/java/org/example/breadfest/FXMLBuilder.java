@@ -1,10 +1,20 @@
 package org.example.breadfest;
+import java.util.Arrays;
 import java.util.List;
 
 
 
 public class FXMLBuilder {
     private StringBuilder FXMLContent;
+
+    private final List<Integer> position_0 = Arrays.asList(233, 69);
+    private final List<Integer> position_1 = Arrays.asList(233, 619);
+    private final List<Integer> position_2 = Arrays.asList(383, 169);
+    private final List<Integer> position_3 = Arrays.asList(383, 519);
+    private final List<Integer> position_4 = Arrays.asList(883, 169);
+    private final List<Integer> position_5 = Arrays.asList(883, 519);
+    private final List<Integer> position_6 = Arrays.asList(1033, 69);
+    private final List<Integer> position_7 = Arrays.asList(1033, 619);
 
     public FXMLBuilder() {
         this.FXMLContent = new StringBuilder();
@@ -21,7 +31,7 @@ public class FXMLBuilder {
 
         //this next section builds the anchor pane with its dimensions
         this.FXMLContent.append("<AnchorPane xmlns=\"http://javafx.com/javafx\" xmlns:fx=\"http://javafx.com/fxml\" fx:controller=\"org.example.breadfest.RoomController\" ");
-        this.FXMLContent.append("minWidth=\"1366\" minHeight=\"768\"  maxWidth=\"1366\" maxHeight=\"768\"");
+        this.FXMLContent.append("minWidth=\"1366\" minHeight=\"768\"  maxWidth=\"1366\" maxHeight=\"768\" ");
         this.FXMLContent.append("style=\"-fx-background-color: #808080;\">\n\n");
         this.FXMLContent.append("<children>\n");
     }
