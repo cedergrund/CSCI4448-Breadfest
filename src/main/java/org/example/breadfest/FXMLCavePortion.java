@@ -8,5 +8,12 @@ public interface FXMLCavePortion {
 
     List<Character> getRoomExitDirections();
 
+    List<String> getObjectsByLocation();
+
+
+    boolean clickLocation(int location);
+
+    List<String[]> getIngredientInventory();
+
 }
 
