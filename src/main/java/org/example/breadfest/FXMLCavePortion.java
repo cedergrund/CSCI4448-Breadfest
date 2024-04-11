@@ -10,10 +10,9 @@ public interface FXMLCavePortion {
 
     List<String> getObjectsByLocation();
 
-
     boolean clickLocation(int location);
 
-    List<String[]> getIngredientInventory();
+    boolean moveRoom(char direction);
 
 }
 

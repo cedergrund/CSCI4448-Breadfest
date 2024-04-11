@@ -105,4 +105,14 @@ public class CaveExplorationPortionGame {
         }
         return ingredient_inventory;
     }
+
+    public boolean moveRoom(char direction){
+        try {
+            this.curr_room = this.curr_room.move(direction);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
 }

@@ -24,7 +24,7 @@ public class Ingredient {
         return this.ingredient_rarity;
     }
 
-//    public int getScore(){
-//        return (int) (this.ingredient_rarity.getIngredientScore() * this.ingredient_type.getIngredientMultiplier());
-//    }
+    public int getScore(){
+        return (int) (this.ingredient_rarity.getIngredientScore() * this.ingredient_type.getIngredientMultiplier());
+    }
 }

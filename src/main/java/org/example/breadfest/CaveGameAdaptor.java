@@ -46,5 +46,10 @@ public class CaveGameAdaptor implements FXMLCavePortion {
         return this.adapted_game_state.getIngredientInventory();
     }
 
+    public boolean moveRoom(char direction){
+        return this.adapted_game_state.moveRoom(direction);
+    }
 
+
+    // TODO: fight scene
 }
