@@ -30,7 +30,7 @@ public class FXMLBuilder {
         // all imports are handled above this line
 
         //this next section builds the anchor pane with its dimensions
-        this.FXMLContent.append("<AnchorPane xmlns=\"http://javafx.com/javafx\" xmlns:fx=\"http://javafx.com/fxml\" fx:controller=\"org.example.breadfest.RoomController\" ");
+        this.FXMLContent.append("<AnchorPane xmlns=\"http://javafx.com/javafx\" xmlns:fx=\"http://javafx.com/fxml\" fx:controller=\"org.example.breadfest.GameController\" ");
         this.FXMLContent.append("minWidth=\"1366\" minHeight=\"768\"  maxWidth=\"1366\" maxHeight=\"768\" ");
         this.FXMLContent.append("style=\"-fx-background-color: #808080;\">\n\n");
         this.FXMLContent.append("<children>\n");
@@ -40,22 +40,24 @@ public class FXMLBuilder {
         this.FXMLContent.append("<Button text=\"Return Home\" AnchorPane.topAnchor=\"20\" AnchorPane.rightAnchor=\"50\" onAction=\"#return_home\"/>\n");
     }
 
-    public void addRoomButtons(List<Character> direction_list) {
+    public void addRoomButtons(CaveGameAdaptor adapted_game) {
+
+        List<Character> direction_list = adapted_game.getRoomExitDirections();
         if (direction_list != null) { // check if the list is null
             for (char direction : direction_list) { // loop through every direction
                 switch (direction) { // add the button for each direction
                     case 'N':
                         // Add North button
-                        this.FXMLContent.append("<Button text=\"North\" AnchorPane.topAnchor=\"20\" AnchorPane.leftAnchor=\"630\" AnchorPane.rightAnchor=\"630\"/>\n");
+                        this.FXMLContent.append("<Button id=\"N\" text=\"North\" AnchorPane.topAnchor=\"20\" AnchorPane.leftAnchor=\"630\" AnchorPane.rightAnchor=\"630\" onAction=\"#moveRoom\"/>\n");
                         break;
                     case 'S':
-                        this.FXMLContent.append("<Button text=\"South\" AnchorPane.bottomAnchor=\"20\" AnchorPane.leftAnchor=\"630\" AnchorPane.rightAnchor=\"630\"/>\n");
+                        this.FXMLContent.append("<Button id=\"S\" text=\"South\" AnchorPane.bottomAnchor=\"20\" AnchorPane.leftAnchor=\"630\" AnchorPane.rightAnchor=\"630\" onAction=\"#moveRoom\"/>\n");
                         break;
                     case 'E':
-                        this.FXMLContent.append("<Button text=\"East\" AnchorPane.topAnchor=\"300\" AnchorPane.rightAnchor=\"20\" AnchorPane.bottomAnchor=\"300\"/>\n");
+                        this.FXMLContent.append("<Button id=\"E\" text=\"East\" AnchorPane.topAnchor=\"300\" AnchorPane.rightAnchor=\"20\" AnchorPane.bottomAnchor=\"300\" onAction=\"#moveRoom\"/>\n");
                         break;
                     case 'W':
-                        this.FXMLContent.append("<Button text=\"West\" AnchorPane.topAnchor=\"300\" AnchorPane.leftAnchor=\"20\" AnchorPane.bottomAnchor=\"300\"/>\n");
+                        this.FXMLContent.append("<Button id=\"W\" text=\"West\" AnchorPane.topAnchor=\"300\" AnchorPane.leftAnchor=\"20\" AnchorPane.bottomAnchor=\"300\" onAction=\"#moveRoom\"/>\n");
                         break;
                     default:
                         // some sort of error here, we didn't get a valid input!
@@ -78,9 +80,9 @@ public class FXMLBuilder {
         this.FXMLContent.append("</AnchorPane>");
     }
 
-    public StringBuilder generateFXMLContent(List<Character> room_directions) {
+    public StringBuilder generateFXMLContent(CaveGameAdaptor adapted_game) {
         this.beginFXMLContent();
-        this.addRoomButtons(room_directions);
+        this.addRoomButtons(adapted_game);
         this.addReturnHomeButton();
         this.addRoomName("Testing Name");
         this.endFXMLContent();

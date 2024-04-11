@@ -22,9 +22,9 @@ class RoomTest {
 
     @Test
     void moveToRoom() {
-        Room test_room = new Room(0);
+        Room test_room = null;
         try {
-            test_room.enterRoom0();
+            test_room = Room.enterRoom0();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

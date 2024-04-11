@@ -7,7 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import java.lang.Double?>
 <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.breadfest.RoomController"
+            fx:controller="org.example.breadfest.GameController"
             minWidth="1366" minHeight="768" maxWidth="1366" maxHeight="768"
             style="-fx-background-color: #2E8B57;">
 
@@ -19,7 +19,7 @@
         </Label>
         <ImageView AnchorPane.bottomAnchor="20" AnchorPane.rightAnchor="20">
             <image>
-                <Image url="@Images/dinosaur_sample.jpeg"/>
+                <Image url="@../../../../../../dinosaur_sample.jpeg"/>
             </image>
         </ImageView>
         <Button layoutX="621" layoutY="288" onAction="#open_inventory" style="-fx-background-color: transparent; -fx-background-insets: 0;">
@@ -37,6 +37,6 @@
             </image>
         </ImageView>
 
-        <Button text="Enter Cave!" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="630" AnchorPane.rightAnchor="630" onAction="#move_north"/>
+        <Button text="Enter Cave!" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="630" AnchorPane.rightAnchor="630" onAction="#enterMaze"/>
     </children>
 </AnchorPane>

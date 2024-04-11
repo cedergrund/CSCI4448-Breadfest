@@ -6,6 +6,7 @@ import org.example.breadfest.ingredients.Ingredient;
 import org.example.breadfest.ingredients.IngredientFactory;
 
 import java.security.InvalidAlgorithmParameterException;
+import java.security.Principal;
 import java.util.*;
 
 public class Room {
@@ -270,7 +271,7 @@ public class Room {
 
     public static Room enterRoom0() throws Exception {
         Room room0 = new Room(0);
-        room0.enterRoom('W', null);
+        room0.enterRoom('S', null);
         return room0;
     }
 
@@ -302,18 +303,22 @@ public class Room {
         return switch (move_direction) {
             case 'W' -> {
                 room_to_move_into.enterRoom('E', this);
+                System.out.println("Moved to depth " + room_to_move_into.getDepth());
                 yield room_to_move_into;
             }
             case 'N' -> {
                 room_to_move_into.enterRoom('S', this);
+                System.out.println("Moved to depth " + room_to_move_into.getDepth());
                 yield room_to_move_into;
             }
             case 'E' -> {
                 room_to_move_into.enterRoom('W', this);
+                System.out.println("Moved to depth " + room_to_move_into.getDepth());
                 yield room_to_move_into;
             }
             case 'S' -> {
                 room_to_move_into.enterRoom('N', this);
+                System.out.println("Moved to depth " + room_to_move_into.getDepth());
                 yield room_to_move_into;
             }
             default -> throw new InvalidAlgorithmParameterException();

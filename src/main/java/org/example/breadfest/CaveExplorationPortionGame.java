@@ -10,16 +10,19 @@ public class CaveExplorationPortionGame {
 
     private final Player player;
     private Room curr_room;
+    private Room room0;
 
-    CaveExplorationPortionGame(){
+    public CaveExplorationPortionGame(){
         this.player = Player.getInstance();
         try {
             this.curr_room = Room.enterRoom0();
+            this.room0 = curr_room;
         }
         catch (Exception e){
             System.out.println("Error " + e);
         }
     }
+
 
     public void playerFightsDinosaur(Dinosaur dinosaur){
         this.player.fightDinosaur(dinosaur);
@@ -75,31 +78,22 @@ public class CaveExplorationPortionGame {
         return objects_by_location;
     }
 
-    public boolean clickLocation(int location){
+    public void clickLocation(int location){
 
         if (this.curr_room.getRoomDinosaurs()[location] != null){
             this.player.fightDinosaur(this.curr_room.getRoomDinosaurs()[location]);
-            return true;
+            this.curr_room.removeObjectFromLocation(location);
         }
         else if (this.curr_room.getRoomIngredients()[location] != null){
             this.player.addIngredientToInventory(this.curr_room.getRoomIngredients()[location]);
-            return true;
+            this.curr_room.removeObjectFromLocation(location);
         }
-
-        return true;
 
     }
 
     public List<String[]> getIngredientInventory(){
-        List<String[]> ingredient_inventory = new ArrayList<>();
-        for (Ingredient curr_ingredient : this.player.getIngredientInventory()){
-            String[] curr_ingredient_information = new String[3];
-            curr_ingredient_information[0] = curr_ingredient.getName();
-            curr_ingredient_information[1] = curr_ingredient.getType().toString();
-            curr_ingredient_information[2] = curr_ingredient.getRarity().toString();
-            ingredient_inventory.add(curr_ingredient_information);
-        }
-        return ingredient_inventory;
+
+        return player.getIngredientInventory();
     }
 
     public boolean moveRoom(char direction){
@@ -110,6 +104,10 @@ public class CaveExplorationPortionGame {
         catch (Exception e){
             return false;
         }
+    }
+
+    public void enterRoom0(){
+        this.curr_room = this.room0;
     }
 
     public String[] getObjectByLocation(int location) {

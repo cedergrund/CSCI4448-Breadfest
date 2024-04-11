@@ -37,9 +37,9 @@ public class CaveGameAdaptor implements FXMLCavePortion {
      * @param location
      * @return boolean -> if true reload all things in room.
      */
-    public boolean clickLocation(int location){
+    public void clickLocation(int location){
 
-        return adapted_game_state.clickLocation(location);
+        adapted_game_state.clickLocation(location);
 
     }
 
@@ -53,6 +53,10 @@ public class CaveGameAdaptor implements FXMLCavePortion {
 
     public boolean moveRoom(char direction){
         return this.adapted_game_state.moveRoom(direction);
+    }
+
+    public void enterRoom0(){
+        this.adapted_game_state.enterRoom0();
     }
 
 

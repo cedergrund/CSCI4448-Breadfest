@@ -12,7 +12,7 @@ public interface FXMLCavePortion {
 
     String[] getObjectByLocation(int location);
 
-    boolean clickLocation(int location);
+    void clickLocation(int location);
 
     boolean moveRoom(char direction);
 
