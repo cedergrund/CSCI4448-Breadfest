@@ -22,9 +22,14 @@ public class CaveGameAdaptor implements FXMLCavePortion {
         return this.adapted_game_state.getRoomExitDirections();
     }
 
-    public List<String> getObjectsByLocation(){
+    public List<String> getObjectsAtAllLocations(){
 
-        return this.adapted_game_state.getObjectsByLocation();
+        return this.adapted_game_state.getObjectsAtAllLocations();
+    }
+
+    @Override
+    public String[] getObjectByLocation(int location) {
+        return this.adapted_game_state.getObjectByLocation(location);
     }
 
 

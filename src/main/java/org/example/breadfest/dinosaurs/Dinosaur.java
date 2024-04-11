@@ -117,4 +117,8 @@ public class Dinosaur {
     public Ingredient getRewardIngredient() {
         return this.reward_ingredient;
     }
+
+    public String getName() {
+        return name;
+    }
 }

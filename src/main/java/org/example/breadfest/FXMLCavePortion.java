@@ -8,7 +8,9 @@ public interface FXMLCavePortion {
 
     List<Character> getRoomExitDirections();
 
-    List<String> getObjectsByLocation();
+    List<String> getObjectsAtAllLocations();
+
+    String[] getObjectByLocation(int location);
 
     boolean clickLocation(int location);
 

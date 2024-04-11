@@ -11,8 +11,8 @@ public class CaveExplorationPortionGame {
     private final Player player;
     private Room curr_room;
 
-    CaveExplorationPortionGame(Player player){
-        this.player = player;
+    CaveExplorationPortionGame(){
+        this.player = Player.getInstance();
         try {
             this.curr_room = Room.enterRoom0();
         }
@@ -23,10 +23,6 @@ public class CaveExplorationPortionGame {
 
     public void playerFightsDinosaur(Dinosaur dinosaur){
         this.player.fightDinosaur(dinosaur);
-    }
-
-    FXMLCavePortion getRoom(){
-        return new CaveGameAdaptor(this);
     }
 
     public String getBackgroundImage() {
@@ -58,7 +54,7 @@ public class CaveExplorationPortionGame {
 
     }
 
-    public List<String> getObjectsByLocation(){
+    public List<String> getObjectsAtAllLocations(){
 
         Dinosaur[] dinosaur_locations = this.curr_room.getRoomDinosaurs();
         Ingredient[] ingredient_locations = this.curr_room.getRoomIngredients();
@@ -114,5 +110,26 @@ public class CaveExplorationPortionGame {
         catch (Exception e){
             return false;
         }
+    }
+
+    public String[] getObjectByLocation(int location) {
+
+        if (this.curr_room.getRoomDinosaurs()[location] != null){
+            Dinosaur dinosaur_at_location = this.curr_room.getRoomDinosaurs()[location];
+            String[] returned_list = new String[2];
+            returned_list[0] = dinosaur_at_location.getName();
+            returned_list[1] = dinosaur_at_location.getDinosaurType().toString();
+            return returned_list;
+        }
+        else if (this.curr_room.getRoomIngredients()[location] != null){
+            Ingredient ingredient_at_location = this.curr_room.getRoomIngredients()[location];
+            String[] returned_list = new String[3];
+            returned_list[0] = ingredient_at_location.getName();
+            returned_list[1] = ingredient_at_location.getType().toString();
+            returned_list[2] = ingredient_at_location.getRarity().toString();
+            return returned_list;
+        }
+
+        return null;
     }
 }

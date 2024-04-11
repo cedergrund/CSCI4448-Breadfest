@@ -1,5 +1,6 @@
 package org.example.breadfest;
 
+import org.example.breadfest.dice.Common.NormalDie;
 import org.example.breadfest.dice.Dice;
 import org.example.breadfest.dinosaurs.Dinosaur;
 import org.example.breadfest.ingredients.Ingredient;
@@ -15,7 +16,7 @@ public class Player {
     // dice_inventory is all die that player has, while active_dice_inventory are the 3 that they currently use
     private final ArrayList<Dice> dice_inventory;
 
-    private final Dice[] active_dice_inventory;
+    private final Dice active_die;
 
     // base patience is starting patience at every time you enter maze
     private int base_patience;
@@ -34,7 +35,7 @@ public class Player {
         this.ingredient_inventory = new ArrayList<Ingredient>();
 
         this.dice_inventory = new ArrayList<>();
-        this.active_dice_inventory = new Dice[3];
+        this.active_die = new NormalDie();
     }
 
     // singleton player
@@ -43,7 +44,7 @@ public class Player {
     }
 
     public boolean changeCurrPatience(int patience_change){
-        this.curr_patience += 5;
+        this.curr_patience += patience_change;
         return this.curr_patience <= 0;
     }
 
@@ -59,8 +60,8 @@ public class Player {
         this.base_patience += upgrade_amount;
     }
 
-    public int rollDice(int selected_die){
-        return this.active_dice_inventory[selected_die-1].rollDice();
+    public int rollCurrentDie(){
+        return this.active_die.rollDice();
     }
 
     private void beatDinosaur(Dinosaur dinosaur){
@@ -83,11 +84,8 @@ public class Player {
 
     public void fightDinosaur(Dinosaur dinosaur){
 
-        // prompt selection of which die to use {1, 2, or 3 (if have 3 dice, do check on availability here)}
-        int selected_die = 1;
-
         // roll two die
-        int player_roll = this.rollDice(selected_die);
+        int player_roll = this.rollCurrentDie();
         int dino_roll = dinosaur.rollDie();
 
         // compare the two rolls
