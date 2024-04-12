@@ -42,6 +42,8 @@ public class Player {
         this.active_die = new NormalDie();
     }
 
+
+
     // singleton player
     public static Player getInstance() {
         return player;
@@ -51,6 +53,8 @@ public class Player {
         this.curr_patience += patience_change;
         return this.curr_patience <= 0;
     }
+
+    public Dice getActiveDie() { return this.active_die;}
 
     public int getCurrPatience() {
         return this.curr_patience;

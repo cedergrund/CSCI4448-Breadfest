@@ -60,34 +60,34 @@ public class Dinosaur {
 
 
     // load dialogues from JSON file using jackson if not loaded already
-    private void loadDialogues() throws IOException {
-        if (!this.dialogues_loaded) {
-            ObjectMapper mapper = new ObjectMapper();
-            String DIALOGUE_FILE_PATH = "dialogues.json";
-            dialogue = mapper.readValue(new File(DIALOGUE_FILE_PATH), new TypeReference<>() {});
-            this.dialogues_loaded = true;
-        }
-    }
+//    private void loadDialogues() throws IOException {
+//        if (!this.dialogues_loaded) {
+//            ObjectMapper mapper = new ObjectMapper();
+//            String DIALOGUE_FILE_PATH = "dialogues.json";
+//            dialogue = mapper.readValue(new File(DIALOGUE_FILE_PATH), new TypeReference<>() {});
+//            this.dialogues_loaded = true;
+//        }
+//    }
 
     // generate dialogue of specific type
-    public String generateDialogueOfType(String type) throws IOException {
-        loadDialogues(); // Ensure dialogues are loaded
-        List<String> options = dialogue.get(type);
-        if (options == null || options.isEmpty()) {
-            return "";
-        }
-        // Choose a random option from the list of dialogue options
-        Random random = new Random();
-        int index = random.nextInt(options.size());
-        return options.get(index);
-    }
+//    public String generateDialogueOfType(String type) throws IOException {
+//        loadDialogues(); // Ensure dialogues are loaded
+//        List<String> options = dialogue.get(type);
+//        if (options == null || options.isEmpty()) {
+//            return "";
+//        }
+//        // Choose a random option from the list of dialogue options
+//        Random random = new Random();
+//        int index = random.nextInt(options.size());
+//        return options.get(index);
+//    }
 
-    public String speak() throws IOException {
-        // TODO: implement odds of dialogue
-        // TODO: implements odds of each dialogue type
-
-        return JSONReading.generateRandomElementFromJSON(this.dialogue, "");
-    }
+//    public String speak() throws IOException {
+//        // TODO: implement odds of dialogue
+//        // TODO: implements odds of each dialogue type
+//
+//        return JSONReading.generateRandomElementFromJSON(this.dialogue, "");
+//    }
 
     public int getCurrPatience() {
         return this.curr_patience;

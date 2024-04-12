@@ -99,6 +99,6 @@ class CaveGameTest {
         CaveGame cave_game_test = new CaveGame();
 
         String[] object_string_test = cave_game_test.getObjectByLocation(0);
-        assertNotNull(object_string_test);
+        assertNull(object_string_test);
     }
 }

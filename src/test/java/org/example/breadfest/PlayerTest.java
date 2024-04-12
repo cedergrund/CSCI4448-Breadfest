@@ -1,6 +1,11 @@
 package org.example.breadfest;
 
+import kotlin.Triple;
 import org.example.breadfest.dice.Dice;
+import org.example.breadfest.dice.Epic.TripleNormalDie;
+import org.example.breadfest.dice.Nuclear.AtomicDie;
+import org.example.breadfest.dice.Rare.DoubleNormalDie;
+import org.example.breadfest.dice.Rare.TwoDice;
 import org.example.breadfest.dinosaurs.Dinosaur;
 import org.example.breadfest.dinosaurs.DinosaurTypes;
 import org.example.breadfest.ingredients.Ingredient;
@@ -49,7 +54,21 @@ class PlayerTest {
 //
     @Test
     void rollCurrentDie() {
+        Dice epic_dice_test = new TripleNormalDie();
+        Dice rare_dice_test_1 = new DoubleNormalDie();
+        Dice rare_dice_test_2 = new TwoDice();
+        Dice nuclear_dice_test = new AtomicDie();
+        
+        assertNotNull(epic_dice_test);
+        assertNotNull(rare_dice_test_1);
+        assertNotNull(rare_dice_test_2);
+        assertNotNull(nuclear_dice_test);
         Player player_test = Player.getInstance();
+        assertNotEquals(player_test.getActiveDie(), epic_dice_test);
+        assertNotEquals(player_test.getActiveDie(), rare_dice_test_1);
+        assertNotEquals(player_test.getActiveDie(), rare_dice_test_2);
+        assertNotEquals(player_test.getActiveDie(), nuclear_dice_test);
+
         int roll_test = player_test.rollCurrentDie();
         assertNotNull(roll_test);
 

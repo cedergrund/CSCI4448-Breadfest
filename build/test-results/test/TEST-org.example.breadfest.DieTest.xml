@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.breadfest.DieTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-04-12T00:32:32" hostname="Josephs-MacBook-Pro.local" time="0.014">
+  <properties/>
+  <testcase name="assertNonZeroNuclear()" classname="org.example.breadfest.DieTest" time="0.01"/>
+  <testcase name="checkRolls()" classname="org.example.breadfest.DieTest" time="0.002"/>
+  <testcase name="assertNonZeroEpic()" classname="org.example.breadfest.DieTest" time="0.001"/>
+  <testcase name="assertNonZeroRare()" classname="org.example.breadfest.DieTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
