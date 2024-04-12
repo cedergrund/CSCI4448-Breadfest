@@ -2,7 +2,6 @@ package org.example.breadfest.ingredients;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.breadfest.JSONReading;
 
 import java.io.IOException;
 import java.io.File;
@@ -33,7 +32,7 @@ public class IngredientFactory {
     public Ingredient makeIngredientByType(IngredientTypes ingredient_type, IngredientRarity ingredient_rarity) throws Exception {
 
         String type = ingredient_type.toString() + ingredient_rarity.toString();
-        String ingredient_name = JSONReading.generateRandomElementFromJSON(this.ingredient_names, type);
+        String ingredient_name = JSONReadingHelper.generateRandomElementFromJSON(this.ingredient_names, type);
 
         return new Ingredient(ingredient_name, ingredient_type, ingredient_rarity);
 

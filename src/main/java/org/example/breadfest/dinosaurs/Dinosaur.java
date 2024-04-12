@@ -5,7 +5,7 @@ import java.util.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.breadfest.JSONReading;
+import org.example.breadfest.ingredients.JSONReadingHelper;
 import org.example.breadfest.dice.Dice;
 import org.example.breadfest.ingredients.Ingredient;
 
@@ -86,7 +86,7 @@ public class Dinosaur {
         // TODO: implement odds of dialogue
         // TODO: implements odds of each dialogue type
 
-        return JSONReading.generateRandomElementFromJSON(this.dialogue, "");
+        return JSONReadingHelper.generateRandomElementFromJSON(this.dialogue, "");
     }
 
     public int getCurrPatience() {

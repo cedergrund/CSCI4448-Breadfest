@@ -2,16 +2,12 @@ package org.example.breadfest.dinosaurs;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.breadfest.JSONReading;
-import org.example.breadfest.ingredients.Ingredient;
+import org.example.breadfest.ingredients.JSONReadingHelper;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class DinosaurFactory {
 
@@ -32,7 +28,7 @@ public class DinosaurFactory {
     public Dinosaur makeADinosaurByType(DinosaurTypes dinosaur_type) throws Exception {
 
         String type = dinosaur_type.toString();
-        String dinosaur_name = JSONReading.generateRandomElementFromJSON(this.dinosaur_names, type);
+        String dinosaur_name = JSONReadingHelper.generateRandomElementFromJSON(this.dinosaur_names, type);
 
         return new Dinosaur(dinosaur_name, dinosaur_type);
 

@@ -20,4 +20,6 @@ module org.example.breadfest {
     opens org.example.breadfest.dice.Rare to javafx.fxml;
     exports org.example.breadfest.dice.Epic;
     opens org.example.breadfest.dice.Epic to javafx.fxml;
+    exports org.example.breadfest.FXML_functions;
+    opens org.example.breadfest.FXML_functions to javafx.fxml;
 }

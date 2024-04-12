@@ -1,12 +1,11 @@
-package org.example.breadfest;
+package org.example.breadfest.ingredients;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class JSONReading {
-
+public class JSONReadingHelper {
 
     public static String generateRandomElementFromJSON(Map<String, List<String>> JSON, String type) throws IOException {
 
