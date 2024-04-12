@@ -82,21 +82,13 @@ public class Dinosaur {
 //        return options.get(index);
 //    }
 
-<<<<<<< HEAD
-    public String speak() throws IOException {
-        // TODO: implement odds of dialogue
-        // TODO: implements odds of each dialogue type
 
-        return JSONReadingHelper.generateRandomElementFromJSON(this.dialogue, "");
-    }
-=======
 //    public String speak() throws IOException {
 //        // TODO: implement odds of dialogue
 //        // TODO: implements odds of each dialogue type
 //
 //        return JSONReading.generateRandomElementFromJSON(this.dialogue, "");
 //    }
->>>>>>> 281c606580a41dd74bd7725c48d080613380313a
 
     public int getCurrPatience() {
         return this.curr_patience;
