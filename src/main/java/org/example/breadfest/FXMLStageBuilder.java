@@ -64,7 +64,7 @@ public class FXMLStageBuilder {
         return this;
     }
 
-    public FXMLStageBuilder addCaveEntranceImages(){
+    public FXMLStageBuilder addCaveEntranceButtonsAndImages(){
 
         ImageView dinosaur_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dinosaur_sample.jpeg"));
         AnchorPane.setBottomAnchor(dinosaur_image_view, 20.0);
@@ -76,10 +76,6 @@ public class FXMLStageBuilder {
         AnchorPane.setRightAnchor(cave_entrance_image_view, 200.0);
         root.getChildren().add(cave_entrance_image_view);
 
-        return this;
-    }
-
-    public FXMLStageBuilder addCave0Entrance(){
         Button enter_cave0_button = new Button("Enter Cave!");
         AnchorPane.setTopAnchor(enter_cave0_button, 20.0);
         AnchorPane.setLeftAnchor(enter_cave0_button, 630.0);
@@ -87,7 +83,7 @@ public class FXMLStageBuilder {
         enter_cave0_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.enterMaze(application, stage);
+                FXMLButtonEventHandlers.enterMaze(application);
             }
         });
 
@@ -140,7 +136,7 @@ public class FXMLStageBuilder {
                 @Override
                 public void handle(ActionEvent event) {
 
-                    FXMLButtonEventHandlers.moveRoom(application, event, stage);
+                    FXMLButtonEventHandlers.moveRoom(application, event);
                 }
             });
             root.getChildren().add(new_button);
@@ -182,7 +178,7 @@ public class FXMLStageBuilder {
         exit_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.exitInventory(application, stage, location_where_pressed);
+                FXMLButtonEventHandlers.exitInventory(application, location_where_pressed);
             }
         });
 
@@ -256,7 +252,7 @@ public class FXMLStageBuilder {
         inventory_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.openInventory(application, stage, location_of_button);
+                FXMLButtonEventHandlers.openInventory(application, location_of_button);
             }
         });
         root.getChildren().add(inventory_button);
@@ -272,7 +268,7 @@ public class FXMLStageBuilder {
         return_home_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.returnHome(application, stage);
+                FXMLButtonEventHandlers.returnHome(application);
             }
         });
 
@@ -299,7 +295,7 @@ public class FXMLStageBuilder {
         dino_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.fightDinosaur(application, stage, location);
+                FXMLButtonEventHandlers.fightDinosaur(application,location);
             }
         });
         root.getChildren().add(dino_button);
@@ -313,7 +309,7 @@ public class FXMLStageBuilder {
         ingredient_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.collectIngredient(application, stage, location);
+                FXMLButtonEventHandlers.collectIngredient(application, location);
             }
         });
         root.getChildren().add(ingredient_button);

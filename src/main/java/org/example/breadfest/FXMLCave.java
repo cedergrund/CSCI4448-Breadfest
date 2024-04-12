@@ -16,5 +16,10 @@ public interface FXMLCave {
 
     boolean moveRoom(char direction);
 
+    List<String[]> getIngredientInventory();
+
+    int getCurrPlayerPatience();
+
+    void enterRoom0();
 }
 

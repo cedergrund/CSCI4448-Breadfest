@@ -7,7 +7,7 @@ public enum IngredientTypes {
     Salt(1),
     Yeast(3),
     Water(4),
-    Extra(1);
+    Topping(1);
 
     private final double ingredient_score_multiplier;
 
@@ -24,7 +24,7 @@ public enum IngredientTypes {
             case 1 -> Salt;
             case 2 -> Yeast;
             case 3 -> Water;
-            case 4 -> Extra;
+            case 4 -> Topping;
             default -> null;
         };
 
