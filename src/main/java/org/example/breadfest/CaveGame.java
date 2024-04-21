@@ -139,4 +139,15 @@ public class CaveGame {
     public int getCurrPlayerPatience(){
         return this.player.getCurrPatience();
     }
+
+    public String getImageByLocation(int location_index) {
+        Dinosaur dinosaur_at_index = curr_cave.getRoomDinosaurs()[location_index];
+
+        return switch (dinosaur_at_index.getDinosaurType()){
+            case Common -> "file:src/main/resources/org/example/breadfest/Images/dino1.100x.GIF";
+            case Rare -> "file:src/main/resources/org/example/breadfest/Images/dino2.100x.GIF";
+            case Epic -> "file:src/main/resources/org/example/breadfest/Images/dino3.100x.GIF";
+            default -> "file:src/main/resources/org/example/breadfest/Images/dino_button_image.png";
+        };
+    }
 }

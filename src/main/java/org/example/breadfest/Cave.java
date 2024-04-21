@@ -41,8 +41,11 @@ public class Cave {
         if (this.depth == 0){
             return 3;
         }
+        if (this.depth == 10){
+            return 0;
+        }
         // the chance for a dead end increases as you go further in the cave
-        double chance_for_dead_end = this.depth*0.1;
+        double chance_for_dead_end = this.depth*0.06;
         // the chance for connected rooms also decreases as you explore greater depths
         double chance_for_connected_room = (1-chance_for_dead_end)/3;
 

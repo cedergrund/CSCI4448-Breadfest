@@ -28,6 +28,11 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
         return this.adapted_game_state.getObjectByLocation(location);
     }
 
+    @Override
+    public String getImageByLocation(int location_index) {
+        return this.adapted_game_state.getImageByLocation(location_index);
+    }
+
 
     /**
      * @param location

@@ -12,6 +12,8 @@ public interface FXMLCave {
 
     String[] getObjectByLocation(int location);
 
+    String getImageByLocation(int locationIndex);
+
     void clickLocation(int location);
 
     boolean moveRoom(char direction);

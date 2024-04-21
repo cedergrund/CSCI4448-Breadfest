@@ -66,7 +66,7 @@ public class FXMLStageBuilder {
 
     public FXMLStageBuilder addCaveEntranceButtonsAndImages(){
 
-        ImageView dinosaur_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dinosaur_sample.jpeg"));
+        ImageView dinosaur_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino1.100x.GIF"));
         AnchorPane.setBottomAnchor(dinosaur_image_view, 20.0);
         AnchorPane.setRightAnchor(dinosaur_image_view, 20.0);
         root.getChildren().add(dinosaur_image_view);
@@ -154,7 +154,8 @@ public class FXMLStageBuilder {
         for (int location_index = 0; location_index <8; location_index++){
             switch (cave_object_locations.get(location_index)){
                 case "dinosaur":{
-                    addDinosaurToLocation(stage, root, location_index);
+                    String image_url = application.getAdaptor().getImageByLocation(location_index);
+                    addDinosaurToLocation(stage, root, location_index, image_url);
                     break;
                 }
                 case "ingredient":{
@@ -243,10 +244,10 @@ public class FXMLStageBuilder {
     public FXMLStageBuilder addPlayerWithInventoryButton(String location_of_button){
 
         Button inventory_button = new Button();
-        inventory_button.setLayoutX(621);
-        inventory_button.setLayoutY(288);
+        inventory_button.setLayoutX(533);
+        inventory_button.setLayoutY(234);
         inventory_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/lego_player.png"));
+        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/character.100x-ezgif.com-resize.gif"));
         inventory_button.setGraphic(legoPlayerImageView);
 
         inventory_button.setOnAction(new EventHandler<ActionEvent>() {
@@ -287,11 +288,11 @@ public class FXMLStageBuilder {
 
     // Helper functions below:
 
-    private void addDinosaurToLocation(Stage stage, AnchorPane root, int location){
+    private void addDinosaurToLocation(Stage stage, AnchorPane root, int location, String image_url){
 
         Button dino_button = addButtonToLocation(location);
-        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino_button_image.png"));
-        dino_button.setGraphic(legoPlayerImageView);
+        ImageView dino_image = new ImageView(new Image(image_url));
+        dino_button.setGraphic(dino_image);
         dino_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
