@@ -43,6 +43,11 @@ public class FXMLStageBuilder {
         return this;
     }
 
+    public FXMLStageBuilder setBakingSceneBackground(){
+        root.setStyle("-fx-background-color: #333333;");
+        return this;
+    }
+
     public FXMLStageBuilder addWelcomeToBreadfestLabel(){
 
         Label welcome_label = new Label("Welcome to Breadfest!");
@@ -248,6 +253,26 @@ public class FXMLStageBuilder {
             AnchorPane.setTopAnchor(noDataLabel, 20.0);
             centerPane.getChildren().add(noDataLabel);
         }
+
+        return this;
+    }
+
+    public FXMLStageBuilder addBillWithBakingSceneButton(String location_of_button){
+
+        Button baking_scene_button = new Button();
+        baking_scene_button.setLayoutX(50);
+        baking_scene_button.setLayoutY(50);
+        baking_scene_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+        ImageView bill_wright_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/bill_wright_npc.jpg"));
+        baking_scene_button.setGraphic(bill_wright_image);
+
+        baking_scene_button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FXMLButtonEventHandlers.openBakingScene(application, location_of_button);
+            }
+        });
+        root.getChildren().add(baking_scene_button);
 
         return this;
     }

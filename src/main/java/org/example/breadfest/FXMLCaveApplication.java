@@ -25,6 +25,7 @@ public class FXMLCaveApplication {
                 .addWelcomeToBreadfestLabel()
                 .addCaveEntranceButtonsAndImages()
                 .addPlayerWithInventoryButton("Entrance")
+                .addBillWithBakingSceneButton("Entrance")
                 .build();
 
         stage.show();
@@ -42,6 +43,13 @@ public class FXMLCaveApplication {
                 .build();
 
         stage.show();
+    }
+
+    public void generateBakingScene(String location_where_pressed){
+        stage = new FXMLStageBuilder(this, stage)
+                .setBakingSceneBackground()
+                .addReturnToGameButton(location_where_pressed)
+                .build();
     }
 
     public void generateInventory(String location_where_pressed){
