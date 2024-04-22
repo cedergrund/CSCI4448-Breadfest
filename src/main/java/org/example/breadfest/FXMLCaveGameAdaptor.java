@@ -64,6 +64,8 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
         return adapted_game_state.getCurrPlayerPatience();
     }
 
+    public int getMaxPlayerPatience() { return adapted_game_state.getMaxPlayerPatience(); }
+
 
     // TODO: fight scene
 }

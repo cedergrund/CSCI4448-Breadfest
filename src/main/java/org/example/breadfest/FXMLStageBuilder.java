@@ -6,15 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -56,11 +54,25 @@ public class FXMLStageBuilder {
     }
 
     public FXMLStageBuilder addPatienceMeter(){
-        Label patience_meter = new Label("Player Patience: " + String.valueOf(application.getAdaptor().getCurrPlayerPatience()));
-        patience_meter.setFont(new Font(32));
+
+        // Inside your method where you set up your UI
+        ProgressBar patience_meter = new ProgressBar();
+        patience_meter.setPrefWidth(200);
         AnchorPane.setLeftAnchor(patience_meter, 20.0);
         AnchorPane.setBottomAnchor(patience_meter, 20.0);
         root.getChildren().add(patience_meter);
+
+        FXMLCave adaptor = application.getAdaptor();
+        int curr_patience = adaptor.getCurrPlayerPatience();
+        double patiencePercentage = (double) curr_patience / adaptor.getMaxPlayerPatience();;
+        patience_meter.setProgress(patiencePercentage);
+
+        Label patience_label = new Label("Patience:"+String.valueOf(curr_patience));
+        patience_label.setFont(Font.font("Verdana", FontWeight.BOLD, 16)); // Use "Satisfy" as the font name
+        AnchorPane.setLeftAnchor(patience_label, 20.0);
+        AnchorPane.setBottomAnchor(patience_label, 40.0);
+        root.getChildren().add(patience_label);
+
         return this;
     }
 
@@ -305,8 +317,8 @@ public class FXMLStageBuilder {
 
     private void addIngredientToLocation(Stage stage, AnchorPane root, int location){
         Button ingredient_button = addButtonToLocation(location);
-        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png"));
-        ingredient_button.setGraphic(legoPlayerImageView);
+        ImageView ingredient_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png"));
+        ingredient_button.setGraphic(ingredient_image);
         ingredient_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -320,36 +332,36 @@ public class FXMLStageBuilder {
         Button button = new Button("");;
         switch (location) { // add the dinosaur to correct location
             case 0:
-                button.setLayoutX(233);
-                button.setLayoutY(69);
+                button.setLayoutX(233-50);
+                button.setLayoutY(69-50);
                 break;
             case 1:
-                button.setLayoutX(233);
-                button.setLayoutY(619);
+                button.setLayoutX(233-50);
+                button.setLayoutY(619-50);
                 break;
             case 2:
-                button.setLayoutX(383);
-                button.setLayoutY(169);
+                button.setLayoutX(383-50);
+                button.setLayoutY(169-50);
                 break;
             case 3:
-                button.setLayoutX(383);
-                button.setLayoutY(519);
+                button.setLayoutX(383-50);
+                button.setLayoutY(519-50);
                 break;
             case 4:
-                button.setLayoutX(883);
-                button.setLayoutY(169);
+                button.setLayoutX(883-50);
+                button.setLayoutY(169-50);
                 break;
             case 5:
-                button.setLayoutX(883);
-                button.setLayoutY(519);
+                button.setLayoutX(883-50);
+                button.setLayoutY(519-50);
                 break;
             case 6:
-                button.setLayoutX(1033);
-                button.setLayoutY(69);
+                button.setLayoutX(1033-50);
+                button.setLayoutY(69-50);
                 break;
             case 7:
-                button.setLayoutX(1033);
-                button.setLayoutY(619);
+                button.setLayoutX(1033-50);
+                button.setLayoutY(619-50);
                 break;
             default:
                 // some sort of error here, we didn't get a valid input!

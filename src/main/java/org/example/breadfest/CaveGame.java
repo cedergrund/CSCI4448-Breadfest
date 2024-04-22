@@ -150,4 +150,8 @@ public class CaveGame {
             default -> "file:src/main/resources/org/example/breadfest/Images/dino_button_image.png";
         };
     }
+
+    public int getMaxPlayerPatience(){
+        return this.player.getBasePatience();
+    }
 }

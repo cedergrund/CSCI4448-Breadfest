@@ -60,6 +60,8 @@ public class Player {
         return this.curr_patience;
     }
 
+    public int getBasePatience() { return this.base_patience; }
+
     public void resetPatience(){
         this.curr_patience = this.base_patience;
     }
