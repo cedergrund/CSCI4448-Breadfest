@@ -28,6 +28,10 @@ public class Player {
     // curr patience starts at base patience and then is updated as you lose it, until turn is over
     private int curr_patience;
 
+    //base honor is starting honor at every time you begin the game!
+    private int base_honor;
+
+
     // damage modifier in fights
     private double damage_modifier;
 

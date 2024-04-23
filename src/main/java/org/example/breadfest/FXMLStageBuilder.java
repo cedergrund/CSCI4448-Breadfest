@@ -1,5 +1,7 @@
 package org.example.breadfest;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -256,6 +259,109 @@ public class FXMLStageBuilder {
 
         return this;
     }
+
+    public FXMLStageBuilder addBakingInventoryTable(){
+
+
+        // title
+        Label inventory_label = new Label("Let's Bake!");
+        inventory_label.setLayoutX(25);
+        inventory_label.setLayoutY(25);
+        inventory_label.setTextFill(javafx.scene.paint.Color.WHITE);
+        inventory_label.setStyle("-fx-font-family: 'Arial Black'; -fx-font-size: 48px;");
+        root.getChildren().add(inventory_label);
+
+
+        // center the table
+        StackPane centerPane = new StackPane();
+        centerPane.setLayoutX((double) 42); // Center horizontally
+        centerPane.setLayoutY((double) 84); // Center vertically
+        root.getChildren().add(centerPane);
+
+
+        // table view create
+        TableView<String[]> table_view = new TableView<>();
+        table_view.setPrefSize(600, 600);
+
+
+        table_view.setRowFactory(tableView -> new TableRow<>() {
+            @Override
+            protected void updateItem(String[] item, boolean empty) {
+                super.updateItem(item, empty);
+                if (getIndex() % 2 == 0) {
+                    // Set background color for even rows
+                    setStyle("-fx-background-color: #7F95B7;"); // light grey
+                } else {
+                    // Set background color for odd rows
+                    setStyle("-fx-background-color: #5F79A5;"); // light blue
+                }
+            }
+        });
+
+
+        // Get data from the function
+        List<String[]> ingredients_data = application.getAdaptor().getIngredientInventory();
+
+
+        // Create ObservableList to hold data for TableView
+        ObservableList<String[]> data = FXCollections.observableArrayList();
+
+
+        // Populate data
+        data.addAll(ingredients_data);
+
+
+        // Define columns based on the size of the first row
+        if (!data.isEmpty()) {
+            int numColumns = ingredients_data.get(0).length;
+            // Add checkbox column
+            TableColumn<String[], Boolean> checkBoxColumn = new TableColumn<>("Select");
+            checkBoxColumn.setCellValueFactory(param -> {
+                String[] rowData = param.getValue();
+                BooleanProperty selected = new SimpleBooleanProperty(Boolean.parseBoolean(rowData[0]));
+
+
+                selected.addListener((observable, oldValue, newValue) -> {
+                    if (newValue) {
+                        // If checkbox is checked, remove the row data from the table
+                        table_view.getItems().remove(param.getValue());
+                        // You might also want to remove the row data from your data model
+                        // For example:
+                        // application.getAdaptor().removeIngredient(rowData);
+                    }
+                });
+                return selected;
+            });
+            checkBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkBoxColumn));
+            table_view.getColumns().add(checkBoxColumn);
+
+
+
+
+            for (int column_index = 0; column_index < numColumns; column_index++) {
+                TableColumn<String[], String> column = populateColumn(column_index);
+                table_view.getColumns().add(column);
+            }
+
+
+            table_view.setItems(data);
+            centerPane.getChildren().add(table_view);
+            table_view.setStyle("-fx-border-color: #0E0A06; -fx-border-width: 2px;");
+        }
+        else {
+            // If data is empty, display a message
+            System.out.println();
+            Label noDataLabel = new Label("No ingredients to display");
+            noDataLabel.setFont(new Font(32));
+            AnchorPane.setLeftAnchor(noDataLabel, 80.0);
+            AnchorPane.setTopAnchor(noDataLabel, 20.0);
+            centerPane.getChildren().add(noDataLabel);
+        }
+
+
+        return this;
+    }
+
 
     public FXMLStageBuilder addBillWithBakingSceneButton(String location_of_button){
 
