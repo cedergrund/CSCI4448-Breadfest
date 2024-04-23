@@ -26,9 +26,9 @@ class CaveTest {
     @Test
     void enterRoom0() throws Exception {
         int test_depth = 0;
-        Cave cave_test = new Cave(test_depth);
+        Cave cave_test = Cave.enterRoom0();
 
-        assertEquals(cave_test.enterRoom0().getDepth(), 0);
+        assertEquals(cave_test.getDepth(), 0);
     }
 
     @Test
@@ -52,7 +52,7 @@ class CaveTest {
     void getRoomNeighbor() throws Exception {
         int test_depth = 0;
         Cave cave_test = new Cave(test_depth);
-        Cave room_0_cave_test = cave_test.enterRoom0();
+        Cave room_0_cave_test = Cave.enterRoom0();
         room_0_cave_test.generateNeighboringRoomsMap();
         Cave north_cave_test = room_0_cave_test.getRoomNeighbor('N');
         assertNotNull(north_cave_test);
@@ -67,8 +67,7 @@ class CaveTest {
 
     @Test
     void hasRoomBeenVisited() throws Exception {
-        Cave cave_test = new Cave(0);
-        Cave cave_test_room_0 = cave_test.enterRoom0();
+        Cave cave_test_room_0 = Cave.enterRoom0();
         assertTrue(cave_test_room_0.hasRoomBeenVisited());
     }
 

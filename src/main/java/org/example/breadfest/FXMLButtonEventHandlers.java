@@ -12,6 +12,10 @@ public class FXMLButtonEventHandlers {
         application.generateInventory(locationOfButton);
     }
 
+    public static void openBakingScene(FXMLCaveApplication application, String locationOfButton) {
+        application.generateBakingScene(locationOfButton);
+    }
+
     public static void enterMaze(FXMLCaveApplication application) {
         application.getAdaptor().enterRoom0();
         application.generateCaveRoom();
