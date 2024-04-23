@@ -35,7 +35,8 @@ public class FXMLButtonEventHandlers {
     public static void fightDinosaur(FXMLCaveApplication application, int location) {
         System.out.println("Fight Dinosaur " + Arrays.toString(application.getAdaptor().getObjectByLocation(location)));
         application.getAdaptor().clickLocation(location);
-        application.generateFightRoom();
+        application.generateCaveRoom();
+//        application.generateFightRoom();
     }
 
     public static void rollDie(FXMLCaveApplication application, int die_rolled) {
@@ -54,6 +55,7 @@ public class FXMLButtonEventHandlers {
 
     public static void collectIngredient(FXMLCaveApplication application, int location) {
         System.out.println("Collect ingredient " + Arrays.toString(application.getAdaptor().getObjectByLocation(location)));
+        application.getAdaptor().clickLocation(location);
         application.generateCaveRoom();
     }
 
