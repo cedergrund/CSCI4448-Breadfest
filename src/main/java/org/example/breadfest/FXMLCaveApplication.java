@@ -120,7 +120,7 @@ public class FXMLCaveApplication {
                 .setBakingSceneBackground()
                 .addBakingInventoryTable()
                 .addReturnToGameButton(location_where_pressed)
-                .addPatienceMeter()
+                .addHonorMeter()
                 .build();
     }
 

@@ -84,6 +84,29 @@ public class FXMLStageBuilder {
         return this;
     }
 
+    public FXMLStageBuilder addHonorMeter(){
+
+        // Inside your method where you set up your UI
+        ProgressBar honor_meter = new ProgressBar();
+        honor_meter.setPrefWidth(200);
+        AnchorPane.setRightAnchor(honor_meter, 20.0);
+        AnchorPane.setBottomAnchor(honor_meter, 20.0);
+        root.getChildren().add(honor_meter);
+
+        FXMLCave adaptor = application.getAdaptor();
+        int curr_honor = adaptor.getCurrPlayerHonor();
+        double honorPercentage = (double) curr_honor / 1000;
+        honor_meter.setProgress(honorPercentage);
+
+        Label honor_label = new Label("Honor: "+String.valueOf(curr_honor));
+        honor_label.setFont(Font.font("Verdana", FontWeight.BOLD, 16)); // Use "Satisfy" as the font name
+        AnchorPane.setLeftAnchor(honor_label, 20.0);
+        AnchorPane.setBottomAnchor(honor_label, 40.0);
+        root.getChildren().add(honor_label);
+
+        return this;
+    }
+
     public FXMLStageBuilder addCaveEntranceButtonsAndImages(){
 
         ImageView dinosaur_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino1.100x.GIF"));

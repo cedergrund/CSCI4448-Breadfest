@@ -136,6 +136,10 @@ public class CaveGame {
         return this.player.getCurrPatience();
     }
 
+    public int getCurrPlayerHonor(){
+        return this.player.getCurrHonor();
+    }
+
     public String getImageByLocation(int location_index) {
         Dinosaur dinosaur_at_index = curr_cave.getRoomDinosaurs()[location_index];
 

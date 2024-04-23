@@ -22,6 +22,8 @@ public interface FXMLCave {
 
     int getCurrPlayerPatience();
 
+    int getCurrPlayerHonor();
+
     void enterRoom0();
 
     int getMaxPlayerPatience();
