@@ -7,23 +7,28 @@ import org.example.breadfest.ingredients.*;
 import java.io.IOException;
 import java.util.Random;
 
-public enum DinosaurTypes {
+public enum DinosaurAndDiceTypes {
+
     Common("Baby",40, 1.0),
     Rare("Mommy",80, 2.0),
     Epic("Daddy",150, 3.0),
     Nuclear("Nuclear",1, 100.0);
 
-    private final String name_prefix;
+    private final String dino_name_prefix;
     private final int base_patience;
     private final double damage_modifier;
     private final DieFactory die_factory;
     private final IngredientFactory ingredient_factory;
 
-    DinosaurTypes(String name_prefix, int base_patience, double damage_modifier) {
-        this.name_prefix = name_prefix;
+    DinosaurAndDiceTypes(String dino_name_prefix, int base_patience, double damage_modifier) {
+        this.dino_name_prefix = dino_name_prefix;
         this.base_patience = base_patience;
         this.damage_modifier = damage_modifier;
-        this.die_factory = new DieFactory();
+        try {
+            this.die_factory = new DieFactory();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         try {
             this.ingredient_factory = new IngredientFactory();
         } catch (IOException e) {
@@ -32,7 +37,7 @@ public enum DinosaurTypes {
     }
 
 
-    public static DinosaurTypes getRandomDinosaurType(int room_depth){
+    public static DinosaurAndDiceTypes getRandomDinosaurOrDieType(int room_depth){
 
         if (room_depth <= 3){
             return Common;
@@ -50,7 +55,7 @@ public enum DinosaurTypes {
     }
 
     public String getNamePrefix() {
-        return name_prefix;
+        return dino_name_prefix;
     }
 
     public int getBasePatience(){
@@ -62,8 +67,7 @@ public enum DinosaurTypes {
     }
 
 
-
-    private DinosaurTypes getNextTypeForDie(){
+    private DinosaurAndDiceTypes getNextType(){
         switch (this){
             case Common -> {
                 return Rare;
@@ -85,7 +89,7 @@ public enum DinosaurTypes {
             }
         }
     }
-    private IngredientRarity getIngredientRarity(){
+    private IngredientRarity getRewardIngredientRarity(){
         Random random_seed = new Random();
         double random_roll = random_seed.nextDouble();
 
@@ -136,15 +140,15 @@ public enum DinosaurTypes {
     }
 
     public Dice getDice() throws Exception {
-        return die_factory.DieFactory(this);
+        return die_factory.makeDieByType(this);
     }
     public Dice getRewardDice() throws Exception {
-        return die_factory.DieFactory(this.getNextTypeForDie());
+        return die_factory.makeDieByType(this.getNextType());
     }
 
     public Ingredient getRewardIngredient() throws Exception {
         IngredientTypes random_ingredient_type = IngredientTypes.getRandomIngredientType();
-        IngredientRarity ingredient_rarity = this.getIngredientRarity();
+        IngredientRarity ingredient_rarity = this.getRewardIngredientRarity();
         return ingredient_factory.makeIngredientByType(random_ingredient_type,ingredient_rarity);
     }
 

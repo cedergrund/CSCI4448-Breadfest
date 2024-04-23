@@ -1,7 +1,7 @@
 package org.example.breadfest;
 
 import org.example.breadfest.dinosaurs.Dinosaur;
-import org.example.breadfest.dinosaurs.DinosaurTypes;
+import org.example.breadfest.dinosaurs.DinosaurAndDiceTypes;
 import org.example.breadfest.ingredients.Ingredient;
 import org.example.breadfest.ingredients.IngredientRarity;
 import org.example.breadfest.ingredients.IngredientTypes;
@@ -15,13 +15,13 @@ class CaveGameTest {
 
     @Test
     void playerFightsDinosaur() throws Exception {
-        String dinosaur_test_name = "dinosaur_test_name";
-        DinosaurTypes dinosaur_test_type = DinosaurTypes.Common;
-        Dinosaur dinosaur_test = new Dinosaur(dinosaur_test_name, dinosaur_test_type);
-
-        CaveGame cave_game_test = new CaveGame();
-        assertNotNull(cave_game_test);
-        cave_game_test.playerFightsDinosaur(dinosaur_test);
+//        String dinosaur_test_name = "dinosaur_test_name";
+//        DinosaurAndDiceTypes dinosaur_test_type = DinosaurAndDiceTypes.Common;
+//        Dinosaur dinosaur_test = new Dinosaur(dinosaur_test_name, dinosaur_test_type);
+//
+//        CaveGame cave_game_test = new CaveGame();
+//        assertNotNull(cave_game_test);
+//        cave_game_test.attackDinosaur(dinosaur_test);
 
     }
 

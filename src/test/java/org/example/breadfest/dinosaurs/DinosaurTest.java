@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DinosaurTest {
     @Test
     void changeCurrPatience() throws Exception {
-        DinosaurTypes dinosaur_type_test = DinosaurTypes.Rare;
+        DinosaurAndDiceTypes dinosaur_type_test = DinosaurAndDiceTypes.Rare;
         Dinosaur dinosaur_test = new Dinosaur("mr_dinosaur_test",dinosaur_type_test);
 
         int curr_patience_test = dinosaur_test.getCurrPatience();
@@ -21,7 +21,7 @@ class DinosaurTest {
 
     @Test
     void getDamageModifier() throws Exception {
-        DinosaurTypes dinosaur_type_test = DinosaurTypes.Rare;
+        DinosaurAndDiceTypes dinosaur_type_test = DinosaurAndDiceTypes.Rare;
         Dinosaur dinosaur_test = new Dinosaur("mr_dinosaur_test",dinosaur_type_test);
 
         double damage_modifier_test = dinosaur_test.getDamageModifier();
@@ -31,7 +31,7 @@ class DinosaurTest {
 
     @Test
     void rollDie() throws Exception{
-        DinosaurTypes dinosaur_type_test = DinosaurTypes.Rare;
+        DinosaurAndDiceTypes dinosaur_type_test = DinosaurAndDiceTypes.Rare;
         Dinosaur dinosaur_test = new Dinosaur("mr_dinosaur_test",dinosaur_type_test);
 
         int dice_result_test = dinosaur_test.rollDie();
@@ -40,7 +40,7 @@ class DinosaurTest {
 
     @Test
     void getDinosaurType() throws Exception {
-        DinosaurTypes dinosaur_type_test = DinosaurTypes.Rare;
+        DinosaurAndDiceTypes dinosaur_type_test = DinosaurAndDiceTypes.Rare;
         Dinosaur dinosaur_test = new Dinosaur("mr_dinosaur_test",dinosaur_type_test);
 
         assertEquals(dinosaur_test.getDinosaurType(), dinosaur_type_test);
@@ -48,7 +48,7 @@ class DinosaurTest {
 
     @Test
     void getRewardDie() throws Exception {
-        DinosaurTypes dinosaur_type_test = DinosaurTypes.Rare;
+        DinosaurAndDiceTypes dinosaur_type_test = DinosaurAndDiceTypes.Rare;
         Dinosaur dinosaur_test = new Dinosaur("mr_dinosaur_test",dinosaur_type_test);
 
         Dice reward_dice_test = dinosaur_test.getRewardDie();
@@ -58,7 +58,7 @@ class DinosaurTest {
 
     @Test
     void getRewardIngredient() throws Exception {
-        DinosaurTypes dinosaur_type_test = DinosaurTypes.Rare;
+        DinosaurAndDiceTypes dinosaur_type_test = DinosaurAndDiceTypes.Rare;
         Dinosaur dinosaur_test = new Dinosaur("mr_dinosaur_test",dinosaur_type_test);
 
         Ingredient ingredient_test = dinosaur_test.getRewardIngredient();
@@ -68,7 +68,7 @@ class DinosaurTest {
 
     @Test
     void getName() throws Exception {
-        DinosaurTypes dinosaur_type_test = DinosaurTypes.Rare;
+        DinosaurAndDiceTypes dinosaur_type_test = DinosaurAndDiceTypes.Rare;
         Dinosaur dinosaur_test = new Dinosaur("mr_dinosaur_test",dinosaur_type_test);
 
         String dinosaur_name_test = dinosaur_test.getName();

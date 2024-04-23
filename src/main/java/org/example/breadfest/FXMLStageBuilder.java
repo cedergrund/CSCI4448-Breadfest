@@ -67,7 +67,7 @@ public class FXMLStageBuilder {
         double patiencePercentage = (double) curr_patience / adaptor.getMaxPlayerPatience();;
         patience_meter.setProgress(patiencePercentage);
 
-        Label patience_label = new Label("Patience:"+String.valueOf(curr_patience));
+        Label patience_label = new Label("Patience: "+String.valueOf(curr_patience));
         patience_label.setFont(Font.font("Verdana", FontWeight.BOLD, 16)); // Use "Satisfy" as the font name
         AnchorPane.setLeftAnchor(patience_label, 20.0);
         AnchorPane.setBottomAnchor(patience_label, 40.0);

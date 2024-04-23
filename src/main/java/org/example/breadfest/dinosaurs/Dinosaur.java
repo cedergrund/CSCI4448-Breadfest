@@ -1,21 +1,15 @@
 package org.example.breadfest.dinosaurs;
 
-import java.io.IOException;
 import java.util.*;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.breadfest.ingredients.JSONReadingHelper;
 import org.example.breadfest.dice.Dice;
 import org.example.breadfest.ingredients.Ingredient;
-
-import java.io.File;
 
 public class Dinosaur {
 
     private final String name;
 
-    private final DinosaurTypes type_of_dinosaur;
+    private final DinosaurAndDiceTypes type_of_dinosaur;
     private int curr_patience;
     private final double damage_modifier;
 
@@ -26,7 +20,7 @@ public class Dinosaur {
     Dice reward_die;
     Ingredient reward_ingredient;
 
-    public Dinosaur(String name, DinosaurTypes type_of_dinosaur) throws Exception {
+    public Dinosaur(String name, DinosaurAndDiceTypes type_of_dinosaur) throws Exception {
         this.name = name;
         this.dialogues_loaded = false;
 
@@ -107,7 +101,7 @@ public class Dinosaur {
         return die.rollDice();
     }
 
-    public DinosaurTypes getDinosaurType() {
+    public DinosaurAndDiceTypes getDinosaurType() {
         return this.type_of_dinosaur;
     }
 
@@ -120,6 +114,7 @@ public class Dinosaur {
     }
 
     public String getName() {
-        return name;
+
+        return type_of_dinosaur.getNamePrefix() + " " + name;
     }
 }

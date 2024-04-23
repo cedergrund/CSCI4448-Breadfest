@@ -26,5 +26,15 @@ public interface FXMLCave {
 
     int getMaxPlayerPatience();
 
+    int[] fightDinosaur(int dice_rolled);
+
+    void regenerateCaveSystem();
+    boolean dinosaurBeaten();
+
+    void updateActiveDice(int die_to_switch);
+
+    String[] getFightersInformation();
+
+    String[][] getDieInformation();
 }
 

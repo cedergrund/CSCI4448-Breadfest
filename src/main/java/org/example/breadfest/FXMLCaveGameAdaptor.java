@@ -23,21 +23,14 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
         return this.adapted_game_state.getObjectsAtAllLocations();
     }
 
-    @Override
     public String[] getObjectByLocation(int location) {
         return this.adapted_game_state.getObjectByLocation(location);
     }
 
-    @Override
     public String getImageByLocation(int location_index) {
         return this.adapted_game_state.getImageByLocation(location_index);
     }
 
-
-    /**
-     * @param location
-     * @return boolean -> if true reload all things in room.
-     */
     public void clickLocation(int location){
 
         adapted_game_state.clickLocation(location);
@@ -66,6 +59,30 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
 
     public int getMaxPlayerPatience() { return adapted_game_state.getMaxPlayerPatience(); }
 
+    public void regenerateCaveSystem() {
+        adapted_game_state.regenerateCaveSystem();
+    }
 
-    // TODO: fight scene
+    public int[] fightDinosaur(int dice_rolled){
+        return adapted_game_state.fightDinosaur(dice_rolled);
+    }
+
+    public boolean dinosaurBeaten(){
+        return adapted_game_state.dinosaurBeaten();
+    }
+
+    public void updateActiveDice(int die_to_switch){
+        adapted_game_state.updateActiveDice(die_to_switch);
+    }
+
+    public String[] getFightersInformation(){
+        return adapted_game_state.getFightersInformation();
+    }
+
+    public String[][] getDieInformation(){
+        return adapted_game_state.getDieInformation();
+    }
+
+
+
 }

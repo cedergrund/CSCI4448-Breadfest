@@ -1,0 +1,18 @@
+{
+  "Common": [
+    "Normal Die|1|1-6-6|Just your everyday 6-sided Die|empty",
+    "Bad Die|1|1-1-1|Do not attempt|empty"
+  ],
+  "Rare": [
+    "Double Normal Die|1|2-12-6|Result of a 6-sided Die x2|empty",
+    "Two Normal Die|2|1-6-6|Sum of 2 rolls of a 6-sided Die|empty",
+    "Three Musketeers|3|3-3-1|Reliable and Stable|empty"
+  ],
+  "Epic": [
+    "Triple Normal Die|1|3-18-6|Result of 6-sided Die x3|empty",
+    "Three Normal Die|3|1-6-6|Sum of 3-Normal 6-sided Die|empty"
+  ],
+  "Nuclear": [
+    "Nuclear Die|1|100-100-1|Instant kill|empty"
+  ]
+}

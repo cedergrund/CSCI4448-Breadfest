@@ -24,10 +24,6 @@ public class CaveGame {
     }
 
 
-    public void playerFightsDinosaur(Dinosaur dinosaur){
-        this.player.fightDinosaur(dinosaur);
-    }
-
     public String getBackgroundImage() {
         return this.curr_cave.getBackgroundImage();
     }
@@ -81,7 +77,7 @@ public class CaveGame {
     public void clickLocation(int location){
 
         if (this.curr_cave.getRoomDinosaurs()[location] != null){
-            this.player.fightDinosaur(this.curr_cave.getRoomDinosaurs()[location]);
+            this.player.setFightingDinosaur(this.curr_cave.getRoomDinosaurs()[location]);
             this.curr_cave.removeObjectFromLocation(location);
         }
         else if (this.curr_cave.getRoomIngredients()[location] != null){
@@ -154,4 +150,35 @@ public class CaveGame {
     public int getMaxPlayerPatience(){
         return this.player.getBasePatience();
     }
+
+    public String[] getFightersInformation(){
+        return player.getFightersInformation();
+    }
+
+    public String[][] getDieInformation(){
+        return player.getActiveDieInventoryInformation();
+    }
+
+    public int[] fightDinosaur(int dice_rolled){
+        return player.attackDinosaur(dice_rolled);
+    }
+
+    public boolean dinosaurBeaten(){
+        return player.beatDinosaur();
+    }
+
+    public void updateActiveDice(int die_to_switch){
+        player.solveDieMergeConflict(die_to_switch);
+    }
+
+    public void regenerateCaveSystem(){
+        try {
+            this.curr_cave = Cave.enterRoom0();
+            this.cave0 = curr_cave;
+        }
+        catch (Exception e){
+            System.out.println("Error " + e);
+        }
+    }
+
 }

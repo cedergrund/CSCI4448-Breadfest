@@ -15,17 +15,17 @@ public class DinosaurFactory {
 
     public DinosaurFactory() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String DIALOGUE_FILE_PATH = "src/main/java/org/example/breadfest/dinosaurs/dinosaurs.json";
-        this.dinosaur_names = mapper.readValue(new File(DIALOGUE_FILE_PATH), new TypeReference<>() {});
+        String DINOSAURS_FILE_PATH = "src/main/java/org/example/breadfest/dinosaurs/dinosaurs.json";
+        this.dinosaur_names = mapper.readValue(new File(DINOSAURS_FILE_PATH), new TypeReference<>() {});
     }
 
     public Dinosaur makeADinosaurFromDepth(int room_depth) throws Exception {
 
-        return this.makeADinosaurByType(DinosaurTypes.getRandomDinosaurType(room_depth));
+        return this.makeADinosaurByType(DinosaurAndDiceTypes.getRandomDinosaurOrDieType(room_depth));
 
     }
 
-    public Dinosaur makeADinosaurByType(DinosaurTypes dinosaur_type) throws Exception {
+    public Dinosaur makeADinosaurByType(DinosaurAndDiceTypes dinosaur_type) throws Exception {
 
         String type = dinosaur_type.toString();
         String dinosaur_name = JSONReadingHelper.generateRandomElementFromJSON(this.dinosaur_names, type);

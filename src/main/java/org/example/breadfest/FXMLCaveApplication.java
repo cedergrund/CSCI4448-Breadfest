@@ -44,6 +44,78 @@ public class FXMLCaveApplication {
         stage.show();
     }
 
+    public void generateFightRoom() {
+
+        stage = new FXMLStageBuilder(this,stage)
+                .setCaveBackground()
+                .addPatienceMeter()
+                .addPlayerWithInventoryButton("Cave")
+                .addCaveExits()
+                .addCaveObjects()
+                .addReturnHomeButton()
+                .build();
+
+        stage.show();
+    }
+
+    public void generateFightRoomResults(int player_roll, int dinosaur_roll, int result) {
+
+        stage = new FXMLStageBuilder(this,stage)
+                .setCaveBackground()
+                .addPatienceMeter()
+                .addPlayerWithInventoryButton("Cave")
+                .addCaveExits()
+                .addCaveObjects()
+                .addReturnHomeButton()
+                .build();
+
+        stage.show();
+
+        try {
+            Thread.sleep(3 * 1000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        switch (result){
+            case 0:{
+                generateFightRoom();
+                break;
+            }
+            case 1: {
+                // add popup saying player died
+                try {
+                    Thread.sleep(5 * 1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                generateCaveEntrance();
+                break;
+            }
+            case 2: {
+                // add popup saying dino died
+                try {
+                    Thread.sleep(5 * 1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+
+                }
+
+                if (cave_game_adaptor.dinosaurBeaten()){
+                    // remove dino died popup
+                    // add change die popup
+
+                }
+                else {
+                    generateCaveRoom();
+                }
+                break;
+            }
+        }
+
+    }
+
+
     public void generateInventory(String location_where_pressed){
 
         stage = new FXMLStageBuilder(this, stage)
@@ -59,4 +131,5 @@ public class FXMLCaveApplication {
     public FXMLCave getAdaptor(){
         return cave_game_adaptor;
     }
+
 }
