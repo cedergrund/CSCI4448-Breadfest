@@ -1,5 +1,6 @@
 package org.example.breadfest;
 
+import javafx.scene.control.TableView;
 import org.example.breadfest.ingredients.Ingredient;
 
 import java.util.List;
@@ -29,8 +30,12 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
         return this.adapted_game_state.getObjectByLocation(location);
     }
 
-    public String getImageByLocation(int location_index) {
-        return this.adapted_game_state.getImageByLocation(location_index);
+    public String getDinosaurImageByLocation(int location_index) {
+        return this.adapted_game_state.getDinosaurImageByLocation(location_index);
+    }
+
+    public String getIngredientImageByLocation(int location_index) {
+        return this.adapted_game_state.getIngredientImageByLocation(location_index);
     }
 
     public void clickLocation(int location){
@@ -49,6 +54,14 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
 
     public Ingredient removeIngredientFromInventory(String ingredient_name) {
         return this.adapted_game_state.removeIngredientFromInventory(ingredient_name);
+    }
+
+    public boolean isValidIngredientList(List<String> ingredient_type_list){
+        return this.adapted_game_state.isValidIngredientList(ingredient_type_list);
+    }
+
+    public void bakeIngredientsFromTable(TableView<String[]> table){
+        this.adapted_game_state.bakeIngredientsFromTable(table);
     }
 
     public boolean moveRoom(char direction){

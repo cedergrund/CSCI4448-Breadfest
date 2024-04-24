@@ -7,7 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import org.example.breadfest.ingredients.Ingredient;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class FXMLButtonEventHandlers {
@@ -21,31 +23,7 @@ public class FXMLButtonEventHandlers {
     }
 
     public static void bakeIngredients(FXMLCaveApplication application, TableView<String[]> table) {
-        ObservableList<String[]> selectedRows = FXCollections.observableArrayList();
-        int cumulative_score = 0;
-        // Iterate through the table to find selected rows
-        for (String[] row : table.getItems()) {
-            if (row[4].equals("true")) { //the box was checked
-                Ingredient baked_ingredient = application.getAdaptor().removeIngredientFromInventory(row[1]);
-                int ingredient_score = baked_ingredient.getScore();
-                cumulative_score += ingredient_score;
-
-                // we need to check if the column is 1 or not!
-                if(row[0].equals("1")){
-                    selectedRows.add(row);
-                    // Print the content of the row
-
-                }
-                else{ // this means there was more than 1 instance
-                    int curr_count = Integer.parseInt(row[0]);
-                    curr_count -= 1;
-                    row[0] = String.valueOf(curr_count);
-                }
-            }
-        }
-        // Remove selected rows from the table
-        table.getItems().removeAll(selectedRows);
-        application.getAdaptor().changeCurrHonor(cumulative_score);
+        application.getAdaptor().bakeIngredientsFromTable(table);
     }
 
     public static void enterMaze(FXMLCaveApplication application) {
