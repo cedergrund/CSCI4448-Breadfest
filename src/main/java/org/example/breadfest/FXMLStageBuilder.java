@@ -280,7 +280,7 @@ public class FXMLStageBuilder {
         if (!data.isEmpty()) {
             int numColumns = ingredients_data.get(0).length - 1;
             for (int column_index = 0; column_index < numColumns; column_index++) {
-                TableColumn<String[], String> column = populateColumn(column_index);
+                TableColumn<String[], String> column = populateInventoryColumns(column_index);
                 table_view.getColumns().add(column);
             }
             table_view.setItems(data);
@@ -373,7 +373,7 @@ public class FXMLStageBuilder {
             table_view.getColumns().add(checkBoxColumn);
 
             for (int column_index = 0; column_index < numColumns; column_index++) {
-                TableColumn<String[], String> column = populateColumn(column_index);
+                TableColumn<String[], String> column = populateBakingColumns(column_index);
                 table_view.getColumns().add(column);
             }
 
@@ -401,7 +401,43 @@ public class FXMLStageBuilder {
         return this;
     }
 
-    private static TableColumn<String[], String> populateColumn(int column_index) {
+    private static TableColumn<String[], String> populateInventoryColumns(int column_index) {
+        TableColumn<String[], String> column = null;
+        switch (column_index){
+            case 0: {
+                column = new TableColumn<>("Count");
+                column.setPrefWidth(50);
+                break;
+            }
+            case 1: {
+                column = new TableColumn<>("Ingredient Name");
+                column.setPrefWidth(244); // was 244, going to try to change it to 194
+                break;
+            }
+            case 2: {
+                column = new TableColumn<>("Ingredient Type");
+                column.setPrefWidth(150);
+                break;
+            }
+            case 3: {
+                column = new TableColumn<>("Ingredient Rarity");
+                column.setPrefWidth(150);
+                break;
+            }
+//            case 4: {
+//                column = new TableColumn<>("");
+//                column.setPrefWidth(150);
+//                break;
+//            }
+        }
+        if (column != null) {
+            column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[column_index]));
+        }
+        return column;
+
+    }
+
+    private static TableColumn<String[], String> populateBakingColumns(int column_index) {
         TableColumn<String[], String> column = null;
         switch (column_index){
             case 0: {
