@@ -51,85 +51,39 @@ public class FXMLCaveApplication {
 
         new FXMLStageBuilder(this, stage)
                 .fightRoomSetup()
-                .addFightRoomDice()
+                .addFightMoves()
                 .build();
 
         stage.show();
 
     }
 
-    public void generateFightRoomWithButtons() {
+    public void generateFightRoomResults(String[] results) {
 
-        try {
-            TimeUnit.SECONDS.sleep(3);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        stage = new FXMLStageBuilder(this,stage)
+        new FXMLStageBuilder(this, stage)
                 .fightRoomSetup()
-                .addFightRoomDice()
+                .addFightResults(results)
+                .build();
+
+        stage.show();
+
+
+    }
+
+    public void generateFightRoomRewards(boolean die_conflict){
+        new FXMLStageBuilder(this, stage)
+                .fightRoomSetup()
                 .build();
 
         stage.show();
     }
 
-    public void generateFightRoomResults(int player_roll, int dinosaur_roll, int result) {
-
-        stage = new FXMLStageBuilder(this,stage)
-                .setCaveBackground()
-                .addPatienceMeter()
-                .addPlayerWithInventoryButton("Cave")
-                .addCaveExits()
-                .addCaveObjects()
-                .addReturnHomeButton()
+    public void generateDieSelectorForMergeConflict(){
+        new FXMLStageBuilder(this, stage)
+                .fightRoomSetup()
                 .build();
 
         stage.show();
-
-        try {
-            Thread.sleep(3 * 1000L);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        switch (result){
-            case 0:{
-                generateFightRoom();
-                break;
-            }
-            case 1: {
-                // add popup saying player died
-                try {
-                    Thread.sleep(5 * 1000L);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                generateCaveEntrance();
-                break;
-            }
-            case 2: {
-                // add popup saying dino died
-                try {
-                    Thread.sleep(5 * 1000L);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-
-                }
-
-                if (cave_game_adaptor.dinosaurBeaten()){
-                    // remove dino died popup
-                    // add change die popup
-
-                }
-                else {
-                    generateCaveRoom();
-                }
-                break;
-            }
-        }
-
     }
 
     public void generateBakingScene(String location_where_pressed){

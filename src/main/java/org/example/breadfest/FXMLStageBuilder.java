@@ -21,6 +21,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -526,7 +527,7 @@ public class FXMLStageBuilder {
         root.getChildren().add(results);
 
         // floor rectangle
-        Rectangle floor = new Rectangle(1366, 128, Color.web("#727272"));
+        Rectangle floor = new Rectangle(1366, 128, Color.web("#941d1d"));
         floor.setLayoutX(0);
         floor.setLayoutY(384);
         floor.setStrokeWidth(0);
@@ -559,31 +560,81 @@ public class FXMLStageBuilder {
         dinoImage.setLayoutY(76);
         root.getChildren().add(dinoImage);
 
-        // Player label
-        Label playerLabel = new Label("Player");
-        playerLabel.setLayoutX(50);
-        playerLabel.setLayoutY(20);
-        playerLabel.setPrefSize(309, 45);
-        playerLabel.setFont(Font.font("Baloo 2 Bold", 25));
-        playerLabel.setTextFill(Color.WHITE);
-        root.getChildren().add(playerLabel);
+        // Player label + patience bar
+        Label player_name = new Label("Player");
+        player_name.setLayoutX(50);
+        player_name.setLayoutY(20);
+        player_name.setPrefSize(309, 45);
+        player_name.setFont(Font.font("Baloo 2 Bold", 25));
+        player_name.setTextFill(Color.WHITE);
+        root.getChildren().add(player_name);
+//
+        int curr_patience = Integer.parseInt(player_dino_info[1]);
+        int max_patience = Integer.parseInt(player_dino_info[2]);
 
-        // Dinosaur name label
-        Label dinoNameLabel = new Label(player_dino_info[2]);
-        dinoNameLabel.setLayoutX(916);
-        dinoNameLabel.setLayoutY(20);
-        dinoNameLabel.setPrefSize(400, 45);
-        dinoNameLabel.setFont(Font.font("Baloo 2 Bold", 25));
-        dinoNameLabel.setTextFill(Color.WHITE);
-        dinoNameLabel.setAlignment(javafx.geometry.Pos.CENTER_RIGHT);
-        root.getChildren().add(dinoNameLabel);
+        ProgressBar patience_meter_player = new ProgressBar();
+        patience_meter_player.setPrefSize(200, 20);
+        patience_meter_player.setLayoutX(50);
+        patience_meter_player.setLayoutY(60);
+        double patience_percentage_player = (double) curr_patience / max_patience;
+        patience_meter_player.setProgress(patience_percentage_player);
+        root.getChildren().add(patience_meter_player);
+
+        Label patience_label = new Label("Patience: "+ curr_patience +"/"+ max_patience);
+        patience_label.setFont(Font.font("Baloo 2 Regular", 15));
+        patience_label.setLayoutX(50);
+        patience_label.setLayoutY(80);
+        patience_label.setTextFill(Color.WHITE);
+        root.getChildren().add(patience_label);
+
+        // Dinosaur label + bar
+        Label dino_name_label = new Label(player_dino_info[3]);
+        dino_name_label.setLayoutX(916);
+        dino_name_label.setLayoutY(20);
+        dino_name_label.setPrefSize(400, 45);
+        dino_name_label.setFont(Font.font("Baloo 2 Bold", 25));
+        dino_name_label.setTextFill(Color.WHITE);
+        dino_name_label.setAlignment(javafx.geometry.Pos.CENTER_RIGHT);
+        root.getChildren().add(dino_name_label);
+
+        ProgressBar patience_meter_dinosaur = new ProgressBar();
+        patience_meter_dinosaur.setPrefSize(200, 20);
+        patience_meter_dinosaur.setLayoutX(1116);
+        patience_meter_dinosaur.setLayoutY(60);
+        patience_meter_dinosaur.setRotate(180);
+        patience_meter_dinosaur.setProgress((double) Integer.parseInt(player_dino_info[4]) / Integer.parseInt(player_dino_info[5]));
+        root.getChildren().add(patience_meter_dinosaur);
+
+
+        // boxes along bottom
+        for (int box_number = 0; box_number < 4; box_number++){
+            double x = getXLocation(box_number);
+
+            // box outline
+            Rectangle box = new Rectangle(341.5, 256, Color.web("#c9cccd"));
+            box.setLayoutX(x);
+            box.setLayoutY(512);
+            box.setStrokeWidth(1);
+            box.setStroke(Color.BLACK);
+            root.getChildren().add(box);
+        }
+
 
         return this;
     }
 
-    public FXMLStageBuilder addFightRoomDice(){
+    public FXMLStageBuilder addFightMoves(){
 
-        // Buttons and labels
+        Label instruction_text = new Label("Pick a Die to Gamble!");
+        instruction_text.setLayoutX(533);
+        instruction_text.setLayoutY(30);
+        instruction_text.setPrefSize(300, 120);
+        instruction_text.setFont(Font.font("Baloo 2 Bold", 21));
+        instruction_text.setTextFill(Color.BLACK);
+        instruction_text.setAlignment(Pos.CENTER);
+        root.getChildren().add(instruction_text);
+
+        // dice
         addDie(0);
         addDie(1);
         addDie(2);
@@ -592,51 +643,216 @@ public class FXMLStageBuilder {
         return this;
     }
 
-    // Method to add button and label
+    public FXMLStageBuilder addFightResults(String[] results){
+
+//       pop up text for later: "Uh-oh! Player ran out of Patience!\nThey don't want to play anymore"
+
+        Label instruction_text = new Label("Player Roll: " + results[1] + " | Dino Roll: " + results[2] + "\n"+results[3]);
+        instruction_text.setLayoutX(533);
+        instruction_text.setLayoutY(30);
+        instruction_text.setPrefSize(300, 120);
+        instruction_text.setFont(Font.font("Baloo 2 Bold", 21));
+        instruction_text.setTextFill(Color.BLACK);
+        instruction_text.setAlignment(Pos.CENTER);
+        instruction_text.setTextAlignment(TextAlignment.CENTER);
+        root.getChildren().add(instruction_text);
+
+        Button button = new Button("Continue...");
+        button.setLayoutX(606);
+        button.setLayoutY(240);
+        button.setPrefSize(150, 30);
+        button.setTextFill(Color.WHITE);
+        button.getStyleClass().add("cta");
+        button.setStyle("-fx-background-color: #6225E6; ");
+        button.setFont(Font.font("Baloo 2 Bold", 20));
+        button.setOnAction(event -> FXMLButtonEventHandlers.startNextFightTurn(application, results[0]));
+
+        root.getChildren().add(button);
+
+        return this;
+    }
+
+    public FXMLStageBuilder addRewardResults(boolean die_conflict){
+
+        String[] rewards = application.getAdaptor().getPreviousReward();
+
+        // scroll background image
+        ImageView scroll_background = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/scroll.png"));
+        scroll_background.setFitWidth(600);
+        scroll_background.setFitHeight(650);
+        scroll_background.setLayoutX(383);
+        scroll_background.setLayoutY(59);
+        scroll_background.setPreserveRatio(false);
+        root.getChildren().add(scroll_background);
+
+        // button
+        Button button = new Button("Say thank you...");
+        button.setLayoutX(606);
+        button.setLayoutY(560);
+        button.setPrefSize(150, 30);
+        button.setTextFill(Color.WHITE);
+        button.setStyle("-fx-background-color: #6225E6; ");
+        button.setFont(Font.font("Baloo 2 Bold", 16));
+        if (die_conflict){
+            button.setOnAction(event -> FXMLButtonEventHandlers.switchDieScene(application));
+        }
+        else {
+            button.setOnAction(event -> FXMLButtonEventHandlers.exitFight(application));
+        }
+
+        root.getChildren().add(button);
+
+        // adding text
+        Label you_win = new Label("You Win!");
+        you_win.setLayoutX(397);
+        you_win.setLayoutY(172);
+        you_win.setPrefSize(600, 47);
+        you_win.setFont(Font.font("Baloo 2", 30));
+        you_win.setUnderline(true);
+        you_win.setTextFill(Color.BLACK);
+        you_win.setAlignment(Pos.CENTER);
+        you_win.setTextAlignment(TextAlignment.CENTER);
+
+        Label description = new Label(rewards[0] + " got bored of gambling and left. But, as a reward for beating him, he left you something...");
+        description.setLayoutX(437);
+        description.setLayoutY(225);
+        description.setPrefSize(500, 75);
+        description.setFont(Font.font("Baloo 2", 20));
+        description.setWrapText(true);
+        description.setTextFill(Color.BLACK);
+        description.setAlignment(Pos.CENTER);
+        description.setTextAlignment(TextAlignment.CENTER);
+
+        // ingredient
+        ImageView ingredient_image = new ImageView(new Image(application.getAdaptor().getDinoImage()));
+        ingredient_image.setFitWidth(375);
+        ingredient_image.setFitHeight(372);
+        ingredient_image.setLayoutX(837);
+        ingredient_image.setLayoutY(76);
+        root.getChildren().add(ingredient_image);
+
+        Label ingredient = new Label(rewards[2] + " Ingredient:\n" + rewards[1]);
+        ingredient.setLayoutX(608);
+        ingredient.setLayoutY(312);
+        ingredient.setPrefSize(300, 100);
+        ingredient.setFont(Font.font("Baloo 2", 25));
+        ingredient.setTextFill(Color.BLACK);
+        ingredient.setAlignment(Pos.BOTTOM_LEFT);
+        ingredient.setTextAlignment(TextAlignment.LEFT);
+
+        root.getChildren().addAll(you_win, description, ingredient);
+
+        if (Objects.equals(rewards[4], "")){
+            return this;
+        }
+
+        Label die = new Label(rewards[5] + " Die:\n" + rewards[4]);
+        die.setLayoutX(454);
+        die.setLayoutY(427);
+        die.setPrefSize(300, 100);
+        die.setFont(Font.font("Baloo 2", 25));
+        die.setTextFill(Color.BLACK);
+        die.setAlignment(Pos.TOP_RIGHT);
+        die.setTextAlignment(TextAlignment.RIGHT);
+
+        root.getChildren().add(die);
+
+
+        return this;
+
+    }
+
+    // Method to add dice buttons
     private void addDie(int die_index) {
 
+        double x = getXLocation(die_index);
+
+        // labels
+        Label die_name;
+        Label description;
+        String[] die_information;
+
         if (die_index == 3){
+            die_name = new Label("Run Away");
+            description = new Label("Insert Excuse here...");
+            die_information = new String[3];
+            die_information[0] = "";
+            die_information[2] = "";
+        }
+        else{
+            die_information = application.getAdaptor().getDieInformation(die_index);
+            if (Objects.equals(die_information[0], "null")){
+                die_name = new Label("No Dice");
+                description = new Label("Collect more dice to populate.");
+            }
+            else{
+                die_name = new Label(die_information[0]);
+                description = new Label(die_information[1]);
+            }
+        }
 
-            double x = 3*341.5;
-            Rectangle box = new Rectangle(341.5, 256, Color.web("#c9cccd"));
-            box.setLayoutX(3*341.5);
-            box.setLayoutY(512);
-            box.setStrokeWidth(1);
-            box.setStroke(Color.BLACK);
-            root.getChildren().add(box);
+        die_name.setLayoutX(x+85);
+        die_name.setLayoutY(534);
+        die_name.setPrefSize(172,30);
+        die_name.setAlignment(Pos.CENTER);
+        die_name.setFont(Font.font("Baloo 2 Bold", 18));
 
-            Label die_name = new Label("Run Away");
-            Label description = new Label("Insert Excuse here...");
+        description.setLayoutX(x+42);
+        description.setLayoutY(552);
+        description.setFont(Font.font("Baloo 2 Regular", 13));
 
-            die_name.setLayoutX(x+85);
-            die_name.setLayoutY(534);
-            die_name.setPrefSize(172,30);
-            die_name.setAlignment(Pos.CENTER);
-            die_name.setFont(Font.font("Baloo 2 Bold", 14));
-
-            description.setLayoutX(x+42);
-            description.setLayoutY(558);
-            description.setFont(Font.font("Baloo 2 Regular", 11));
+        if (die_index == 3){
             description.setPrefSize(258, 130);
             description.setAlignment(Pos.TOP_CENTER);
-            root.getChildren().addAll(die_name, description);
-
-            Button button = new Button("Flee");
-            button.setLayoutX(x+83);
-            button.setLayoutY(718);
-            button.setPrefSize(172, 32);
-            button.setStyle("-fx-background-color: crimson");
-            button.setTextFill(Color.BLACK);
-            button.setFont(Font.font("Baloo 2 Bold", 14));
-            root.getChildren().add(button);
-
-            return;
-
-
         }
-        String[] die_information = application.getAdaptor().getDieInformation(die_index);
-        double x;
+        else{
+            description.setAlignment(Pos.CENTER);
+            description.setPrefSize(258,30);
+        }
 
+        root.getChildren().addAll(die_name, description);
+
+
+        // return if no die
+        if (Objects.equals(die_information[0], "null")){
+            return;
+        }
+
+        // add button
+        Button button;
+
+        if (die_index == 3){
+            button = new Button("Flee");
+            button.setStyle("-fx-background-color: #309e41");
+        }
+        else{
+            button = new Button("Roll");
+            button.setStyle("-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));;");
+        }
+
+        button.setLayoutX(x+83);
+        button.setLayoutY(718);
+        button.setPrefSize(172, 32);
+        button.setTextFill(Color.BLACK);
+        button.setId(String.valueOf(die_index));
+        button.setFont(Font.font("Baloo 2 Bold", 14));
+        button.setOnAction(event -> FXMLButtonEventHandlers.fightButtonPushed(application, event));
+
+        root.getChildren().add(button);
+
+        if (!Objects.equals(die_information[2], "")){
+            ImageView pdf_image = new ImageView(new Image(die_information[2]));
+            pdf_image.setFitWidth(258);
+            pdf_image.setFitHeight(121);
+            pdf_image.setLayoutX(x + 42);
+            pdf_image.setLayoutY(585);
+            root.getChildren().add(pdf_image);
+        }
+
+    }
+
+    private double getXLocation(int die_index) {
+        double x;
         switch (die_index){
             case 0: {
                 x = 0;
@@ -655,63 +871,7 @@ public class FXMLStageBuilder {
                 break;
             }
         }
-
-        Rectangle box = new Rectangle(341.5, 256, Color.web("#c9cccd"));
-        box.setLayoutX(x);
-        box.setLayoutY(512);
-        box.setStrokeWidth(1);
-        box.setStroke(Color.BLACK);
-        root.getChildren().add(box);
-
-        Label die_name;
-        Label description;
-
-        if (Objects.equals(die_information[0], "null")){
-            die_name = new Label("No Dice");
-            description = new Label("Collect more dice to populate.");
-        }
-        else{
-            die_name = new Label(die_information[0]);
-            description = new Label(die_information[1]);
-        }
-
-        die_name.setLayoutX(x+85);
-        die_name.setLayoutY(534);
-        die_name.setPrefSize(172,30);
-        die_name.setAlignment(Pos.CENTER);
-        die_name.setFont(Font.font("Baloo 2 Bold", 14));
-
-        description.setLayoutX(x+42);
-        description.setLayoutY(552);
-        description.setFont(Font.font("Baloo 2 Regular", 11));
-
-
-        description.setAlignment(Pos.CENTER);
-        description.setPrefSize(258,30);
-        root.getChildren().addAll(die_name, description);
-
-        if (Objects.equals(die_information[0], "null")){
-            return;
-        }
-
-        if (!Objects.equals(die_information[2], "")){
-            ImageView pdf_image = new ImageView(new Image(die_information[2]));
-            pdf_image.setFitWidth(258);
-            pdf_image.setFitHeight(121);
-            pdf_image.setLayoutX(x + 42);
-            pdf_image.setLayoutY(585);
-            root.getChildren().add(pdf_image);
-        }
-
-        Button button = new Button("Roll");
-        button.setLayoutX(x+83);
-        button.setLayoutY(718);
-        button.setPrefSize(172, 32);
-        button.setStyle("-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));;");
-        button.setTextFill(Color.BLACK);
-        button.setFont(Font.font("Baloo 2 Bold", 14));
-        root.getChildren().add(button);
-
+        return x;
     }
 
     public Stage build(){

@@ -34,22 +34,13 @@ public class Dinosaur {
         Random random_seed = new Random();
         double random_roll = random_seed.nextDouble();
 
-        if (random_roll < 0.25){ // no rewards
+        if (random_roll < 0.5){ // only ingredient reward
             this.reward_die = null;
-            this.reward_ingredient = null;
-        }
-        else if (random_roll < 0.5){ // only die reward
-            this.reward_die = type_of_dinosaur.getRewardDice();
-            this.reward_ingredient = null;
-        }
-        else if (random_roll < 0.75){
-            this.reward_die = null;
-            this.reward_ingredient = type_of_dinosaur.getRewardIngredient();
         }
         else{
             this.reward_die = type_of_dinosaur.getRewardDice();
-            this.reward_ingredient = type_of_dinosaur.getRewardIngredient();
         }
+        this.reward_ingredient = type_of_dinosaur.getRewardIngredient();
     }
 
 

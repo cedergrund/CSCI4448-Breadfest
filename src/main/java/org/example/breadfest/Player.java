@@ -22,14 +22,15 @@ public class Player {
 
     private Dinosaur fightingDinosaur = null;
 
+    private String[] previous_reward;
+
+
     // base patience is starting patience at every time you enter maze
     private int base_patience;
 
     // curr patience starts at base patience and then is updated as you lose it, until turn is over
     private int curr_patience;
 
-    //base honor is starting honor at every time you begin the game!
-    private int base_honor;
     // you curr honor is the honor the player has at any given moment
     private int curr_honor;
 
@@ -39,9 +40,8 @@ public class Player {
 
     private Player() {
         this.base_patience = 110;
-        this.base_honor = 0;
         this.curr_patience = base_patience;
-        this.curr_honor = base_honor;
+        this.curr_honor = 0;
         this.damage_modifier = 1.0;
 
         this.ingredient_inventory = new HashMap<>();
@@ -91,15 +91,42 @@ public class Player {
         return this.active_dice_inventory[index_selection].rollDice();
     }
 
-    public boolean beatDinosaur(){
+    public boolean stopFight(boolean fight_won){
+        // returns false if stopping fight runs as normal
+        // returns true if more stuff needs to be addressed
+        //   if fleeing from fight: true if player ran out of patience while trying to flee
+        //   if fight is won: true if there is a merge conflict with reward die
+
+        if (!fight_won){
+            fightingDinosaur = null;
+            if (this.curr_patience <= 0){
+                return false;
+            }
+
+            if (this.changeCurrPatience(-10)){
+                return true;
+            };
+            return false;
+        }
         Ingredient reward_ingredient = fightingDinosaur.getRewardIngredient();
         Dice reward_die = fightingDinosaur.getRewardDie();
 
+        previous_reward = new String[6];
+        previous_reward[0] = fightingDinosaur.getName();
+
         if (reward_ingredient != null){
             addIngredientToInventory(reward_ingredient);
+            previous_reward[1] = reward_ingredient.getName();
+            previous_reward[2] = reward_ingredient.getRarity().toString();
+            previous_reward[3] = reward_ingredient.getType().toString();
         }
         if (reward_die != null){
+            previous_reward[4] = reward_die.getName();
+            previous_reward[5] = reward_die.getRarity();
             return addDieToInventory(reward_die);
+        }
+        else {
+            previous_reward[3] = "";
         }
 
         fightingDinosaur = null;
@@ -110,65 +137,66 @@ public class Player {
 //
 //    }
 
-    public int[] attackDinosaur(int die_index_selection){
-        // returned by index: 0:player roll, 1: dino roll, 2: result
-
-        // results:
-        // returns 0 if no one died
-        // returns 1 if player died
-        // returns 2 if dino died
+    public String[] attackDinosaur(int die_index_selection){
+        // returned by index: 0: dying party (empty if no death), 1:player roll, 2: dino roll, 3: result
 
         // roll two die
         int player_roll = this.rollDie(die_index_selection);
         int dino_roll = this.fightingDinosaur.rollDie();
 
-        int[] returned_array = new int[3];
-        returned_array[0] = player_roll;
-        returned_array[1] = dino_roll;
+        String[] returned_array = new String[4];
+        returned_array[0] = "";
+        returned_array[1] = String.valueOf(player_roll);
+        returned_array[2] = String.valueOf(dino_roll);
 
         // compare the two rolls
         int roll_difference = player_roll - dino_roll;
 
         if (roll_difference >= 5){ // embarrassing win
             // print whatever output
-            if (fightingDinosaur.changeCurrPatience((int) (-40*this.damage_modifier))){
+            returned_array[3] = "How Embarrassing!\nDino loses " + (int) (40 * this.damage_modifier) + " patience";
+            if (fightingDinosaur.changeCurrPatience(-1* (int) (40*this.damage_modifier))){
                 // dino "died", address
-                returned_array[2] = 2;
+                returned_array[0] = "dino";
             }
         }
         else if (roll_difference > 0){ // normal win
             // print whatever output
-            if (fightingDinosaur.changeCurrPatience((int) (-20*this.damage_modifier))){
+            returned_array[3] = "Hooray!\nDino loses " + (int) (20 * this.damage_modifier) + " patience";
+            if (fightingDinosaur.changeCurrPatience(-1* (int) (20*this.damage_modifier))){
                 // dino "died", address
-                returned_array[2] = 2;
+                returned_array[0] = "dino";
             };
 
         }
         else if (roll_difference == 0){ // tie
             // print whatever output
+            returned_array[3] = "Draw!\nYou both lose 10 patience";
             if (this.changeCurrPatience(-10)){
                 // player "died", address
-                returned_array[2] = 1;
-            };
-            if (fightingDinosaur.changeCurrPatience(-10)){
+                returned_array[0] = "player";
+            }
+            else if (fightingDinosaur.changeCurrPatience(-10)){
                 // dino "died", address
-                returned_array[2] = 2;
+                returned_array[0] = "dino";
             };
 
         }
         else if (roll_difference > -5){ // normal loss
             // print whatever output
-            if(this.changeCurrPatience(-20)){
+            returned_array[3] = "Oh no!\nYou lose " + (int) (20*this.fightingDinosaur.getDinosaurType().getDamageModifier()) + " patience";
+            if(this.changeCurrPatience( -1* (int) (20*this.fightingDinosaur.getDinosaurType().getDamageModifier()))){
                 // player "died", address
-                returned_array[2] = 1;
+                returned_array[0] = "player";
             };
 
         }
         else { // embarrassing loss
             // print whatever output
-            if(this.changeCurrPatience(-40)){
+            returned_array[3] = "How Embarrassing!\nYou lose " + (int) (40*this.fightingDinosaur.getDinosaurType().getDamageModifier()) + " patience";
+            if(this.changeCurrPatience(-1* (int) (40 * this.fightingDinosaur.getDinosaurType().getDamageModifier()))){
                 // player "died", address
-                returned_array[2] = 1;
+                returned_array[0] = "player";
             };
         }
 
@@ -264,11 +292,13 @@ public class Player {
     }
 
     public String[] getFightersInformation(){
-        String[] returned_strings = new String[5];
+        String[] returned_strings = new String[6];
         returned_strings[0] = "Player";
         returned_strings[1] = String.valueOf(curr_patience);
-        returned_strings[2] = fightingDinosaur.getName();
-        returned_strings[3] = String.valueOf(fightingDinosaur.getCurrPatience());
+        returned_strings[2] = String.valueOf(base_patience);
+        returned_strings[3] = fightingDinosaur.getName();
+        returned_strings[4] = String.valueOf(fightingDinosaur.getCurrPatience());
+        returned_strings[5] = String.valueOf(fightingDinosaur.getDinosaurType().getBasePatience());
 
         return returned_strings;
     }
@@ -291,7 +321,7 @@ public class Player {
         this.fightingDinosaur = dino_to_fight;
     }
 
-    public Dinosaur getFightingDinosaur(){
-        return this.fightingDinosaur;
+    public String[] getPreviousReward(){
+        return this.previous_reward;
     }
 }
