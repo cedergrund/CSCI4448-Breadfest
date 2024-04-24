@@ -300,7 +300,7 @@ public class FXMLStageBuilder {
         return this;
     }
 
-    public FXMLStageBuilder addBakingInventoryTable(){
+    public FXMLStageBuilder addBakingInventoryTable(String location_where_pressed){
 
         Label inventory_label = new Label("Let's Bake!");
         inventory_label.setLayoutX(25);
@@ -339,6 +339,7 @@ public class FXMLStageBuilder {
             @Override
             public void handle(ActionEvent event) {
                 FXMLButtonEventHandlers.bakeIngredients(application, table_view);
+                FXMLButtonEventHandlers.openBakingScene(application, location_where_pressed);
             }
         });
         root.getChildren().add(removeSelectedButton);

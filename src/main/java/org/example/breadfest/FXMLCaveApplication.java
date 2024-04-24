@@ -135,7 +135,7 @@ public class FXMLCaveApplication {
     public void generateBakingScene(String location_where_pressed){
         stage = new FXMLStageBuilder(this, stage)
                 .setBakingSceneBackground()
-                .addBakingInventoryTable()
+                .addBakingInventoryTable(location_where_pressed)
                 .addCookingPot()
                 .addReturnToGameButton(location_where_pressed)
                 .addHonorMeter()

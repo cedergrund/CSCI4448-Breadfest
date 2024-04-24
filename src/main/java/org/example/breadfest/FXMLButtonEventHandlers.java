@@ -43,7 +43,6 @@ public class FXMLButtonEventHandlers {
                 }
             }
         }
-
         // Remove selected rows from the table
         table.getItems().removeAll(selectedRows);
         application.getAdaptor().changeCurrHonor(cumulative_score);
