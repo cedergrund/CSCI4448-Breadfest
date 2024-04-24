@@ -232,7 +232,7 @@ public class CaveGame {
         return this.player.changeCurrHonor(honor_change);
     }
 
-    public String getImageByLocation(int location_index) {
+    public String getDinosaurImageByLocation(int location_index) {
         Dinosaur dinosaur_at_index = curr_cave.getRoomDinosaurs()[location_index];
 
         return switch (dinosaur_at_index.getDinosaurType()){
@@ -240,6 +240,19 @@ public class CaveGame {
             case Rare -> "file:src/main/resources/org/example/breadfest/Images/dino2.100x.GIF";
             case Epic -> "file:src/main/resources/org/example/breadfest/Images/dino3.100x.GIF";
             default -> "file:src/main/resources/org/example/breadfest/Images/dino_button_image.png";
+        };
+    }
+
+    public String getIngredientImageByLocation(int location_index){
+        Ingredient ingredient_at_index = curr_cave.getRoomIngredients()[location_index];
+
+        return switch (ingredient_at_index.getType()){
+            case Flour -> "file:src/main/resources/org/example/breadfest/Images/flour_bag.gif";
+            case Water -> "file:src/main/resources/org/example/breadfest/Images/water_bottle_test.gif";
+            case Salt -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
+            case Yeast -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
+            case Topping -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
+            default -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
         };
     }
 

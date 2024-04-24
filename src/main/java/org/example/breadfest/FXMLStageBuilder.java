@@ -46,6 +46,8 @@ public class FXMLStageBuilder {
         return this;
     }
 
+
+
     public FXMLStageBuilder setBackgroundGreen(){
         root.setStyle("-fx-background-color: #2E8B57;");
         return this;
@@ -214,12 +216,13 @@ public class FXMLStageBuilder {
         for (int location_index = 0; location_index <8; location_index++){
             switch (cave_object_locations.get(location_index)){
                 case "dinosaur":{
-                    String image_url = application.getAdaptor().getImageByLocation(location_index);
+                    String image_url = application.getAdaptor().getDinosaurImageByLocation(location_index);
                     addDinosaurToLocation(stage, root, location_index, image_url);
                     break;
                 }
                 case "ingredient":{
-                    addIngredientToLocation(stage, root, location_index);
+                    String image_url = application.getAdaptor().getIngredientImageByLocation(location_index);
+                    addIngredientToLocation(stage, root, location_index, image_url);
                     break;
                 }
             }
@@ -775,9 +778,9 @@ public class FXMLStageBuilder {
     }
 
 
-    private void addIngredientToLocation(Stage stage, AnchorPane root, int location){
+    private void addIngredientToLocation(Stage stage, AnchorPane root, int location, String image_url){
         Button ingredient_button = addButtonToLocation(location);
-        ImageView ingredient_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png"));
+        ImageView ingredient_image = new ImageView(new Image(image_url));
         ingredient_button.setGraphic(ingredient_image);
         ingredient_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override

@@ -15,7 +15,9 @@ public interface FXMLCave {
 
     String[] getObjectByLocation(int location);
 
-    String getImageByLocation(int locationIndex);
+    String getDinosaurImageByLocation(int locationIndex);
+
+    String getIngredientImageByLocation(int locationIndex);
 
     void clickLocation(int location);
 

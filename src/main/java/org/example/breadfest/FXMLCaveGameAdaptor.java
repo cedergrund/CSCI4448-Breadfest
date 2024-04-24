@@ -30,8 +30,12 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
         return this.adapted_game_state.getObjectByLocation(location);
     }
 
-    public String getImageByLocation(int location_index) {
-        return this.adapted_game_state.getImageByLocation(location_index);
+    public String getDinosaurImageByLocation(int location_index) {
+        return this.adapted_game_state.getDinosaurImageByLocation(location_index);
+    }
+
+    public String getIngredientImageByLocation(int location_index) {
+        return this.adapted_game_state.getIngredientImageByLocation(location_index);
     }
 
     public void clickLocation(int location){
