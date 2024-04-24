@@ -71,6 +71,8 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
         return adapted_game_state.dinosaurBeaten();
     }
 
+    public String getDinoImage() {return adapted_game_state.getDinoImage(); }
+
     public void updateActiveDice(int die_to_switch){
         adapted_game_state.updateActiveDice(die_to_switch);
     }
@@ -79,8 +81,8 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
         return adapted_game_state.getFightersInformation();
     }
 
-    public String[][] getDieInformation(){
-        return adapted_game_state.getDieInformation();
+    public String[] getDieInformation(int die_index){
+        return adapted_game_state.getDieInformation(die_index);
     }
 
 

@@ -2,6 +2,8 @@ package org.example.breadfest;
 
 import javafx.stage.Stage;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class FXMLCaveApplication {
 
@@ -43,16 +45,31 @@ public class FXMLCaveApplication {
                 .build();
 
         stage.show();
+
     }
     public void generateFightRoom() {
 
+        new FXMLStageBuilder(this, stage)
+                .fightRoomSetup()
+                .addFightRoomDice()
+                .build();
+
+        stage.show();
+
+    }
+
+    public void generateFightRoomWithButtons() {
+
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
         stage = new FXMLStageBuilder(this,stage)
-                .setCaveBackground()
-                .addPatienceMeter()
-                .addPlayerWithInventoryButton("Cave")
-                .addCaveExits()
-                .addCaveObjects()
-                .addReturnHomeButton()
+                .fightRoomSetup()
+                .addFightRoomDice()
                 .build();
 
         stage.show();

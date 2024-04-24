@@ -35,6 +35,8 @@ public interface FXMLCave {
 
     String[] getFightersInformation();
 
-    String[][] getDieInformation();
+    String getDinoImage();
+
+    String[] getDieInformation(int die_index);
 }
 
