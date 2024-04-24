@@ -1,5 +1,6 @@
 package org.example.breadfest;
 
+import javafx.scene.control.TableView;
 import org.example.breadfest.ingredients.Ingredient;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public interface FXMLCave {
     String getImageByLocation(int locationIndex);
 
     void clickLocation(int location);
+
+    boolean isValidIngredientList(List<String> ingredient_type_list);
+
+    void bakeIngredientsFromTable(TableView<String[]> table);
 
     boolean moveRoom(char direction);
 

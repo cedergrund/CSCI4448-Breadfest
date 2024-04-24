@@ -1,5 +1,8 @@
 package org.example.breadfest;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 import org.example.breadfest.dinosaurs.Dinosaur;
 import org.example.breadfest.ingredients.Ingredient;
 
@@ -90,6 +93,91 @@ public class CaveGame {
     public List<String[]> getIngredientInventory(){
 
         return player.getIngredientInventory();
+    }
+
+    Boolean isValidIngredientList(List<String> ingredient_type_list){
+        Boolean contains_flour = false;
+        Boolean contains_water = false;
+        Boolean contains_salt = false;
+        Boolean contains_yeast = false;
+
+        for (String ingredientType : ingredient_type_list) {
+            switch (ingredientType) {
+                case "Flour":
+                    // Handle Type1
+                    contains_flour = true;
+                    break;
+                case "Water":
+                    // Handle Type2
+                    contains_water = true;
+                    break;
+                case "Salt":
+                    // Handle Type3
+                    contains_salt = true;
+                    break;
+                // Add more cases as needed
+                case "Yeast":
+                    // Handle yeast
+                    contains_yeast = true;
+                    break;
+                default:
+                    // do nothing! since it didn't match :D
+                    // this will be the case for all Toppings
+                    break;
+            }
+        }
+        if (contains_flour && contains_water && contains_salt && contains_yeast){
+            // then we have a valid bread!
+            return true;
+        }
+        else {
+            // our bread we've tried to bake is not valid, since it doesn't contain at least 1 of every essential ingredient type
+            return false;
+        }
+    }
+
+    public void bakeIngredientsFromTable(TableView<String[]> table){
+        //this essentially does two things by analyzing the selected rows in the table
+        // it changes the player's honor, and it modifies the player's inventory
+        //Lets do it!
+
+
+        ObservableList<String[]> selectedRows = FXCollections.observableArrayList();
+        int cumulative_score = 0; // this will be our total score of all baked ingredients
+        List<String> ingredient_type_list = new ArrayList<>();
+        // Iterate through the table to find selected rows
+        for (String[] row : table.getItems()) {
+            if (row[4].equals("true")) { //the box was checked
+                Ingredient baked_ingredient = player.removeIngredientFromInventory(row[1]);
+                int ingredient_score = baked_ingredient.getScore();
+                cumulative_score += ingredient_score;
+
+                ingredient_type_list.add(row[2]); // this collects all types of selected ingredients
+
+                // we need to check if the column is 1 or not!
+                if(row[0].equals("1")){
+                    selectedRows.add(row);
+                    // Print the content of the row
+
+                }
+                else{ // this means there was more than 1 instance
+                    int curr_count = Integer.parseInt(row[0]);
+                    curr_count -= 1;
+                    row[0] = String.valueOf(curr_count);
+                }
+            }
+        }
+
+        // check if bake is valid and then change honor
+        Boolean valid_ingredient = this.isValidIngredientList(ingredient_type_list);
+        table.getItems().removeAll(selectedRows);
+        if (valid_ingredient){
+            player.changeCurrHonor(cumulative_score);
+        }
+        else {
+            player.changeCurrHonor(0);
+        }
+        // there's no need to remove rows for the displayed table, just remove them from the inventory! then reload the scene :)
     }
 
     public Ingredient removeIngredientFromInventory(String ingredient_name){

@@ -1,5 +1,6 @@
 package org.example.breadfest;
 
+import javafx.scene.control.TableView;
 import org.example.breadfest.ingredients.Ingredient;
 
 import java.util.List;
@@ -49,6 +50,14 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
 
     public Ingredient removeIngredientFromInventory(String ingredient_name) {
         return this.adapted_game_state.removeIngredientFromInventory(ingredient_name);
+    }
+
+    public boolean isValidIngredientList(List<String> ingredient_type_list){
+        return this.adapted_game_state.isValidIngredientList(ingredient_type_list);
+    }
+
+    public void bakeIngredientsFromTable(TableView<String[]> table){
+        this.adapted_game_state.bakeIngredientsFromTable(table);
     }
 
     public boolean moveRoom(char direction){
