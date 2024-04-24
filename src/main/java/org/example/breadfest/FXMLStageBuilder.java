@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -15,11 +16,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FXMLStageBuilder {
 
@@ -488,6 +493,224 @@ public class FXMLStageBuilder {
         // Add nodes to root
         root.getChildren().addAll(return_home_button);
         return this;
+    }
+
+    public FXMLStageBuilder fightRoomSetup(){
+        // Rectangle background
+        Rectangle background = new Rectangle(1366, 768, Color.web("#d7d6d6"));
+        root.getChildren().add(background);
+
+        // background image
+        ImageView backgroundImage = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/fight_background.png"));
+        backgroundImage.setFitWidth(1366);
+        backgroundImage.setFitHeight(449);
+        backgroundImage.setLayoutX(0);
+        backgroundImage.setLayoutY(0);
+        backgroundImage.setPreserveRatio(false);
+        backgroundImage.setOpacity(0.9);
+        root.getChildren().add(backgroundImage);
+
+        // dino/player divider
+        Line divider = new Line(683, 0, 683, 512);
+        divider.setStrokeWidth(2);
+        divider.setStroke(Color.BLACK);
+        root.getChildren().add(divider);
+
+        // result rectangle
+        Rectangle results = new Rectangle(300, 120, Color.web("#adb6bf"));
+        results.setLayoutX(533);
+        results.setLayoutY(30);
+        results.setStrokeWidth(1);
+        results.setStroke(Color.BLACK);
+        root.getChildren().add(results);
+
+        // floor rectangle
+        Rectangle floor = new Rectangle(1366, 128, Color.web("#727272"));
+        floor.setLayoutX(0);
+        floor.setLayoutY(384);
+        floor.setStrokeWidth(0);
+        root.getChildren().add(floor);
+
+        // horizontal dividers
+        Line horizontal_divider1 = new Line(0, 512, 1366, 512);
+        horizontal_divider1.setStrokeWidth(5);
+        horizontal_divider1.setStroke(Color.BLACK);
+        Line horizontal_divider2 = new Line(0, 384, 1366, 384);
+        horizontal_divider2.setStrokeWidth(2);
+        horizontal_divider2.setStroke(Color.BLACK);
+        root.getChildren().addAll(horizontal_divider1, horizontal_divider2);
+
+        String[] player_dino_info = application.getAdaptor().getFightersInformation();
+
+        // Player image
+        ImageView playerImage = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/character.100x-ezgif.com-resize.gif"));
+        playerImage.setFitWidth(450);
+        playerImage.setFitHeight(420);
+        playerImage.setLayoutX(116.5);
+        playerImage.setLayoutY(68);
+        root.getChildren().add(playerImage);
+
+        // Dinosaur image
+        ImageView dinoImage = new ImageView(new Image(application.getAdaptor().getDinoImage()));
+        dinoImage.setFitWidth(375);
+        dinoImage.setFitHeight(372);
+        dinoImage.setLayoutX(837);
+        dinoImage.setLayoutY(76);
+        root.getChildren().add(dinoImage);
+
+        // Player label
+        Label playerLabel = new Label("Player");
+        playerLabel.setLayoutX(50);
+        playerLabel.setLayoutY(20);
+        playerLabel.setPrefSize(309, 45);
+        playerLabel.setFont(Font.font("Baloo 2 Bold", 25));
+        playerLabel.setTextFill(Color.WHITE);
+        root.getChildren().add(playerLabel);
+
+        // Dinosaur name label
+        Label dinoNameLabel = new Label(player_dino_info[2]);
+        dinoNameLabel.setLayoutX(916);
+        dinoNameLabel.setLayoutY(20);
+        dinoNameLabel.setPrefSize(400, 45);
+        dinoNameLabel.setFont(Font.font("Baloo 2 Bold", 25));
+        dinoNameLabel.setTextFill(Color.WHITE);
+        dinoNameLabel.setAlignment(javafx.geometry.Pos.CENTER_RIGHT);
+        root.getChildren().add(dinoNameLabel);
+
+        return this;
+    }
+
+    public FXMLStageBuilder addFightRoomDice(){
+
+        // Buttons and labels
+        addDie(0);
+        addDie(1);
+        addDie(2);
+        addDie(3);
+
+        return this;
+    }
+
+    // Method to add button and label
+    private void addDie(int die_index) {
+
+        if (die_index == 3){
+
+            double x = 3*341.5;
+            Rectangle box = new Rectangle(341.5, 256, Color.web("#c9cccd"));
+            box.setLayoutX(3*341.5);
+            box.setLayoutY(512);
+            box.setStrokeWidth(1);
+            box.setStroke(Color.BLACK);
+            root.getChildren().add(box);
+
+            Label die_name = new Label("Run Away");
+            Label description = new Label("Insert Excuse here...");
+
+            die_name.setLayoutX(x+85);
+            die_name.setLayoutY(534);
+            die_name.setPrefSize(172,30);
+            die_name.setAlignment(Pos.CENTER);
+            die_name.setFont(Font.font("Baloo 2 Bold", 14));
+
+            description.setLayoutX(x+42);
+            description.setLayoutY(558);
+            description.setFont(Font.font("Baloo 2 Regular", 11));
+            description.setPrefSize(258, 130);
+            description.setAlignment(Pos.TOP_CENTER);
+            root.getChildren().addAll(die_name, description);
+
+            Button button = new Button("Flee");
+            button.setLayoutX(x+83);
+            button.setLayoutY(718);
+            button.setPrefSize(172, 32);
+            button.setStyle("-fx-background-color: crimson");
+            button.setTextFill(Color.BLACK);
+            button.setFont(Font.font("Baloo 2 Bold", 14));
+            root.getChildren().add(button);
+
+            return;
+
+
+        }
+        String[] die_information = application.getAdaptor().getDieInformation(die_index);
+        double x;
+
+        switch (die_index){
+            case 0: {
+                x = 0;
+                break;
+            }
+            case 1:{
+                x = 341.5;
+                break;
+            }
+            case 2:{
+                x = 2*341.5;
+                break;
+            }
+            default:{
+                x = 3*341.5;
+                break;
+            }
+        }
+
+        Rectangle box = new Rectangle(341.5, 256, Color.web("#c9cccd"));
+        box.setLayoutX(x);
+        box.setLayoutY(512);
+        box.setStrokeWidth(1);
+        box.setStroke(Color.BLACK);
+        root.getChildren().add(box);
+
+        Label die_name;
+        Label description;
+
+        if (Objects.equals(die_information[0], "null")){
+            die_name = new Label("No Dice");
+            description = new Label("Collect more dice to populate.");
+        }
+        else{
+            die_name = new Label(die_information[0]);
+            description = new Label(die_information[1]);
+        }
+
+        die_name.setLayoutX(x+85);
+        die_name.setLayoutY(534);
+        die_name.setPrefSize(172,30);
+        die_name.setAlignment(Pos.CENTER);
+        die_name.setFont(Font.font("Baloo 2 Bold", 14));
+
+        description.setLayoutX(x+42);
+        description.setLayoutY(552);
+        description.setFont(Font.font("Baloo 2 Regular", 11));
+
+
+        description.setAlignment(Pos.CENTER);
+        description.setPrefSize(258,30);
+        root.getChildren().addAll(die_name, description);
+
+        if (Objects.equals(die_information[0], "null")){
+            return;
+        }
+
+        if (!Objects.equals(die_information[2], "")){
+            ImageView pdf_image = new ImageView(new Image(die_information[2]));
+            pdf_image.setFitWidth(258);
+            pdf_image.setFitHeight(121);
+            pdf_image.setLayoutX(x + 42);
+            pdf_image.setLayoutY(585);
+            root.getChildren().add(pdf_image);
+        }
+
+        Button button = new Button("Roll");
+        button.setLayoutX(x+83);
+        button.setLayoutY(718);
+        button.setPrefSize(172, 32);
+        button.setStyle("-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));;");
+        button.setTextFill(Color.BLACK);
+        button.setFont(Font.font("Baloo 2 Bold", 14));
+        root.getChildren().add(button);
+
     }
 
     public Stage build(){

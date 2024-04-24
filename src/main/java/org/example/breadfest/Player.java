@@ -258,6 +258,15 @@ public class Player {
         active_dice_inventory[index_replaced] = potential_die;
     }
 
+    public String getDinoImage(){
+        String base_string = "file:src/main/resources/org/example/breadfest/Images/";
+        return switch (this.fightingDinosaur.getDinosaurType()){
+            case Common -> base_string + "dino1.100x.gif";
+            case Rare -> base_string + "dino2.100x.gif";
+            case Epic -> base_string + "dino3.100x.gif";
+            case Nuclear -> base_string + "dino_button_image.png";
+        };
+    }
 
     public String[] getFightersInformation(){
         String[] returned_strings = new String[5];
@@ -268,19 +277,18 @@ public class Player {
 
         return returned_strings;
     }
-    public String[][] getActiveDieInventoryInformation() {
-        String[][] returned_strings = new String[3][3];
+    public String[] getActiveDieInventoryInformation(int die_index) {
+        String[] returned_strings = new String[3];
 
-        for (int die_index = 0; die_index < 3; die_index++){
-            Dice curr_die = this.active_dice_inventory[die_index];
-            if (curr_die == null){
-                returned_strings[die_index][0] = "null";
-                continue;
-            }
-            returned_strings[die_index][0] = curr_die.getName();
-            returned_strings[die_index][1] = curr_die.getDescription();
-            returned_strings[die_index][2] = curr_die.getPDFImage();
+        Dice curr_die = this.active_dice_inventory[die_index];
+        if (curr_die == null){
+            returned_strings[0] = "null";
+            returned_strings[2] = "";
+            return returned_strings;
         }
+        returned_strings[0] = curr_die.getName();
+        returned_strings[1] = curr_die.getDescription();
+        returned_strings[2] = curr_die.getPDFImage();
         return returned_strings;
     }
 

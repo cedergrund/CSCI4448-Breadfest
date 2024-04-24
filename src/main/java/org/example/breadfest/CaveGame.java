@@ -163,8 +163,8 @@ public class CaveGame {
         return player.getFightersInformation();
     }
 
-    public String[][] getDieInformation(){
-        return player.getActiveDieInventoryInformation();
+    public String[] getDieInformation(int die_index){
+        return player.getActiveDieInventoryInformation(die_index);
     }
 
     public int[] fightDinosaur(int dice_rolled){
@@ -174,6 +174,8 @@ public class CaveGame {
     public boolean dinosaurBeaten(){
         return player.beatDinosaur();
     }
+
+    public String getDinoImage() { return player.getDinoImage(); }
 
     public void updateActiveDice(int die_to_switch){
         player.solveDieMergeConflict(die_to_switch);

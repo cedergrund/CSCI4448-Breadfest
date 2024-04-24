@@ -1,95 +1,196 @@
 {
 
   "WaterCommon": [
-    "Tap Water"
+    "Tap Water",
+    "Rainwater",
+    "River Water",
+    "Well Water",
+    "Puddle Water"
   ],
   "WaterRare": [
-    "Spring Water"
+    "Spring Water",
+    "Glacial Meltwater",
+    "Mystic Mist",
+    "Forest Stream Water",
+    "Ancient Aquifer Water"
   ],
   "WaterEpic": [
-    "Enchanted Dewdrops"
-  ],
-  "WaterLegendary": [
+    "Enchanted Raindrops",
+    "Aquatic Essence",
+    "Morning Dew",
+    "Starshine Springs Water",
     "Hydration Elixir"
   ],
+  "WaterLegendary": [
+    "Ethereal Elixir",
+    "Old Dinosaur Spring Water",
+    "Water from Mars",
+    "Primordial Purity",
+    "Nectar of the Gods"
+  ],
   "WaterChampion": [
-    "Tears of the Ancients"
+    "Tears of the Ancients",
+    "Reflected Moonshine Water",
+    "Oceanic Essence",
+    "Fountain of Youth",
+    "Divine Drip"
   ],
   "WaterNuclear": [
     "Plutonium-239"
   ],
 
   "FlourCommon": [
-    "All-Purpose Flour"
+    "All-Purpose Flour",
+    "Wheat Flour",
+    "Barley Flour",
+    "Rye Flour",
+    "Corn Flour"
   ],
   "FlourRare":[
-    "Dwarven Cave Flour"
+    "Dwarven Cave Flour",
+    "Elven Enchantment Flour",
+    "Mermaid's Seagrass Flour",
+    "Centaur Corn Flour",
+    "Feywild Flour"
   ],
   "FlourEpic": [
-    "Eternal Farmer's Grains"
+    "Eternal Farmer's Flour",
+    "Dragonfire Flour",
+    "Sorcerer's Sorghum Flour",
+    "Titanium Triticale Flour",
+    "Arcane Almond Flour"
   ],
   "FlourLegendary": [
-    "Cosmic Dust"
+    "Cosmic Dust",
+    "Phoenix Feather Grounds",
+    "Frost Giant Oat Powder",
+    "Moonbeam Barley Flakes",
+    "Wyvern Wing Dust"
   ],
   "FlourChampion": [
-    "Ashes of the Titans"
+    "Ashes of the Titans",
+    "Empyrean Emmer",
+    "Divine Diamond",
+    "Quantum Quinoa",
+    "Astral Angelica"
   ],
   "FlourNuclear": [
-    "Bomb"
+    "Bomb Flour"
   ],
 
   "YeastCommon": [
-    "Baker's Yeast"
+    "Baker's Yeast",
+    "Wild Yeast",
+    "Sourdough Starter",
+    "Ale Yeast",
+    "Instant Yeast"
   ],
   "YeastRare": [
-    "Baker's Yeast"
+    "Baker's Yeast",
+    "Traditional Yeast",
+    "Magic Mold",
+    "Ancient Starter Culture",
+    "Mystic Ferment"
   ],
   "YeastEpic": [
-    "Fungal Spores"
+    "Fungal Spores",
+    "Ethereal Yeast",
+    "Dragon's Breath Yeast",
+    "Celestial Sourdough",
+    "Arcane Ale Yeast"
   ],
   "YeastLegendary":[
-    "Fermented Skunk"
+    "Fermented Skunk",
+    "Golden Yeast",
+    "Moonlit Mold",
+    "Divine Dough Starter",
+    "Mystical Mixture"
   ],
   "YeastChampion": [
-    "Chaos Yeast of the Void"
+    "Chaos Yeast of the Void",
+    "Eldritch Elixir Yeast",
+    "Titanic Trub",
+    "Starborn Starter",
+    "Primordial Paste"
   ],
   "YeastNuclear": [
     "Uranium-235"
   ],
 
   "SaltCommon": [
-    "Table Salt"
+    "Table Salt",
+    "Rock Salt",
+    "Kosher Salt",
+    "Sea Salt",
+    "Mineral Salt"
   ],
   "SaltRare": [
-    "Sea Salt"
+    "Celtic Sea Salt",
+    "Himalayan Pink Salt",
+    "Crystal Salt",
+    "Mystic Salt",
+    "Driftwood Salt"
   ],
   "SaltEpic" : [
-    "Desert Wind Salt"
+    "Desert Wind Salt",
+    "Ancient Sea Salt",
+    "Volcanic Salt",
+    "Moonlit Salt",
+    "Starlight Salt",
+    "Magmatic Salt"
   ],
   "SaltLegendary" : [
-    "Evaporated Salt of Pixie Tears"
+    "Evaporated Salt of Pixie Tears",
+    "Celestial Crystals Salt",
+    "Primordial Sea Salt",
+    "Diamond Dust Salt",
+    "Ethereal Essence Salt"
   ],
   "SaltChampion" : [
-    "Timeless Salt of Preservation"
+    "Timeless Salt of Preservation",
+    "Infinity Salt",
+    "Dimensional Salt",
+    "Eternal Essence Salt",
+    "Omnipotent Salt"
   ],
   "SaltNuclear" : [
     "Hydrogen Gas"
   ],
 
   "ToppingCommon" : [
-    "Garden Herbs"
+    "Garden Herbs",
+    "Crushed Garlic",
+    "Sesame Seeds",
+    "Chopped Onions",
+    "Sliced Almonds"
   ],
   "ToppingRare" : [
-    "Dragonfruit Chunks"
+    "Dragonfruit Chunks",
+    "Fairy Dust Sprinkles",
+    "Crystalized Honey",
+    "Moonbeam Mushrooms",
+    "Enchanted Berries"
   ],
   "ToppingEpic" : [
-    "Starlight Glaze"
+    "Starlight Glaze",
+    "Aurora Borealis Drizzle",
+    "Galactic Stardust",
+    "Celestial Crystals",
+    "Ethereal Essence Drizzle"
   ],
   "ToppingLegendary" : [
-    "Phoenix Feathers"
+    "Phoenix Feathers",
+    "Dragon Scale Shavings",
+    "Mermaid Scale Glitter",
+    "Unicorn Mane Strands",
+    "Titanium Truffle Shavings"
   ],
   "ToppingChampion" : [
-    "World Tree's Essence"
+    "World Tree's Essence",
+    "'If I had a nickle' Concentrate",
+    "Eldritch Essence",
+    "Cosmic Concoction",
+    "Infinity Infusion"
   ],
   "ToppingNuclear" : [
     "Uranium-238"
