@@ -278,7 +278,7 @@ public class FXMLStageBuilder {
 
         // Define columns based on the size of the first row
         if (!data.isEmpty()) {
-            int numColumns = ingredients_data.get(0).length;
+            int numColumns = ingredients_data.get(0).length - 1;
             for (int column_index = 0; column_index < numColumns; column_index++) {
                 TableColumn<String[], String> column = populateColumn(column_index);
                 table_view.getColumns().add(column);
