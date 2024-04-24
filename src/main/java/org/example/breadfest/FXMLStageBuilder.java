@@ -16,7 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -35,6 +35,15 @@ public class FXMLStageBuilder {
     public FXMLStageBuilder(FXMLCaveApplication application, Stage stage){
         this.application = application;
         this.stage = stage;
+    }
+
+    public FXMLStageBuilder addCookingPot(){
+        ImageView cauldron_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/cauldron_template.png"));
+        AnchorPane.setBottomAnchor(cauldron_image_view, 125.0);
+        AnchorPane.setLeftAnchor(cauldron_image_view, 700.0);
+        root.getChildren().add(cauldron_image_view);
+
+        return this;
     }
 
     public FXMLStageBuilder setBackgroundGreen(){
@@ -86,6 +95,31 @@ public class FXMLStageBuilder {
         AnchorPane.setLeftAnchor(patience_label, 20.0);
         AnchorPane.setBottomAnchor(patience_label, 40.0);
         root.getChildren().add(patience_label);
+
+        return this;
+    }
+
+    public FXMLStageBuilder addHonorMeter(){
+
+        // Inside your method where you set up your UI
+        ProgressBar honor_meter = new ProgressBar();
+        honor_meter.setPrefWidth(200);
+        AnchorPane.setRightAnchor(honor_meter, 20.0);
+        AnchorPane.setBottomAnchor(honor_meter, 20.0);
+        root.getChildren().add(honor_meter);
+
+        FXMLCave adaptor = application.getAdaptor();
+        int curr_honor = adaptor.getCurrPlayerHonor();
+        double honorPercentage = (double) curr_honor / 1000;
+//        honor_meter.setProgress(honorPercentage);
+        honor_meter.setProgress(honorPercentage);
+
+        Label honor_label = new Label("Honor: "+String.valueOf(curr_honor));
+        honor_label.setFont(Font.font("Verdana", FontWeight.BOLD, 16)); // Use "Satisfy" as the font name
+        honor_label.setTextFill(Color.WHITE);
+        AnchorPane.setRightAnchor(honor_label, 20.0);
+        AnchorPane.setBottomAnchor(honor_label, 40.0);
+        root.getChildren().add(honor_label);
 
         return this;
     }
@@ -268,8 +302,6 @@ public class FXMLStageBuilder {
 
     public FXMLStageBuilder addBakingInventoryTable(){
 
-
-        // title
         Label inventory_label = new Label("Let's Bake!");
         inventory_label.setLayoutX(25);
         inventory_label.setLayoutY(25);
@@ -277,18 +309,14 @@ public class FXMLStageBuilder {
         inventory_label.setStyle("-fx-font-family: 'Arial Black'; -fx-font-size: 48px;");
         root.getChildren().add(inventory_label);
 
-
-        // center the table
         StackPane centerPane = new StackPane();
         centerPane.setLayoutX((double) 42); // Center horizontally
         centerPane.setLayoutY((double) 84); // Center vertically
         root.getChildren().add(centerPane);
 
-
-        // table view create
         TableView<String[]> table_view = new TableView<>();
         table_view.setPrefSize(600, 600);
-
+        table_view.setEditable(true);
 
         table_view.setRowFactory(tableView -> new TableRow<>() {
             @Override
@@ -304,55 +332,85 @@ public class FXMLStageBuilder {
             }
         });
 
+        Button removeSelectedButton = new Button("Bake Ingredients");
+        removeSelectedButton.setLayoutX(800);
+        removeSelectedButton.setLayoutY(650);
+        removeSelectedButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FXMLButtonEventHandlers.removeSelectedRows(table_view);
+            }
+        });
+        root.getChildren().add(removeSelectedButton);
 
-        // Get data from the function
+
         List<String[]> ingredients_data = application.getAdaptor().getIngredientInventory();
 
-
-        // Create ObservableList to hold data for TableView
         ObservableList<String[]> data = FXCollections.observableArrayList();
 
-
-        // Populate data
         data.addAll(ingredients_data);
 
-
-        // Define columns based on the size of the first row
         if (!data.isEmpty()) {
             int numColumns = ingredients_data.get(0).length;
+
             // Add checkbox column
             TableColumn<String[], Boolean> checkBoxColumn = new TableColumn<>("Select");
+            checkBoxColumn.setEditable(true);
             checkBoxColumn.setCellValueFactory(param -> {
                 String[] rowData = param.getValue();
                 BooleanProperty selected = new SimpleBooleanProperty(Boolean.parseBoolean(rowData[0]));
-
-
                 selected.addListener((observable, oldValue, newValue) -> {
-                    if (newValue) {
-                        // If checkbox is checked, remove the row data from the table
-                        table_view.getItems().remove(param.getValue());
-                        // You might also want to remove the row data from your data model
-                        // For example:
-                        // application.getAdaptor().removeIngredient(rowData);
-                    }
+                    // Update the checkbox boolean at row[0]
+                    rowData[0] = newValue.toString();
                 });
                 return selected;
             });
+
             checkBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkBoxColumn));
             table_view.getColumns().add(checkBoxColumn);
-
-
-
 
             for (int column_index = 0; column_index < numColumns; column_index++) {
                 TableColumn<String[], String> column = populateColumn(column_index);
                 table_view.getColumns().add(column);
             }
 
+            // Update the structure of the data array to accommodate the additional checkbox boolean value
+            for (String[] row : data) {
+                String[] newRow = new String[row.length + 1];
+                newRow[0] = "false"; // Initialize the checkbox boolean to false
+                System.arraycopy(row, 0, newRow, 1, row.length); // Copy the original contents of the row
+                row = newRow; // Update the reference to the modified row
+            }
 
             table_view.setItems(data);
             centerPane.getChildren().add(table_view);
             table_view.setStyle("-fx-border-color: #0E0A06; -fx-border-width: 2px;");
+//            int numColumns = ingredients_data.get(0).length;
+//            // Add checkbox column
+//
+//            for (int column_index = 0; column_index < numColumns + 1; column_index++) {
+//                TableColumn<String[], String> column = populateColumn(column_index);
+//                table_view.getColumns().add(column);
+//            }
+//
+//            TableColumn<String[], Boolean> checkBoxColumn = new TableColumn<>("Select");
+//            checkBoxColumn.setPrefWidth(50);
+//            checkBoxColumn.setEditable(true);
+//            checkBoxColumn.setCellValueFactory(param -> {
+//                String[] rowData = param.getValue();
+//                BooleanProperty selected = new SimpleBooleanProperty(Boolean.parseBoolean(rowData[0]));
+//                selected.addListener((observable, oldValue, newValue) -> {
+//                    param.getValue()[0] = newValue.toString();
+//                });
+//                return selected;
+//            });
+//            checkBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkBoxColumn));
+//            table_view.getColumns().add(checkBoxColumn);
+//
+//
+//            table_view.setItems(data);
+//            centerPane.getChildren().add(table_view);
+//            table_view.setStyle("-fx-border-color: #0E0A06; -fx-border-width: 2px;");
         }
         else {
             // If data is empty, display a message
@@ -363,9 +421,38 @@ public class FXMLStageBuilder {
             AnchorPane.setTopAnchor(noDataLabel, 20.0);
             centerPane.getChildren().add(noDataLabel);
         }
-
-
         return this;
+    }
+
+    private static TableColumn<String[], String> populateColumn(int column_index) {
+        TableColumn<String[], String> column = null;
+        switch (column_index){
+            case 0: {
+                column = new TableColumn<>("Count");
+                column.setPrefWidth(50);
+                break;
+            }
+            case 1: {
+                column = new TableColumn<>("Ingredient Name");
+                column.setPrefWidth(189); // was 244, going to try to change it to 194
+                break;
+            }
+            case 2: {
+                column = new TableColumn<>("Ingredient Type");
+                column.setPrefWidth(150);
+                break;
+            }
+            default: {
+                column = new TableColumn<>("Ingredient Rarity");
+                column.setPrefWidth(150);
+                break;
+            }
+        }
+        if (column != null) {
+            column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[column_index]));
+        }
+        return column;
+
     }
 
 
@@ -725,33 +812,6 @@ public class FXMLStageBuilder {
 
         button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
         return button;
-    }
-
-    private static TableColumn<String[], String> populateColumn(int column_index) {
-        TableColumn<String[], String> column = null;
-        switch (column_index){
-            case 0: {
-                column = new TableColumn<>("Count");
-                column.setPrefWidth(50);
-                break;
-            }
-            case 1: {
-                column = new TableColumn<>("Ingredient Name");
-                column.setPrefWidth(244);
-                break;
-            }
-            case 2: {
-                column = new TableColumn<>("Ingredient Type");
-                column.setPrefWidth(150);
-                break;
-            }
-            default: {
-                column = new TableColumn<>("Ingredient Rarity");
-                column.setPrefWidth(150);
-            }
-        }
-        column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[column_index]));
-        return column;
     }
 
 }

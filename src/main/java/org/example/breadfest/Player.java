@@ -30,6 +30,8 @@ public class Player {
 
     //base honor is starting honor at every time you begin the game!
     private int base_honor;
+    // you curr honor is the honor the player has at any given moment
+    private int curr_honor;
 
 
     // damage modifier in fights
@@ -37,7 +39,9 @@ public class Player {
 
     private Player() {
         this.base_patience = 110;
+        this.base_honor = 0;
         this.curr_patience = base_patience;
+        this.curr_honor = base_honor;
         this.damage_modifier = 1.0;
 
         this.ingredient_inventory = new HashMap<>();
@@ -60,6 +64,11 @@ public class Player {
         return this.curr_patience <= 0;
     }
 
+    public boolean changeCurrHonor(int honor_change){
+        this.curr_honor += honor_change;
+        return this.curr_patience >= 1000; //returns true if honor exceeds threshold of 1000
+    }
+
     public Dice[] getActiveDieInventory() {
         return this.active_dice_inventory;
     }
@@ -67,8 +76,13 @@ public class Player {
     public int getCurrPatience() {
         return this.curr_patience;
     }
+    public int getCurrHonor() {
+        return this.curr_honor;
+    }
 
     public int getBasePatience() { return this.base_patience; }
+
+    public int getBaseHonor() {return this.base_honor;}
 
     public void resetPatience(){
         this.curr_patience = this.base_patience;
