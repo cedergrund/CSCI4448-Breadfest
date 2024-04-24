@@ -1,7 +1,10 @@
 package org.example.breadfest;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -14,6 +17,44 @@ public class FXMLButtonEventHandlers {
 
     public static void openBakingScene(FXMLCaveApplication application, String locationOfButton) {
         application.generateBakingScene(locationOfButton);
+    }
+
+    public static void removeSelectedRows(TableView<String[]> table) {
+        ObservableList<String[]> selectedRows = FXCollections.observableArrayList();
+        System.out.println("button pressed");
+        // Iterate through the table to find selected rows
+        for (String[] row : table.getItems()) {
+            System.out.println("new row");
+            for (int i = 0; i < row.length; i++) {
+                System.out.println(row[i]);
+            }
+            if (row[0].equals("true")) { //the box was checked
+                System.out.println("it was true");
+                // we need to check if the column is 1 or not!
+//                if(row[1].equals(1)){
+//                    selectedRows.add(row);
+//                    // Print the content of the row
+//                    System.out.print("Row content: ");
+//                    for (String cell : row) {
+//                        System.out.print(cell + " ");
+//                    }
+//                    System.out.println();
+//                }
+//                else{ // this means there was more than 1 instance
+//                    row[1] -= 1;
+//                    selectedRows.add(row);
+//                    System.out.print("Row content: ");
+//                    for (String cell : row) {
+//                        System.out.print(cell + " ");
+//                    }
+//                    System.out.println();
+//                }
+
+            }
+        }
+
+        // Remove selected rows from the table
+        table.getItems().removeAll(selectedRows);
     }
 
     public static void enterMaze(FXMLCaveApplication application) {
