@@ -1,5 +1,7 @@
 package org.example.breadfest;
 
+import org.example.breadfest.ingredients.Ingredient;
+
 import java.util.List;
 
 public class FXMLCaveGameAdaptor implements FXMLCave {
@@ -43,6 +45,10 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
      */
     public List<String[]> getIngredientInventory(){
         return this.adapted_game_state.getIngredientInventory();
+    }
+
+    public Ingredient removeIngredientFromInventory(String ingredient_name) {
+        return this.adapted_game_state.removeIngredientFromInventory(ingredient_name);
     }
 
     public boolean moveRoom(char direction){

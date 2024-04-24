@@ -190,7 +190,7 @@ public class Player {
 
         List<String[]> ingredient_inventory = new ArrayList<>();
         for (String ingredient_name : this.ingredient_inventory.keySet()){
-            String[] curr_ingredient_information = new String[4];
+            String[] curr_ingredient_information = new String[5];
             List<Ingredient> ingredient_list_with_correct_name = this.ingredient_inventory.get(ingredient_name);
             Ingredient example_ingredient = ingredient_list_with_correct_name.get(0);
 
@@ -198,6 +198,7 @@ public class Player {
             curr_ingredient_information[1] = example_ingredient.getName();
             curr_ingredient_information[2] = example_ingredient.getType().toString();
             curr_ingredient_information[3] = example_ingredient.getRarity().toString();
+            curr_ingredient_information[4] = "false";
             ingredient_inventory.add(curr_ingredient_information);
         }
         return ingredient_inventory;
@@ -214,6 +215,28 @@ public class Player {
             new_list.add(ingredient);
             this.ingredient_inventory.put(name_of_reward_ingredient, new_list);
         }
+    }
+
+    public Ingredient removeIngredientFromInventory(String ingredient_name){
+            if (this.ingredient_inventory.containsKey(ingredient_name)){
+                // we know that the ingredient is in there... check the length of the list
+                if (this.ingredient_inventory.get(ingredient_name).size() > 1){
+                    // then we have multiple!
+                    int last_index = this.ingredient_inventory.get(ingredient_name).size() - 1;
+                    Ingredient needed_ingredient = this.ingredient_inventory.get(ingredient_name).get(last_index);
+                    this.ingredient_inventory.get(ingredient_name).remove(last_index);
+                    return needed_ingredient;
+                }
+                else {
+                    // we have a string name that points to a list of one item. Remove it all
+                    Ingredient needed_ingredient = this.ingredient_inventory.get(ingredient_name).get(0);
+                    this.ingredient_inventory.remove(ingredient_name);
+                    return needed_ingredient;
+                }
+
+            } else {
+                return null;
+            }
     }
 
     public boolean addDieToInventory(Dice die){

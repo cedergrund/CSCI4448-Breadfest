@@ -333,7 +333,7 @@ public class FXMLStageBuilder {
         removeSelectedButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.removeSelectedRows(table_view);
+                FXMLButtonEventHandlers.bakeIngredients(application, table_view);
             }
         });
         root.getChildren().add(removeSelectedButton);
@@ -345,21 +345,23 @@ public class FXMLStageBuilder {
 
         data.addAll(ingredients_data);
 
+
         if (!data.isEmpty()) {
-            int numColumns = ingredients_data.get(0).length;
+            int numColumns = ingredients_data.get(0).length - 1;
 
             // Add checkbox column
             TableColumn<String[], Boolean> checkBoxColumn = new TableColumn<>("Select");
             checkBoxColumn.setEditable(true);
             checkBoxColumn.setCellValueFactory(param -> {
-                String[] rowData = param.getValue();
+                final String[] rowData = param.getValue();
                 BooleanProperty selected = new SimpleBooleanProperty(Boolean.parseBoolean(rowData[0]));
                 selected.addListener((observable, oldValue, newValue) -> {
-                    // Update the checkbox boolean at row[0]
-                    rowData[0] = newValue.toString();
+                    // Update rowData at index 4 with the new value
+                    rowData[4] = newValue.toString();
                 });
                 return selected;
             });
+
 
             checkBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkBoxColumn));
             table_view.getColumns().add(checkBoxColumn);
@@ -369,43 +371,17 @@ public class FXMLStageBuilder {
                 table_view.getColumns().add(column);
             }
 
-            // Update the structure of the data array to accommodate the additional checkbox boolean value
-            for (String[] row : data) {
-                String[] newRow = new String[row.length + 1];
-                newRow[0] = "false"; // Initialize the checkbox boolean to false
-                System.arraycopy(row, 0, newRow, 1, row.length); // Copy the original contents of the row
-                row = newRow; // Update the reference to the modified row
-            }
+//            // Update the structure of the data array to accommodate the additional checkbox boolean value
+//            for (String[] row : data) {
+//                String[] newRow = new String[row.length + 1];
+//                newRow[0] = "false"; // Initialize the checkbox boolean to false
+//                System.arraycopy(row, 0, newRow, 1, row.length); // Copy the original contents of the row
+//                row = newRow; // Update the reference to the modified row
+//            }
 
             table_view.setItems(data);
             centerPane.getChildren().add(table_view);
             table_view.setStyle("-fx-border-color: #0E0A06; -fx-border-width: 2px;");
-//            int numColumns = ingredients_data.get(0).length;
-//            // Add checkbox column
-//
-//            for (int column_index = 0; column_index < numColumns + 1; column_index++) {
-//                TableColumn<String[], String> column = populateColumn(column_index);
-//                table_view.getColumns().add(column);
-//            }
-//
-//            TableColumn<String[], Boolean> checkBoxColumn = new TableColumn<>("Select");
-//            checkBoxColumn.setPrefWidth(50);
-//            checkBoxColumn.setEditable(true);
-//            checkBoxColumn.setCellValueFactory(param -> {
-//                String[] rowData = param.getValue();
-//                BooleanProperty selected = new SimpleBooleanProperty(Boolean.parseBoolean(rowData[0]));
-//                selected.addListener((observable, oldValue, newValue) -> {
-//                    param.getValue()[0] = newValue.toString();
-//                });
-//                return selected;
-//            });
-//            checkBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkBoxColumn));
-//            table_view.getColumns().add(checkBoxColumn);
-//
-//
-//            table_view.setItems(data);
-//            centerPane.getChildren().add(table_view);
-//            table_view.setStyle("-fx-border-color: #0E0A06; -fx-border-width: 2px;");
         }
         else {
             // If data is empty, display a message
@@ -437,11 +413,16 @@ public class FXMLStageBuilder {
                 column.setPrefWidth(150);
                 break;
             }
-            default: {
+            case 3: {
                 column = new TableColumn<>("Ingredient Rarity");
                 column.setPrefWidth(150);
                 break;
             }
+//            case 4: {
+//                column = new TableColumn<>("");
+//                column.setPrefWidth(150);
+//                break;
+//            }
         }
         if (column != null) {
             column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[column_index]));

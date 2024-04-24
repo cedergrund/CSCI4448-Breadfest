@@ -19,37 +19,23 @@ public class FXMLButtonEventHandlers {
         application.generateBakingScene(locationOfButton);
     }
 
-    public static void removeSelectedRows(TableView<String[]> table) {
+    public static void bakeIngredients(FXMLCaveApplication application, TableView<String[]> table) {
         ObservableList<String[]> selectedRows = FXCollections.observableArrayList();
-        System.out.println("button pressed");
         // Iterate through the table to find selected rows
         for (String[] row : table.getItems()) {
-            System.out.println("new row");
-            for (int i = 0; i < row.length; i++) {
-                System.out.println(row[i]);
-            }
-            if (row[0].equals("true")) { //the box was checked
-                System.out.println("it was true");
+            if (row[4].equals("true")) { //the box was checked
+                application.getAdaptor().removeIngredientFromInventory(row[1]);
                 // we need to check if the column is 1 or not!
-//                if(row[1].equals(1)){
-//                    selectedRows.add(row);
-//                    // Print the content of the row
-//                    System.out.print("Row content: ");
-//                    for (String cell : row) {
-//                        System.out.print(cell + " ");
-//                    }
-//                    System.out.println();
-//                }
-//                else{ // this means there was more than 1 instance
-//                    row[1] -= 1;
-//                    selectedRows.add(row);
-//                    System.out.print("Row content: ");
-//                    for (String cell : row) {
-//                        System.out.print(cell + " ");
-//                    }
-//                    System.out.println();
-//                }
+                if(row[0].equals("1")){
+                    selectedRows.add(row);
+                    // Print the content of the row
 
+                }
+                else{ // this means there was more than 1 instance
+                    int curr_count = Integer.parseInt(row[0]);
+                    curr_count -= 1;
+                    row[0] = String.valueOf(curr_count);
+                }
             }
         }
 

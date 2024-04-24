@@ -92,6 +92,10 @@ public class CaveGame {
         return player.getIngredientInventory();
     }
 
+    public Ingredient removeIngredientFromInventory(String ingredient_name){
+        return player.removeIngredientFromInventory(ingredient_name);
+    }
+
     public boolean moveRoom(char direction){
         try {
             this.curr_cave = this.curr_cave.move(direction);

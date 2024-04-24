@@ -1,5 +1,7 @@
 package org.example.breadfest;
 
+import org.example.breadfest.ingredients.Ingredient;
+
 import java.util.List;
 
 public interface FXMLCave {
@@ -19,6 +21,8 @@ public interface FXMLCave {
     boolean moveRoom(char direction);
 
     List<String[]> getIngredientInventory();
+
+    Ingredient removeIngredientFromInventory(String ingredient_name);
 
     int getCurrPlayerPatience();
 
