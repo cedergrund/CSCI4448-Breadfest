@@ -64,9 +64,9 @@ public class Player {
         return this.curr_patience <= 0;
     }
 
-    public boolean changeCurrHonor(int honor_change){
+    public int changeCurrHonor(int honor_change){
         this.curr_honor += honor_change;
-        return this.curr_patience >= 1000; //returns true if honor exceeds threshold of 1000
+        return this.curr_honor; //returns the update honor!
     }
 
     public Dice[] getActiveDieInventory() {
@@ -76,13 +76,8 @@ public class Player {
     public int getCurrPatience() {
         return this.curr_patience;
     }
-    public int getCurrHonor() {
-        return this.curr_honor;
-    }
 
     public int getBasePatience() { return this.base_patience; }
-
-    public int getBaseHonor() {return this.base_honor;}
 
     public void resetPatience(){
         this.curr_patience = this.base_patience;

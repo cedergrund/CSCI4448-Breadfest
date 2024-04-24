@@ -140,8 +140,8 @@ public class CaveGame {
         return this.player.getCurrPatience();
     }
 
-    public int getCurrPlayerHonor(){
-        return this.player.getCurrHonor();
+    public int changeCurrHonor(int honor_change){
+        return this.player.changeCurrHonor(honor_change);
     }
 
     public String getImageByLocation(int location_index) {

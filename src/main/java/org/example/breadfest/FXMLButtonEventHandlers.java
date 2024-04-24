@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import org.example.breadfest.ingredients.Ingredient;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -21,10 +22,14 @@ public class FXMLButtonEventHandlers {
 
     public static void bakeIngredients(FXMLCaveApplication application, TableView<String[]> table) {
         ObservableList<String[]> selectedRows = FXCollections.observableArrayList();
+        int cumulative_score = 0;
         // Iterate through the table to find selected rows
         for (String[] row : table.getItems()) {
             if (row[4].equals("true")) { //the box was checked
-                application.getAdaptor().removeIngredientFromInventory(row[1]);
+                Ingredient baked_ingredient = application.getAdaptor().removeIngredientFromInventory(row[1]);
+                int ingredient_score = baked_ingredient.getScore();
+                cumulative_score += ingredient_score;
+
                 // we need to check if the column is 1 or not!
                 if(row[0].equals("1")){
                     selectedRows.add(row);
@@ -41,6 +46,7 @@ public class FXMLButtonEventHandlers {
 
         // Remove selected rows from the table
         table.getItems().removeAll(selectedRows);
+        application.getAdaptor().changeCurrHonor(cumulative_score);
     }
 
     public static void enterMaze(FXMLCaveApplication application) {

@@ -26,7 +26,7 @@ public interface FXMLCave {
 
     int getCurrPlayerPatience();
 
-    int getCurrPlayerHonor();
+    int changeCurrHonor(int honor_change);
 
     void enterRoom0();
 

@@ -109,7 +109,7 @@ public class FXMLStageBuilder {
         root.getChildren().add(honor_meter);
 
         FXMLCave adaptor = application.getAdaptor();
-        int curr_honor = adaptor.getCurrPlayerHonor();
+        int curr_honor = adaptor.changeCurrHonor(0);
         double honorPercentage = (double) curr_honor / 1000;
 //        honor_meter.setProgress(honorPercentage);
         honor_meter.setProgress(honorPercentage);
