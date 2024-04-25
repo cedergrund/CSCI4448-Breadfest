@@ -240,12 +240,7 @@ public class FXMLStageBuilder {
 
         ImageView exit_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/Transparent_X.png"));
         exit_button.setGraphic(exit_image);
-        exit_button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.exitInventory(application, location_where_pressed);
-            }
-        });
+        exit_button.setOnAction(event -> FXMLButtonEventHandlers.exitInventory(application, location_where_pressed));
 
         root.getChildren().add(exit_button);
         return this;
@@ -314,8 +309,8 @@ public class FXMLStageBuilder {
         root.getChildren().add(inventory_label);
 
         StackPane centerPane = new StackPane();
-        centerPane.setLayoutX((double) 42); // Center horizontally
-        centerPane.setLayoutY((double) 84); // Center vertically
+        centerPane.setLayoutX(42); // Center horizontally
+        centerPane.setLayoutY(84); // Center vertically
         root.getChildren().add(centerPane);
 
         TableView<String[]> table_view = new TableView<>();
@@ -711,8 +706,9 @@ public class FXMLStageBuilder {
         return this;
     }
 
-    public FXMLStageBuilder addRewardResults(boolean die_conflict){
+    static public Stage popUpFightResults(FXMLCaveApplication application, Stage stage, boolean die_conflict){
 
+        AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
         String[] rewards = application.getAdaptor().getPreviousReward();
 
         // scroll background image
@@ -762,12 +758,25 @@ public class FXMLStageBuilder {
         description.setAlignment(Pos.CENTER);
         description.setTextAlignment(TextAlignment.CENTER);
 
+        Rectangle outline = new Rectangle(500, 215, Color.web("#941d1d"));
+        outline.setLayoutX(437);
+        outline.setLayoutY(312);
+        outline.setStrokeWidth(2);
+        outline.setStroke(Color.BLACK);
+        outline.setFill(Color.TRANSPARENT);
+        root.getChildren().add(outline);
+
+        Line horizontal_divider = new Line(437, 419.5, 937, 419.5);
+        horizontal_divider.setStrokeWidth(1);
+        horizontal_divider.setStroke(Color.BLACK);
+        root.getChildren().add(horizontal_divider);
+
         // ingredient
-        ImageView ingredient_image = new ImageView(new Image(application.getAdaptor().getDinoImage()));
-        ingredient_image.setFitWidth(375);
-        ingredient_image.setFitHeight(372);
-        ingredient_image.setLayoutX(837);
-        ingredient_image.setLayoutY(76);
+        ImageView ingredient_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/big_water_bott.gif"));
+        ingredient_image.setFitWidth(100);
+        ingredient_image.setFitHeight(100);
+        ingredient_image.setLayoutX(458);
+        ingredient_image.setLayoutY(312);
         root.getChildren().add(ingredient_image);
 
         Label ingredient = new Label(rewards[2] + " Ingredient:\n" + rewards[1]);
@@ -782,8 +791,20 @@ public class FXMLStageBuilder {
         root.getChildren().addAll(you_win, description, ingredient);
 
         if (Objects.equals(rewards[4], "")){
-            return this;
+            Scene scene = new Scene(root, 1366, 768);
+            stage.setScene(scene);
+            stage.setTitle("The Quest for Breadfest");
+            return stage;
         }
+
+
+        // die
+        ImageView die_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/reward_die.png"));
+        die_image.setFitWidth(100);
+        die_image.setFitHeight(100);
+        die_image.setLayoutX(804);
+        die_image.setLayoutY(427);
+        root.getChildren().add(die_image);
 
         Label die = new Label(rewards[5] + " Die:\n" + rewards[4]);
         die.setLayoutX(454);
@@ -796,8 +817,10 @@ public class FXMLStageBuilder {
 
         root.getChildren().add(die);
 
-
-        return this;
+        Scene scene = new Scene(root, 1366, 768);
+        stage.setScene(scene);
+        stage.setTitle("The Quest for Breadfest");
+        return stage;
 
     }
 
@@ -842,7 +865,9 @@ public class FXMLStageBuilder {
 
         if (die_index == 3){
             description.setPrefSize(258, 130);
+            description.setLayoutY(558);
             description.setAlignment(Pos.TOP_CENTER);
+            description.setWrapText(true);
         }
         else{
             description.setAlignment(Pos.CENTER);

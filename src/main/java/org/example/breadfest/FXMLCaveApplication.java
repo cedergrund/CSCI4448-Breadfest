@@ -2,8 +2,6 @@ package org.example.breadfest;
 
 import javafx.stage.Stage;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class FXMLCaveApplication {
 
@@ -49,7 +47,7 @@ public class FXMLCaveApplication {
     }
     public void generateFightRoom() {
 
-        new FXMLStageBuilder(this, stage)
+        stage = new FXMLStageBuilder(this, stage)
                 .fightRoomSetup()
                 .addFightMoves()
                 .build();
@@ -60,7 +58,7 @@ public class FXMLCaveApplication {
 
     public void generateFightRoomResults(String[] results) {
 
-        new FXMLStageBuilder(this, stage)
+        stage = new FXMLStageBuilder(this, stage)
                 .fightRoomSetup()
                 .addFightResults(results)
                 .build();
@@ -71,10 +69,7 @@ public class FXMLCaveApplication {
     }
 
     public void generateFightRoomRewards(boolean die_conflict){
-        new FXMLStageBuilder(this, stage)
-                .fightRoomSetup()
-                .build();
-
+        stage = FXMLStageBuilder.popUpFightResults(this, stage, die_conflict);
         stage.show();
     }
 

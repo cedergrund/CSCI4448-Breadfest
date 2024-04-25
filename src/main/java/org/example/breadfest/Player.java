@@ -126,7 +126,7 @@ public class Player {
             return addDieToInventory(reward_die);
         }
         else {
-            previous_reward[3] = "";
+            previous_reward[4] = "";
         }
 
         fightingDinosaur = null;
