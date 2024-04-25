@@ -246,14 +246,7 @@ public class CaveGame {
     public String getIngredientImageByLocation(int location_index){
         Ingredient ingredient_at_index = curr_cave.getRoomIngredients()[location_index];
 
-        return switch (ingredient_at_index.getType()){
-            case Flour -> "file:src/main/resources/org/example/breadfest/Images/flour_display.gif";
-            case Water -> "file:src/main/resources/org/example/breadfest/Images/water_display.gif";
-            case Salt -> "file:src/main/resources/org/example/breadfest/Images/salt_display.gif";
-            case Yeast -> "file:src/main/resources/org/example/breadfest/Images/yeast_display.gif";
-            case Topping -> "file:src/main/resources/org/example/breadfest/Images/topping_display.gif";
-            default -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
-        };
+        return getIngredientImageByString(ingredient_at_index.getType().toString());
     }
 
     public int getMaxPlayerPatience(){
@@ -277,6 +270,17 @@ public class CaveGame {
     }
 
     public String getDinoImage() { return player.getDinoImage(); }
+
+    public String getIngredientImageByString(String type) {
+        return switch (type){
+            case "Flour" -> "file:src/main/resources/org/example/breadfest/Images/flour_display.gif";
+            case "Water" -> "file:src/main/resources/org/example/breadfest/Images/water_display.gif";
+            case "Salt" -> "file:src/main/resources/org/example/breadfest/Images/salt_display.gif";
+            case "Yeast" -> "file:src/main/resources/org/example/breadfest/Images/yeast_display.gif";
+            case "Topping" -> "file:src/main/resources/org/example/breadfest/Images/topping_display.gif";
+            default -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
+        };
+    }
 
     public void updateActiveDice(int die_to_switch){
         player.solveDieMergeConflict(die_to_switch);

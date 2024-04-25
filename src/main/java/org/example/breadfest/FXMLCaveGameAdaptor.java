@@ -96,6 +96,10 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
 
     public String getDinoImage() {return adapted_game_state.getDinoImage(); }
 
+    public String getIngredientImageByType(String type){
+        return adapted_game_state.getIngredientImageByString(type);
+    }
+
     public void updateActiveDice(int die_to_switch){
         adapted_game_state.updateActiveDice(die_to_switch);
     }

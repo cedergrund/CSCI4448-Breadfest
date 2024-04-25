@@ -49,6 +49,8 @@ public interface FXMLCave {
 
     String getDinoImage();
 
+    String getIngredientImageByType(String type);
+
     String[] getDieInformation(int die_index);
 
     boolean stopFight(boolean won_fight);

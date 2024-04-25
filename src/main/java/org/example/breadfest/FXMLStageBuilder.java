@@ -772,7 +772,7 @@ public class FXMLStageBuilder {
         root.getChildren().add(horizontal_divider);
 
         // ingredient
-        ImageView ingredient_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/big_water_bott.gif"));
+        ImageView ingredient_image = new ImageView(new Image(application.getAdaptor().getIngredientImageByType(rewards[3])));
         ingredient_image.setFitWidth(100);
         ingredient_image.setFitHeight(100);
         ingredient_image.setLayoutX(458);
