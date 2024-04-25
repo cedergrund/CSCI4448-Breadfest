@@ -6,5 +6,6 @@ public interface Dice {
     String getName();
     String getDescription();
     String getPDFImage();
+    String getRarity();
 
 }

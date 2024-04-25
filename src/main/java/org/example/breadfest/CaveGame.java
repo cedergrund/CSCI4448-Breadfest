@@ -268,12 +268,12 @@ public class CaveGame {
         return player.getActiveDieInventoryInformation(die_index);
     }
 
-    public int[] fightDinosaur(int dice_rolled){
+    public String[] fightDinosaur(int dice_rolled){
         return player.attackDinosaur(dice_rolled);
     }
 
-    public boolean dinosaurBeaten(){
-        return player.beatDinosaur();
+    public boolean stopFight(boolean won_fight){
+        return player.stopFight(won_fight);
     }
 
     public String getDinoImage() { return player.getDinoImage(); }
@@ -290,5 +290,9 @@ public class CaveGame {
         catch (Exception e){
             System.out.println("Error " + e);
         }
+    }
+
+    public String[] getPreviousReward(){
+        return player.getPreviousReward();
     }
 }

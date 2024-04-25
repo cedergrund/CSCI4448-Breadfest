@@ -67,7 +67,15 @@ public class DieFactory {
 
             @Override
             public String getPDFImage() {
-                return dice_parts[3];
+                if (Objects.equals(dice_parts[4], "empty")){
+                    dice_parts[4] = "";
+                }
+                return dice_parts[4];
+            }
+
+            @Override
+            public String getRarity() {
+                return die_type.toString();
             }
         };
     }
@@ -93,6 +101,11 @@ public class DieFactory {
             @Override
             public String getPDFImage() {
                 return "";
+            }
+
+            @Override
+            public String getRarity() {
+                return "Common";
             }
         };
     }
