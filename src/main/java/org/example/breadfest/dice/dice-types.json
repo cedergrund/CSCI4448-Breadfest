@@ -1,18 +1,30 @@
 {
   "Common": [
-    "Normal Die|1|1-6-6|Just your everyday 6-sided Die|empty",
-    "Bad Die|1|1-1-1|Do not attempt|empty"
+    "Normal Die|1|1,6,6|Just your everyday 6-sided Die. Nothing to it really. Kinda boring to be honest...|empty",
+    "Bad Die|1|1,1,1|Do not attempt. I don't even know how you were unlucky enough to get this...|empty",
+    "Medium Die|1|3,3,1|Attempting maybe recommended. It's 50/50...|empty",
+    "Good Die|1|5,5,1|Attempting recommended. Almost better than all other common die...|empty"
   ],
   "Rare": [
-    "2x Normal Die|1|2-12-6|Double the result of a 6-sided Die|empty",
-    "Two Normal Die|2|1-6-6|Sum of 2 rolls of a 6-sided Die|empty",
-    "Three Musketeers|3|3-3-1|Reliable and Stable|empty"
+    "Normal Die x2|1|2,12,6|Takes the result of a 6-sided die and multiplies it by 2...|empty",
+    "Two Normal Die|2|1,6,6|Takes the result of two 6-sided die and adds them...|empty",
+    "Three Musketeers|3|3,3,1|Rolls three magical die. Each die is reliable, stable, and always land on three...|empty",
+    "Chaos Cube|1|-10,20,31|A little ball of chaos. Result could be very high, or very low. It's impossible to know for sure...|empty",
+    "Mirror Cube|1|0,0,0|Mimics the result of the your last roll...|empty"
   ],
   "Epic": [
-    "Triple Normal Die|1|3-18-6|Result of 6-sided Die x3|empty",
-    "Three Normal Die|3|1-6-6|Sum of 3-Normal 6-sided Die|empty"
+    "Normal Die x3|1|3,18,6|Takes the result of a 6-sided die and multiplies it by 3...|empty",
+    "Three Normal Die|3|1,6,6|Takes the result of three 6-sided die and adds them...|empty",
+    "Five Musketeers|5|3,3,1|Five musketeers??? I didn't know there were more than three. Hmm. Just goes to show...|empty",
+    "Mirror Cube Deluxe|2|0,0,0|Doubles the result of the your last roll...|empty",
+    "Ingredient In-ten-did|4|0,0,0|Always rolls a 10. If you win, you get a random Ingredient as a reward...|empty"
   ],
   "Nuclear": [
-    "Nuclear Die|1|100-100-1|Instant kill|empty"
+    "Heads or Tails|1|1,100,2|Flip a coin. Heads you live, tails you die.|empty"
+  ],
+  "EndGame": [
+    "Heads or Tails|1|1,100,2|Flip a coin. Heads you live, tails you die.|empty",
+    "Normal Die x20|1|20,120,6|Takes the result of a 6-sided die and multiplies it by 20.|empty",
+    "Insta-win|3|0,0,0|Takes your opponents roll and adds 1. Fairly simply, but a little unfair.|empty"
   ]
 }

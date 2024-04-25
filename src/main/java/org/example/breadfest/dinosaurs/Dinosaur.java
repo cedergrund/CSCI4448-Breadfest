@@ -28,7 +28,7 @@ public class Dinosaur {
         this.type_of_dinosaur = type_of_dinosaur;
         this.curr_patience = type_of_dinosaur.getBasePatience();
         this.damage_modifier = type_of_dinosaur.getDamageModifier();
-        this.die = type_of_dinosaur.getDice();
+        this.die = type_of_dinosaur.getDice("dino");
 
         // seeding dinosaur with rewards after loss
         Random random_seed = new Random();

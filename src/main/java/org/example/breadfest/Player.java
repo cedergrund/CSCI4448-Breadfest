@@ -4,7 +4,9 @@ import org.example.breadfest.dice.Dice;
 import org.example.breadfest.dice.DieFactory;
 import org.example.breadfest.dinosaurs.Dinosaur;
 import org.example.breadfest.ingredients.Ingredient;
+import org.example.breadfest.ingredients.IngredientFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +26,8 @@ public class Player {
 
     private String[] previous_reward;
 
+    private int previous_roll;
+
 
     // base patience is starting patience at every time you enter maze
     private int base_patience;
@@ -39,7 +43,7 @@ public class Player {
     private double damage_modifier;
 
     private Player() {
-        this.base_patience = 110;
+        this.base_patience = 100;
         this.curr_patience = base_patience;
         this.curr_honor = 0;
         this.damage_modifier = 1.0;
@@ -50,6 +54,8 @@ public class Player {
         this.active_dice_inventory[0] = DieFactory.generateBaseDie();
         this.active_dice_inventory[1] = null;
         this.active_dice_inventory[2] = null;
+
+        this.previous_roll = 0;
     }
 
 
@@ -66,6 +72,23 @@ public class Player {
 
     public int changeCurrHonor(int honor_change){
         this.curr_honor += honor_change;
+        if (curr_honor > 250){
+            damage_modifier = 2;
+            base_patience = 200;
+        }
+        if (curr_honor > 500){
+            damage_modifier = 3;
+            base_patience = 400;
+        }
+        if (curr_honor > 750){
+            damage_modifier = 4;
+            base_patience = 600;
+        }
+        if (curr_honor > 750){
+            damage_modifier = 5;
+            base_patience = 1000;
+        }
+
         return this.curr_honor; //returns the update honor!
     }
 
@@ -143,6 +166,41 @@ public class Player {
         // roll two die
         int player_roll = this.rollDie(die_index_selection);
         int dino_roll = this.fightingDinosaur.rollDie();
+
+        switch (player_roll){
+            case -1000:{
+                player_roll = this.previous_roll;
+                break;
+            }
+            case -2000:{
+                player_roll = 2*this.previous_roll;
+                this.previous_roll = player_roll;
+                break;
+            }
+            case -3000:{
+                player_roll = dino_roll+1;
+                this.previous_roll = player_roll;
+                break;
+            }
+            case -4000:{
+                player_roll = 10;
+                if (player_roll > dino_roll){
+                    IngredientFactory ingredient_factory;
+                    try {
+                        ingredient_factory = new IngredientFactory();
+                        this.addIngredientToInventory(ingredient_factory.makeIngredient());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                this.previous_roll = player_roll;
+                break;
+            }
+            default:{
+                this.previous_roll = player_roll;
+            }
+
+        }
 
         String[] returned_array = new String[4];
         returned_array[0] = "";

@@ -791,9 +791,6 @@ public class FXMLStageBuilder {
         root.getChildren().addAll(you_win, description, ingredient);
 
         if (Objects.equals(rewards[4], "")){
-            Scene scene = new Scene(root, 1366, 768);
-            stage.setScene(scene);
-            stage.setTitle("The Quest for Breadfest");
             return stage;
         }
 
@@ -817,9 +814,6 @@ public class FXMLStageBuilder {
 
         root.getChildren().add(die);
 
-        Scene scene = new Scene(root, 1366, 768);
-        stage.setScene(scene);
-        stage.setTitle("The Quest for Breadfest");
         return stage;
 
     }
@@ -859,11 +853,11 @@ public class FXMLStageBuilder {
         description.setAlignment(Pos.CENTER);
         description.setTextAlignment(TextAlignment.CENTER);
 
-        Label quote = new Label("\"There is no progress or accomplishment without sacrifice.\"\n- William Warren Wright");
+        Label quote = new Label("\"There is no progress or accomplishment without sacrifice.\" -William Warren Wright");
         quote.setLayoutX(433);
         quote.setLayoutY(530);
         quote.setPrefSize(500, 75);
-        quote.setFont(Font.font("Baloo 2", 18));
+        quote.setFont(Font.font("Verdana Italic", 18));
         quote.setWrapText(true);
         quote.setTextFill(Color.BLACK);
         quote.setAlignment(Pos.CENTER);
@@ -893,9 +887,6 @@ public class FXMLStageBuilder {
         addDieForRemoving(application,root,2);
         addDieForRemoving(application,root,3);
 
-        Scene scene = new Scene(root, 1366, 768);
-        stage.setScene(scene);
-        stage.setTitle("The Quest for Breadfest");
         return stage;
 
     }
@@ -941,8 +932,8 @@ public class FXMLStageBuilder {
         die_name.setFont(Font.font("Baloo 2 Regular", 15));
 
         description.setLayoutX(x+10);
-        description.setLayoutY(y+34);
-        description.setPrefSize(121, 78);
+        description.setLayoutY(y+40);
+        description.setPrefSize(220, 70);
         description.setFont(Font.font("Baloo 2 Regular", 12));
         description.setWrapText(true);
         description.setTextAlignment(TextAlignment.LEFT);
@@ -952,8 +943,8 @@ public class FXMLStageBuilder {
 
         // add button
         Button button = new Button("Remove");
-        button.setLayoutX(x+151.5);
-        button.setLayoutY(y+84);
+        button.setLayoutX(x+150);
+        button.setLayoutY(y+6);
         button.setPrefSize(70, 26);
         button.setTextFill(Color.WHITE);
         button.setStyle("-fx-background-color: #c71e12");
@@ -961,15 +952,6 @@ public class FXMLStageBuilder {
         button.setFont(Font.font("Baloo 2 Bold", 14));
         button.setOnAction(event -> FXMLButtonEventHandlers.switchDieAndExit(application, event));
         root.getChildren().add(button);
-
-        if (!Objects.equals(die_information[2], "")) {
-            ImageView pdf_image = new ImageView(new Image(die_information[2]));
-            pdf_image.setFitWidth(115);
-            pdf_image.setFitHeight(75);
-            pdf_image.setLayoutX(x + 129);
-            pdf_image.setLayoutY(y + 5);
-            root.getChildren().add(pdf_image);
-        }
 
     }
 
@@ -1008,18 +990,17 @@ public class FXMLStageBuilder {
         die_name.setFont(Font.font("Baloo 2 Bold", 18));
 
         description.setLayoutX(x+42);
-        description.setLayoutY(552);
+        description.setLayoutY(558);
         description.setFont(Font.font("Baloo 2 Regular", 13));
+        description.setWrapText(true);
+        description.setTextAlignment(TextAlignment.CENTER);
+        description.setAlignment(Pos.TOP_CENTER);
 
         if (die_index == 3){
             description.setPrefSize(258, 130);
-            description.setLayoutY(558);
-            description.setAlignment(Pos.TOP_CENTER);
-            description.setWrapText(true);
         }
         else{
-            description.setAlignment(Pos.CENTER);
-            description.setPrefSize(258,30);
+            description.setPrefSize(258,100);
         }
 
         root.getChildren().addAll(die_name, description);
@@ -1054,11 +1035,16 @@ public class FXMLStageBuilder {
 
         if (!Objects.equals(die_information[2], "")){
             ImageView pdf_image = new ImageView(new Image(die_information[2]));
-            pdf_image.setFitWidth(258);
-            pdf_image.setFitHeight(121);
-            pdf_image.setLayoutX(x + 42);
-            pdf_image.setLayoutY(585);
-            root.getChildren().add(pdf_image);
+            pdf_image.setFitWidth(210);
+            pdf_image.setFitHeight(95);
+            pdf_image.setLayoutX(x + 65.75);
+            pdf_image.setLayoutY(616);
+
+            Label pdf_label = new Label("Die PDF:");
+            pdf_label.setLayoutX(x+65);
+            pdf_label.setLayoutY(616);
+            pdf_label.setFont(Font.font("Baloo 2 Regular", 13));
+            root.getChildren().addAll(pdf_image, pdf_label);
         }
 
     }

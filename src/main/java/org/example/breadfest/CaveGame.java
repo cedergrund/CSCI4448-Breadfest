@@ -187,7 +187,7 @@ public class CaveGame {
     public boolean moveRoom(char direction){
         try {
             this.curr_cave = this.curr_cave.move(direction);
-            if (this.player.changeCurrPatience(-10)){
+            if (this.player.changeCurrPatience(-20)){
                 System.out.println("player patience run out.");
                 return true;
             }

@@ -10,10 +10,9 @@ import java.util.Random;
 public enum DinosaurAndDiceTypes {
 
     Common("Baby",40, 1.0),
-    Rare("Mommy",80, 2.0),
-    Epic("Daddy",150, 3.0),
+    Rare("Mommy",100, 2.0),
+    Epic("Daddy",300, 3.0),
     Nuclear("Nuclear",1, 100.0);
-
     private final String dino_name_prefix;
     private final int base_patience;
     private final double damage_modifier;
@@ -67,25 +66,25 @@ public enum DinosaurAndDiceTypes {
     }
 
 
-    private DinosaurAndDiceTypes getNextType(){
+    private String getNextType(){
         switch (this){
             case Common -> {
-                return Rare;
+                return Rare.toString();
             }
             case Rare -> {
-                return Epic;
+                return Epic.toString();
             }
             case Epic -> {
                 // 50% chance for nuclear
                 if ((int)Math.round(Math.random()) == 1){
-                    return Nuclear;
+                    return Nuclear.toString();
                 }
                 else{
-                    return Epic;
+                    return Epic.toString();
                 }
             }
             default -> {
-                return Nuclear;
+                return "EndGame";
             }
         }
     }
@@ -139,11 +138,11 @@ public enum DinosaurAndDiceTypes {
         }
     }
 
-    public Dice getDice() throws Exception {
-        return die_factory.makeDieByType(this);
+    public Dice getDice(String source) throws Exception {
+        return die_factory.makeDieByType(this.toString(), source);
     }
     public Dice getRewardDice() throws Exception {
-        return die_factory.makeDieByType(this.getNextType());
+        return die_factory.makeDieByType(this.getNextType(), "reward");
     }
 
     public Ingredient getRewardIngredient() throws Exception {
