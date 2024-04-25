@@ -249,7 +249,7 @@ public class CaveGame {
         return switch (ingredient_at_index.getType()){
             case Flour -> "file:src/main/resources/org/example/breadfest/Images/flour_bag.gif";
             case Water -> "file:src/main/resources/org/example/breadfest/Images/water_bottle_test.gif";
-            case Salt -> "file:src/main/resources/org/example/breadfest/Images/salt_test.png";
+            case Salt -> "file:src/main/resources/org/example/breadfest/Images/salt_shaker.gif";
             case Yeast -> "file:src/main/resources/org/example/breadfest/Images/yeast_bag.gif";
             case Topping -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
             default -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
