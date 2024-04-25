@@ -59,6 +59,7 @@ public class FXMLButtonEventHandlers {
         }
         else if (Objects.equals(last_turn_result, "player")){
             application.getAdaptor().stopFight(false);
+            application.getAdaptor().regenerateCaveSystem();
             application.generateCaveEntrance();
         }
         else{
@@ -68,15 +69,16 @@ public class FXMLButtonEventHandlers {
 
     public static void switchDieScene(FXMLCaveApplication application){
 
-        application.generateCaveRoom();
+        application.generateDieSelectorForMergeConflict();
     }
 
     public static void exitFight(FXMLCaveApplication application){
         application.generateCaveRoom();
     }
 
-    public static void switchDieAndExit(FXMLCaveApplication application,int die_to_switch){
-        application.getAdaptor().updateActiveDice(die_to_switch);
+    public static void switchDieAndExit(FXMLCaveApplication application,Event event){
+        int button_pushed = Integer.parseInt(((Button) event.getSource()).getId());
+        application.getAdaptor().updateActiveDice(button_pushed);
         application.generateCaveRoom();
     }
 
@@ -93,6 +95,7 @@ public class FXMLButtonEventHandlers {
     private static void fleeFight(FXMLCaveApplication application){
 
         if (application.getAdaptor().stopFight(false)){ // player ran out of patience while trying to flee
+            application.getAdaptor().regenerateCaveSystem();
             application.generateCaveEntrance();
         }
         else { // player was able to flee

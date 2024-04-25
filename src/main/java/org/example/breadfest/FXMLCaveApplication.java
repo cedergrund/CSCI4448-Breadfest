@@ -74,10 +74,7 @@ public class FXMLCaveApplication {
     }
 
     public void generateDieSelectorForMergeConflict(){
-        new FXMLStageBuilder(this, stage)
-                .fightRoomSetup()
-                .build();
-
+        stage = FXMLStageBuilder.popUpDieConflict(this, stage);
         stage.show();
     }
 

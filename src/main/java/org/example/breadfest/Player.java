@@ -278,7 +278,12 @@ public class Player {
     }
 
     public void solveDieMergeConflict(int index_replaced){
-        active_dice_inventory[index_replaced] = potential_die;
+        if (index_replaced == 3) {
+            potential_die = null;
+        }
+        else {
+            active_dice_inventory[index_replaced] = potential_die;
+        }
     }
 
     public String getDinoImage(){
@@ -303,9 +308,17 @@ public class Player {
         return returned_strings;
     }
     public String[] getActiveDieInventoryInformation(int die_index) {
+
         String[] returned_strings = new String[3];
 
-        Dice curr_die = this.active_dice_inventory[die_index];
+        Dice curr_die;
+        if (die_index == 3){
+            curr_die = this.potential_die;
+        }
+        else{
+            curr_die = this.active_dice_inventory[die_index];
+        }
+
         if (curr_die == null){
             returned_strings[0] = "null";
             returned_strings[2] = "";
