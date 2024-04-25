@@ -247,11 +247,11 @@ public class CaveGame {
         Ingredient ingredient_at_index = curr_cave.getRoomIngredients()[location_index];
 
         return switch (ingredient_at_index.getType()){
-            case Flour -> "file:src/main/resources/org/example/breadfest/Images/flour_bag.gif";
-            case Water -> "file:src/main/resources/org/example/breadfest/Images/water_bottle_test.gif";
-            case Salt -> "file:src/main/resources/org/example/breadfest/Images/salt_shaker.gif";
-            case Yeast -> "file:src/main/resources/org/example/breadfest/Images/yeast_bag.gif";
-            case Topping -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
+            case Flour -> "file:src/main/resources/org/example/breadfest/Images/flour_display.gif";
+            case Water -> "file:src/main/resources/org/example/breadfest/Images/water_display.gif";
+            case Salt -> "file:src/main/resources/org/example/breadfest/Images/salt_display.gif";
+            case Yeast -> "file:src/main/resources/org/example/breadfest/Images/yeast_display.gif";
+            case Topping -> "file:src/main/resources/org/example/breadfest/Images/topping_display.gif";
             default -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
         };
     }
