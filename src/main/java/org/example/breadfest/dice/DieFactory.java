@@ -44,21 +44,24 @@ public class DieFactory {
             }
         }
 
-
+        final String[] final_dice_parts = dice_parts;
         if (dice_roll_numbers[0] == 0 && dice_roll_numbers[1] == 0 & dice_roll_numbers[2] == 0){ // special die
             return new Dice() {
-                public int rollDice() { return Integer.parseInt(dice_parts[1])*-1000;}
+                public int rollDice() {
+                    int i = Integer.parseInt(final_dice_parts[1]) * -1000;
+                    return i;
+                }
                 public String getName() {
-                    return dice_parts[0];
+                    return final_dice_parts[0];
                 }
                 public String getDescription() {
-                    return dice_parts[3];
+                    return final_dice_parts[3];
                 }
                 public String getPDFImage() {
-                    if (Objects.equals(dice_parts[4], "empty")){
-                        dice_parts[4] = "file:src/main/resources/org/example/breadfest/Images/i_dont_know.png";
+                    if (Objects.equals(final_dice_parts[4], "empty")){
+                        final_dice_parts[4] = "file:src/main/resources/org/example/breadfest/Images/i_dont_know.png";
                     }
-                    return dice_parts[4];
+                    return final_dice_parts[4];
                 }
                 public String getRarity() {
                     return die_type;
@@ -77,28 +80,29 @@ public class DieFactory {
             }
         }
 
+        final int final_num_die_rolled = num_die_rolled;
         return new Dice() {
             @Override
             public int rollDice() {
                 Random random_seed = new Random();
                 int total_roll = 0;
-                for (int die_num = 0; die_num < num_die_rolled; die_num++){
+                for (int die_num = 0; die_num < final_num_die_rolled; die_num++){
                     total_roll += roll_possibilities.get(random_seed.nextInt(roll_possibilities.size()));
                 }
 
                 return total_roll;
             }
             public String getName() {
-                return dice_parts[0];
+                return final_dice_parts[0];
             }
             public String getDescription() {
-                return dice_parts[3];
+                return final_dice_parts[3];
             }
             public String getPDFImage() {
-                if (Objects.equals(dice_parts[4], "empty")){
-                    dice_parts[4] = "file:src/main/resources/org/example/breadfest/Images/i_dont_know.png";
+                if (Objects.equals(final_dice_parts[4], "empty")){
+                    final_dice_parts[4] = "file:src/main/resources/org/example/breadfest/Images/i_dont_know.png";
                 }
-                return dice_parts[4];
+                return final_dice_parts[4];
             }
             public String getRarity() {
                 return die_type;
