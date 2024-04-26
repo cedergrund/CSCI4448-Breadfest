@@ -23,7 +23,7 @@ public interface FXMLCave {
 
     boolean isValidIngredientList(List<String> ingredient_type_list);
 
-    void bakeIngredientsFromTable(TableView<String[]> table);
+    int bakeIngredientsFromTable(TableView<String[]> table);
 
     boolean moveRoom(char direction);
 
@@ -38,6 +38,8 @@ public interface FXMLCave {
     void enterRoom0();
 
     int getMaxPlayerPatience();
+
+    int getCurrPlayerHonor();
 
     String[] fightDinosaur(int dice_rolled);
 

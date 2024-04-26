@@ -20,7 +20,8 @@
     "Ingredient In-ten-did|4|0,0,0|Always rolls a 10. If you win, you get a random Ingredient as a reward...|file:src/main/resources/org/example/breadfest/Images/dice_pdf/ten.png"
   ],
   "Nuclear": [
-    "Heads or Tails|1|1,100,2|Flip a coin. Heads you live, tails you die.|file:src/main/resources/org/example/breadfest/Images/dice_pdf/flip_a_coin.png"
+    "Heads or Tails|1|1,100,2|Flip a coin. Heads you live, tails you die.|file:src/main/resources/org/example/breadfest/Images/dice_pdf/flip_a_coin.png",
+    "Normal Die x20|1|20,120,6|Takes the result of a 6-sided die and multiplies it by 20.|file:src/main/resources/org/example/breadfest/Images/dice_pdf/times_20_normal.png"
   ],
   "EndGame": [
     "Heads or Tails|1|1,100,2|Flip a coin. Heads you live, tails you die.|file:src/main/resources/org/example/breadfest/Images/dice_pdf/flip_a_coin.png",

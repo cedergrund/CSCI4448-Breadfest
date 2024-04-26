@@ -136,7 +136,7 @@ public class CaveGame {
         }
     }
 
-    public void bakeIngredientsFromTable(TableView<String[]> table){
+    public int bakeIngredientsFromTable(TableView<String[]> table){
         //this essentially does two things by analyzing the selected rows in the table
         // it changes the player's honor, and it modifies the player's inventory
         //Lets do it!
@@ -172,10 +172,10 @@ public class CaveGame {
         Boolean valid_ingredient = this.isValidIngredientList(ingredient_type_list);
         table.getItems().removeAll(selectedRows);
         if (valid_ingredient){
-            player.changeCurrHonor(cumulative_score);
+            return player.changeCurrHonor(cumulative_score);
         }
         else {
-            player.changeCurrHonor(0);
+            return 0;
         }
         // there's no need to remove rows for the displayed table, just remove them from the inventory! then reload the scene :)
     }
@@ -230,6 +230,10 @@ public class CaveGame {
 
     public int changeCurrHonor(int honor_change){
         return this.player.changeCurrHonor(honor_change);
+    }
+
+    public int getCurrPlayerHonor(){
+        return player.getCurrHonor();
     }
 
     public String getDinosaurImageByLocation(int location_index) {

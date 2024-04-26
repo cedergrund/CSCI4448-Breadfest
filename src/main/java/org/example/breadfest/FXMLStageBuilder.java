@@ -114,7 +114,7 @@ public class FXMLStageBuilder {
         root.getChildren().add(honor_meter);
 
         FXMLCave adaptor = application.getAdaptor();
-        int curr_honor = adaptor.changeCurrHonor(0);
+        int curr_honor = adaptor.getCurrPlayerHonor();
         double honorPercentage = (double) curr_honor / 1000;
 //        honor_meter.setProgress(honorPercentage);
         honor_meter.setProgress(honorPercentage);
@@ -301,7 +301,7 @@ public class FXMLStageBuilder {
         return this;
     }
 
-    public FXMLStageBuilder addBakingInventoryTable(String location_where_pressed){
+    public FXMLStageBuilder addBakingInventoryTable(){
 
         Label inventory_label = new Label("Let's Bake!");
         inventory_label.setLayoutX(25);
@@ -336,12 +336,9 @@ public class FXMLStageBuilder {
         Button removeSelectedButton = new Button("Bake Ingredients");
         removeSelectedButton.setLayoutX(800);
         removeSelectedButton.setLayoutY(650);
-        removeSelectedButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.bakeIngredients(application, table_view);
-                FXMLButtonEventHandlers.openBakingScene(application, location_where_pressed);
-            }
+        removeSelectedButton.setOnAction(event -> {
+            int upgrade = FXMLButtonEventHandlers.bakeIngredients(application, table_view);
+            FXMLButtonEventHandlers.openBakingScene(application, upgrade);
         });
         root.getChildren().add(removeSelectedButton);
 
@@ -487,7 +484,7 @@ public class FXMLStageBuilder {
         baking_scene_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.openBakingScene(application, location_of_button);
+                FXMLButtonEventHandlers.openBakingScene(application, 0);
             }
         });
         root.getChildren().add(baking_scene_button);
@@ -708,255 +705,6 @@ public class FXMLStageBuilder {
         return this;
     }
 
-    static public Stage popUpFightResults(FXMLCaveApplication application, Stage stage, boolean die_conflict){
-
-        AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
-        String[] rewards = application.getAdaptor().getPreviousReward();
-
-        // scroll background image
-        ImageView scroll_background = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/scroll.png"));
-        scroll_background.setFitWidth(600);
-        scroll_background.setFitHeight(650);
-        scroll_background.setLayoutX(383);
-        scroll_background.setLayoutY(59);
-        scroll_background.setPreserveRatio(false);
-        root.getChildren().add(scroll_background);
-
-        // button
-        Button button = new Button("Say thank you...");
-        button.setLayoutX(606);
-        button.setLayoutY(560);
-        button.setPrefSize(150, 30);
-        button.setTextFill(Color.WHITE);
-        button.setStyle("-fx-background-color: #6225E6; ");
-        button.setFont(Font.font("Baloo 2 Bold", 16));
-        if (die_conflict){
-            button.setOnAction(event -> FXMLButtonEventHandlers.switchDieScene(application));
-        }
-        else {
-            button.setOnAction(event -> FXMLButtonEventHandlers.exitFight(application));
-        }
-
-        root.getChildren().add(button);
-
-        // adding text
-        Label you_win = new Label("You Win!");
-        you_win.setLayoutX(383);
-        you_win.setLayoutY(172);
-        you_win.setPrefSize(600, 47);
-        you_win.setFont(Font.font("Baloo 2", 30));
-        you_win.setUnderline(true);
-        you_win.setTextFill(Color.BLACK);
-        you_win.setAlignment(Pos.CENTER);
-        you_win.setTextAlignment(TextAlignment.CENTER);
-
-        Label description = new Label(rewards[0] + " got bored of gambling and left. But, as a reward for beating him, he left you something...");
-        description.setLayoutX(433);
-        description.setLayoutY(225);
-        description.setPrefSize(500, 75);
-        description.setFont(Font.font("Baloo 2", 20));
-        description.setWrapText(true);
-        description.setTextFill(Color.BLACK);
-        description.setAlignment(Pos.CENTER);
-        description.setTextAlignment(TextAlignment.CENTER);
-
-        Rectangle outline = new Rectangle(500, 215, Color.web("#941d1d"));
-        outline.setLayoutX(437);
-        outline.setLayoutY(312);
-        outline.setStrokeWidth(2);
-        outline.setStroke(Color.BLACK);
-        outline.setFill(Color.TRANSPARENT);
-        root.getChildren().add(outline);
-
-        Line horizontal_divider = new Line(437, 419.5, 937, 419.5);
-        horizontal_divider.setStrokeWidth(1);
-        horizontal_divider.setStroke(Color.BLACK);
-        root.getChildren().add(horizontal_divider);
-
-        // ingredient
-        ImageView ingredient_image = new ImageView(new Image(application.getAdaptor().getIngredientImageByType(rewards[3])));
-        ingredient_image.setFitWidth(100);
-        ingredient_image.setFitHeight(100);
-        ingredient_image.setLayoutX(458);
-        ingredient_image.setLayoutY(312);
-        root.getChildren().add(ingredient_image);
-
-        Label ingredient = new Label(rewards[2] + " Ingredient:\n" + rewards[1]);
-        ingredient.setLayoutX(608);
-        ingredient.setLayoutY(312);
-        ingredient.setPrefSize(300, 100);
-        ingredient.setFont(Font.font("Baloo 2", 25));
-        ingredient.setTextFill(Color.BLACK);
-        ingredient.setAlignment(Pos.BOTTOM_LEFT);
-        ingredient.setTextAlignment(TextAlignment.LEFT);
-
-        root.getChildren().addAll(you_win, description, ingredient);
-
-        if (Objects.equals(rewards[4], "")){
-            return stage;
-        }
-
-
-        // die
-        ImageView die_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/reward_die.png"));
-        die_image.setFitWidth(100);
-        die_image.setFitHeight(100);
-        die_image.setLayoutX(804);
-        die_image.setLayoutY(427);
-        root.getChildren().add(die_image);
-
-        Label die = new Label(rewards[5] + " Die:\n" + rewards[4]);
-        die.setLayoutX(454);
-        die.setLayoutY(427);
-        die.setPrefSize(300, 100);
-        die.setFont(Font.font("Baloo 2", 25));
-        die.setTextFill(Color.BLACK);
-        die.setAlignment(Pos.TOP_RIGHT);
-        die.setTextAlignment(TextAlignment.RIGHT);
-
-        root.getChildren().add(die);
-
-        return stage;
-
-    }
-
-    static public Stage popUpDieConflict(FXMLCaveApplication application, Stage stage){
-
-        AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
-        String[] rewards = application.getAdaptor().getPreviousReward();
-
-        // scroll background image
-        ImageView scroll_background = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/scroll.png"));
-        scroll_background.setFitWidth(600);
-        scroll_background.setFitHeight(650);
-        scroll_background.setLayoutX(383);
-        scroll_background.setLayoutY(59);
-        scroll_background.setPreserveRatio(false);
-        root.getChildren().add(scroll_background);
-
-        // adding text
-        Label title = new Label("Max Dice Inventory Reached!");
-        title.setLayoutX(383);
-        title.setLayoutY(172);
-        title.setPrefSize(600, 47);
-        title.setFont(Font.font("Baloo 2", 30));
-        title.setUnderline(true);
-        title.setTextFill(Color.BLACK);
-        title.setAlignment(Pos.CENTER);
-        title.setTextAlignment(TextAlignment.CENTER);
-
-        Label description = new Label("Pick a Die to give up");
-        description.setLayoutX(433);
-        description.setLayoutY(225);
-        description.setPrefSize(500, 60);
-        description.setFont(Font.font("Baloo 2", 20));
-        description.setWrapText(true);
-        description.setTextFill(Color.BLACK);
-        description.setAlignment(Pos.CENTER);
-        description.setTextAlignment(TextAlignment.CENTER);
-
-        Label quote = new Label("\"There is no progress or accomplishment without sacrifice.\" -William Warren Wright");
-        quote.setLayoutX(433);
-        quote.setLayoutY(530);
-        quote.setPrefSize(500, 75);
-        quote.setFont(Font.font("Verdana Italic", 18));
-        quote.setWrapText(true);
-        quote.setTextFill(Color.BLACK);
-        quote.setAlignment(Pos.CENTER);
-        quote.setTextAlignment(TextAlignment.CENTER);
-
-        Rectangle outline = new Rectangle(500, 230, Color.web("#941d1d"));
-        outline.setLayoutX(433);
-        outline.setLayoutY(295);
-        outline.setStrokeWidth(2);
-        outline.setStroke(Color.BLACK);
-        outline.setFill(Color.TRANSPARENT);
-        root.getChildren().add(outline);
-
-        Line horizontal_divider = new Line(433, 410, 933, 410);
-        horizontal_divider.setStrokeWidth(1);
-        horizontal_divider.setStroke(Color.BLACK);
-        Line vertical_divider = new Line(683, 295, 683, 525);
-        vertical_divider.setStrokeWidth(1);
-        vertical_divider.setStroke(Color.BLACK);
-        root.getChildren().addAll(horizontal_divider, vertical_divider);
-
-
-        root.getChildren().addAll(title, description, quote);
-
-        addDieForRemoving(application,root,0);
-        addDieForRemoving(application,root,1);
-        addDieForRemoving(application,root,2);
-        addDieForRemoving(application,root,3);
-
-        return stage;
-
-    }
-
-    // Methods to add dice buttons
-    private static void addDieForRemoving(FXMLCaveApplication application, AnchorPane root, int die_index) {
-
-        double x;
-        double y;
-        switch (die_index){
-            case 0:{
-                x = 433;
-                y = 295;
-                break;
-            }
-            case 1:{
-                x = 683;
-                y = 295;
-                break;
-            }
-            case 2:{
-                x = 433;
-                y = 410;
-                break;
-            }
-            default:{
-                x = 683;
-                y = 410;
-                break;
-            }
-        }
-
-        String[] die_information = application.getAdaptor().getDieInformation(die_index);
-        Label die_name = new Label(die_information[0]);
-        Label description = new Label(die_information[1]);
-
-        die_name.setLayoutX(x+10);
-        die_name.setLayoutY(y+5);
-        die_name.setPrefSize(160,31);
-        die_name.setAlignment(Pos.CENTER_LEFT);
-        die_name.setTextAlignment(TextAlignment.LEFT);
-        die_name.setUnderline(true);
-        die_name.setFont(Font.font("Baloo 2 Regular", 15));
-
-        description.setLayoutX(x+10);
-        description.setLayoutY(y+40);
-        description.setPrefSize(220, 70);
-        description.setFont(Font.font("Baloo 2 Regular", 12));
-        description.setWrapText(true);
-        description.setTextAlignment(TextAlignment.LEFT);
-        description.setAlignment(Pos.TOP_LEFT);
-
-        root.getChildren().addAll(die_name, description);
-
-        // add button
-        Button button = new Button("Remove");
-        button.setLayoutX(x+170);
-        button.setLayoutY(y+6);
-        button.setPrefSize(70, 26);
-        button.setTextFill(Color.WHITE);
-        button.setStyle("-fx-background-color: #c71e12");
-        button.setId(String.valueOf(die_index));
-        button.setFont(Font.font("Baloo 2 Bold", 14));
-        button.setOnAction(event -> FXMLButtonEventHandlers.switchDieAndExit(application, event));
-        root.getChildren().add(button);
-
-    }
-
     private void addDieForRolling(int die_index) {
 
         double x = getXLocation(die_index);
@@ -1157,3 +905,6 @@ public class FXMLStageBuilder {
     }
 
 }
+
+
+

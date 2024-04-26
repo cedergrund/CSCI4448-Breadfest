@@ -31,7 +31,6 @@ public class Player {
 
     private int previous_roll;
 
-
     // base patience is starting patience at every time you enter maze
     private int base_patience;
 
@@ -79,25 +78,33 @@ public class Player {
     }
 
     public int changeCurrHonor(int honor_change){
+        // returns upgrade if it occurs
         this.curr_honor += honor_change;
-        if (curr_honor > 250){
-            damage_modifier = 2;
-            base_patience = 200;
-        }
-        if (curr_honor > 500){
-            damage_modifier = 3;
-            base_patience = 400;
-        }
-        if (curr_honor > 750){
-            damage_modifier = 4;
-            base_patience = 600;
-        }
-        if (curr_honor > 750){
+        if (curr_honor > 1000  && this.damage_modifier < 5){
             damage_modifier = 5;
             base_patience = 1000;
+            return 5;
         }
+        else if (curr_honor > 750 && this.damage_modifier < 4){
+            damage_modifier = 2;
+            base_patience = 200;
+            return 2;
+        }
+        else if (curr_honor > 500 && this.damage_modifier < 3){
+            damage_modifier = 3;
+            base_patience = 400;
+            return 3;
+        }
+        if (curr_honor > 250 && this.damage_modifier < 2){
+            damage_modifier = 4;
+            base_patience = 600;
+            return 4;
+        }
+        return 1;
 
-        return this.curr_honor; //returns the update honor!
+    }
+    public int getCurrHonor(){
+        return this.curr_honor;
     }
 
     public Dice[] getActiveDieInventory() {

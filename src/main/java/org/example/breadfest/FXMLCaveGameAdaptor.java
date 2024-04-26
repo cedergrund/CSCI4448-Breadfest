@@ -60,8 +60,8 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
         return this.adapted_game_state.isValidIngredientList(ingredient_type_list);
     }
 
-    public void bakeIngredientsFromTable(TableView<String[]> table){
-        this.adapted_game_state.bakeIngredientsFromTable(table);
+    public int bakeIngredientsFromTable(TableView<String[]> table){
+        return this.adapted_game_state.bakeIngredientsFromTable(table);
     }
 
     public boolean moveRoom(char direction){
@@ -78,6 +78,10 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
 
     public int changeCurrHonor(int honor_change){
         return adapted_game_state.changeCurrHonor(honor_change);
+    }
+
+    public int getCurrPlayerHonor(){
+        return adapted_game_state.getCurrPlayerHonor();
     }
 
     public int getMaxPlayerPatience() { return adapted_game_state.getMaxPlayerPatience(); }

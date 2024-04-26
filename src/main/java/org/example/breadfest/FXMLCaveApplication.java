@@ -82,25 +82,30 @@ public class FXMLCaveApplication {
     }
 
     public void generateFightRoomRewards(boolean die_conflict){
-        stage = FXMLStageBuilder.popUpFightResults(this, stage, die_conflict);
+        stage = popUps.popUpFightResults(this, stage, die_conflict);
         stage.show();
     }
 
     public void generateDieSelectorForMergeConflict(){
-        stage = FXMLStageBuilder.popUpDieConflict(this, stage);
+        stage = popUps.popUpDieConflict(this, stage);
         stage.show();
     }
 
-    public void generateBakingScene(String location_where_pressed){
+    public void generateBakingScene(int upgrade){
         stage = new FXMLStageBuilder(this, stage)
                 .setBakingSceneBackground()
-                .addBakingInventoryTable(location_where_pressed)
+                .addBakingInventoryTable()
                 .addCookingPot()
-                .addReturnToGameButton(location_where_pressed)
+                .addReturnToGameButton("entrance")
                 .addHonorMeter()
                 .build();
 
+        stage.show();
         startSong("baking");
+
+        stage = popUps.popUpPlayerUpgrade(this, stage, upgrade);
+        stage.show();
+
     }
 
     public void generateInventory(String location_where_pressed){
@@ -159,14 +164,14 @@ public class FXMLCaveApplication {
                 media_player[song_index].play();
             }
             else{
-                media_player[song_index].stop();
+                media_player[song_index].pause();
             }
         }
     }
 
     private void stopAllSongs(){
         for (MediaPlayer mediaPlayer : media_player) {
-            mediaPlayer.stop();
+            mediaPlayer.pause();
         }
     }
 

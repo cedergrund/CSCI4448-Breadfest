@@ -18,12 +18,12 @@ public class FXMLButtonEventHandlers {
         application.generateInventory(locationOfButton);
     }
 
-    public static void openBakingScene(FXMLCaveApplication application, String locationOfButton) {
-        application.generateBakingScene(locationOfButton);
+    public static void openBakingScene(FXMLCaveApplication application, int upgrade) {
+        application.generateBakingScene(upgrade);
     }
 
-    public static void bakeIngredients(FXMLCaveApplication application, TableView<String[]> table) {
-        application.getAdaptor().bakeIngredientsFromTable(table);
+    public static int bakeIngredients(FXMLCaveApplication application, TableView<String[]> table) {
+        return application.getAdaptor().bakeIngredientsFromTable(table);
     }
 
     public static void enterMaze(FXMLCaveApplication application) {
