@@ -21,7 +21,6 @@ public class DieFactory {
 
     public Dice makeDieByType(String die_type, String source) throws Exception {
 
-
         String dice_string = JSONReadingHelper.generateRandomElementFromJSON(this.die_types, die_type);
         String[] dice_parts = dice_string.split("\\|");
 
@@ -31,7 +30,7 @@ public class DieFactory {
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
-        if (Objects.equals(source, "dino")){
+        if (Objects.equals(source, "dino") && !Objects.equals(dice_parts[0], "Hail Mary")){
             while (dice_roll_numbers[0] == 0 && dice_roll_numbers[1] == 0 & dice_roll_numbers[2] == 0){
                 dice_string = JSONReadingHelper.generateRandomElementFromJSON(this.die_types, die_type);
                 dice_parts = dice_string.split("\\|");
@@ -46,10 +45,39 @@ public class DieFactory {
 
         final String[] final_dice_parts = dice_parts;
         if (dice_roll_numbers[0] == 0 && dice_roll_numbers[1] == 0 & dice_roll_numbers[2] == 0){ // special die
+
+            if (Objects.equals(final_dice_parts[0], "Hail Mary")){
+                return new Dice() {
+                    public int rollDice() {
+                        Random random_seed = new Random();
+                        if (random_seed.nextDouble() < 0.1){
+                            return 100;
+                        }
+                        else{
+                            return 0;
+                        }
+                    }
+                    public String getName() {
+                        return final_dice_parts[0];
+                    }
+                    public String getDescription() {
+                        return final_dice_parts[3];
+                    }
+                    public String getPDFImage() {
+                        if (Objects.equals(final_dice_parts[4], "empty")){
+                            final_dice_parts[4] = "file:src/main/resources/org/example/breadfest/Images/i_dont_know.png";
+                        }
+                        return final_dice_parts[4];
+                    }
+                    public String getRarity() {
+                        return die_type;
+                    }
+                };
+            }
+
             return new Dice() {
                 public int rollDice() {
-                    int i = Integer.parseInt(final_dice_parts[1]) * -1000;
-                    return i;
+                    return Integer.parseInt(final_dice_parts[1]) * -1000;
                 }
                 public String getName() {
                     return final_dice_parts[0];
@@ -82,7 +110,6 @@ public class DieFactory {
 
         final int final_num_die_rolled = num_die_rolled;
         return new Dice() {
-            @Override
             public int rollDice() {
                 Random random_seed = new Random();
                 int total_roll = 0;
@@ -130,7 +157,7 @@ public class DieFactory {
 
             @Override
             public String getPDFImage() {
-                return "file:src/main/resources/org/example/breadfest/Images/i_dont_know.png";
+                return "file:src/main/resources/org/example/breadfest/Images/dice_pdf/normal.png";
             }
 
             @Override

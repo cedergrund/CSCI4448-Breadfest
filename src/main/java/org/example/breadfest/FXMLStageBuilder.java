@@ -24,6 +24,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.security.MessageDigest;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,6 +57,7 @@ public class FXMLStageBuilder {
 
     public FXMLStageBuilder setCaveBackground(){
         root.setStyle("-fx-background-color: #808080;");
+
         return this;
     }
 
@@ -925,7 +927,7 @@ public class FXMLStageBuilder {
 
         die_name.setLayoutX(x+10);
         die_name.setLayoutY(y+5);
-        die_name.setPrefSize(121,31);
+        die_name.setPrefSize(160,31);
         die_name.setAlignment(Pos.CENTER_LEFT);
         die_name.setTextAlignment(TextAlignment.LEFT);
         die_name.setUnderline(true);
@@ -943,7 +945,7 @@ public class FXMLStageBuilder {
 
         // add button
         Button button = new Button("Remove");
-        button.setLayoutX(x+150);
+        button.setLayoutX(x+170);
         button.setLayoutY(y+6);
         button.setPrefSize(70, 26);
         button.setTextFill(Color.WHITE);
@@ -965,11 +967,10 @@ public class FXMLStageBuilder {
         String[] die_information;
 
         if (die_index == 3){
+            die_information = application.getAdaptor().getDieInformation(die_index+1);
             die_name = new Label("Run Away");
-            description = new Label("Insert Excuse here...");
-            die_information = new String[3];
+            description = new Label(die_information[1]);
             die_information[0] = "";
-            die_information[2] = "";
         }
         else{
             die_information = application.getAdaptor().getDieInformation(die_index);
@@ -997,7 +998,7 @@ public class FXMLStageBuilder {
         description.setAlignment(Pos.TOP_CENTER);
 
         if (die_index == 3){
-            description.setPrefSize(258, 130);
+            description.setPrefSize(258, 150);
         }
         else{
             description.setPrefSize(258,100);
@@ -1036,13 +1037,14 @@ public class FXMLStageBuilder {
         if (!Objects.equals(die_information[2], "")){
             ImageView pdf_image = new ImageView(new Image(die_information[2]));
             pdf_image.setFitWidth(210);
-            pdf_image.setFitHeight(95);
+            pdf_image.setFitHeight(105);
             pdf_image.setLayoutX(x + 65.75);
-            pdf_image.setLayoutY(616);
+            pdf_image.setLayoutY(606);
 
             Label pdf_label = new Label("Die PDF:");
             pdf_label.setLayoutX(x+65);
-            pdf_label.setLayoutY(616);
+            pdf_label.setLayoutY(600);
+            pdf_label.setUnderline(true);
             pdf_label.setFont(Font.font("Baloo 2 Regular", 13));
             root.getChildren().addAll(pdf_image, pdf_label);
         }

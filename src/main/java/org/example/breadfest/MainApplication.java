@@ -1,7 +1,11 @@
 package org.example.breadfest;
 
 import javafx.application.Application;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import java.nio.file.Paths;
 
 public class MainApplication extends Application {
     public static void main(String[] args) {
@@ -24,4 +28,5 @@ public class MainApplication extends Application {
         // run game
         javafx_application.runGame();
     }
+
 }

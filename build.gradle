@@ -30,7 +30,7 @@ application {
 
 javafx {
   version = '17.0.6'
-  modules = ['javafx.controls', 'javafx.fxml']
+  modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
 }
 
 dependencies {
@@ -44,8 +44,10 @@ dependencies {
   // jackson for dialogue read from file
   implementation 'com.fasterxml.jackson.core:jackson-core:2.16.1'
   implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
+  // media
+  implementation 'org.openjfx:javafx-media:17.0.6'
 
 }
 

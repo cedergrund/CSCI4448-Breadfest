@@ -4,6 +4,7 @@ module org.example.breadfest {
     requires com.fasterxml.jackson.databind;
     requires kotlin.stdlib;
     requires java.compiler;
+    requires javafx.media;
 
 
     opens org.example.breadfest to javafx.fxml;

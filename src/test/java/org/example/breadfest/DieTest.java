@@ -12,10 +12,10 @@ public class DieTest {
     void testCreation() throws Exception {
         DieFactory factory = new DieFactory();
 
-        Dice common_dice_test = factory.makeDieByType(DinosaurAndDiceTypes.Common);
-        Dice rare_dice_test = factory.makeDieByType(DinosaurAndDiceTypes.Rare);
-        Dice epic_dice_test = factory.makeDieByType(DinosaurAndDiceTypes.Epic);
-        Dice nuclear_dice_test = factory.makeDieByType(DinosaurAndDiceTypes.Nuclear);
+        Dice common_dice_test = factory.makeDieByType(DinosaurAndDiceTypes.Common.toString(), "dino");
+        Dice rare_dice_test = factory.makeDieByType(DinosaurAndDiceTypes.Rare.toString(), "dino");
+        Dice epic_dice_test = factory.makeDieByType(DinosaurAndDiceTypes.Epic.toString(), "dino");
+        Dice nuclear_dice_test = factory.makeDieByType(DinosaurAndDiceTypes.Nuclear.toString(), "dino");
 
         assertNotNull(common_dice_test);
         assertNotNull(rare_dice_test);
@@ -35,7 +35,7 @@ public class DieTest {
     @Test
     void testCommonDieMethods() throws Exception {
         DieFactory factory = new DieFactory();
-        Dice common_dice_test = factory.makeDieByType(DinosaurAndDiceTypes.Common);
+        Dice common_dice_test = factory.makeDieByType(DinosaurAndDiceTypes.Common.toString(), "dino");
 
         assertNotNull(common_dice_test);
         assertTrue("Normal Die".equals(common_dice_test.getName()) || "Bad Die".equals(common_dice_test.getName()));

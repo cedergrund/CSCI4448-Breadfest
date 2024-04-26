@@ -5,6 +5,7 @@ import org.example.breadfest.dice.DieFactory;
 import org.example.breadfest.dinosaurs.Dinosaur;
 import org.example.breadfest.ingredients.Ingredient;
 import org.example.breadfest.ingredients.IngredientFactory;
+import org.example.breadfest.ingredients.JSONReadingHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import java.util.Map;
 public class Player {
 
     private static final Player player = new Player();
+
+    private final JSONReadingHelper random_excuse_generator;
 
     private final Map<String, List<Ingredient>> ingredient_inventory;
 
@@ -49,6 +52,11 @@ public class Player {
         this.damage_modifier = 1.0;
 
         this.ingredient_inventory = new HashMap<>();
+        try {
+            this.random_excuse_generator = new JSONReadingHelper();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         this.active_dice_inventory = new Dice[3];
         this.active_dice_inventory[0] = DieFactory.generateBaseDie();
@@ -174,7 +182,6 @@ public class Player {
             }
             case -2000:{
                 player_roll = 2*this.previous_roll;
-                this.previous_roll = player_roll;
                 break;
             }
             case -3000:{
@@ -370,7 +377,14 @@ public class Player {
         String[] returned_strings = new String[3];
 
         Dice curr_die;
-        if (die_index == 3){
+
+        if (die_index == 4){
+            returned_strings[0] = "flee";
+            returned_strings[1] = random_excuse_generator.getRandomExcuse();
+            returned_strings[2] = "";
+            return returned_strings;
+        }
+        else if (die_index == 3){
             curr_die = this.potential_die;
         }
         else{
