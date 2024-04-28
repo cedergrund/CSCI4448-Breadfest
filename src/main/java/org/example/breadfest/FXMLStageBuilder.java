@@ -195,25 +195,34 @@ public class FXMLStageBuilder {
                     new_button.setGraphic(north_portal_display);
                     break;
                 case 'S':
-                    new_button = new Button("South");
+                    new_button = new Button();
                     new_button.setId("S");
-                    AnchorPane.setBottomAnchor(new_button, 20.0);
+                    AnchorPane.setTopAnchor(new_button, 677.0);
                     AnchorPane.setLeftAnchor(new_button, 630.0);
                     AnchorPane.setRightAnchor(new_button, 630.0);
+                    new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+                    ImageView south_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/south_portal.png"));
+                    new_button.setGraphic(south_portal_display);
                     break;
                 case 'E':
-                    new_button = new Button("East");
+                    new_button = new Button();
                     new_button.setId("E");
-                    AnchorPane.setTopAnchor(new_button, 300.0);
-                    AnchorPane.setRightAnchor(new_button, 20.0);
-                    AnchorPane.setBottomAnchor(new_button, 300.0);
+                    AnchorPane.setTopAnchor(new_button, 400.0);
+                    AnchorPane.setBottomAnchor(new_button, 400.0);
+                    AnchorPane.setLeftAnchor(new_button, 1361.0 - 83.0);
+                    new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+                    ImageView east_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/east_portal.png"));
+                    new_button.setGraphic(east_portal_display);
                     break;
                 case 'W':
-                    new_button = new Button("West");
+                    new_button = new Button();
                     new_button.setId("W");
-                    AnchorPane.setTopAnchor(new_button, 300.0);
-                    AnchorPane.setLeftAnchor(new_button, 20.0);
-                    AnchorPane.setBottomAnchor(new_button, 300.0);
+                    AnchorPane.setTopAnchor(new_button, 400.0);
+                    AnchorPane.setBottomAnchor(new_button, 400.0);
+                    AnchorPane.setRightAnchor(new_button, 1361 - 83.0);
+                    new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+                    ImageView west_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/west_portal.png"));
+                    new_button.setGraphic(west_portal_display);
                     break;
                 default:
                     // some sort of error here, we didn't get a valid input!
