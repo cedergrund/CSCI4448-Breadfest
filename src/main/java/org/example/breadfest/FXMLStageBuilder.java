@@ -56,8 +56,11 @@ public class FXMLStageBuilder {
     }
 
     public FXMLStageBuilder setCaveBackground(){
-        root.setStyle("-fx-background-color: #808080;");
-
+//        root.setStyle("-fx-background-color: #808080;");
+        ImageView cave_background = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/cave_background_base.png"));
+        AnchorPane.setTopAnchor(cave_background, 0.0);
+        AnchorPane.setRightAnchor(cave_background, 0.0);
+        root.getChildren().add(cave_background);
         return this;
     }
 
@@ -165,11 +168,14 @@ public class FXMLStageBuilder {
             switch (direction) { // add the button for each direction
                 case 'N':
                     // Add North button
-                    new_button = new Button("North");
+                    new_button = new Button();
                     new_button.setId("N");
-                    AnchorPane.setTopAnchor(new_button, 20.0);
                     AnchorPane.setLeftAnchor(new_button, 630.0);
                     AnchorPane.setRightAnchor(new_button, 630.0);
+                    AnchorPane.setBottomAnchor(new_button, 680.0);
+                    new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+                    ImageView north_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/north_portal.png"));
+                    new_button.setGraphic(north_portal_display);
                     break;
                 case 'S':
                     new_button = new Button("South");
