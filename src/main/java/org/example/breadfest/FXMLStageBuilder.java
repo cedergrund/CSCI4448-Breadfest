@@ -99,7 +99,8 @@ public class FXMLStageBuilder {
         patience_meter.setProgress(patiencePercentage);
 
         Label patience_label = new Label("Patience: "+String.valueOf(curr_patience));
-        patience_label.setFont(Font.font("Verdana", FontWeight.BOLD, 16)); // Use "Satisfy" as the font name
+        patience_label.setFont(Font.font("Baloo 2", FontWeight.BOLD, 16));
+        patience_label.setTextFill(Color.WHITE);
         AnchorPane.setLeftAnchor(patience_label, 20.0);
         AnchorPane.setBottomAnchor(patience_label, 40.0);
         root.getChildren().add(patience_label);
@@ -118,9 +119,26 @@ public class FXMLStageBuilder {
 
         FXMLCave adaptor = application.getAdaptor();
         int curr_honor = adaptor.getCurrPlayerHonor();
-        double honorPercentage = (double) curr_honor / 1000;
-//        honor_meter.setProgress(honorPercentage);
-        honor_meter.setProgress(honorPercentage);
+        double honor_percentage = (double) curr_honor / 5000;
+        honor_meter.setProgress(honor_percentage);
+
+        // setting progress bar color by level
+        if (honor_percentage < ((double)250/5000)){
+            honor_meter.setStyle("-fx-accent: yellow;");
+        }
+        else if (honor_percentage < ((double)750/5000)){
+            honor_meter.setStyle("-fx-accent: green;");
+        }
+        else if (honor_percentage < ((double)2000/5000)){
+            honor_meter.setStyle("-fx-accent: blue;");
+        }
+        else if (honor_percentage < ((double)5000/5000)){
+            honor_meter.setStyle("-fx-accent: purple;");
+        }
+        else{
+            System.out.println("max");
+            honor_meter.setStyle("-fx-accent: red;");
+        }
 
         Label honor_label = new Label("Honor: "+String.valueOf(curr_honor));
         honor_label.setFont(Font.font("Verdana", FontWeight.BOLD, 16)); // Use "Satisfy" as the font name

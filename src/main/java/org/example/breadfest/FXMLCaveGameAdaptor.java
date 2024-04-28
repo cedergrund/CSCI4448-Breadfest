@@ -56,10 +56,6 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
         return this.adapted_game_state.removeIngredientFromInventory(ingredient_name);
     }
 
-    public boolean isValidIngredientList(List<String> ingredient_type_list){
-        return this.adapted_game_state.isValidIngredientList(ingredient_type_list);
-    }
-
     public int bakeIngredientsFromTable(TableView<String[]> table){
         return this.adapted_game_state.bakeIngredientsFromTable(table);
     }

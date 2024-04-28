@@ -133,7 +133,7 @@ public enum DinosaurAndDiceTypes {
                 return IngredientRarity.Epic;
             }
             default -> {
-                return IngredientRarity.Champion;
+                return IngredientRarity.Nuclear;
             }
         }
     }
@@ -142,6 +142,39 @@ public enum DinosaurAndDiceTypes {
         return die_factory.makeDieByType(this.toString(), source);
     }
     public Dice getRewardDice() throws Exception {
+        Random random_seed = new Random();
+        double random_number = random_seed.nextDouble();
+
+        switch (this){
+            case Common -> {
+                if (random_number < 0.5){
+                    return die_factory.makeDieByType(Common.toString(), "reward");
+                }
+                else{
+                    return die_factory.makeDieByType(Rare.toString(), "reward");
+                }
+            }
+            case Rare -> {
+                if (random_number < 0.5){
+                    return die_factory.makeDieByType(Rare.toString(), "reward");
+                }
+                else{
+                    return die_factory.makeDieByType(Epic.toString(), "reward");
+                }
+            }
+            case Epic -> {
+                if (random_number < 0.5){
+                    return die_factory.makeDieByType(Epic.toString(), "reward");
+                }
+                else{
+                    return die_factory.makeDieByType(Nuclear.toString(), "reward");
+                }
+            }
+            case Nuclear -> {
+                return die_factory.makeDieByType("EndGame", "reward");
+            }
+        }
+
         return die_factory.makeDieByType(this.getNextType(), "reward");
     }
 

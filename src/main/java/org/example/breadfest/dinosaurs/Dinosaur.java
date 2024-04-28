@@ -34,7 +34,7 @@ public class Dinosaur {
         Random random_seed = new Random();
         double random_roll = random_seed.nextDouble();
 
-        if (random_roll < 0.5){ // only ingredient reward
+        if (random_roll < 0.4 && this.type_of_dinosaur != DinosaurAndDiceTypes.Nuclear){ // only ingredient reward
             this.reward_die = null;
         }
         else{

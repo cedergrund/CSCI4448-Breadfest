@@ -1,7 +1,6 @@
 package org.example.breadfest;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -54,11 +53,11 @@ public class popUps {
         Label description = new Label(description_text);
         description.setLayoutX(433);
         description.setLayoutY(225);
-        description.setPrefSize(500, 75);
+        description.setPrefSize(500, 350);
         description.setFont(Font.font("Baloo 2", 20));
         description.setWrapText(true);
         description.setTextFill(Color.BLACK);
-        description.setAlignment(Pos.CENTER);
+        description.setAlignment(Pos.TOP_CENTER);
         description.setTextAlignment(TextAlignment.CENTER);
 
         root.getChildren().addAll(title, description);
@@ -92,7 +91,7 @@ public class popUps {
         label.setPrefSize(300, 100);
         label.setFont(Font.font("Baloo 2", 25));
         label.setTextFill(Color.BLACK);
-        label.setAlignment(Pos.BOTTOM_LEFT);
+        label.setAlignment(Pos.CENTER_LEFT);
         label.setTextAlignment(TextAlignment.LEFT);
 
         root.getChildren().addAll(image, label);
@@ -111,7 +110,7 @@ public class popUps {
         label.setPrefSize(300, 100);
         label.setFont(Font.font("Baloo 2", 25));
         label.setTextFill(Color.BLACK);
-        label.setAlignment(Pos.TOP_RIGHT);
+        label.setAlignment(Pos.CENTER_RIGHT);
         label.setTextAlignment(TextAlignment.RIGHT);
 
         root.getChildren().addAll(image, label);
@@ -153,12 +152,46 @@ public class popUps {
 
     }
 
+    static public Stage popUpNuclear(FXMLCaveApplication application, Stage stage){
+
+        AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
+
+        setUpBase(root);
+
+        // button
+        Button button = addBottomButton("what is it?");
+        button.setOnAction(event -> FXMLButtonEventHandlers.rawrdoughValleyExplodes(application));
+        root.getChildren().add(button);
+
+        // adding text
+        addTitleAndDescription(root, "Hold on...", "You didn't just bake with a nuclear ingredient, RIGHT?!?\n" +
+                "oh no.................................\n" +
+                "WHAT HAVE YOU DONE!!!");
+
+
+        ImageView image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/shocked_turtle.png"));
+        image.setFitWidth(130);
+        image.setFitHeight(210);
+        image.setPreserveRatio(true);
+        image.setLayoutX(618);
+        image.setLayoutY(342);
+        root.getChildren().add(image);
+        return stage;
+
+    }
+
     static public Stage popUpPlayerUpgrade(FXMLCaveApplication application, Stage stage, int upgrade){
 
-        if (upgrade <= 1){
+        if (upgrade == 1 || upgrade == 0){
+            // returns 0 if you made dust, 1 if no upgrade
             return stage;
         }
-        if (upgrade == 5){
+        else if (upgrade == -1){
+            application.nuclearIngredientUsed();
+            return stage;
+        }
+        else if (upgrade == 5){
+            // game is won!!
             System.out.println("Game won!");
             return stage;
         }
@@ -182,18 +215,24 @@ public class popUps {
 
         switch (upgrade){
             case 2:{
-                upper_text = "Cool Glass of Water\n";
-                lower_text = "Menacing Stare:\nDinos lose patience faster";
+                upper_text = "A Cool Glass of Water\n" +
+                        "━━━━━━━━━━━━━━━♡";
+                lower_text = "A Menacing Stare\n" +
+                        "★━━━━━━━━━━━━━━━━━━";
                 break;
             }
             case 3:{
-                upper_text = "Mediation Book\n";
-                lower_text = "Light-up Shoes:\nDinos lose patience faster";
+                upper_text = "Scented Candles\n" +
+                        "━━━━━━━━━━━━━━━♡";
+                lower_text = "Light-up Shoes\n" +
+                        "★━━━━━━━━━━━━━━━━━━";
                 break;
             }
             case 4:{
-                upper_text = "A Positive Perspective:\nYour patience increases.";
-                lower_text = "Really Smelly Farts:\nDinos lose patience faster";
+                upper_text = "A Positive Perspective\n" +
+                        "━━━━━━━━━━━━━━━♡";
+                lower_text = "Really Smelly Farts\n" +
+                        "★━━━━━━━━━━━━━━━━━━";
                 break;
             }
             default:{
@@ -204,9 +243,26 @@ public class popUps {
 
         // ingredient
         addTopImageForTwoSlots(root, "file:src/main/resources/org/example/breadfest/Images/calm_boy.png", upper_text);
+        Label patience_increase_explanation = new Label("Your patience increases...");
+        patience_increase_explanation.setLayoutX(608);
+        patience_increase_explanation.setLayoutY(320);
+        patience_increase_explanation.setPrefSize(300, 100);
+        patience_increase_explanation.setFont(Font.font("Baloo 2", 20));
+        patience_increase_explanation.setTextFill(Color.BLACK);
+        patience_increase_explanation.setAlignment(Pos.CENTER_LEFT);
 
         // die
         addBottomImageForTwoSlots(root, "file:src/main/resources/org/example/breadfest/Images/menacing_bear.png", lower_text);
+        Label damage_multiplier_explanation = new Label("Dinosaurs lose patience faster...");
+        damage_multiplier_explanation.setLayoutX(454);
+        damage_multiplier_explanation.setLayoutY(435);
+        damage_multiplier_explanation.setPrefSize(300, 100);
+        damage_multiplier_explanation.setFont(Font.font("Baloo 2", 20));
+        damage_multiplier_explanation.setTextFill(Color.BLACK);
+        damage_multiplier_explanation.setAlignment(Pos.CENTER_RIGHT);
+        damage_multiplier_explanation.setTextAlignment(TextAlignment.RIGHT);
+
+        root.getChildren().addAll(patience_increase_explanation, damage_multiplier_explanation);
 
         return stage;
 
