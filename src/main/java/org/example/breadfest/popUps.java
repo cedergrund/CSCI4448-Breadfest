@@ -182,17 +182,17 @@ public class popUps {
 
         switch (upgrade){
             case 2:{
-                upper_text = "Cool Glass of Water:\nYour patience increases.";
+                upper_text = "Cool Glass of Water\n";
                 lower_text = "Menacing Stare:\nDinos lose patience faster";
                 break;
             }
             case 3:{
-                upper_text = "Mediation Book:\nYour patience increases.";
+                upper_text = "Mediation Book\n";
                 lower_text = "Light-up Shoes:\nDinos lose patience faster";
                 break;
             }
             case 4:{
-                upper_text = "A Positive Perspective:\nYour patience increases.";
+                upper_text = "A Positive Perspective\n :\nYour patience increases.";
                 lower_text = "Really Smelly Farts:\nDinos lose patience faster";
                 break;
             }
