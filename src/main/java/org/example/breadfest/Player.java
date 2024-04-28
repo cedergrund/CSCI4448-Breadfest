@@ -3,9 +3,7 @@ package org.example.breadfest;
 import org.example.breadfest.dice.Dice;
 import org.example.breadfest.dice.DieFactory;
 import org.example.breadfest.dinosaurs.Dinosaur;
-import org.example.breadfest.ingredients.Ingredient;
-import org.example.breadfest.ingredients.IngredientFactory;
-import org.example.breadfest.ingredients.JSONReadingHelper;
+import org.example.breadfest.ingredients.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,6 +60,65 @@ public class Player {
         this.active_dice_inventory[1] = null;
         this.active_dice_inventory[2] = null;
 
+        IngredientFactory test = null;
+        try {
+            test = new IngredientFactory();
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Nuclear));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Common));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Epic));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Epic));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Epic));
+            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Epic));
+
+
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         this.previous_roll = 0;
     }
 
@@ -80,35 +137,31 @@ public class Player {
     public int changeCurrHonor(int honor_change){
         // returns upgrade if it occurs
         this.curr_honor += honor_change;
-        if (curr_honor > 1000  && this.damage_modifier < 5){
+        if (curr_honor > 5000  && this.damage_modifier < 5){
             damage_modifier = 5;
             base_patience = 1000;
             return 5;
         }
-        else if (curr_honor > 750 && this.damage_modifier < 4){
-            damage_modifier = 2;
+        else if (curr_honor > 2000 && this.damage_modifier < 4){
+            damage_modifier = 4;
             base_patience = 200;
-            return 2;
+            return 4;
         }
-        else if (curr_honor > 500 && this.damage_modifier < 3){
+        else if (curr_honor > 750 && this.damage_modifier < 3){
             damage_modifier = 3;
             base_patience = 400;
             return 3;
         }
         if (curr_honor > 250 && this.damage_modifier < 2){
-            damage_modifier = 4;
+            damage_modifier = 2;
             base_patience = 600;
-            return 4;
+            return 2;
         }
         return 1;
 
     }
     public int getCurrHonor(){
         return this.curr_honor;
-    }
-
-    public Dice[] getActiveDieInventory() {
-        return this.active_dice_inventory;
     }
 
     public int getCurrPatience() {

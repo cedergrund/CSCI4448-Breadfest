@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import org.example.breadfest.dinosaurs.Dinosaur;
 import org.example.breadfest.ingredients.Ingredient;
+import org.example.breadfest.ingredients.IngredientRarity;
+import org.example.breadfest.ingredients.IngredientTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +97,10 @@ public class CaveGame {
         return player.getIngredientInventory();
     }
 
-    Boolean isValidIngredientList(List<String> ingredient_type_list){
+    boolean isValidIngredientList(List<String> ingredient_type_list){
+        // return 0 if no
+        // returns 1 if yes
+
         Boolean contains_flour = false;
         Boolean contains_water = false;
         Boolean contains_salt = false;
@@ -141,6 +146,8 @@ public class CaveGame {
         // it changes the player's honor, and it modifies the player's inventory
         //Lets do it!
 
+        // returns -1 if nuclear ingredient used
+
 
         ObservableList<String[]> selectedRows = FXCollections.observableArrayList();
         int cumulative_score = 0; // this will be our total score of all baked ingredients
@@ -149,6 +156,9 @@ public class CaveGame {
         for (String[] row : table.getItems()) {
             if (row[4].equals("true")) { //the box was checked
                 Ingredient baked_ingredient = player.removeIngredientFromInventory(row[1]);
+                if (baked_ingredient.getRarity() == IngredientRarity.Nuclear){
+                    return -1;
+                }
                 int ingredient_score = baked_ingredient.getScore();
                 cumulative_score += ingredient_score;
 
@@ -169,8 +179,9 @@ public class CaveGame {
         }
 
         // check if bake is valid and then change honor
-        Boolean valid_ingredient = this.isValidIngredientList(ingredient_type_list);
+        boolean valid_ingredient = this.isValidIngredientList(ingredient_type_list);
         table.getItems().removeAll(selectedRows);
+
         if (valid_ingredient){
             return player.changeCurrHonor(cumulative_score);
         }

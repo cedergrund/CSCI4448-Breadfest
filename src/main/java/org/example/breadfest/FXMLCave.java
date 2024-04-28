@@ -21,8 +21,6 @@ public interface FXMLCave {
 
     void clickLocation(int location);
 
-    boolean isValidIngredientList(List<String> ingredient_type_list);
-
     int bakeIngredientsFromTable(TableView<String[]> table);
 
     boolean moveRoom(char direction);

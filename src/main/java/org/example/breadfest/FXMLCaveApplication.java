@@ -1,10 +1,13 @@
 package org.example.breadfest;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.nio.file.Paths;
 
 
@@ -18,7 +21,7 @@ public class FXMLCaveApplication {
         this.cave_game_adaptor = fxmlCave;
         this.stage = stage;
         stage.setResizable(false);
-        setUpMusic();
+        setUpMedia();
     }
 
     public void runGame(){
@@ -35,7 +38,7 @@ public class FXMLCaveApplication {
                 .addBillWithBakingSceneButton("Entrance")
                 .build();
 
-        stopAllSongs();
+        startSong("entrance");
 
         stage.show();
     }
@@ -91,6 +94,12 @@ public class FXMLCaveApplication {
         stage.show();
     }
 
+    public void nuclearIngredientUsed() {
+        stopAllSongs();
+        stage = popUps.popUpNuclear(this, stage);
+        stage.show();
+    }
+
     public void generateBakingScene(int upgrade){
         stage = new FXMLStageBuilder(this, stage)
                 .setBakingSceneBackground()
@@ -100,7 +109,6 @@ public class FXMLCaveApplication {
                 .addHonorMeter()
                 .build();
 
-        stage.show();
         startSong("baking");
 
         stage = popUps.popUpPlayerUpgrade(this, stage, upgrade);
@@ -126,8 +134,8 @@ public class FXMLCaveApplication {
         return cave_game_adaptor;
     }
 
-    private void setUpMusic(){
-        this.media_player = new MediaPlayer[3];
+    private void setUpMedia(){
+        this.media_player = new MediaPlayer[5];
         // cave: 0,
         Media cave_song = new Media(Paths.get("src/main/resources/org/example/breadfest/music/Exquisite_Corpse_Soundscape.mp3").toUri().toString());
         this.media_player[0] = new MediaPlayer(cave_song);
@@ -140,20 +148,33 @@ public class FXMLCaveApplication {
         // fight: 1,
         Media fight_song = new Media(Paths.get("src/main/resources/org/example/breadfest/music/street_fighter.mp3").toUri().toString());
         this.media_player[1] = new MediaPlayer(fight_song);
-        media_player[1].setVolume(0.4);
+        media_player[1].setVolume(0.3);
         media_player[1].setOnEndOfMedia(() -> {
             media_player[1].seek(Duration.ZERO);
             media_player[1].play();
         });
 
         // baking: 2,
-        Media baking_song = new Media(Paths.get("src/main/resources/org/example/breadfest/music/Beethoven's_5th_Symphony.mp3").toUri().toString());
+        Media baking_song = new Media(Paths.get("src/main/resources/org/example/breadfest/music/baking_music.mp3").toUri().toString());
         this.media_player[2] = new MediaPlayer(baking_song);
-        media_player[2].setVolume(0.4);
+        media_player[2].setVolume(0.3);
         media_player[2].setOnEndOfMedia(() -> {
             media_player[2].seek(Duration.ZERO);
             media_player[2].play();
         });
+
+        // cave entrance: 3,
+        Media cave_entrance_song = new Media(Paths.get("src/main/resources/org/example/breadfest/music/on_my_way.mp3").toUri().toString());
+        this.media_player[3] = new MediaPlayer(cave_entrance_song);
+        media_player[3].setVolume(0.3);
+        media_player[3].setOnEndOfMedia(() -> {
+            media_player[3].seek(Duration.ZERO);
+            media_player[3].play();
+        });
+
+        // explosion video: 4,
+        Media explosion_video = new Media(Paths.get("src/main/resources/org/example/breadfest/music/game_over_video.mp4").toUri().toString());
+        this.media_player[4] = new MediaPlayer(explosion_video);
     }
 
     private void startSong(String place){
@@ -164,7 +185,12 @@ public class FXMLCaveApplication {
                 media_player[song_index].play();
             }
             else{
-                media_player[song_index].pause();
+                if (song_index == 3){
+                    media_player[song_index].stop();
+                }
+                else {
+                    media_player[song_index].pause();
+                }
             }
         }
     }
@@ -173,15 +199,26 @@ public class FXMLCaveApplication {
         for (MediaPlayer mediaPlayer : media_player) {
             mediaPlayer.pause();
         }
+        media_player[3].stop();
     }
 
-    private int getSongIndex(String song){
-        return switch(song){
+    private int getSongIndex(String song) {
+        return switch (song) {
             case "cave" -> 0;
-            case "fight" ->  1;
-            case "baking" ->  2;
-            default-> 3;
+            case "fight" -> 1;
+            case "baking" -> 2;
+            case "entrance" -> 3;
+            default -> 4;
         };
+    }
+
+    public void playExplodeVideo() {
+        MediaView media_view = new MediaView(this.media_player[4]);
+        this.media_player[4].setAutoPlay(true);
+        AnchorPane root = (AnchorPane) stage.getScene().getRoot();
+        root.getChildren().add(media_view);
+        stage.setTitle("RawrDough Valley went boom :0");
+        stage.show();
     }
 
 }
