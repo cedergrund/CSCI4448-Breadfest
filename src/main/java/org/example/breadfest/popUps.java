@@ -192,7 +192,7 @@ public class popUps {
                 break;
             }
             case 4:{
-                upper_text = "A Positive Perspective\n :\nYour patience increases.";
+                upper_text = "A Positive Perspective:\nYour patience increases.";
                 lower_text = "Really Smelly Farts:\nDinos lose patience faster";
                 break;
             }
