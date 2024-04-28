@@ -133,7 +133,7 @@ public enum DinosaurAndDiceTypes {
                 return IngredientRarity.Epic;
             }
             default -> {
-                return IngredientRarity.Champion;
+                return IngredientRarity.Nuclear;
             }
         }
     }
@@ -171,12 +171,7 @@ public enum DinosaurAndDiceTypes {
                 }
             }
             case Nuclear -> {
-                if (random_number < 0.5){
-                    return die_factory.makeDieByType(Nuclear.toString(), "reward");
-                }
-                else{
-                    return die_factory.makeDieByType("EndGame", "reward");
-                }
+                return die_factory.makeDieByType("EndGame", "reward");
             }
         }
 

@@ -4,7 +4,7 @@
     "Bad Die|1|1,1,1|Do not attempt. I'm sorry, I don't even know how you were unlucky enough to get this....|file:src/main/resources/org/example/breadfest/Images/dice_pdf/bad_die.png",
     "Okay Die|1|3,3,1|Attempting maybe recommended. I mean it's alright. 50/50...|file:src/main/resources/org/example/breadfest/Images/dice_pdf/okay_die.png",
     "Good Die|1|5,5,1|Attempting recommended. Almost better than all other common die...|file:src/main/resources/org/example/breadfest/Images/dice_pdf/good_die.png",
-    "Even Die|1|2,6,3|Tries really hard to stay even, in when the world is tumultuous. Admirable, for sure...|file:src/main/resources/org/example/breadfest/Images/dice_pdf/even_die.png",
+    "Even Die|1|2,6,3|Tries really hard to stay even, even when the world is tumultuous. Admirable, for sure...|file:src/main/resources/org/example/breadfest/Images/dice_pdf/even_die.png",
     "Odd Die|1|1,7,4|Odd, oddly enough. Can't stay even, even if it tried...|file:src/main/resources/org/example/breadfest/Images/dice_pdf/odd_die.png"
   ],
   "Rare": [
