@@ -19,7 +19,7 @@ public class popUps {
 
     static private void setUpBase(AnchorPane root){
         // scroll background image
-        ImageView scroll_background = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/scroll.png"));
+        ImageView scroll_background = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/scroll.png"));
         scroll_background.setFitWidth(600);
         scroll_background.setFitHeight(650);
         scroll_background.setLayoutX(383);
@@ -53,7 +53,7 @@ public class popUps {
         Label description = new Label(description_text);
         description.setLayoutX(433);
         description.setLayoutY(225);
-        description.setPrefSize(500, 350);
+        description.setPrefSize(500, 200);
         description.setFont(Font.font("Baloo 2", 20));
         description.setWrapText(true);
         description.setTextFill(Color.BLACK);
@@ -123,6 +123,14 @@ public class popUps {
 
         setUpBase(root);
 
+        // adding text
+        addTitleAndDescription(root, "You Win!", rewards[0] + " got bored of gambling and left. But, as a reward for beating him, he left you something...");
+
+        addCenterBoxWithTwoSlots(root);
+
+        // ingredient
+        addTopImageForTwoSlots(root, application.getAdaptor().getIngredientImageByType(rewards[3]), rewards[2] + " Ingredient:\n" + rewards[1]);
+
         // button
         Button button = addBottomButton("Say thank you...");
         if (die_conflict){
@@ -133,20 +141,13 @@ public class popUps {
         }
         root.getChildren().add(button);
 
-        // adding text
-        addTitleAndDescription(root, "You Win!", rewards[0] + " got bored of gambling and left. But, as a reward for beating him, he left you something...");
-
-        addCenterBoxWithTwoSlots(root);
-
-        // ingredient
-        addTopImageForTwoSlots(root, application.getAdaptor().getIngredientImageByType(rewards[3]), rewards[2] + " Ingredient:\n" + rewards[1]);
-
         if (Objects.equals(rewards[4], "")){
             return stage;
         }
 
         // die
-        addBottomImageForTwoSlots(root, "file:src/main/resources/org/example/breadfest/Images/reward_die.png", rewards[5] + " Die:\n" + rewards[4]);
+        addBottomImageForTwoSlots(root, "file:src/main/resources/org/example/breadfest/images/reward_die.png", rewards[5] + " Die:\n" + rewards[4]);
+
 
         return stage;
 
@@ -158,24 +159,52 @@ public class popUps {
 
         setUpBase(root);
 
-        // button
-        Button button = addBottomButton("what is it?");
-        button.setOnAction(event -> FXMLButtonEventHandlers.rawrdoughValleyExplodes(application));
-        root.getChildren().add(button);
-
         // adding text
         addTitleAndDescription(root, "Hold on...", "You didn't just bake with a nuclear ingredient, RIGHT?!?\n" +
                 "oh no.................................\n" +
                 "WHAT HAVE YOU DONE!!!");
 
 
-        ImageView image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/shocked_turtle.png"));
+        ImageView image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/shocked_turtle.png"));
         image.setFitWidth(130);
         image.setFitHeight(210);
         image.setPreserveRatio(true);
         image.setLayoutX(618);
         image.setLayoutY(342);
         root.getChildren().add(image);
+
+        // button
+        Button button = addBottomButton("what is it?");
+        button.setOnAction(event -> FXMLButtonEventHandlers.rawrdoughValleyExplodes(application));
+        root.getChildren().add(button);
+
+        return stage;
+
+    }
+
+    static public Stage popUpPatienceExhausted(FXMLCaveApplication application, Stage stage){
+
+        AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
+
+        setUpBase(root);
+
+        // adding text
+        addTitleAndDescription(root, "Patience Exhausted...", "All this cave exploration and dinosaur gambling is taxing work, and your patience has run all the way out. How about you go home and take the rest of the day off - you deserve it!");
+
+
+        ImageView image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/sweeepy_kitty.png"));
+        image.setFitWidth(200);
+        image.setFitHeight(134);
+        image.setPreserveRatio(true);
+        image.setLayoutX(583);
+        image.setLayoutY(400);
+        root.getChildren().add(image);
+
+        // button
+        Button button = addBottomButton("good idea!");
+        button.setOnAction(event -> FXMLButtonEventHandlers.returnHome(application));
+        root.getChildren().add(button);
+
         return stage;
 
     }
@@ -186,24 +215,34 @@ public class popUps {
 
         setUpBase(root);
 
-        // button
-        Button button = addBottomButton("wow...");
-        button.setOnAction(event -> FXMLButtonEventHandlers.creditsScreen(application));
-        root.getChildren().add(button);
-
         // adding text
         addTitleAndDescription(root, "A Quest Complete...", "After finishing your bake, you see a note was slipped under your door. You pick it up, and it reads:");
 
-        Label letter = new Label("To whom it may concern, As a result of your tremendous success in baking, the 'Bosses of Rawrdough-valley's Edible Assemblages and Delights' (B.R.E.A.D.) cordially request your attendance at this year's Breadfest. Congrats on this acccomplishment, Master Baker!");
+        Label letter = new Label("To whom it may concern,                                   \n" +
+                "     As a result of your tremendous success in baking, the 'Bosses of Rawrdough-valley's Edible Assemblages and Delights' (B.R.E.A.D.) cordially request your attendance at this year's Breadfest. Congrats on this acccomplishment, Master Baker!");
         letter.setLayoutX(433);
-        letter.setLayoutY(328);
-        letter.setPrefSize(500, 250);
+        letter.setLayoutY(312);
+        letter.setPrefSize(500, 160);
         letter.setFont(Font.font("Verdana", 19));
         letter.setWrapText(true);
         letter.setTextFill(Color.BLACK);
         letter.setAlignment(Pos.TOP_CENTER);
         letter.setTextAlignment(TextAlignment.CENTER);
         root.getChildren().add(letter);
+
+
+        // bread image
+        ImageView image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/bread.GIF"));
+        image.setFitWidth(100);
+        image.setFitHeight(100);
+        image.setLayoutX(633);
+        image.setLayoutY(458);
+        root.getChildren().add(image);
+
+        // button
+        Button button = addBottomButton("wow...");
+        button.setOnAction(event -> FXMLButtonEventHandlers.creditsScreen(application));
+        root.getChildren().add(button);
 
         return stage;
 
@@ -228,11 +267,6 @@ public class popUps {
         AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
 
         setUpBase(root);
-
-        // button
-        Button button = addBottomButton("How Great!");
-        button.setOnAction(event -> FXMLButtonEventHandlers.openBakingScene(application, 0));
-        root.getChildren().add(button);
 
         // adding text
         addTitleAndDescription(root, "Your Glory is Growing!", "Your baking skills are on-the-up, and people are taking notice! You get sent some gifts in the mail...");
@@ -271,7 +305,7 @@ public class popUps {
         }
 
         // ingredient
-        addTopImageForTwoSlots(root, "file:src/main/resources/org/example/breadfest/Images/calm_boy.png", upper_text);
+        addTopImageForTwoSlots(root, "file:src/main/resources/org/example/breadfest/images/calm_boy.png", upper_text);
         Label patience_increase_explanation = new Label("Your patience increases...");
         patience_increase_explanation.setLayoutX(608);
         patience_increase_explanation.setLayoutY(320);
@@ -281,7 +315,7 @@ public class popUps {
         patience_increase_explanation.setAlignment(Pos.CENTER_LEFT);
 
         // die
-        addBottomImageForTwoSlots(root, "file:src/main/resources/org/example/breadfest/Images/menacing_bear.png", lower_text);
+        addBottomImageForTwoSlots(root, "file:src/main/resources/org/example/breadfest/images/menacing_bear.png", lower_text);
         Label damage_multiplier_explanation = new Label("Dinosaurs lose patience faster...");
         damage_multiplier_explanation.setLayoutX(454);
         damage_multiplier_explanation.setLayoutY(435);
@@ -293,6 +327,11 @@ public class popUps {
 
         root.getChildren().addAll(patience_increase_explanation, damage_multiplier_explanation);
 
+        // button
+        Button button = addBottomButton("How Great!");
+        button.setOnAction(event -> FXMLButtonEventHandlers.openBakingScene(application, 0));
+        root.getChildren().add(button);
+
         return stage;
 
     }
@@ -300,7 +339,6 @@ public class popUps {
     static public Stage popUpDieConflict(FXMLCaveApplication application, Stage stage){
 
         AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
-        String[] rewards = application.getAdaptor().getPreviousReward();
 
         setUpBase(root);
 

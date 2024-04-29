@@ -28,9 +28,9 @@ public class FXMLButtonEventHandlers {
 
     public static void moveRoom(FXMLCaveApplication application, Event event) {
         char direction = ((Button) event.getSource()).getId().charAt(0);
-        if (application.getAdaptor().moveRoom(direction)){
-            application.getAdaptor().regenerateCaveSystem();
-            application.generateCaveEntrance();
+
+        if (application.getAdaptor().moveRoom(direction)){ // run out of patience
+            application.popUpPatienceExhausted();
         }
         else{
             application.generateCaveRoom();
@@ -54,8 +54,7 @@ public class FXMLButtonEventHandlers {
         }
         else if (Objects.equals(last_turn_result, "player")){
             application.getAdaptor().stopFight(false);
-            application.getAdaptor().regenerateCaveSystem();
-            application.generateCaveEntrance();
+            application.popUpPatienceExhausted();
         }
         else{
             application.generateFightRoom();
@@ -90,8 +89,7 @@ public class FXMLButtonEventHandlers {
     private static void fleeFight(FXMLCaveApplication application){
 
         if (application.getAdaptor().stopFight(false)){ // player ran out of patience while trying to flee
-            application.getAdaptor().regenerateCaveSystem();
-            application.generateCaveEntrance();
+            application.popUpPatienceExhausted();
         }
         else { // player was able to flee
             application.generateCaveRoom();

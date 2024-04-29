@@ -85,7 +85,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="768.0" stroke="BLACK" strokeType="INSIDE" width="1366.0" />
       <ImageView fitHeight="650.0" fitWidth="600.0" layoutX="383.0" layoutY="59.0" pickOnBounds="true">
          <image>
-            <Image url="@scroll.png" />
+            <Image url="@../images/scroll.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="383.0" layoutY="172.0" prefHeight="47.0" prefWidth="600.0" text="The Quest Complete..." textAlignment="CENTER" underline="true">
@@ -98,15 +98,20 @@
             <Font name="Baloo 2 Regular" size="16.0" />
          </font>
       </Button>
-      <Label alignment="TOP_CENTER" layoutX="433.0" layoutY="225.0" prefHeight="350.0" prefWidth="500.0" text="After finishing your bake, you see a note was slipped under your door. You pick it up, and it reads:" textAlignment="CENTER" wrapText="true">
+      <Label alignment="TOP_CENTER" layoutX="433.0" layoutY="225.0" prefHeight="200.0" prefWidth="500.0" text="After finishing your bake, you see a note was slipped under your door. You pick it up, and it reads:" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Baloo 2 Regular" size="20.0" />
          </font>
       </Label>
-      <Label alignment="TOP_CENTER" layoutX="433.0" layoutY="328.0" prefHeight="247.0" prefWidth="500.0" text="To whom it may concern, As a result of your tremendous success in baking, the 'Bosses of Rawrdough-valley's Edible Assemblages and Delights' (B.R.E.A.D.) cordially request your attendance at this year's Breadfest. Congrats on this acccomplishment, Master Baker!" textAlignment="CENTER" wrapText="true">
+      <Label alignment="TOP_CENTER" layoutX="433.0" layoutY="312.0" prefHeight="153.0" prefWidth="500.0" text="To whom it may concern,                                   &#10;     As a result of your tremendous success in baking, the 'Bosses of Rawrdough-valley's Edible Assemblages and Delights' (B.R.E.A.D.) cordially request your attendance at this year's Breadfest. Congrats on this acccomplishment, Master Baker!" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Verdana" size="19.0" />
          </font>
       </Label>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="633.0" layoutY="458.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/bread.GIF" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="650.0" fitWidth="600.0" layoutX="383.0" layoutY="59.0" pickOnBounds="true">
          <image>
-            <Image url="@Images/scroll.png" />
+            <Image url="@../images/scroll.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="383.0" layoutY="172.0" prefHeight="47.0" prefWidth="600.0" text="Hold on..." textAlignment="CENTER" underline="true">

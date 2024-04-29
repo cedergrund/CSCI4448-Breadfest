@@ -204,6 +204,7 @@ public class Player {
             }
             case -2000:{
                 player_roll = 2*this.previous_roll;
+                this.previous_roll = player_roll;
                 break;
             }
             case -3000:{
@@ -374,7 +375,7 @@ public class Player {
     }
 
     public String getDinoImage(){
-        String base_string = "file:src/main/resources/org/example/breadfest/Images/";
+        String base_string = "file:src/main/resources/org/example/breadfest/images/";
         return switch (this.fightingDinosaur.getDinosaurType()){
             case Common -> base_string + "dino1.100x.gif";
             case Rare -> base_string + "dino2.100x.gif";
