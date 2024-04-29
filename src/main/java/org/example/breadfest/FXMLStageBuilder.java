@@ -17,6 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -27,6 +29,7 @@ import javafx.stage.Stage;
 import java.security.MessageDigest;
 import java.util.List;
 import java.util.Objects;
+
 
 public class FXMLStageBuilder {
 
@@ -99,7 +102,7 @@ public class FXMLStageBuilder {
         patience_meter.setProgress(patiencePercentage);
 
         Label patience_label = new Label("Patience: "+String.valueOf(curr_patience));
-        patience_label.setFont(Font.font("Baloo 2", FontWeight.BOLD, 16));
+        patience_label.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
         patience_label.setTextFill(Color.WHITE);
         AnchorPane.setLeftAnchor(patience_label, 20.0);
         AnchorPane.setBottomAnchor(patience_label, 40.0);
@@ -408,14 +411,6 @@ public class FXMLStageBuilder {
                 table_view.getColumns().add(column);
             }
 
-//            // Update the structure of the data array to accommodate the additional checkbox boolean value
-//            for (String[] row : data) {
-//                String[] newRow = new String[row.length + 1];
-//                newRow[0] = "false"; // Initialize the checkbox boolean to false
-//                System.arraycopy(row, 0, newRow, 1, row.length); // Copy the original contents of the row
-//                row = newRow; // Update the reference to the modified row
-//            }
-
             table_view.setItems(data);
             centerPane.getChildren().add(table_view);
             table_view.setStyle("-fx-border-color: #0E0A06; -fx-border-width: 2px;");
@@ -532,7 +527,7 @@ public class FXMLStageBuilder {
         inventory_button.setLayoutX(533);
         inventory_button.setLayoutY(234);
         inventory_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/character.100x-ezgif.com-resize.gif"));
+        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/player.gif"));
         inventory_button.setGraphic(legoPlayerImageView);
 
         inventory_button.setOnAction(new EventHandler<ActionEvent>() {
@@ -611,7 +606,7 @@ public class FXMLStageBuilder {
         String[] player_dino_info = application.getAdaptor().getFightersInformation();
 
         // Player image
-        ImageView playerImage = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/character.100x-ezgif.com-resize.gif"));
+        ImageView playerImage = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/player.gif"));
         playerImage.setFitWidth(450);
         playerImage.setFitHeight(420);
         playerImage.setLayoutX(116.5);
@@ -634,7 +629,7 @@ public class FXMLStageBuilder {
         player_name.setFont(Font.font("Baloo 2 Bold", 25));
         player_name.setTextFill(Color.WHITE);
         root.getChildren().add(player_name);
-//
+
         int curr_patience = Integer.parseInt(player_dino_info[1]);
         int max_patience = Integer.parseInt(player_dino_info[2]);
 
@@ -870,12 +865,7 @@ public class FXMLStageBuilder {
         Button dino_button = addButtonToLocation(location);
         ImageView dino_image = new ImageView(new Image(image_url));
         dino_button.setGraphic(dino_image);
-        dino_button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.fightDinosaur(application,location);
-            }
-        });
+        dino_button.setOnAction(event -> FXMLButtonEventHandlers.fightDinosaur(application,location));
         root.getChildren().add(dino_button);
     }
 
@@ -884,12 +874,7 @@ public class FXMLStageBuilder {
         Button ingredient_button = addButtonToLocation(location);
         ImageView ingredient_image = new ImageView(new Image(image_url));
         ingredient_button.setGraphic(ingredient_image);
-        ingredient_button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.collectIngredient(application, location);
-            }
-        });
+        ingredient_button.setOnAction(event -> FXMLButtonEventHandlers.collectIngredient(application, location));
         root.getChildren().add(ingredient_button);
     }
 
@@ -935,6 +920,93 @@ public class FXMLStageBuilder {
 
         button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
         return button;
+    }
+
+    public FXMLStageBuilder generateGameWinScene(){
+        // background image
+        ImageView background_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/game_win_background.jpg"));
+        background_image.setFitWidth(1366);
+        background_image.setFitHeight(768);
+        background_image.setLayoutX(0);
+        background_image.setLayoutY(0);
+
+        // entity images
+        ImageView player_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/player.gif"));
+        player_image.setFitWidth(360);
+        player_image.setFitHeight(349);
+        player_image.setPreserveRatio(true);
+        player_image.setLayoutX(94);
+        player_image.setLayoutY(261);
+
+        ImageView baby_dino_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino1.100x.gif"));
+        baby_dino_image.setFitWidth(125);
+        baby_dino_image.setFitHeight(150);
+        baby_dino_image.setPreserveRatio(true);
+        baby_dino_image.setLayoutX(1027);
+        baby_dino_image.setLayoutY(465);
+
+        ImageView mommy_dino_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino2.100x.gif"));
+        mommy_dino_image.setFitWidth(150);
+        mommy_dino_image.setFitHeight(200);
+        mommy_dino_image.setPreserveRatio(true);
+        mommy_dino_image.setLayoutX(1095);
+        mommy_dino_image.setLayoutY(439);
+
+        ImageView daddy_dino_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino3.100x.gif"));
+        daddy_dino_image.setFitWidth(150);
+        daddy_dino_image.setFitHeight(400);
+        daddy_dino_image.setPreserveRatio(true);
+        daddy_dino_image.setLayoutX(1215);
+        daddy_dino_image.setLayoutY(436);
+        root.getChildren().addAll(background_image,player_image, baby_dino_image, mommy_dino_image,daddy_dino_image);
+
+
+        // text
+        Ellipse text_outline = new Ellipse(0, 0, 250, 100);
+        text_outline.setLayoutX(310);
+        text_outline.setLayoutY(170);
+        text_outline.setFill(Paint.valueOf("#ffc120"));
+
+        Label top_text = new Label("The Quest for Breadfest");
+        top_text.setLayoutX(60);
+        top_text.setLayoutY(89);
+        top_text.setPrefSize(500, 100);
+        top_text.setFont(Font.font("Baloo 2", 30));
+        top_text.setTextFill(Color.BLACK);
+        top_text.setAlignment(Pos.CENTER);
+        top_text.setTextAlignment(TextAlignment.CENTER);
+
+        Label middle_text = new Label("A Game by Joseph Allred & Gustav Cedergrund");
+        middle_text.setLayoutX(60);
+        middle_text.setLayoutY(144);
+        middle_text.setPrefSize(500, 79);
+        middle_text.setFont(Font.font("Baloo 2", 23));
+        middle_text.setTextFill(Color.BLACK);
+        middle_text.setAlignment(Pos.CENTER);
+        middle_text.setTextAlignment(TextAlignment.CENTER);
+
+        Label bottom_text = new Label("with art/sounds from Coby Granger and Rachel Suter");
+        bottom_text.setLayoutX(60);
+        bottom_text.setLayoutY(193);
+        bottom_text.setPrefSize(500, 30);
+        bottom_text.setFont(Font.font("Baloo 2", 16));
+        bottom_text.setTextFill(Color.BLACK);
+        bottom_text.setAlignment(Pos.CENTER);
+        bottom_text.setTextAlignment(TextAlignment.CENTER);
+        root.getChildren().addAll(text_outline,top_text,middle_text, bottom_text);
+
+        // back to game button
+        Button button = new Button("back to game");
+        button.setLayoutX(1198);
+        button.setLayoutY(707);
+        button.setPrefSize(150, 30);
+        button.setTextFill(Color.WHITE);
+        button.setStyle("-fx-background-color: #6225E6; ");
+        button.setFont(Font.font("Baloo 2 Bold", 16));
+        button.setOnAction(event -> FXMLButtonEventHandlers.returnHome(application));
+        root.getChildren().add(button);
+
+        return this;
     }
 
 }

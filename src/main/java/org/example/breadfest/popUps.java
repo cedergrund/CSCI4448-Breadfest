@@ -180,6 +180,35 @@ public class popUps {
 
     }
 
+    static public Stage popUpGameWin(FXMLCaveApplication application, Stage stage){
+
+        AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
+
+        setUpBase(root);
+
+        // button
+        Button button = addBottomButton("wow...");
+        button.setOnAction(event -> FXMLButtonEventHandlers.creditsScreen(application));
+        root.getChildren().add(button);
+
+        // adding text
+        addTitleAndDescription(root, "A Quest Complete...", "After finishing your bake, you see a note was slipped under your door. You pick it up, and it reads:");
+
+        Label letter = new Label("To whom it may concern, As a result of your tremendous success in baking, the 'Bosses of Rawrdough-valley's Edible Assemblages and Delights' (B.R.E.A.D.) cordially request your attendance at this year's Breadfest. Congrats on this acccomplishment, Master Baker!");
+        letter.setLayoutX(433);
+        letter.setLayoutY(328);
+        letter.setPrefSize(500, 250);
+        letter.setFont(Font.font("Verdana", 19));
+        letter.setWrapText(true);
+        letter.setTextFill(Color.BLACK);
+        letter.setAlignment(Pos.TOP_CENTER);
+        letter.setTextAlignment(TextAlignment.CENTER);
+        root.getChildren().add(letter);
+
+        return stage;
+
+    }
+
     static public Stage popUpPlayerUpgrade(FXMLCaveApplication application, Stage stage, int upgrade){
 
         if (upgrade == 1 || upgrade == 0){
@@ -192,7 +221,7 @@ public class popUps {
         }
         else if (upgrade == 5){
             // game is won!!
-            System.out.println("Game won!");
+            application.maxUpgradeReached();
             return stage;
         }
 

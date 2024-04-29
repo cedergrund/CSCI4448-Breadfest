@@ -7,7 +7,6 @@ import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.nio.file.Paths;
 
 
@@ -100,6 +99,12 @@ public class FXMLCaveApplication {
         stage.show();
     }
 
+    public void maxUpgradeReached() {
+        stopAllSongs();
+        stage = popUps.popUpGameWin(this, stage);
+        stage.show();
+    }
+
     public void generateBakingScene(int upgrade){
         stage = new FXMLStageBuilder(this, stage)
                 .setBakingSceneBackground()
@@ -134,8 +139,68 @@ public class FXMLCaveApplication {
         return cave_game_adaptor;
     }
 
+    public void playExplodeVideo() {
+        MediaView media_view = new MediaView(this.media_player[4]);
+        this.media_player[4].setAutoPlay(true);
+        AnchorPane root = (AnchorPane) stage.getScene().getRoot();
+        root.getChildren().add(media_view);
+        stage.setTitle("RawrDough Valley went boom :0");
+        stage.show();
+    }
+
+    public void playCreditsScreen() {
+
+        stage = new FXMLStageBuilder(this, stage)
+                .generateGameWinScene()
+                .build();
+
+        stage.setTitle("You did it!");
+
+        MediaPlayer[] credits_videos = new MediaPlayer[4];
+        AnchorPane root = (AnchorPane) stage.getScene().getRoot();
+
+        for (int video_index = 5; video_index < 9; video_index++){
+            this.media_player[video_index].setAutoPlay(true);
+            this.media_player[video_index].setVolume(0.7);
+            MediaView video = getMediaView(this.media_player[video_index], video_index);
+            root.getChildren().add(video);
+        }
+        stage.show();
+    }
+
+    private MediaView getMediaView(MediaPlayer raw_video, int video_index) {
+        MediaView video = new MediaView(raw_video);
+        video.setFitHeight(100);
+        double x;
+        double y;
+        switch (video_index){
+            case 5:{
+                x = 1171;
+                y = 27;
+                break;
+            }
+            case 6:{
+                x = 962;
+                y = 21;
+                break;
+            }
+            case 7:{
+                x = 759;
+                y = 34;
+                break;
+            }
+            default:{
+                x = 558;
+                y = 18;
+            }
+        }
+        video.setLayoutX(x);
+        video.setLayoutY(y);
+        return video;
+    }
+
     private void setUpMedia(){
-        this.media_player = new MediaPlayer[5];
+        this.media_player = new MediaPlayer[9];
         // cave: 0,
         Media cave_song = new Media(Paths.get("src/main/resources/org/example/breadfest/music/Exquisite_Corpse_Soundscape.mp3").toUri().toString());
         this.media_player[0] = new MediaPlayer(cave_song);
@@ -173,8 +238,15 @@ public class FXMLCaveApplication {
         });
 
         // explosion video: 4,
-        Media explosion_video = new Media(Paths.get("src/main/resources/org/example/breadfest/music/game_over_video.mp4").toUri().toString());
+        Media explosion_video = new Media(Paths.get("src/main/resources/org/example/breadfest/videos/game_over_video.mp4").toUri().toString());
         this.media_player[4] = new MediaPlayer(explosion_video);
+
+        // victory videos: 5-8
+        this.media_player[5] = new MediaPlayer(new Media(Paths.get("src/main/resources/org/example/breadfest/videos/dancing.mp4").toUri().toString()));
+        this.media_player[6] = new MediaPlayer(new Media(Paths.get("src/main/resources/org/example/breadfest/videos/dancing1.mp4").toUri().toString()));
+        this.media_player[7] = new MediaPlayer(new Media(Paths.get("src/main/resources/org/example/breadfest/videos/dancing2.mp4").toUri().toString()));
+        this.media_player[8] = new MediaPlayer(new Media(Paths.get("src/main/resources/org/example/breadfest/videos/dancing3.mp4").toUri().toString()));
+
     }
 
     private void startSong(String place){
@@ -211,14 +283,4 @@ public class FXMLCaveApplication {
             default -> 4;
         };
     }
-
-    public void playExplodeVideo() {
-        MediaView media_view = new MediaView(this.media_player[4]);
-        this.media_player[4].setAutoPlay(true);
-        AnchorPane root = (AnchorPane) stage.getScene().getRoot();
-        root.getChildren().add(media_view);
-        stage.setTitle("RawrDough Valley went boom :0");
-        stage.show();
-    }
-
 }

@@ -123,4 +123,9 @@ public class FXMLButtonEventHandlers {
     public static void rawrdoughValleyExplodes(FXMLCaveApplication application) {
         application.playExplodeVideo();
     }
+
+    public static void creditsScreen(FXMLCaveApplication application) {
+        System.out.println("should play video");
+        application.playCreditsScreen();
+    }
 }
