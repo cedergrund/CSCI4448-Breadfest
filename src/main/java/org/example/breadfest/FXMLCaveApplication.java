@@ -105,6 +105,12 @@ public class FXMLCaveApplication {
         stage.show();
     }
 
+    public void popUpPatienceExhausted() {
+        stopAllSongs();
+        stage = popUps.popUpPatienceExhausted(this, stage);
+        stage.show();
+    }
+
     public void generateBakingScene(int upgrade){
         stage = new FXMLStageBuilder(this, stage)
                 .setBakingSceneBackground()

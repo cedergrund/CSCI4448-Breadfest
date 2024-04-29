@@ -43,7 +43,7 @@ public class FXMLStageBuilder {
     }
 
     public FXMLStageBuilder addCookingPot(){
-        ImageView cauldron_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/cauldron_template.png"));
+        ImageView cauldron_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/cauldron_template.png"));
         AnchorPane.setBottomAnchor(cauldron_image_view, 125.0);
         AnchorPane.setLeftAnchor(cauldron_image_view, 700.0);
         root.getChildren().add(cauldron_image_view);
@@ -60,7 +60,7 @@ public class FXMLStageBuilder {
 
     public FXMLStageBuilder setCaveBackground(){
 //        root.setStyle("-fx-background-color: #808080;");
-        ImageView cave_background = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/cave_background_base.png"));
+        ImageView cave_background = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/cave_background_base.png"));
         AnchorPane.setTopAnchor(cave_background, 0.0);
         AnchorPane.setRightAnchor(cave_background, 0.0);
         root.getChildren().add(cave_background);
@@ -155,12 +155,12 @@ public class FXMLStageBuilder {
 
     public FXMLStageBuilder addCaveEntranceButtonsAndImages(){
 
-        ImageView dinosaur_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino1.100x.GIF"));
+        ImageView dinosaur_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/dino1.100x.GIF"));
         AnchorPane.setBottomAnchor(dinosaur_image_view, 20.0);
         AnchorPane.setRightAnchor(dinosaur_image_view, 20.0);
         root.getChildren().add(dinosaur_image_view);
 
-        ImageView cave_entrance_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/cave_entrance.jpeg"));
+        ImageView cave_entrance_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/cave_entrance.jpeg"));
         AnchorPane.setTopAnchor(cave_entrance_image_view, 80.0);
         AnchorPane.setRightAnchor(cave_entrance_image_view, 200.0);
         root.getChildren().add(cave_entrance_image_view);
@@ -195,7 +195,7 @@ public class FXMLStageBuilder {
                     AnchorPane.setRightAnchor(new_button, 630.0);
                     AnchorPane.setBottomAnchor(new_button, 680.0);
                     new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-                    ImageView north_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/north_portal.png"));
+                    ImageView north_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/north_portal.png"));
                     new_button.setGraphic(north_portal_display);
                     break;
                 case 'S':
@@ -205,7 +205,7 @@ public class FXMLStageBuilder {
                     AnchorPane.setLeftAnchor(new_button, 630.0);
                     AnchorPane.setRightAnchor(new_button, 630.0);
                     new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-                    ImageView south_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/south_portal.png"));
+                    ImageView south_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/south_portal.png"));
                     new_button.setGraphic(south_portal_display);
                     break;
                 case 'E':
@@ -215,7 +215,7 @@ public class FXMLStageBuilder {
                     AnchorPane.setBottomAnchor(new_button, 400.0);
                     AnchorPane.setLeftAnchor(new_button, 1361.0 - 83.0);
                     new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-                    ImageView east_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/east_portal.png"));
+                    ImageView east_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/east_portal.png"));
                     new_button.setGraphic(east_portal_display);
                     break;
                 case 'W':
@@ -225,7 +225,7 @@ public class FXMLStageBuilder {
                     AnchorPane.setBottomAnchor(new_button, 400.0);
                     AnchorPane.setRightAnchor(new_button, 1361 - 83.0);
                     new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-                    ImageView west_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/west_portal.png"));
+                    ImageView west_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/west_portal.png"));
                     new_button.setGraphic(west_portal_display);
                     break;
                 default:
@@ -276,7 +276,7 @@ public class FXMLStageBuilder {
         exit_button.setLayoutY(20);
         exit_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
 
-        ImageView exit_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/Transparent_X.png"));
+        ImageView exit_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/Transparent_X.png"));
         exit_button.setGraphic(exit_image);
         exit_button.setOnAction(event -> FXMLButtonEventHandlers.exitInventory(application, location_where_pressed));
 
@@ -506,7 +506,7 @@ public class FXMLStageBuilder {
         baking_scene_button.setLayoutX(50);
         baking_scene_button.setLayoutY(50);
         baking_scene_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-        ImageView bill_wright_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/bill_wright_npc.jpg"));
+        ImageView bill_wright_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/bill_wright_npc.jpg"));
         baking_scene_button.setGraphic(bill_wright_image);
 
         baking_scene_button.setOnAction(new EventHandler<ActionEvent>() {
@@ -527,7 +527,7 @@ public class FXMLStageBuilder {
         inventory_button.setLayoutX(533);
         inventory_button.setLayoutY(234);
         inventory_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/player.gif"));
+        ImageView legoPlayerImageView = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/player.gif"));
         inventory_button.setGraphic(legoPlayerImageView);
 
         inventory_button.setOnAction(new EventHandler<ActionEvent>() {
@@ -564,7 +564,7 @@ public class FXMLStageBuilder {
         root.getChildren().add(background);
 
         // background image
-        ImageView backgroundImage = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/fight_background.png"));
+        ImageView backgroundImage = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/fight_background.png"));
         backgroundImage.setFitWidth(1366);
         backgroundImage.setFitHeight(449);
         backgroundImage.setLayoutX(0);
@@ -606,7 +606,7 @@ public class FXMLStageBuilder {
         String[] player_dino_info = application.getAdaptor().getFightersInformation();
 
         // Player image
-        ImageView playerImage = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/player.gif"));
+        ImageView playerImage = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/player.gif"));
         playerImage.setFitWidth(450);
         playerImage.setFitHeight(420);
         playerImage.setLayoutX(116.5);
@@ -924,35 +924,35 @@ public class FXMLStageBuilder {
 
     public FXMLStageBuilder generateGameWinScene(){
         // background image
-        ImageView background_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/game_win_background.jpg"));
+        ImageView background_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/game_win_background.jpg"));
         background_image.setFitWidth(1366);
         background_image.setFitHeight(768);
         background_image.setLayoutX(0);
         background_image.setLayoutY(0);
 
         // entity images
-        ImageView player_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/player.gif"));
+        ImageView player_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/player.gif"));
         player_image.setFitWidth(360);
         player_image.setFitHeight(349);
         player_image.setPreserveRatio(true);
         player_image.setLayoutX(94);
         player_image.setLayoutY(261);
 
-        ImageView baby_dino_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino1.100x.gif"));
+        ImageView baby_dino_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/dino1.100x.gif"));
         baby_dino_image.setFitWidth(125);
         baby_dino_image.setFitHeight(150);
         baby_dino_image.setPreserveRatio(true);
         baby_dino_image.setLayoutX(1027);
         baby_dino_image.setLayoutY(465);
 
-        ImageView mommy_dino_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino2.100x.gif"));
+        ImageView mommy_dino_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/dino2.100x.gif"));
         mommy_dino_image.setFitWidth(150);
         mommy_dino_image.setFitHeight(200);
         mommy_dino_image.setPreserveRatio(true);
         mommy_dino_image.setLayoutX(1095);
         mommy_dino_image.setLayoutY(439);
 
-        ImageView daddy_dino_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/Images/dino3.100x.gif"));
+        ImageView daddy_dino_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/dino3.100x.gif"));
         daddy_dino_image.setFitWidth(150);
         daddy_dino_image.setFitHeight(400);
         daddy_dino_image.setPreserveRatio(true);

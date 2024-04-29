@@ -251,10 +251,10 @@ public class CaveGame {
         Dinosaur dinosaur_at_index = curr_cave.getRoomDinosaurs()[location_index];
 
         return switch (dinosaur_at_index.getDinosaurType()){
-            case Common -> "file:src/main/resources/org/example/breadfest/Images/dino1.100x.GIF";
-            case Rare -> "file:src/main/resources/org/example/breadfest/Images/dino2.100x.GIF";
-            case Epic -> "file:src/main/resources/org/example/breadfest/Images/dino3.100x.GIF";
-            default -> "file:src/main/resources/org/example/breadfest/Images/dino_button_image.png";
+            case Common -> "file:src/main/resources/org/example/breadfest/images/dino1.100x.GIF";
+            case Rare -> "file:src/main/resources/org/example/breadfest/images/dino2.100x.GIF";
+            case Epic -> "file:src/main/resources/org/example/breadfest/images/dino3.100x.GIF";
+            default -> "file:src/main/resources/org/example/breadfest/images/dino_button_image.png";
         };
     }
 
@@ -288,12 +288,12 @@ public class CaveGame {
 
     public String getIngredientImageByString(String type) {
         return switch (type){
-            case "Flour" -> "file:src/main/resources/org/example/breadfest/Images/flour_display.gif";
-            case "Water" -> "file:src/main/resources/org/example/breadfest/Images/water_display.gif";
-            case "Salt" -> "file:src/main/resources/org/example/breadfest/Images/salt_display.gif";
-            case "Yeast" -> "file:src/main/resources/org/example/breadfest/Images/yeast_display.gif";
-            case "Topping" -> "file:src/main/resources/org/example/breadfest/Images/topping_display.gif";
-            default -> "file:src/main/resources/org/example/breadfest/Images/Flour-Transparent.png";
+            case "Flour" -> "file:src/main/resources/org/example/breadfest/images/flour_display.gif";
+            case "Water" -> "file:src/main/resources/org/example/breadfest/images/water_display.gif";
+            case "Salt" -> "file:src/main/resources/org/example/breadfest/images/salt_display.gif";
+            case "Yeast" -> "file:src/main/resources/org/example/breadfest/images/yeast_display.gif";
+            case "Topping" -> "file:src/main/resources/org/example/breadfest/images/topping_display.gif";
+            default -> "file:src/main/resources/org/example/breadfest/images/Flour-Transparent.png";
         };
     }
 

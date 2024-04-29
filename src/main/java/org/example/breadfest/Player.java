@@ -375,7 +375,7 @@ public class Player {
     }
 
     public String getDinoImage(){
-        String base_string = "file:src/main/resources/org/example/breadfest/Images/";
+        String base_string = "file:src/main/resources/org/example/breadfest/images/";
         return switch (this.fightingDinosaur.getDinosaurType()){
             case Common -> base_string + "dino1.100x.gif";
             case Rare -> base_string + "dino2.100x.gif";

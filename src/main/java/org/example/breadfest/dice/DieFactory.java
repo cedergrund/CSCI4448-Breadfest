@@ -65,7 +65,7 @@ public class DieFactory {
                     }
                     public String getPDFImage() {
                         if (Objects.equals(final_dice_parts[4], "empty")){
-                            final_dice_parts[4] = "file:src/main/resources/org/example/breadfest/Images/i_dont_know.png";
+                            final_dice_parts[4] = "file:src/main/resources/org/example/breadfest/images/i_dont_know.png";
                         }
                         return final_dice_parts[4];
                     }
@@ -87,7 +87,7 @@ public class DieFactory {
                 }
                 public String getPDFImage() {
                     if (Objects.equals(final_dice_parts[4], "empty")){
-                        final_dice_parts[4] = "file:src/main/resources/org/example/breadfest/Images/i_dont_know.png";
+                        final_dice_parts[4] = "file:src/main/resources/org/example/breadfest/images/i_dont_know.png";
                     }
                     return final_dice_parts[4];
                 }
@@ -127,7 +127,7 @@ public class DieFactory {
             }
             public String getPDFImage() {
                 if (Objects.equals(final_dice_parts[4], "empty")){
-                    final_dice_parts[4] = "file:src/main/resources/org/example/breadfest/Images/i_dont_know.png";
+                    final_dice_parts[4] = "file:src/main/resources/org/example/breadfest/images/i_dont_know.png";
                 }
                 return final_dice_parts[4];
             }
@@ -157,7 +157,7 @@ public class DieFactory {
 
             @Override
             public String getPDFImage() {
-                return "file:src/main/resources/org/example/breadfest/Images/dice_pdf/normal.png";
+                return "file:src/main/resources/org/example/breadfest/images/dice_pdf/normal.png";
             }
 
             @Override
