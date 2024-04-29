@@ -204,6 +204,7 @@ public class Player {
             }
             case -2000:{
                 player_roll = 2*this.previous_roll;
+                this.previous_roll = player_roll;
                 break;
             }
             case -3000:{
