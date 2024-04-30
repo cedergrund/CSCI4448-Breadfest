@@ -43,8 +43,11 @@ public class FXMLStageBuilder {
     }
 
 
-    public FXMLStageBuilder setBackgroundGreen(){
-        root.setStyle("-fx-background-color: #2E8B57;");
+    public FXMLStageBuilder setCaveEntranceBackground(){
+        ImageView background_scene = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/cave_entrance_sceen.png"));
+        AnchorPane.setTopAnchor(background_scene, 0.0);
+        AnchorPane.setLeftAnchor(background_scene, 0.0);
+        root.getChildren().add(background_scene);
         return this;
     }
 
@@ -59,11 +62,6 @@ public class FXMLStageBuilder {
 
     public FXMLStageBuilder setInventoryBackground(){
         root.setStyle("-fx-background-color: #8B4513;");
-        return this;
-    }
-
-    public FXMLStageBuilder setBakingSceneBackground(){
-        root.setStyle("-fx-background-color: #333333;");
         return this;
     }
 
@@ -145,22 +143,36 @@ public class FXMLStageBuilder {
         return this;
     }
 
-    public FXMLStageBuilder addCaveEntranceButtonsAndImages(){
+    public FXMLStageBuilder addCaveEntranceButtonAndParticles(){
 
-        ImageView dinosaur_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/dino1.100x.GIF"));
-        AnchorPane.setBottomAnchor(dinosaur_image_view, 20.0);
-        AnchorPane.setRightAnchor(dinosaur_image_view, 20.0);
-        root.getChildren().add(dinosaur_image_view);
+//        ImageView dinosaur_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/dino1.100x.GIF"));
+//        AnchorPane.setBottomAnchor(dinosaur_image_view, 20.0);
+//        AnchorPane.setRightAnchor(dinosaur_image_view, 20.0);
+//        root.getChildren().add(dinosaur_image_view);
 
-        ImageView cave_entrance_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/cave_entrance.jpeg"));
-        AnchorPane.setTopAnchor(cave_entrance_image_view, 80.0);
-        AnchorPane.setRightAnchor(cave_entrance_image_view, 200.0);
-        root.getChildren().add(cave_entrance_image_view);
+//        ImageView cave_entrance_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/cave_entrance.jpeg"));
+//        AnchorPane.setTopAnchor(cave_entrance_image_view, 80.0);
+//        AnchorPane.setRightAnchor(cave_entrance_image_view, 200.0);
+//        root.getChildren().add(cave_entrance_image_view);
 
-        Button enter_cave0_button = new Button("Enter Cave!");
-        AnchorPane.setTopAnchor(enter_cave0_button, 20.0);
-        AnchorPane.setLeftAnchor(enter_cave0_button, 630.0);
-        AnchorPane.setRightAnchor(enter_cave0_button, 630.0);
+        ImageView portal_graphics_1 = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/portal_texture_big.gif"));
+
+        AnchorPane.setLeftAnchor(portal_graphics_1, 955.0);
+        AnchorPane.setTopAnchor(portal_graphics_1, 87.0 + 50.0);
+        portal_graphics_1.setOpacity(0.35);
+        root.getChildren().add(portal_graphics_1);
+
+
+
+        Button enter_cave0_button = new Button();
+        enter_cave0_button.setLayoutX(905.0);
+        enter_cave0_button.setLayoutY(87.0);
+        enter_cave0_button.setPrefWidth(300.0);
+        enter_cave0_button.setPrefHeight(300.0);
+        enter_cave0_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+
+
+
         enter_cave0_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -687,14 +699,26 @@ public class FXMLStageBuilder {
     }
 
 
-    public FXMLStageBuilder addBillWithBakingSceneButton(String location_of_button){
+    public FXMLStageBuilder addBakingSceneButton(String location_of_button){
+
+
+        ImageView baking_house_particles = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/baking_house_particles.gif"));
+
+        AnchorPane.setLeftAnchor(baking_house_particles, 238.0);
+        AnchorPane.setTopAnchor(baking_house_particles, 200.0);
+        baking_house_particles.setOpacity(0.35);
+        root.getChildren().add(baking_house_particles);
+
 
         Button baking_scene_button = new Button();
-        baking_scene_button.setLayoutX(50);
-        baking_scene_button.setLayoutY(50);
+        baking_scene_button.setLayoutX(238);
+        baking_scene_button.setLayoutY(200);
+        baking_scene_button.setPrefWidth(187.0);
+        baking_scene_button.setPrefHeight(222.0);
         baking_scene_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
-        ImageView bill_wright_image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/bill_wright_npc.jpg"));
-        baking_scene_button.setGraphic(bill_wright_image);
+
+
+
 
         baking_scene_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override

@@ -31,11 +31,11 @@ public class FXMLCaveApplication {
     public void generateCaveEntrance(){
 
         stage = new FXMLStageBuilder(this, this.stage)
-                .setBackgroundGreen()
+                .setCaveEntranceBackground()
                 .addWelcomeToBreadfestLabel()
-                .addCaveEntranceButtonsAndImages()
+                .addCaveEntranceButtonAndParticles()
                 .addPlayerWithInventoryButton("Entrance")
-                .addBillWithBakingSceneButton("Entrance")
+                .addBakingSceneButton("Entrance")
                 .build();
 
         startSong("entrance");
