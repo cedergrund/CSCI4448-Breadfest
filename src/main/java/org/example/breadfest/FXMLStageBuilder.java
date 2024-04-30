@@ -182,47 +182,203 @@ public class FXMLStageBuilder {
 
         for (char direction : direction_list) { // loop through every direction
             Button new_button = null;
+            ImageView portal_graphics_1 = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/tiny_portal_texture.gif"));
+            ImageView portal_graphics_2 = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/tiny_portal_texture.gif"));
+            ImageView portal_graphics_3 = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/tiny_portal_texture.gif"));
+            ImageView portal_graphics_4 = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/tiny_portal_texture.gif"));
+            ImageView portal_graphics_5 = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/tiny_portal_texture.gif"));
+
             switch (direction) { // add the button for each direction
                 case 'N':
                     // Add North button
                     new_button = new Button();
                     new_button.setId("N");
-                    AnchorPane.setLeftAnchor(new_button, 630.0);
-                    AnchorPane.setRightAnchor(new_button, 630.0);
-                    AnchorPane.setBottomAnchor(new_button, 680.0);
+                    // make the button the same size as the north_portal image
+                    new_button.setPrefSize(500.0, 83.0);
+                    //position the button
+                    AnchorPane.setLeftAnchor(new_button, 433.0);
+                    AnchorPane.setRightAnchor(new_button, 433.0);
+                    AnchorPane.setBottomAnchor(new_button, 684.0);
+                    //make the button transparent, so it rests on top of the image and gif
                     new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+
+                    // Add the portal image and position it correctly
                     ImageView north_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/north_portal.png"));
-                    new_button.setGraphic(north_portal_display);
+                    AnchorPane.setLeftAnchor(north_portal_display, 433.0);
+                    AnchorPane.setRightAnchor(north_portal_display, 433.0);
+                    AnchorPane.setBottomAnchor(north_portal_display, 684.0);
+                    // Add the portal to the root on the bottom
+                    root.getChildren().add(north_portal_display);
+
+                    //Add the portal gif particles
+                    AnchorPane.setLeftAnchor(portal_graphics_1, 488.0 + 10.0);
+                    AnchorPane.setTopAnchor(portal_graphics_1, 5.0);
+                    portal_graphics_1.setOpacity(0.35);
+                    root.getChildren().add(portal_graphics_1);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_2, 568.0 + 5.0);
+                    AnchorPane.setTopAnchor(portal_graphics_2, 15.0);
+                    portal_graphics_2.setOpacity(0.35);
+                    portal_graphics_2.setRotate(0.9);
+                    root.getChildren().add(portal_graphics_2);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_5, 683.0 - 35.0);
+                    AnchorPane.setTopAnchor(portal_graphics_5, 10.0);
+                    portal_graphics_5.setOpacity(0.35);
+                    root.getChildren().add(portal_graphics_5);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_3, 728.0 - 5.0);
+                    AnchorPane.setTopAnchor(portal_graphics_3, 15.0);
+                    portal_graphics_3.setOpacity(0.35);
+                    portal_graphics_2.setRotate(0.9);
+                    root.getChildren().add(portal_graphics_3);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_4, 808.0 - 5.0);
+                    AnchorPane.setTopAnchor(portal_graphics_4, 5.0);
+                    portal_graphics_4.setOpacity(0.35);
+                    root.getChildren().add(portal_graphics_4);
                     break;
                 case 'S':
                     new_button = new Button();
                     new_button.setId("S");
-                    AnchorPane.setTopAnchor(new_button, 677.0);
-                    AnchorPane.setLeftAnchor(new_button, 630.0);
-                    AnchorPane.setRightAnchor(new_button, 630.0);
+                    // make the button the same size as the south_portal image
+                    new_button.setPrefSize(500.0, 83.0);
+                    //position the button
+                    AnchorPane.setLeftAnchor(new_button, 433.0);
+                    AnchorPane.setRightAnchor(new_button, 433.0);
+                    AnchorPane.setTopAnchor(new_button, 684.0);
+                    //make the button transparent, so it rests on top of the image and gif
                     new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+
+                    // Add the portal image and position it correctly
                     ImageView south_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/south_portal.png"));
-                    new_button.setGraphic(south_portal_display);
+                    AnchorPane.setLeftAnchor(south_portal_display, 433.0 - 30.0);
+                    AnchorPane.setRightAnchor(south_portal_display, 433.0 + 30.0);
+                    AnchorPane.setTopAnchor(south_portal_display, 684.0);
+                    // Add the portal to the root on the bottom
+                    root.getChildren().add(south_portal_display);
+
+                    //Add the portal gif particles
+                    AnchorPane.setLeftAnchor(portal_graphics_1, 488.0 + 5.0);
+                    AnchorPane.setBottomAnchor(portal_graphics_1, 5.0);
+                    portal_graphics_1.setOpacity(0.35);
+                    root.getChildren().add(portal_graphics_1);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_2, 568.0 + 5.0);
+                    AnchorPane.setBottomAnchor(portal_graphics_2, 15.0);
+                    portal_graphics_2.setOpacity(0.35);
+                    portal_graphics_2.setRotate(90.0);
+                    root.getChildren().add(portal_graphics_2);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_5, 683.0 - 35.0);
+                    AnchorPane.setBottomAnchor(portal_graphics_5, 5.0);
+                    portal_graphics_5.setOpacity(0.35);
+                    root.getChildren().add(portal_graphics_5);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_3, 728.0 - 5.0);
+                    AnchorPane.setBottomAnchor(portal_graphics_3, 15.0);
+                    portal_graphics_3.setOpacity(0.35);
+                    portal_graphics_2.setRotate(90.0);
+                    root.getChildren().add(portal_graphics_3);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_4, 808.0 - 20.0);
+                    AnchorPane.setBottomAnchor(portal_graphics_4, 5.0);
+                    portal_graphics_4.setOpacity(0.35);
+                    portal_graphics_4.setRotate(90.0);
+                    root.getChildren().add(portal_graphics_4);
                     break;
                 case 'E':
                     new_button = new Button();
                     new_button.setId("E");
-                    AnchorPane.setTopAnchor(new_button, 400.0);
-                    AnchorPane.setBottomAnchor(new_button, 400.0);
-                    AnchorPane.setLeftAnchor(new_button, 1361.0 - 83.0);
+                    // make the button the same size as the north_portal image
+                    new_button.setPrefSize(81.0, 416.0);
+                    //position the button
+                    AnchorPane.setLeftAnchor(new_button, 1366.0 - 81.0);
+                    AnchorPane.setTopAnchor(new_button, 173.5);
+                    AnchorPane.setBottomAnchor(new_button, 173.5);
+                    //make the button transparent, so it rests on top of the image and gif
                     new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+                    // Add the portal image and position it correctly
                     ImageView east_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/east_portal.png"));
-                    new_button.setGraphic(east_portal_display);
+                    AnchorPane.setLeftAnchor(east_portal_display, 1366.0 - 78.0);
+                    AnchorPane.setTopAnchor(east_portal_display, 176.0);
+                    AnchorPane.setBottomAnchor(east_portal_display, 176.0);
+                    // Add the portal to the root on the bottom
+                    root.getChildren().add(east_portal_display);
+
+                    AnchorPane.setRightAnchor(portal_graphics_1, 5.0);
+                    AnchorPane.setTopAnchor(portal_graphics_1, 229.0 + 20.0);
+                    portal_graphics_1.setOpacity(0.35);
+                    portal_graphics_1.setFitHeight(60.0);
+                    portal_graphics_1.setFitWidth(60.0);
+                    root.getChildren().add(portal_graphics_1);
+
+                    AnchorPane.setRightAnchor(portal_graphics_2, 10.0);
+                    AnchorPane.setTopAnchor(portal_graphics_2, 309.0);
+                    portal_graphics_2.setOpacity(0.35);
+                    portal_graphics_2.setRotate(90.0);
+                    root.getChildren().add(portal_graphics_2);
+
+                    AnchorPane.setRightAnchor(portal_graphics_3, 10.0);
+                    AnchorPane.setTopAnchor(portal_graphics_3, 389.0);
+                    portal_graphics_3.setOpacity(0.35);
+                    portal_graphics_2.setRotate(180.0);
+                    root.getChildren().add(portal_graphics_3);
+
+                    AnchorPane.setRightAnchor(portal_graphics_4, 5.0);
+                    AnchorPane.setTopAnchor(portal_graphics_4, 469.0 - 10.0);
+                    portal_graphics_4.setOpacity(0.35);
+                    portal_graphics_4.setRotate(90.0);
+                    portal_graphics_4.setFitHeight(60.0);
+                    portal_graphics_4.setFitWidth(60.0);
+                    root.getChildren().add(portal_graphics_4);
                     break;
                 case 'W':
                     new_button = new Button();
                     new_button.setId("W");
-                    AnchorPane.setTopAnchor(new_button, 400.0);
-                    AnchorPane.setBottomAnchor(new_button, 400.0);
-                    AnchorPane.setRightAnchor(new_button, 1361 - 83.0);
+                    // make the button the same size as the north_portal image
+                    new_button.setPrefSize(83.0, 421.0);
+                    //position the button
+                    AnchorPane.setRightAnchor(new_button, 1366.0 - 83.0);
+                    AnchorPane.setTopAnchor(new_button, 173.5);
+                    AnchorPane.setBottomAnchor(new_button, 173.5);
+                    //make the button transparent, so it rests on top of the image and gif
                     new_button.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+
+                    // Add the portal image and position it correctly
                     ImageView west_portal_display = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/west_portal.png"));
-                    new_button.setGraphic(west_portal_display);
+                    AnchorPane.setRightAnchor(west_portal_display, 1366.0 - 83.0);
+                    AnchorPane.setTopAnchor(west_portal_display, 173.5);
+                    AnchorPane.setBottomAnchor(west_portal_display, 173.5);
+                    // Add the portal to the root on the bottom
+                    root.getChildren().add(west_portal_display);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_1, 5.0);
+                    AnchorPane.setTopAnchor(portal_graphics_1, 229.0 + 20.0);
+                    portal_graphics_1.setOpacity(0.35);
+                    portal_graphics_1.setFitHeight(60.0);
+                    portal_graphics_1.setFitWidth(60.0);
+                    root.getChildren().add(portal_graphics_1);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_2, 10.0);
+                    AnchorPane.setTopAnchor(portal_graphics_2, 309.0);
+                    portal_graphics_2.setOpacity(0.35);
+                    portal_graphics_2.setRotate(90.0);
+                    root.getChildren().add(portal_graphics_2);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_3, 10.0);
+                    AnchorPane.setTopAnchor(portal_graphics_3, 389.0);
+                    portal_graphics_3.setOpacity(0.35);
+                    portal_graphics_2.setRotate(180.0);
+                    root.getChildren().add(portal_graphics_3);
+
+                    AnchorPane.setLeftAnchor(portal_graphics_4, 5.0);
+                    AnchorPane.setTopAnchor(portal_graphics_4, 469.0 - 10.0);
+                    portal_graphics_4.setOpacity(0.35);
+                    portal_graphics_4.setRotate(90.0);
+                    portal_graphics_4.setFitHeight(60.0);
+                    portal_graphics_4.setFitWidth(60.0);
+                    root.getChildren().add(portal_graphics_4);
                     break;
                 default:
                     // some sort of error here, we didn't get a valid input!
