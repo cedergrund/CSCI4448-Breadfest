@@ -105,7 +105,6 @@ public class Dinosaur {
     }
 
     public String getName() {
-
         return type_of_dinosaur.getNamePrefix() + " " + name;
     }
 }

@@ -82,7 +82,7 @@
       </Label>
       <ImageView fitHeight="300.0" fitWidth="300.0" layoutX="850.0" layoutY="375.0" pickOnBounds="true">
          <image>
-            <Image url="@cauldron_template.png" />
+            <Image url="@cauldron.gif" />
          </image>
       </ImageView>
       <Button layoutX="1201.0" layoutY="15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #6225E6;" text="return outside" textFill="WHITE">
@@ -95,7 +95,7 @@
             <Font name="Baloo 2 Regular" size="16.0" />
          </font>
       </Button>
-      <ImageView fitHeight="170.0" fitWidth="170.0" layoutX="915.0" layoutY="342.0" pickOnBounds="true">
+      <ImageView fitHeight="170.0" fitWidth="170.0" layoutX="915.0" layoutY="246.0" pickOnBounds="true">
          <image>
             <Image url="@bread.GIF" />
          </image>
