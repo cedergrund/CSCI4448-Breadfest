@@ -17,8 +17,6 @@ public class Cave {
 
     private final Map<Character, Cave> neighboring_rooms;
 
-    private String background_image;
-
     List<Integer> available_locations_for_entities;
     private Ingredient[] ingredients_in_room_by_location;
     private Dinosaur[] dinosaurs_in_room_by_location;
@@ -32,11 +30,12 @@ public class Cave {
         this.neighboring_rooms = new HashMap<>();
     }
 
-    public Map<Character, Cave> getNeighboring_rooms(){
+    public Map<Character, Cave> getNeighboringRooms(){
         return this.neighboring_rooms;
     }
 
-    private int generateNeighboringRoomsCount(){
+    private int generateNeighboringRoomsCount()
+    {
         // if we're in the first room in the cave, automatically generate 3 neighbors
         if (this.depth == 0){
             return 3;
@@ -256,12 +255,6 @@ public class Cave {
 
     }
 
-    private void generateBackgroundImage(){
-
-        // TODO: add art for different room types, and randomly generate one based on num rooms
-        this.background_image = "";
-    }
-
     private void populateRoom() throws Exception {
 
         // add ingredients/dinosaurs to 8 available locations
@@ -297,9 +290,6 @@ public class Cave {
 
         // generate neighboring rooms
         this.generateNeighboringRoomsMap();
-
-        // generate background image
-        this.generateBackgroundImage();
 
         // populate the room
         this.populateRoom();
@@ -349,10 +339,6 @@ public class Cave {
 
     public boolean hasRoomBeenVisited() {
         return this.visited;
-    }
-
-    public String getBackgroundImage() {
-        return this.background_image;
     }
 
     public Ingredient[] getRoomIngredients() {

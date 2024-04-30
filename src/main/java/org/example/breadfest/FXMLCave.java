@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface FXMLCave {
 
-    String getBackgroundImage();
-
     List<Character> getRoomExitDirections();
 
     List<String> getObjectsAtAllLocations();
@@ -29,11 +27,7 @@ public interface FXMLCave {
 
     List<String[]> getIngredientInventory(String type);
 
-    Ingredient removeIngredientFromInventory(String ingredient_name);
-
     int getCurrPlayerPatience();
-
-    int changeCurrHonor(int honor_change);
 
     void enterRoom0();
 

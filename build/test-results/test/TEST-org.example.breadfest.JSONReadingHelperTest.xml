@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.breadfest.JSONReadingHelperTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-04-30T03:23:04" hostname="Gustavs-MacBook-Pro.local" time="0.203">
-  <properties/>
-  <testcase name="generateRandomElementFromJSON()" classname="org.example.breadfest.JSONReadingHelperTest" time="0.009"/>
-  <testcase name="getRandomExcuse()" classname="org.example.breadfest.JSONReadingHelperTest" time="0.194"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

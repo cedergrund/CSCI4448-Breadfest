@@ -57,27 +57,6 @@ public class Player {
         this.active_dice_inventory[1] = null;
         this.active_dice_inventory[2] = null;
 
-        IngredientFactory test = null;
-        try {
-            test = new IngredientFactory();
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Nuclear));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Common));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Champion));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Champion));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Champion));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Champion));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Champion));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Champion));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Water, IngredientRarity.Champion));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Flour, IngredientRarity.Champion));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Salt, IngredientRarity.Champion));
-            this.addIngredientToInventory(test.makeIngredientByType(IngredientTypes.Yeast, IngredientRarity.Champion));
-
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
         this.previous_roll = 0;
     }
 

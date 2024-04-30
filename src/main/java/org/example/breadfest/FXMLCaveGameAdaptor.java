@@ -13,9 +13,6 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
         this.adapted_game_state = game_state;
     }
 
-    public String getBackgroundImage(){
-        return this.adapted_game_state.getBackgroundImage();
-    }
 
     public List<Character> getRoomExitDirections(){
         return this.adapted_game_state.getRoomExitDirections();
@@ -73,10 +70,6 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
 
     public int getCurrPlayerPatience(){
         return adapted_game_state.getCurrPlayerPatience();
-    }
-
-    public int changeCurrHonor(int honor_change){
-        return adapted_game_state.changeCurrHonor(honor_change);
     }
 
     public int getCurrPlayerHonor(){

@@ -29,11 +29,6 @@ public class CaveGame {
         }
     }
 
-
-    public String getBackgroundImage() {
-        return this.curr_cave.getBackgroundImage();
-    }
-
     public void playerCollectsIngredient(Ingredient ingredient, int location) {
         this.player.addIngredientToInventory(ingredient);
         this.curr_cave.removeObjectFromLocation(location);
@@ -135,14 +130,9 @@ public class CaveGame {
                     break;
             }
         }
-        if (contains_flour && contains_water && contains_salt && contains_yeast){
-            // then we have a valid bread!
-            return true;
-        }
-        else {
-            // our bread we've tried to bake is not valid, since it doesn't contain at least 1 of every essential ingredient type
-            return false;
-        }
+        // then we have a valid bread!
+        // our bread we've tried to bake is not valid, since it doesn't contain at least 1 of every essential ingredient type
+        return contains_flour && contains_water && contains_salt && contains_yeast;
     }
 
     public String[] bakeIngredientsFromTable(List<String[]> baked_ingredients){
@@ -155,7 +145,7 @@ public class CaveGame {
         // index 1 is how much honor was increased
         // index 2 is the name of the baked bread
 
-        //Lets do it!
+        // Lets do it!
 
         String[] returned_array = new String[3];
 
@@ -245,10 +235,6 @@ public class CaveGame {
 
     public int getCurrPlayerPatience(){
         return this.player.getCurrPatience();
-    }
-
-    public int changeCurrHonor(int honor_change){
-        return this.player.changeCurrHonor(honor_change);
     }
 
     public int getCurrPlayerHonor(){
