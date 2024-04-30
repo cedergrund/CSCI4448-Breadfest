@@ -1,7 +1,5 @@
 package org.example.breadfest;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +9,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -27,7 +24,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -860,7 +856,7 @@ public class FXMLStageBuilder {
 
         // boxes along bottom
         for (int box_number = 0; box_number < 4; box_number++){
-            double x = getXLocation(box_number);
+            double x = getXLocationForFight(box_number);
 
             // box outline
             Rectangle box = new Rectangle(341.5, 256, Color.web("#c9cccd"));
@@ -926,7 +922,7 @@ public class FXMLStageBuilder {
 
     private void addDieForRolling(int die_index) {
 
-        double x = getXLocation(die_index);
+        double x = getXLocationForFight(die_index);
 
         // labels
         Label die_name;
@@ -1018,7 +1014,7 @@ public class FXMLStageBuilder {
 
     }
 
-    private double getXLocation(int die_index) {
+    private double getXLocationForFight(int die_index) {
         double x;
         switch (die_index){
             case 0: {
@@ -1072,37 +1068,37 @@ public class FXMLStageBuilder {
     private Button addButtonToLocation(int location){
         Button button = new Button("");;
         switch (location) { // add the dinosaur to correct location
-            case 0:
-                button.setLayoutX(233-50);
-                button.setLayoutY(69-50);
+            case 0: // Top left spawn position
+                button.setLayoutX(125);
+                button.setLayoutY(80);
                 break;
-            case 1:
-                button.setLayoutX(233-50);
-                button.setLayoutY(619-50);
+            case 1: // Top right spawn position
+                button.setLayoutX(1041);
+                button.setLayoutY(80);
                 break;
-            case 2:
-                button.setLayoutX(383-50);
-                button.setLayoutY(169-50);
+            case 2: // Above left spawn point
+                button.setLayoutX(350);
+                button.setLayoutY(130);
                 break;
-            case 3:
-                button.setLayoutX(383-50);
-                button.setLayoutY(519-50);
+            case 3:// Above right spawn point
+                button.setLayoutX(816);
+                button.setLayoutY(130);
                 break;
-            case 4:
-                button.setLayoutX(883-50);
-                button.setLayoutY(169-50);
+            case 4: // Bottom left spawn position
+                button.setLayoutX(125);
+                button.setLayoutY(450);
                 break;
-            case 5:
-                button.setLayoutX(883-50);
-                button.setLayoutY(519-50);
+            case 5: // Bottom right spawn position
+                button.setLayoutX(1041);
+                button.setLayoutY(450);
                 break;
-            case 6:
-                button.setLayoutX(1033-50);
-                button.setLayoutY(69-50);
+            case 6: // Below left spawn point
+                button.setLayoutX(350);
+                button.setLayoutY(400);
                 break;
             case 7:
-                button.setLayoutX(1033-50);
-                button.setLayoutY(619-50);
+                button.setLayoutX(816);
+                button.setLayoutY(400);
                 break;
             default:
                 // some sort of error here, we didn't get a valid input!
@@ -1176,7 +1172,7 @@ public class FXMLStageBuilder {
         middle_text.setAlignment(Pos.CENTER);
         middle_text.setTextAlignment(TextAlignment.CENTER);
 
-        Label bottom_text = new Label("with art/sounds from Coby Granger and Rachel Suter");
+        Label bottom_text = new Label("with art/sounds from Cobi Granger and Rachel Suter");
         bottom_text.setLayoutX(60);
         bottom_text.setLayoutY(193);
         bottom_text.setPrefSize(500, 30);
