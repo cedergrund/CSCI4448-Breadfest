@@ -429,7 +429,7 @@ public class popUps {
         image.setFitWidth(170);
         image.setFitHeight(170);
         image.setLayoutX(915);
-        image.setLayoutY(342);
+        image.setLayoutY(246);
         root.getChildren().add(image);
     }
 

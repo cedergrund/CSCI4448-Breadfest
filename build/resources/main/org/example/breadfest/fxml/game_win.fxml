@@ -85,7 +85,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="768.0" stroke="BLACK" strokeType="INSIDE" width="1366.0" />
       <ImageView fitHeight="650.0" fitWidth="600.0" layoutX="383.0" layoutY="59.0" pickOnBounds="true">
          <image>
-            <Image url="@../Images/scroll.png" />
+            <Image url="@../images/scroll.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="383.0" layoutY="172.0" prefHeight="47.0" prefWidth="600.0" text="The Quest Complete..." textAlignment="CENTER" underline="true">
@@ -110,7 +110,7 @@
       </Label>
       <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="633.0" layoutY="458.0" pickOnBounds="true">
          <image>
-            <Image url="@../Images/bread.GIF" />
+            <Image url="@../images/bread.GIF" />
          </image>
       </ImageView>
    </children>

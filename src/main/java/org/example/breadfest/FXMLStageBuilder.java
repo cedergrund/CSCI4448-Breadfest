@@ -525,7 +525,7 @@ public class FXMLStageBuilder {
         root.getChildren().add(return_outside);
 
         // image
-        ImageView cauldron = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/cauldron_template.png"));
+        ImageView cauldron = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/cauldron.gif"));
         cauldron.setFitWidth(300);
         cauldron.setFitHeight(300);
         cauldron.setLayoutX(850);
