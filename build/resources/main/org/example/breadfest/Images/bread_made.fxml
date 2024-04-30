@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -38,27 +39,81 @@
             <Image url="@sweeepy_kitty.png" />
          </image>
       </ImageView>
+      <Label alignment="TOP_CENTER" layoutX="118.0" layoutY="235.0" prefWidth="600.0" style="-fx-background-color: rgb(0,0,0,0.5); background-opacity: ;" text="You don't have all the required ingredients to bake a bread in your inventory. Go to the cave and collect:&#10;Water&#10;Salt&#10;Flour&#10;Yeast" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Baloo 2 Regular" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="343.0" layoutY="446.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #6225E6;" text="Let's go!" textFill="WHITE">
+         <font>
+            <Font name="Baloo 2 Regular" size="16.0" />
+         </font>
+      </Button>
+      <Label alignment="TOP_CENTER" layoutX="118.0" layoutY="333.0" prefWidth="600.0" style="-fx-background-color: rgb(0,0,0,0.5); background-opacity: ;" text="You have all the required ingredients for bread-baking. Care to dance?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Baloo 2 Regular" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_CENTER" layoutX="58.0" layoutY="275.0" prefWidth="720.0" style="-fx-background-color: rgb(0,0,0,0.5); background-opacity: ;" text="Congratulations! You've made:&#10;&quot;'If I had a nickle' Concentrate &amp; Evaporated Salt of Pixie Tears Bread&quot;&#10;and it earned you _______ honor&#10;Good Work!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Baloo 2 Regular" size="24.0" />
+         </font>
+      </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="768.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="1366.0" />
-      <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true">
-         <image>
-            <Image url="@../../../../../../../../../../../../../Downloads/monica-garisch-kitchen-scene-1.png.png" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="84.0" prefHeight="47.0" prefWidth="600.0" text="Time to Bake!" textAlignment="CENTER" textFill="WHITE" underline="true">
-         <font>
-            <Font name="Baloo 2 Regular" size="30.0" />
-         </font>
-      </Label>
-      <Label alignment="TOP_CENTER" layoutX="18.0" layoutY="143.0" prefHeight="200.0" prefWidth="684.0" text="Recall, every bread need a flour, water, yeast, salt, and optionally, a topping." textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="Baloo 2 Regular" size="20.0" />
-         </font>
-      </Label>
-      <TableView layoutX="132.0" layoutY="208.0" prefHeight="344.0" prefWidth="449.0">
+      <TableView layoutX="118.0" layoutY="235.0" prefHeight="400.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="121.38688659667969" text="C1">
+               <graphic>
+                  <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+               </graphic>
+            </TableColumn>
+          <TableColumn prefWidth="115.58882141113281" text="C2" />
         </columns>
       </TableView>
+      <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true">
+         <image>
+            <Image url="@kitchen_background.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="383.0" layoutY="80.0" prefWidth="600.0" style="-fx-background-color: rgb(0,0,0,0.5);" text="Time to Bake!" textAlignment="CENTER" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Baloo 2 Regular" size="40.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="300.0" fitWidth="300.0" layoutX="850.0" layoutY="375.0" pickOnBounds="true">
+         <image>
+            <Image url="@cauldron_template.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="1201.0" layoutY="15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #6225E6;" text="return outside" textFill="WHITE">
+         <font>
+            <Font name="Baloo 2 Regular" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="343.0" layoutY="454.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #6225E6;" text="Let's go!" textFill="WHITE">
+         <font>
+            <Font name="Baloo 2 Regular" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="170.0" fitWidth="170.0" layoutX="915.0" layoutY="342.0" pickOnBounds="true">
+         <image>
+            <Image url="@bread.GIF" />
+         </image>
+      </ImageView>
+      <Label alignment="TOP_CENTER" layoutX="118.0" layoutY="200.0" prefHeight="74.0" prefWidth="600.0" style="-fx-background-color: rgb(0,0,0,0.5);" text="First, choose a flour..." textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Baloo 2 Regular" size="25.0" />
+         </font>
+      </Label>
+      <Button layoutX="343.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #6225E6;" text="next" textFill="WHITE">
+         <font>
+            <Font name="Baloo 2 Regular" size="16.0" />
+         </font>
+      </Button>
+      <Label alignment="TOP_CENTER" layoutX="118.0" layoutY="300.0" prefWidth="600.0" style="-fx-background-color: rgb(0,0,0,0.5);" text="You don't have any toppings in your inventory, but that's okay - you don't need toppings to bake a bread!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Baloo 2 Regular" size="22.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.nio.file.Paths;
+import java.util.List;
 
 
 public class FXMLCaveApplication {
@@ -84,47 +85,64 @@ public class FXMLCaveApplication {
     }
 
     public void generateFightRoomRewards(boolean die_conflict){
-        stage = popUps.popUpFightResults(this, stage, die_conflict);
+        popUps.popUpFightResults(this, stage, die_conflict);
         stage.show();
     }
 
     public void generateDieSelectorForMergeConflict(){
-        stage = popUps.popUpDieConflict(this, stage);
+        popUps.popUpDieConflict(this, stage);
         stage.show();
     }
 
     public void nuclearIngredientUsed() {
         stopAllSongs();
-        stage = popUps.popUpNuclear(this, stage);
+        popUps.popUpNuclear(this, stage);
         stage.show();
     }
 
     public void maxUpgradeReached() {
         stopAllSongs();
-        stage = popUps.popUpGameWin(this, stage);
+        popUps.popUpGameWin(this, stage);
         stage.show();
     }
 
     public void popUpPatienceExhausted() {
         stopAllSongs();
-        stage = popUps.popUpPatienceExhausted(this, stage);
+        popUps.popUpPatienceExhausted(this, stage);
         stage.show();
     }
 
-    public void generateBakingScene(int upgrade){
+    public void generateBaseBaking(int upgrade){
+        startSong("baking");
+
         stage = new FXMLStageBuilder(this, stage)
-                .setBakingSceneBackground()
-                .addBakingInventoryTable()
-                .addCookingPot()
-                .addReturnToGameButton("entrance")
+                .bakingSceneBackground()
+                .bakingSceneSetup()
                 .addHonorMeter()
                 .build();
+        stage.show();
 
         startSong("baking");
 
-        stage = popUps.popUpPlayerUpgrade(this, stage, upgrade);
+        popUps.popUpPlayerUpgrade(this, stage, upgrade);
+        stage.show();
+    }
+
+    public void popUpBakingNextTable(String next_ingredient, List<String[]> baked_ingredients){
+        popUps.popUpNextBakingIngredient(this, stage, next_ingredient, baked_ingredients);
+        stage.show();
+    }
+
+    public void generateBreadResults(String[] bread_result){
+        stage = new FXMLStageBuilder(this, stage)
+                .bakingSceneBackground()
+                .addHonorMeter()
+                .removeOutsideButton()
+                .build();
         stage.show();
 
+        popUps.popUpBreadResult(this, stage, bread_result);
+        stage.show();
     }
 
     public void generateInventory(String location_where_pressed){
@@ -162,7 +180,6 @@ public class FXMLCaveApplication {
 
         stage.setTitle("You did it!");
 
-        MediaPlayer[] credits_videos = new MediaPlayer[4];
         AnchorPane root = (AnchorPane) stage.getScene().getRoot();
 
         for (int video_index = 5; video_index < 9; video_index++){
@@ -219,7 +236,7 @@ public class FXMLCaveApplication {
         // fight: 1,
         Media fight_song = new Media(Paths.get("src/main/resources/org/example/breadfest/music/street_fighter.mp3").toUri().toString());
         this.media_player[1] = new MediaPlayer(fight_song);
-        media_player[1].setVolume(0.3);
+        media_player[1].setVolume(0.35);
         media_player[1].setOnEndOfMedia(() -> {
             media_player[1].seek(Duration.ZERO);
             media_player[1].play();
@@ -228,7 +245,7 @@ public class FXMLCaveApplication {
         // baking: 2,
         Media baking_song = new Media(Paths.get("src/main/resources/org/example/breadfest/music/baking_music.mp3").toUri().toString());
         this.media_player[2] = new MediaPlayer(baking_song);
-        media_player[2].setVolume(0.3);
+        media_player[2].setVolume(0.35);
         media_player[2].setOnEndOfMedia(() -> {
             media_player[2].seek(Duration.ZERO);
             media_player[2].play();
@@ -237,7 +254,7 @@ public class FXMLCaveApplication {
         // cave entrance: 3,
         Media cave_entrance_song = new Media(Paths.get("src/main/resources/org/example/breadfest/music/on_my_way.mp3").toUri().toString());
         this.media_player[3] = new MediaPlayer(cave_entrance_song);
-        media_player[3].setVolume(0.3);
+        media_player[3].setVolume(0.35);
         media_player[3].setOnEndOfMedia(() -> {
             media_player[3].seek(Duration.ZERO);
             media_player[3].play();

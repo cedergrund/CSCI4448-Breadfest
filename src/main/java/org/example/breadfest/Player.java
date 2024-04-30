@@ -6,10 +6,7 @@ import org.example.breadfest.dinosaurs.Dinosaur;
 import org.example.breadfest.ingredients.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Player {
 
@@ -296,6 +293,26 @@ public class Player {
         this.damage_modifier *= 1 + ((double) percent_change / 100);
     }
 
+    public List<String[]> getIngredientInventory(String type) {
+
+        List<String[]> ingredient_inventory = new ArrayList<>();
+        for (String ingredient_name : this.ingredient_inventory.keySet()){
+            List<Ingredient> ingredient_list_with_correct_name = this.ingredient_inventory.get(ingredient_name);
+            Ingredient example_ingredient = ingredient_list_with_correct_name.get(0);
+
+            if (!Objects.equals(example_ingredient.getType().toString(), type)){
+                continue;
+            }
+            String[] curr_ingredient_information = new String[5];
+            curr_ingredient_information[0] = String.valueOf(ingredient_list_with_correct_name.size());
+            curr_ingredient_information[1] = example_ingredient.getName();
+            curr_ingredient_information[2] = example_ingredient.getType().toString();
+            curr_ingredient_information[3] = example_ingredient.getRarity().toString();
+            curr_ingredient_information[4] = "false";
+            ingredient_inventory.add(curr_ingredient_information);
+        }
+        return ingredient_inventory;
+    }
 
     public List<String[]> getIngredientInventory() {
 

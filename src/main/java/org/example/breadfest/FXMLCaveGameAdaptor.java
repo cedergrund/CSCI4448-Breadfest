@@ -51,13 +51,16 @@ public class FXMLCaveGameAdaptor implements FXMLCave {
     public List<String[]> getIngredientInventory(){
         return this.adapted_game_state.getIngredientInventory();
     }
+    public List<String[]> getIngredientInventory(String type){
+        return this.adapted_game_state.getIngredientInventory(type);
+    }
 
     public Ingredient removeIngredientFromInventory(String ingredient_name) {
         return this.adapted_game_state.removeIngredientFromInventory(ingredient_name);
     }
 
-    public int bakeIngredientsFromTable(TableView<String[]> table){
-        return this.adapted_game_state.bakeIngredientsFromTable(table);
+    public String[] bakeIngredientsFromTable(List<String[]> baked_ingredients){
+        return this.adapted_game_state.bakeIngredientsFromTable(baked_ingredients);
     }
 
     public boolean moveRoom(char direction){

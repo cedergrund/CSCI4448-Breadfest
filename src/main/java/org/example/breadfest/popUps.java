@@ -1,8 +1,12 @@
 package org.example.breadfest;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -10,10 +14,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.util.List;
 import java.util.Objects;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
+import static org.example.breadfest.FXMLStageBuilder.populateBakingColumns;
+import static org.example.breadfest.FXMLStageBuilder.removeNodeById;
+
 
 public class popUps {
 
@@ -116,7 +127,7 @@ public class popUps {
         root.getChildren().addAll(image, label);
     }
 
-    static public Stage popUpFightResults(FXMLCaveApplication application, Stage stage, boolean die_conflict){
+    static public void popUpFightResults(FXMLCaveApplication application, Stage stage, boolean die_conflict){
 
         AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
         String[] rewards = application.getAdaptor().getPreviousReward();
@@ -142,20 +153,19 @@ public class popUps {
         root.getChildren().add(button);
 
         if (Objects.equals(rewards[4], "")){
-            return stage;
+            return;
         }
 
         // die
         addBottomImageForTwoSlots(root, "file:src/main/resources/org/example/breadfest/images/reward_die.png", rewards[5] + " Die:\n" + rewards[4]);
-
-
-        return stage;
-
     }
 
-    static public Stage popUpNuclear(FXMLCaveApplication application, Stage stage){
+    public static void popUpNuclear(FXMLCaveApplication application, Stage stage){
 
         AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
+
+        removeNodeById(root, "outside");
+        removeNodeById(root, "start");
 
         setUpBase(root);
 
@@ -178,11 +188,9 @@ public class popUps {
         button.setOnAction(event -> FXMLButtonEventHandlers.rawrdoughValleyExplodes(application));
         root.getChildren().add(button);
 
-        return stage;
-
     }
 
-    static public Stage popUpPatienceExhausted(FXMLCaveApplication application, Stage stage){
+    public static void popUpPatienceExhausted(FXMLCaveApplication application, Stage stage){
 
         AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
 
@@ -190,7 +198,6 @@ public class popUps {
 
         // adding text
         addTitleAndDescription(root, "Patience Exhausted...", "All this cave exploration and dinosaur gambling is taxing work, and your patience has run all the way out. How about you go home and take the rest of the day off - you deserve it!");
-
 
         ImageView image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/sweeepy_kitty.png"));
         image.setFitWidth(200);
@@ -205,11 +212,149 @@ public class popUps {
         button.setOnAction(event -> FXMLButtonEventHandlers.returnHome(application));
         root.getChildren().add(button);
 
-        return stage;
+        removeNodeById(root, "patience_bar");
+        removeNodeById(root, "patience_label");
+
+        getNewPatienceBar(application, root);
+    }
+
+    public static void popUpNextBakingIngredient(FXMLCaveApplication application, Stage stage, String curr_ingredient, List<String[]> baked_ingredients){
+
+        AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
+        removeNodeById(root, "top_text");
+
+        Label top_text;
+        Button next_ingredient;
+        switch (curr_ingredient){
+            case "Flour":{
+                top_text = new Label("First, choose a flour...");
+                next_ingredient = new Button("next...");
+                break;
+            }
+            case "Water":{
+                top_text = new Label("Next, choose a water...");
+                next_ingredient = new Button("next...");
+                break;
+            }
+            case "Yeast":{
+                top_text = new Label("Then, choose a yeast...");
+                next_ingredient = new Button("next...");
+                break;
+            }
+            case "Salt":{
+                top_text = new Label("Now, choose a salt...");
+                next_ingredient = new Button("next...");
+                break;
+            }
+            case "Topping":{
+                top_text = new Label("Finally, you may choose a topping...");
+                next_ingredient = new Button("Bake bread...");
+                break;
+            }
+            default:{
+                top_text = new Label("");
+                next_ingredient = new Button("");
+            }
+        }
+        top_text.setLayoutX(118);
+        top_text.setLayoutY(200);
+        top_text.setPrefSize(600, 74);
+        top_text.setFont(Font.font("Baloo 2", 25));
+        top_text.setTextFill(Color.WHITE);
+        top_text.setAlignment(Pos.TOP_CENTER);
+        top_text.setId("top_text");
+        top_text.setTextAlignment(TextAlignment.CENTER);
+        top_text.setStyle("-fx-background-color: rgb(0,0,0,0.5);");
+        root.getChildren().add(top_text);
+
+        TableView<String[]> table_view = new TableView<>();
+        table_view.setPrefSize(600, 400);
+        table_view.setLayoutX(118);
+        table_view.setLayoutY(235);
+        table_view.setId("table"+curr_ingredient);
+        table_view.setEditable(true);
+        table_view.setRowFactory(tableView -> new TableRow<>() {
+            @Override
+            protected void updateItem(String[] item, boolean empty) {
+                super.updateItem(item, empty);
+                if (getIndex() % 2 == 0) {
+                    // Set background color for even rows
+                    setStyle("-fx-background-color: #7F95B7;"); // light grey
+                } else {
+                    // Set background color for odd rows
+                    setStyle("-fx-background-color: #5F79A5;"); // light blue
+                }
+            }
+        });
+
+        List<String[]> ingredients_data = application.getAdaptor().getIngredientInventory(curr_ingredient);
+        ObservableList<String[]> data = FXCollections.observableArrayList();
+        data.addAll(ingredients_data);
+
+        if (data.isEmpty()){
+            Label missing_toppings = new Label("You don't have any toppings in your inventory, but that's okay - you don't need toppings to bake a bread!");
+            missing_toppings.setLayoutX(118);
+            missing_toppings.setLayoutY(300);
+            missing_toppings.setWrapText(true);
+            missing_toppings.setPrefSize(600, USE_COMPUTED_SIZE);
+            missing_toppings.setFont(Font.font("Baloo 2", 22));
+            missing_toppings.setTextFill(Color.WHITE);
+            missing_toppings.setAlignment(Pos.TOP_CENTER);
+            missing_toppings.setTextAlignment(TextAlignment.CENTER);
+            missing_toppings.setStyle("-fx-background-color: rgb(0,0,0,0.5);");
+            top_text.setPrefSize(600, USE_COMPUTED_SIZE);
+            root.getChildren().add(missing_toppings);
+            removeNodeById(root, "tableFlour");
+            removeNodeById(root, "tableWater");
+            removeNodeById(root, "tableYeast");
+            removeNodeById(root, "tableSalt");
+            removeNodeById(root, "start");
+            removeNodeById(root, "startlabel");
+        }
+        else{
+            int num_columns = ingredients_data.get(0).length - 1;
+
+            // Add checkbox column
+            TableColumn<String[], Boolean> checkBoxColumn = new TableColumn<>("Select");
+            checkBoxColumn.setEditable(true);
+            checkBoxColumn.setCellValueFactory(param -> {
+                final String[] rowData = param.getValue();
+                BooleanProperty selected = new SimpleBooleanProperty(Boolean.parseBoolean(rowData[0]));
+                selected.addListener((observable, oldValue, newValue) -> {
+                    // Update rowData at index 4 with the new value
+                    rowData[4] = newValue.toString();
+                });
+                return selected;
+            });
+
+
+            checkBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkBoxColumn));
+            table_view.getColumns().add(checkBoxColumn);
+
+            for (int column_index = 0; column_index < num_columns; column_index++) {
+                TableColumn<String[], String> column = populateBakingColumns(column_index);
+                table_view.getColumns().add(column);
+            }
+            table_view.setItems(data);
+            table_view.setStyle("-fx-border-color: #0E0A06; -fx-border-width: 2px;");
+            root.getChildren().add(table_view);
+        }
+
+
+        next_ingredient.setLayoutX(343);
+        next_ingredient.setLayoutY(645);
+        next_ingredient.setPrefSize(150, 30);
+        next_ingredient.setTextFill(Color.WHITE);
+        next_ingredient.setStyle("-fx-background-color: #6225E6; ");
+        next_ingredient.setFont(Font.font("Baloo 2 Bold", 16));
+        next_ingredient.setId(curr_ingredient);
+
+        next_ingredient.setOnAction(event -> FXMLButtonEventHandlers.bakingNextClicked(application, event, baked_ingredients, table_view));
+        root.getChildren().add(next_ingredient);
 
     }
 
-    static public Stage popUpGameWin(FXMLCaveApplication application, Stage stage){
+    public static void popUpGameWin(FXMLCaveApplication application, Stage stage){
 
         AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
 
@@ -244,27 +389,66 @@ public class popUps {
         button.setOnAction(event -> FXMLButtonEventHandlers.creditsScreen(application));
         root.getChildren().add(button);
 
-        return stage;
-
     }
 
-    static public Stage popUpPlayerUpgrade(FXMLCaveApplication application, Stage stage, int upgrade){
+    public static void popUpBreadResult(FXMLCaveApplication application, Stage stage, String[] bread_results){
+
+        AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
+        int upgrade = Integer.parseInt(bread_results[0]);
+        if (upgrade == -1){
+            application.nuclearIngredientUsed();
+            return;
+        }
+
+        Label results = new Label("Congratulations! You've made:\n" +
+                bread_results[2] + "\n" +
+                "and it earned you " + bread_results[1] + " honor.\n" +
+                "Good Work!");
+        results.setLayoutX(58);
+        results.setLayoutY(275);
+        results.setPrefSize(720, USE_COMPUTED_SIZE);
+        results.setFont(Font.font("Baloo 2", 24));
+        results.setTextFill(Color.WHITE);
+        results.setAlignment(Pos.CENTER);
+        results.setWrapText(true);
+        results.setTextAlignment(TextAlignment.CENTER);
+        results.setStyle("-fx-background-color: rgb(0,0,0,0.5);");
+
+        Button continue_button = new Button("Let's go!");
+        continue_button.setLayoutX(343);
+        continue_button.setLayoutY(454);
+        continue_button.setPrefSize(150, 30);
+        continue_button.setTextFill(Color.WHITE);
+        continue_button.setStyle("-fx-background-color: #6225E6; ");
+        continue_button.setFont(Font.font("Baloo 2 Bold", 16));
+        continue_button.setOnAction(event -> FXMLButtonEventHandlers.openBakingScene(application, upgrade));
+        root.getChildren().addAll(results, continue_button);
+
+        // bread image
+        ImageView image = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/bread.GIF"));
+        image.setFitWidth(170);
+        image.setFitHeight(170);
+        image.setLayoutX(915);
+        image.setLayoutY(342);
+        root.getChildren().add(image);
+    }
+
+    public static void popUpPlayerUpgrade(FXMLCaveApplication application, Stage stage, int upgrade){
 
         if (upgrade == 1 || upgrade == 0){
             // returns 0 if you made dust, 1 if no upgrade
-            return stage;
+            return;
         }
-        else if (upgrade == -1){
-            application.nuclearIngredientUsed();
-            return stage;
-        }
-        else if (upgrade == 5){
+        AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
+        removeNodeById(root, "outside");
+        removeNodeById(root, "start");
+
+        if (upgrade == 5){
             // game is won!!
             application.maxUpgradeReached();
-            return stage;
+            return;
         }
 
-        AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
 
         setUpBase(root);
 
@@ -332,11 +516,10 @@ public class popUps {
         button.setOnAction(event -> FXMLButtonEventHandlers.openBakingScene(application, 0));
         root.getChildren().add(button);
 
-        return stage;
 
     }
 
-    static public Stage popUpDieConflict(FXMLCaveApplication application, Stage stage){
+    public static void popUpDieConflict(FXMLCaveApplication application, Stage stage){
 
         AnchorPane root = (AnchorPane)  stage.getScene().getRoot();
 
@@ -375,9 +558,6 @@ public class popUps {
         addDieForRemoving(application,root,1);
         addDieForRemoving(application,root,2);
         addDieForRemoving(application,root,3);
-
-        return stage;
-
     }
 
     // Methods to add dice buttons
@@ -441,6 +621,26 @@ public class popUps {
         button.setFont(Font.font("Baloo 2 Bold", 14));
         button.setOnAction(event -> FXMLButtonEventHandlers.switchDieAndExit(application, event));
         root.getChildren().add(button);
+    }
 
+    private static void getNewPatienceBar(FXMLCaveApplication application, AnchorPane root) {
+        // Inside your method where you set up your UI
+        ProgressBar patience_meter = new ProgressBar();
+        patience_meter.setPrefWidth(200);
+        AnchorPane.setLeftAnchor(patience_meter, 20.0);
+        AnchorPane.setBottomAnchor(patience_meter, 20.0);
+        root.getChildren().add(patience_meter);
+
+        FXMLCave adaptor = application.getAdaptor();
+        int curr_patience = adaptor.getCurrPlayerPatience();
+        double patiencePercentage = (double) curr_patience / adaptor.getMaxPlayerPatience();;
+        patience_meter.setProgress(patiencePercentage);
+
+        Label patience_label = new Label("Patience: "+String.valueOf(curr_patience));
+        patience_label.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
+        patience_label.setTextFill(Color.WHITE);
+        AnchorPane.setLeftAnchor(patience_label, 20.0);
+        AnchorPane.setBottomAnchor(patience_label, 40.0);
+        root.getChildren().add(patience_label);
     }
 }

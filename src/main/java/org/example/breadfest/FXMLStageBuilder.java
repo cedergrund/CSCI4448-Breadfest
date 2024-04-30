@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -27,8 +28,11 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 
 public class FXMLStageBuilder {
@@ -41,16 +45,6 @@ public class FXMLStageBuilder {
         this.application = application;
         this.stage = stage;
     }
-
-    public FXMLStageBuilder addCookingPot(){
-        ImageView cauldron_image_view = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/cauldron_template.png"));
-        AnchorPane.setBottomAnchor(cauldron_image_view, 125.0);
-        AnchorPane.setLeftAnchor(cauldron_image_view, 700.0);
-        root.getChildren().add(cauldron_image_view);
-
-        return this;
-    }
-
 
 
     public FXMLStageBuilder setBackgroundGreen(){
@@ -92,6 +86,7 @@ public class FXMLStageBuilder {
         // Inside your method where you set up your UI
         ProgressBar patience_meter = new ProgressBar();
         patience_meter.setPrefWidth(200);
+        patience_meter.setId("patience_bar");
         AnchorPane.setLeftAnchor(patience_meter, 20.0);
         AnchorPane.setBottomAnchor(patience_meter, 20.0);
         root.getChildren().add(patience_meter);
@@ -103,6 +98,7 @@ public class FXMLStageBuilder {
 
         Label patience_label = new Label("Patience: "+String.valueOf(curr_patience));
         patience_label.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
+        patience_label.setId("patience_label");
         patience_label.setTextFill(Color.WHITE);
         AnchorPane.setLeftAnchor(patience_label, 20.0);
         AnchorPane.setBottomAnchor(patience_label, 40.0);
@@ -337,95 +333,134 @@ public class FXMLStageBuilder {
         return this;
     }
 
-    public FXMLStageBuilder addBakingInventoryTable(){
+    public FXMLStageBuilder bakingSceneBackground(){
+        ImageView kitchen = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/kitchen_background.png"));
+        kitchen.setFitWidth(1366);
+        kitchen.setFitHeight(768);
+        kitchen.setLayoutX(0);
+        kitchen.setLayoutY(0);
+        root.getChildren().add(kitchen);
 
-        Label inventory_label = new Label("Let's Bake!");
-        inventory_label.setLayoutX(25);
-        inventory_label.setLayoutY(25);
-        inventory_label.setTextFill(javafx.scene.paint.Color.WHITE);
-        inventory_label.setStyle("-fx-font-family: 'Arial Black'; -fx-font-size: 48px;");
-        root.getChildren().add(inventory_label);
+        // base labels
+        Label title_label = new Label("Time to Bake!");
+        title_label.setLayoutX(383);
+        title_label.setLayoutY(80);
+        title_label.setPrefSize(600, 80);
+        title_label.setFont(Font.font("Baloo 2", 40));
+        title_label.setUnderline(true);
+        title_label.setTextFill(Color.WHITE);
+        title_label.setAlignment(Pos.CENTER);
+        title_label.setStyle("-fx-background-color: rgb(0,0,0,0.5);");
+        title_label.setTextAlignment(TextAlignment.CENTER);
 
-        StackPane centerPane = new StackPane();
-        centerPane.setLayoutX(42); // Center horizontally
-        centerPane.setLayoutY(84); // Center vertically
-        root.getChildren().add(centerPane);
-
-        TableView<String[]> table_view = new TableView<>();
-        table_view.setPrefSize(600, 600);
-        table_view.setEditable(true);
-
-        table_view.setRowFactory(tableView -> new TableRow<>() {
-            @Override
-            protected void updateItem(String[] item, boolean empty) {
-                super.updateItem(item, empty);
-                if (getIndex() % 2 == 0) {
-                    // Set background color for even rows
-                    setStyle("-fx-background-color: #7F95B7;"); // light grey
-                } else {
-                    // Set background color for odd rows
-                    setStyle("-fx-background-color: #5F79A5;"); // light blue
-                }
-            }
-        });
-
-        Button removeSelectedButton = new Button("Bake Ingredients");
-        removeSelectedButton.setLayoutX(800);
-        removeSelectedButton.setLayoutY(650);
-        removeSelectedButton.setOnAction(event -> {
-            int upgrade = FXMLButtonEventHandlers.bakeIngredients(application, table_view);
-            FXMLButtonEventHandlers.openBakingScene(application, upgrade);
-        });
-        root.getChildren().add(removeSelectedButton);
+        root.getChildren().add(title_label);
 
 
-        List<String[]> ingredients_data = application.getAdaptor().getIngredientInventory();
+        // button
+        Button return_outside = new Button("return outside");
+        return_outside.setLayoutX(1201);
+        return_outside.setLayoutY(15);
+        return_outside.setPrefSize(150, 30);
+        return_outside.setTextFill(Color.WHITE);
+        return_outside.setStyle("-fx-background-color: #6225E6; ");
+        return_outside.setFont(Font.font("Baloo 2 Bold", 16));
+        return_outside.setId("outside");
+        return_outside.setOnAction(event -> FXMLButtonEventHandlers.returnHome(application));
+        root.getChildren().add(return_outside);
 
-        ObservableList<String[]> data = FXCollections.observableArrayList();
+        // image
+        ImageView cauldron = new ImageView(new Image("file:src/main/resources/org/example/breadfest/images/cauldron_template.png"));
+        cauldron.setFitWidth(300);
+        cauldron.setFitHeight(300);
+        cauldron.setLayoutX(850);
+        cauldron.setLayoutY(375);
+        root.getChildren().add(cauldron);
 
-        data.addAll(ingredients_data);
-
-
-        if (!data.isEmpty()) {
-            int numColumns = ingredients_data.get(0).length - 1;
-
-            // Add checkbox column
-            TableColumn<String[], Boolean> checkBoxColumn = new TableColumn<>("Select");
-            checkBoxColumn.setEditable(true);
-            checkBoxColumn.setCellValueFactory(param -> {
-                final String[] rowData = param.getValue();
-                BooleanProperty selected = new SimpleBooleanProperty(Boolean.parseBoolean(rowData[0]));
-                selected.addListener((observable, oldValue, newValue) -> {
-                    // Update rowData at index 4 with the new value
-                    rowData[4] = newValue.toString();
-                });
-                return selected;
-            });
-
-
-            checkBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkBoxColumn));
-            table_view.getColumns().add(checkBoxColumn);
-
-            for (int column_index = 0; column_index < numColumns; column_index++) {
-                TableColumn<String[], String> column = populateBakingColumns(column_index);
-                table_view.getColumns().add(column);
-            }
-
-            table_view.setItems(data);
-            centerPane.getChildren().add(table_view);
-            table_view.setStyle("-fx-border-color: #0E0A06; -fx-border-width: 2px;");
-        }
-        else {
-            // If data is empty, display a message
-            System.out.println();
-            Label noDataLabel = new Label("No ingredients to display");
-            noDataLabel.setFont(new Font(32));
-            AnchorPane.setLeftAnchor(noDataLabel, 80.0);
-            AnchorPane.setTopAnchor(noDataLabel, 20.0);
-            centerPane.getChildren().add(noDataLabel);
-        }
         return this;
     }
+
+    public FXMLStageBuilder bakingSceneSetup(){
+
+        List<String[]> flour_data = application.getAdaptor().getIngredientInventory("Flour");
+        List<String[]> water_data = application.getAdaptor().getIngredientInventory("Water");
+        List<String[]> yeast_data = application.getAdaptor().getIngredientInventory("Yeast");
+        List<String[]> salt_data = application.getAdaptor().getIngredientInventory("Salt");
+
+        List<String> empty_ingredient_types = new ArrayList<>();
+
+        if (flour_data.isEmpty()){
+            empty_ingredient_types.add("Flour");
+        }
+        if (water_data.isEmpty()){
+            empty_ingredient_types.add("Water");
+        }
+        if (yeast_data.isEmpty()){
+            empty_ingredient_types.add("Yeast");
+        }
+        if (salt_data.isEmpty()){
+            empty_ingredient_types.add("Salt");
+        }
+
+        if (!empty_ingredient_types.isEmpty()){
+            StringBuilder missing_ingredients_names = new StringBuilder();
+            for (String emptyIngredientType : empty_ingredient_types) {
+                missing_ingredients_names.append("\n").append(emptyIngredientType);
+            }
+            Label missing_ingredients_label = new Label("You don't have all the required ingredients to bake a bread in your inventory. Go to the cave and collect:" + missing_ingredients_names);
+            missing_ingredients_label.setLayoutX(118);
+            missing_ingredients_label.setLayoutY(235);
+            missing_ingredients_label.setPrefSize(600, USE_COMPUTED_SIZE);
+            missing_ingredients_label.setFont(Font.font("Baloo 2", 24));
+            missing_ingredients_label.setTextFill(Color.WHITE);
+            missing_ingredients_label.setWrapText(true);
+            missing_ingredients_label.setAlignment(Pos.TOP_CENTER);
+            missing_ingredients_label.setTextAlignment(TextAlignment.CENTER);
+            missing_ingredients_label.setStyle("-fx-background-color: rgb(0,0,0,0.5);");
+            root.getChildren().add(missing_ingredients_label);
+        }
+        else{
+            Label ask_to_start_baking_label = new Label("You have all the required ingredients for bread-baking. Care to dance?");
+            ask_to_start_baking_label.setLayoutX(118);
+            ask_to_start_baking_label.setLayoutY(333);
+            ask_to_start_baking_label.setPrefSize(600, USE_COMPUTED_SIZE);
+            ask_to_start_baking_label.setFont(Font.font("Baloo 2", 24));
+            ask_to_start_baking_label.setTextFill(Color.WHITE);
+            ask_to_start_baking_label.setWrapText(true);
+            ask_to_start_baking_label.setId("startlabel");
+            ask_to_start_baking_label.setAlignment(Pos.TOP_CENTER);
+            ask_to_start_baking_label.setTextAlignment(TextAlignment.CENTER);
+            ask_to_start_baking_label.setStyle("-fx-background-color: rgb(0,0,0,0.5);");
+
+            Button start_baking = new Button("Let's go!");
+            start_baking.setLayoutX(343);
+            start_baking.setLayoutY(446);
+            start_baking.setPrefSize(150, 30);
+            start_baking.setTextFill(Color.WHITE);
+            start_baking.setStyle("-fx-background-color: #6225E6; ");
+            start_baking.setFont(Font.font("Baloo 2 Bold", 16));
+            start_baking.setId("start");
+            start_baking.setOnAction(event -> FXMLButtonEventHandlers.bakingNextClicked(application, event, new ArrayList<>(), null));
+            root.getChildren().addAll(ask_to_start_baking_label, start_baking);
+        }
+
+        return this;
+    }
+
+    public FXMLStageBuilder removeOutsideButton(){
+        removeNodeById(root, "outside");
+        return this;
+    }
+
+    public static void removeNodeById(AnchorPane root, String id){
+        ObservableList<Node> children = root.getChildren();
+        for (Node child: children){
+            if (Objects.equals(child.getId(), id)){
+                children.remove(child);
+                break;
+            }
+        }
+    }
+
 
     private static TableColumn<String[], String> populateInventoryColumns(int column_index) {
         TableColumn<String[], String> column = null;
@@ -463,7 +498,7 @@ public class FXMLStageBuilder {
 
     }
 
-    private static TableColumn<String[], String> populateBakingColumns(int column_index) {
+    public static TableColumn<String[], String> populateBakingColumns(int column_index) {
         TableColumn<String[], String> column = null;
         switch (column_index){
             case 0: {
@@ -543,18 +578,18 @@ public class FXMLStageBuilder {
 
     public FXMLStageBuilder addReturnHomeButton(){
 
+        // button
         Button return_home_button = new Button("Return Home");
-        AnchorPane.setTopAnchor(return_home_button, 20.0);
-        AnchorPane.setRightAnchor(return_home_button, 50.0);
-        return_home_button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                FXMLButtonEventHandlers.returnHome(application);
-            }
-        });
+        return_home_button.setLayoutX(1201);
+        return_home_button.setLayoutY(15);
+        return_home_button.setPrefSize(150, 30);
+        return_home_button.setTextFill(Color.WHITE);
+        return_home_button.setStyle("-fx-background-color: #6225E6; ");
+        return_home_button.setFont(Font.font("Baloo 2 Bold", 16));
+        return_home_button.setId("outside");
+        return_home_button.setOnAction(event -> FXMLButtonEventHandlers.returnHome(application));
+        root.getChildren().add(return_home_button);
 
-        // Add nodes to root
-        root.getChildren().addAll(return_home_button);
         return this;
     }
 

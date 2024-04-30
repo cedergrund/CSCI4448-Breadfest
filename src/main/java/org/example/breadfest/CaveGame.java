@@ -10,6 +10,7 @@ import org.example.breadfest.ingredients.IngredientTypes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CaveGame {
 
@@ -96,6 +97,9 @@ public class CaveGame {
 
         return player.getIngredientInventory();
     }
+    public List<String[]> getIngredientInventory(String type){
+        return player.getIngredientInventory(type);
+    }
 
     boolean isValidIngredientList(List<String> ingredient_type_list){
         // return 0 if no
@@ -141,54 +145,58 @@ public class CaveGame {
         }
     }
 
-    public int bakeIngredientsFromTable(TableView<String[]> table){
-        //this essentially does two things by analyzing the selected rows in the table
-        // it changes the player's honor, and it modifies the player's inventory
+    public String[] bakeIngredientsFromTable(List<String[]> baked_ingredients){
+        // returns an array of Strings of length 3
+        // index 0 is upgrade ->
+        //          -1 if nuclear ingredient baked
+        //          0 if bake failed
+        //          1 if player didn't upgrade
+        //          x with player's new level
+        // index 1 is how much honor was increased
+        // index 2 is the name of the baked bread
+
         //Lets do it!
 
-        // returns -1 if nuclear ingredient used
+        String[] returned_array = new String[3];
 
-
-        ObservableList<String[]> selectedRows = FXCollections.observableArrayList();
         int cumulative_score = 0; // this will be our total score of all baked ingredients
         List<String> ingredient_type_list = new ArrayList<>();
-        // Iterate through the table to find selected rows
-        for (String[] row : table.getItems()) {
-            if (row[4].equals("true")) { //the box was checked
-                Ingredient baked_ingredient = player.removeIngredientFromInventory(row[1]);
-                if (baked_ingredient.getRarity() == IngredientRarity.Nuclear){
-                    return -1;
-                }
-                int ingredient_score = baked_ingredient.getScore();
-                cumulative_score += ingredient_score;
 
-                ingredient_type_list.add(row[2]); // this collects all types of selected ingredients
+        // iterate through ingredients that were baked with
+        for (String[] ingredient : baked_ingredients) {
 
-                // we need to check if the column is 1 or not!
-                if(row[0].equals("1")){
-                    selectedRows.add(row);
-                    // Print the content of the row
-
-                }
-                else{ // this means there was more than 1 instance
-                    int curr_count = Integer.parseInt(row[0]);
-                    curr_count -= 1;
-                    row[0] = String.valueOf(curr_count);
-                }
+            Ingredient baked_ingredient = player.removeIngredientFromInventory(ingredient[1]);
+            if (baked_ingredient.getRarity() == IngredientRarity.Nuclear){
+                returned_array[0] = String.valueOf(-1);
+                return returned_array;
             }
+            int ingredient_score = baked_ingredient.getScore();
+            cumulative_score += ingredient_score;
+
+            ingredient_type_list.add(ingredient[2]); // this collects all types of selected ingredients
         }
 
         // check if bake is valid and then change honor
         boolean valid_ingredient = this.isValidIngredientList(ingredient_type_list);
-        table.getItems().removeAll(selectedRows);
 
         if (valid_ingredient){
-            return player.changeCurrHonor(cumulative_score);
+            returned_array[0] = String.valueOf(player.changeCurrHonor(cumulative_score));
+            returned_array[1] = String.valueOf(cumulative_score);
+
+            Random random = new Random();
+            int index1 = random.nextInt(baked_ingredients.size());
+            int index2 = random.nextInt(baked_ingredients.size());
+            while (index2 == index1) {
+                index2 = random.nextInt(baked_ingredients.size());
+            }
+            returned_array[2] = "\"" +baked_ingredients.get(index1)[1] + " & " + baked_ingredients.get(index2)[1] + "\" Bread";
         }
         else {
-            return 0;
+            returned_array[0] = String.valueOf(0);
+            returned_array[1] = String.valueOf(0);
+            returned_array[2] = "Dust";
         }
-        // there's no need to remove rows for the displayed table, just remove them from the inventory! then reload the scene :)
+        return returned_array;
     }
 
     public Ingredient removeIngredientFromInventory(String ingredient_name){

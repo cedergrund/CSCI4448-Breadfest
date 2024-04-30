@@ -21,11 +21,13 @@ public interface FXMLCave {
 
     void clickLocation(int location);
 
-    int bakeIngredientsFromTable(TableView<String[]> table);
+    String[] bakeIngredientsFromTable(List<String[]> baked_ingredients);
 
     boolean moveRoom(char direction);
 
     List<String[]> getIngredientInventory();
+
+    List<String[]> getIngredientInventory(String type);
 
     Ingredient removeIngredientFromInventory(String ingredient_name);
 
