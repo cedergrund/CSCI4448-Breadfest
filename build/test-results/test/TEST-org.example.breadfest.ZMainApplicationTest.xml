@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.breadfest.ZMainApplicationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-01T02:42:53" hostname="Josephs-MacBook-Pro.local" time="12.688">
+  <properties/>
+  <testcase name="main()" classname="org.example.breadfest.ZMainApplicationTest" time="12.688"/>
+  <system-out><![CDATA[Moved to depth 1
+]]></system-out>
+  <system-err><![CDATA[Apr 30, 2024 8:42:58 PM com.sun.glass.ui.mac.MacApplication lambda$waitForReactivation$6
+WARNING: Timeout while waiting for app reactivation
+]]></system-err>
+</testsuite>
