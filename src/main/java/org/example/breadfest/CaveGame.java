@@ -88,6 +88,10 @@ public class CaveGame {
 
     }
 
+    public void wipeInventory(){
+        this.player.wipeInventory();
+    }
+
     public List<String[]> getIngredientInventory(){
 
         return player.getIngredientInventory();
@@ -307,5 +311,9 @@ public class CaveGame {
 
     public String[] getPreviousReward(){
         return player.getPreviousReward();
+    }
+
+    public void setFightingDinosaur(Dinosaur dino_to_fight){
+        this.player.setFightingDinosaur(dino_to_fight);
     }
 }
