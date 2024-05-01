@@ -316,6 +316,7 @@ class CaveGameTest {
     @Test
     void getDieInformation() {
 
+
     }
 
     @Test

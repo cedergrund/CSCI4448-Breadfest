@@ -124,7 +124,6 @@ class APlayerTest {
         Player.getInstance().attackDinosaur(0);
         assertFalse(Player.getInstance().stopFight(false));
         assertEquals(Player.getInstance().getFightersInformation()[0], "error");
-
     }
 
 
