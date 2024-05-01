@@ -87,7 +87,7 @@ public class CaveGame {
     }
 
     public void wipeInventory(){
-        this.player.wipeInventory();
+        Player.getInstance().wipeInventory();
     }
 
     public List<String[]> getIngredientInventory(){
@@ -312,6 +312,6 @@ public class CaveGame {
     }
 
     public void setFightingDinosaur(Dinosaur dino_to_fight){
-        this.player.setFightingDinosaur(dino_to_fight);
+        Player.getInstance().setFightingDinosaur(dino_to_fight);
     }
 }

@@ -117,32 +117,15 @@ class APlayerTest {
     @Test
     void setFightingDinosaur() throws Exception {
         Dinosaur test_dino = new DinosaurFactory().makeADinosaurFromDepth(1);
-//        assertRunt
-//                (Player.getInstance().getFightersInformation());
-//        Player.getInstance().setFightingDinosaur(test_dino);
+        assertEquals(Player.getInstance().getFightersInformation()[0], "error");
+        Player.getInstance().setFightingDinosaur(test_dino);
+        assertEquals(Player.getInstance().getFightersInformation()[3], test_dino.getName());
+
+        Player.getInstance().attackDinosaur(0);
+        assertFalse(Player.getInstance().stopFight(false));
+        assertEquals(Player.getInstance().getFightersInformation()[0], "error");
 
     }
 
-    @Test
-    void fightDinosaur() throws Exception {
-//        String dinosaur_test_name = "dinosaur_test_name";
-//        DinosaurAndDiceTypes dinosaur_test_type = DinosaurAndDiceTypes.Common;
-//        Dinosaur dinosaur_test = new Dinosaur(dinosaur_test_name, dinosaur_test_type);
-//
-//        assertNotNull(dinosaur_test);
-//
-//        Player player_test = Player.getInstance();
-//
-//
-//        for (int i = 0; i < 5; i++) {
-//            // Execute the line of code 5 times
-//            player_test.attackDinosaur(dinosaur_test);
-//        }
-//
-//        assertNotEquals(100, player_test.getCurrPatience());
-//
-//        player_test.resetPatience();
-
-    }
 
 }

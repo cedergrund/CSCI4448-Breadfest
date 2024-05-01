@@ -263,7 +263,7 @@ public class Player {
         return returned_array;
 
     }
-    
+
     public List<String[]> getIngredientInventory(String type) {
 
         List<String[]> ingredient_inventory = new ArrayList<>();
@@ -382,7 +382,9 @@ public class Player {
     public String[] getFightersInformation(){
 
         if (fightingDinosaur == null){
-            throw new RuntimeException("no fighting dinosaur");
+            String[] returned_string = new String[1];
+            returned_string[0] = "error";
+            return returned_string;
         }
 
         String[] returned_strings = new String[6];
