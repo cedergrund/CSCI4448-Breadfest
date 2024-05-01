@@ -14,12 +14,10 @@ import java.util.Random;
 
 public class CaveGame {
 
-    private final Player player;
     private Cave curr_cave;
     private Cave cave0;
 
     public CaveGame(){
-        this.player = Player.getInstance();
         try {
             this.curr_cave = Cave.enterRoom0();
             this.cave0 = curr_cave;
@@ -30,7 +28,7 @@ public class CaveGame {
     }
 
     public void playerCollectsIngredient(Ingredient ingredient, int location) {
-        this.player.addIngredientToInventory(ingredient);
+        Player.getInstance().addIngredientToInventory(ingredient);
         this.curr_cave.removeObjectFromLocation(location);
     }
 
@@ -78,11 +76,11 @@ public class CaveGame {
     public void clickLocation(int location){
 
         if (this.curr_cave.getRoomDinosaurs()[location] != null){
-            this.player.setFightingDinosaur(this.curr_cave.getRoomDinosaurs()[location]);
+            Player.getInstance().setFightingDinosaur(this.curr_cave.getRoomDinosaurs()[location]);
             this.curr_cave.removeObjectFromLocation(location);
         }
         else if (this.curr_cave.getRoomIngredients()[location] != null){
-            this.player.addIngredientToInventory(this.curr_cave.getRoomIngredients()[location]);
+            Player.getInstance().addIngredientToInventory(this.curr_cave.getRoomIngredients()[location]);
             this.curr_cave.removeObjectFromLocation(location);
         }
 
@@ -90,10 +88,10 @@ public class CaveGame {
 
     public List<String[]> getIngredientInventory(){
 
-        return player.getIngredientInventory();
+        return Player.getInstance().getIngredientInventory();
     }
     public List<String[]> getIngredientInventory(String type){
-        return player.getIngredientInventory(type);
+        return Player.getInstance().getIngredientInventory(type);
     }
 
     boolean isValidIngredientList(List<String> ingredient_type_list){
@@ -155,7 +153,7 @@ public class CaveGame {
         // iterate through ingredients that were baked with
         for (String[] ingredient : baked_ingredients) {
 
-            Ingredient baked_ingredient = player.removeIngredientFromInventory(ingredient[1]);
+            Ingredient baked_ingredient = Player.getInstance().removeIngredientFromInventory(ingredient[1]);
             if (baked_ingredient.getRarity() == IngredientRarity.Nuclear){
                 returned_array[0] = String.valueOf(-1);
                 return returned_array;
@@ -170,7 +168,7 @@ public class CaveGame {
         boolean valid_ingredient = this.isValidIngredientList(ingredient_type_list);
 
         if (valid_ingredient){
-            returned_array[0] = String.valueOf(player.changeCurrHonor(cumulative_score));
+            returned_array[0] = String.valueOf(Player.getInstance().changeCurrHonor(cumulative_score));
             returned_array[1] = String.valueOf(cumulative_score);
 
             Random random = new Random();
@@ -190,13 +188,13 @@ public class CaveGame {
     }
 
     public Ingredient removeIngredientFromInventory(String ingredient_name){
-        return player.removeIngredientFromInventory(ingredient_name);
+        return Player.getInstance().removeIngredientFromInventory(ingredient_name);
     }
 
     public boolean moveRoom(char direction){
         try {
             this.curr_cave = this.curr_cave.move(direction);
-            if (this.player.changeCurrPatience(-20)){
+            if (Player.getInstance().changeCurrPatience(-20)){
                 System.out.println("player patience run out.");
                 return true;
             }
@@ -209,7 +207,7 @@ public class CaveGame {
 
     public void enterRoom0(){
         this.curr_cave = this.cave0;
-        this.player.resetPatience();
+        Player.getInstance().resetPatience();
     }
 
     public String[] getObjectByLocation(int location) {
@@ -234,11 +232,11 @@ public class CaveGame {
     }
 
     public int getCurrPlayerPatience(){
-        return this.player.getCurrPatience();
+        return Player.getInstance().getCurrPatience();
     }
 
     public int getCurrPlayerHonor(){
-        return player.getCurrHonor();
+        return Player.getInstance().getCurrHonor();
     }
 
     public String getDinosaurImageByLocation(int location_index) {
@@ -259,26 +257,26 @@ public class CaveGame {
     }
 
     public int getMaxPlayerPatience(){
-        return this.player.getBasePatience();
+        return Player.getInstance().getBasePatience();
     }
 
     public String[] getFightersInformation(){
-        return player.getFightersInformation();
+        return Player.getInstance().getFightersInformation();
     }
 
     public String[] getDieInformation(int die_index){
-        return player.getActiveDieInventoryInformation(die_index);
+        return Player.getInstance().getActiveDieInventoryInformation(die_index);
     }
 
     public String[] fightDinosaur(int dice_rolled){
-        return player.attackDinosaur(dice_rolled);
+        return Player.getInstance().attackDinosaur(dice_rolled);
     }
 
     public boolean stopFight(boolean won_fight){
-        return player.stopFight(won_fight);
+        return Player.getInstance().stopFight(won_fight);
     }
 
-    public String getDinoImage() { return player.getDinoImage(); }
+    public String getDinoImage() { return Player.getInstance().getDinoImage(); }
 
     public String getIngredientImageByString(String type) {
         return switch (type){
@@ -292,7 +290,7 @@ public class CaveGame {
     }
 
     public void updateActiveDice(int die_to_switch){
-        player.solveDieMergeConflict(die_to_switch);
+        Player.getInstance().solveDieMergeConflict(die_to_switch);
     }
 
     public void regenerateCaveSystem(){
@@ -306,6 +304,6 @@ public class CaveGame {
     }
 
     public String[] getPreviousReward(){
-        return player.getPreviousReward();
+        return Player.getInstance().getPreviousReward();
     }
 }

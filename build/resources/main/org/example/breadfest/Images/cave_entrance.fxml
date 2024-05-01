@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cave_entrance_sceen.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="413.0" fitWidth="437.0" layoutX="444.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@player.gif" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="259.0" layoutY="140.0" prefHeight="66.0" prefWidth="135.0" text="Home" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Baloo 2 Regular" size="23.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="147.0" layoutX="1235.0" layoutY="304.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#889019" height="79.0" layoutX="1179.0" layoutY="275.0" stroke="BLACK" strokeType="INSIDE" width="149.0" />
+      <Label alignment="CENTER" layoutX="1185.0" layoutY="282.0" prefHeight="66.0" prefWidth="135.0" text="Cave this way" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Baloo 2 Regular" size="23.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

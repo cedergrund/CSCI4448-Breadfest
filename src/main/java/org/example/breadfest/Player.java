@@ -112,10 +112,6 @@ public class Player {
         this.curr_patience = this.base_patience;
     }
 
-    public void upgradeBasePatience(int upgrade_amount){
-        this.base_patience += upgrade_amount;
-    }
-
     public int rollDie(int index_selection){
         return this.active_dice_inventory[index_selection].rollDice();
     }
@@ -268,10 +264,6 @@ public class Player {
 
     }
 
-    public void addToDamageModifier(int percent_change){
-        this.damage_modifier *= 1 + ((double) percent_change / 100);
-    }
-
     public List<String[]> getIngredientInventory(String type) {
 
         List<String[]> ingredient_inventory = new ArrayList<>();
@@ -381,6 +373,11 @@ public class Player {
     }
 
     public String[] getFightersInformation(){
+
+        if (fightingDinosaur == null){
+            throw new RuntimeException("no fighting dinosaur");
+        }
+
         String[] returned_strings = new String[6];
         returned_strings[0] = "Player";
         returned_strings[1] = String.valueOf(curr_patience);
