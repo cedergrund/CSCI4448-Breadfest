@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="org.example.breadfest.JSONReadingHelperTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-05-01T02:42:53" hostname="Josephs-MacBook-Pro.local" time="0.002">
+=======
+<testsuite name="org.example.breadfest.JSONReadingHelperTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-05-01T03:06:05" hostname="econ2-204-18-edu.int.colorado.edu" time="0.001">
+>>>>>>> 2ec5f1c29508c866cc112645db726a1deb2204fc
   <properties/>
   <testcase name="generateRandomElementFromJSON()" classname="org.example.breadfest.JSONReadingHelperTest" time="0.0"/>
   <testcase name="getRandomExcuse()" classname="org.example.breadfest.JSONReadingHelperTest" time="0.001"/>

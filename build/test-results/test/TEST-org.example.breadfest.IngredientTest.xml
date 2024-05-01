@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="org.example.breadfest.IngredientTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-05-01T02:42:53" hostname="Josephs-MacBook-Pro.local" time="0.005">
   <properties/>
   <testcase name="makeIngredientByType()" classname="org.example.breadfest.IngredientTest" time="0.001"/>
@@ -9,6 +10,18 @@
   <testcase name="makeNuclearIngredient()" classname="org.example.breadfest.IngredientTest" time="0.001"/>
   <testcase name="getRarity()" classname="org.example.breadfest.IngredientTest" time="0.0"/>
   <testcase name="getScore()" classname="org.example.breadfest.IngredientTest" time="0.0"/>
+=======
+<testsuite name="org.example.breadfest.IngredientTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-05-01T03:06:05" hostname="econ2-204-18-edu.int.colorado.edu" time="0.003">
+  <properties/>
+  <testcase name="makeIngredientByType()" classname="org.example.breadfest.IngredientTest" time="0.0"/>
+  <testcase name="makeIngredient()" classname="org.example.breadfest.IngredientTest" time="0.001"/>
+  <testcase name="testFactoryCreation()" classname="org.example.breadfest.IngredientTest" time="0.0"/>
+  <testcase name="getName()" classname="org.example.breadfest.IngredientTest" time="0.0"/>
+  <testcase name="getType()" classname="org.example.breadfest.IngredientTest" time="0.0"/>
+  <testcase name="makeNuclearIngredient()" classname="org.example.breadfest.IngredientTest" time="0.0"/>
+  <testcase name="getRarity()" classname="org.example.breadfest.IngredientTest" time="0.0"/>
+  <testcase name="getScore()" classname="org.example.breadfest.IngredientTest" time="0.001"/>
+>>>>>>> 2ec5f1c29508c866cc112645db726a1deb2204fc
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

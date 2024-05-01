@@ -1,10 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="org.example.breadfest.ZMainApplicationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-01T02:42:53" hostname="Josephs-MacBook-Pro.local" time="12.688">
   <properties/>
   <testcase name="main()" classname="org.example.breadfest.ZMainApplicationTest" time="12.688"/>
   <system-out><![CDATA[Moved to depth 1
 ]]></system-out>
   <system-err><![CDATA[Apr 30, 2024 8:42:58 PM com.sun.glass.ui.mac.MacApplication lambda$waitForReactivation$6
+=======
+<testsuite name="org.example.breadfest.ZMainApplicationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-01T03:06:05" hostname="econ2-204-18-edu.int.colorado.edu" time="124.789">
+  <properties/>
+  <testcase name="main()" classname="org.example.breadfest.ZMainApplicationTest" time="124.789"/>
+  <system-out><![CDATA[max
+max
+should play video
+Moved to depth 1
+Fight Dinosaur [Baby Thrashclaw, Common]
+Collect ingredient [Sliced Almonds, Topping, Common]
+Moved to depth 1
+Collect ingredient [River Water, Water, Common]
+Fight Dinosaur [Baby Bitegrinder, Common]
+Collect ingredient [Tap Water, Water, Common]
+Moved to depth 1
+Moved to depth 2
+Moved to depth 3
+Fight Dinosaur [Baby Thrashclaw, Common]
+Fight Dinosaur [Baby Slashscale, Common]
+player patience run out.
+player patience run out.
+player patience run out.
+player patience run out.
+player patience run out.
+Moved to depth 2
+player patience run out.
+Moved to depth 3
+player patience run out.
+Moved to depth 4
+player patience run out.
+player patience run out.
+Moved to depth 4
+player patience run out.
+Moved to depth 5
+player patience run out.
+Collect ingredient [Sourdough Starter, Yeast, Common]
+Collect ingredient [Titanium Truffle Shavings, Topping, Legendary]
+Fight Dinosaur [Mommy Savagemaw, Rare]
+max
+max
+]]></system-out>
+  <system-err><![CDATA[Apr 30, 2024 9:06:10 PM com.sun.glass.ui.mac.MacApplication lambda$waitForReactivation$6
+>>>>>>> 2ec5f1c29508c866cc112645db726a1deb2204fc
 WARNING: Timeout while waiting for app reactivation
 ]]></system-err>
 </testsuite>

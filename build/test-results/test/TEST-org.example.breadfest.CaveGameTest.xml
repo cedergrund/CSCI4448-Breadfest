@@ -1,27 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="org.example.breadfest.CaveGameTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2024-05-01T02:42:53" hostname="Josephs-MacBook-Pro.local" time="0.031">
   <properties/>
   <testcase name="testEnterRoom0()" classname="org.example.breadfest.CaveGameTest" time="0.004"/>
+=======
+<testsuite name="org.example.breadfest.CaveGameTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2024-05-01T03:06:05" hostname="econ2-204-18-edu.int.colorado.edu" time="0.025">
+  <properties/>
+  <testcase name="testEnterRoom0()" classname="org.example.breadfest.CaveGameTest" time="0.003"/>
+>>>>>>> 2ec5f1c29508c866cc112645db726a1deb2204fc
   <testcase name="enterRoom0()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
   <testcase name="testClickLocation()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
   <testcase name="moveRoom()" classname="org.example.breadfest.CaveGameTest" time="0.002"/>
   <testcase name="getCurrPlayerHonor()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
+<<<<<<< HEAD
   <testcase name="testPlayerCollectsIngredient()" classname="org.example.breadfest.CaveGameTest" time="0.002"/>
   <testcase name="bakeIngredientsFromTable()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
   <testcase name="testGetObjectByLocation()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
   <testcase name="testGetObjectsAtAllLocations()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
   <testcase name="getIngredientImageByString()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
+=======
+  <testcase name="testPlayerCollectsIngredient()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
+  <testcase name="bakeIngredientsFromTable()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
+  <testcase name="testGetObjectByLocation()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
+  <testcase name="testGetObjectsAtAllLocations()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
+>>>>>>> 2ec5f1c29508c866cc112645db726a1deb2204fc
   <testcase name="playerCollectsIngredient()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
   <testcase name="getObjectsAtAllLocations()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
   <testcase name="testMoveRoom()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
   <testcase name="updateActiveDice()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
   <testcase name="regenerateCaveSystem()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
+<<<<<<< HEAD
   <testcase name="playerFightsDinosaur()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
   <testcase name="isValidIngredientList()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
   <testcase name="getIngredientInventory()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
   <testcase name="removeIngredientFromInventory()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
   <testcase name="getFightersInformation()" classname="org.example.breadfest.CaveGameTest" time="0.002"/>
   <testcase name="getObjectByLocation()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>
+=======
+  <testcase name="isValidIngredientList()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
+  <testcase name="getIngredientInventory()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
+  <testcase name="removeIngredientFromInventory()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
+  <testcase name="getFightersInformation()" classname="org.example.breadfest.CaveGameTest" time="0.002"/>
+  <testcase name="getObjectByLocation()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
+>>>>>>> 2ec5f1c29508c866cc112645db726a1deb2204fc
   <testcase name="clickLocation()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
   <testcase name="getMaxPlayerPatience()" classname="org.example.breadfest.CaveGameTest" time="0.0"/>
   <testcase name="getRoomExitDirections()" classname="org.example.breadfest.CaveGameTest" time="0.001"/>

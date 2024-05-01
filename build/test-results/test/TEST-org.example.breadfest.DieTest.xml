@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="org.example.breadfest.DieTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-05-01T02:42:53" hostname="Josephs-MacBook-Pro.local" time="0.004">
   <properties/>
   <testcase name="testCreation()" classname="org.example.breadfest.DieTest" time="0.002"/>
   <testcase name="testMagicDie()" classname="org.example.breadfest.DieTest" time="0.001"/>
   <testcase name="testNormalDieGeneration()" classname="org.example.breadfest.DieTest" time="0.001"/>
   <testcase name="makeDieByType()" classname="org.example.breadfest.DieTest" time="0.0"/>
+=======
+<testsuite name="org.example.breadfest.DieTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-05-01T03:06:05" hostname="econ2-204-18-edu.int.colorado.edu" time="0.004">
+  <properties/>
+  <testcase name="testCreation()" classname="org.example.breadfest.DieTest" time="0.001"/>
+  <testcase name="testMagicDie()" classname="org.example.breadfest.DieTest" time="0.002"/>
+  <testcase name="testNormalDieGeneration()" classname="org.example.breadfest.DieTest" time="0.0"/>
+  <testcase name="makeDieByType()" classname="org.example.breadfest.DieTest" time="0.001"/>
+>>>>>>> 2ec5f1c29508c866cc112645db726a1deb2204fc
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

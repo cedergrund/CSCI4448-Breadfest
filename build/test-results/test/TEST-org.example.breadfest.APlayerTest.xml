@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.breadfest.APlayerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-05-01T01:36:30" hostname="econ2-204-18-edu.int.colorado.edu" time="0.261">
+<testsuite name="org.example.breadfest.APlayerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-05-01T03:06:05" hostname="econ2-204-18-edu.int.colorado.edu" time="0.229">
   <properties/>
-  <testcase name="getInstance()" classname="org.example.breadfest.APlayerTest" time="0.242"/>
-  <testcase name="changingDie()" classname="org.example.breadfest.APlayerTest" time="0.001"/>
+  <testcase name="getInstance()" classname="org.example.breadfest.APlayerTest" time="0.21"/>
+  <testcase name="changingDie()" classname="org.example.breadfest.APlayerTest" time="0.0"/>
   <testcase name="changeCurrPatience()" classname="org.example.breadfest.APlayerTest" time="0.001"/>
   <testcase name="setFightingDinosaur()" classname="org.example.breadfest.APlayerTest" time="0.012"/>
   <testcase name="getCurrHonor()" classname="org.example.breadfest.APlayerTest" time="0.0"/>
   <testcase name="changingIngredientInventory()" classname="org.example.breadfest.APlayerTest" time="0.001"/>
-  <testcase name="rollCurrentDie()" classname="org.example.breadfest.APlayerTest" time="0.001"/>
+  <testcase name="rollCurrentDie()" classname="org.example.breadfest.APlayerTest" time="0.0"/>
   <testcase name="getIngredientInventory()" classname="org.example.breadfest.APlayerTest" time="0.0"/>
-  <testcase name="getBasePatience()" classname="org.example.breadfest.APlayerTest" time="0.0"/>
+  <testcase name="getBasePatience()" classname="org.example.breadfest.APlayerTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
