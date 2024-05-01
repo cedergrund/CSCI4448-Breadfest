@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.breadfest.FXMLCaveGameAdaptorTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2024-05-01T03:06:05" hostname="econ2-204-18-edu.int.colorado.edu" time="0.013">
+  <properties/>
+  <testcase name="enterRoom0()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.002"/>
+  <testcase name="moveRoom()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.001"/>
+  <testcase name="testPlayerCollectsIngredient()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.001"/>
+  <testcase name="bakeIngredientsFromTable()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.001"/>
+  <testcase name="testGetObjectByLocation()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.0"/>
+  <testcase name="testGetObjectsAtAllLocations()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.001"/>
+  <testcase name="getObjectsAtAllLocations()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.0"/>
+  <testcase name="testMoveRoom()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.001"/>
+  <testcase name="updateActiveDice()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.0"/>
+  <testcase name="regenerateCaveSystem()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.001"/>
+  <testcase name="getIngredientInventory()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.001"/>
+  <testcase name="removeIngredientFromInventory()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.0"/>
+  <testcase name="getFightersInformation()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.001"/>
+  <testcase name="getObjectByLocation()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.0"/>
+  <testcase name="clickLocation()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.001"/>
+  <testcase name="getMaxPlayerPatience()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.001"/>
+  <testcase name="getRoomExitDirections()" classname="org.example.breadfest.FXMLCaveGameAdaptorTest" time="0.0"/>
+  <system-out><![CDATA[Moved to depth 1
+Moved to depth 1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.breadfest.DinosaurTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-05-01T03:06:05" hostname="econ2-204-18-edu.int.colorado.edu" time="0.003">
+  <properties/>
+  <testcase name="makeDinosaurFromDepth()" classname="org.example.breadfest.DinosaurTest" time="0.001"/>
+  <testcase name="getDamageModifier()" classname="org.example.breadfest.DinosaurTest" time="0.0"/>
+  <testcase name="getRewardIngredient()" classname="org.example.breadfest.DinosaurTest" time="0.0"/>
+  <testcase name="getName()" classname="org.example.breadfest.DinosaurTest" time="0.001"/>
+  <testcase name="changeCurrPatience()" classname="org.example.breadfest.DinosaurTest" time="0.0"/>
+  <testcase name="getDinosaurType()" classname="org.example.breadfest.DinosaurTest" time="0.0"/>
+  <testcase name="getRewardDie()" classname="org.example.breadfest.DinosaurTest" time="0.0"/>
+  <testcase name="rollDie()" classname="org.example.breadfest.DinosaurTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
