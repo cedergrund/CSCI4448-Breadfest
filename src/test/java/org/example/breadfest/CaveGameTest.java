@@ -8,6 +8,7 @@ import org.example.breadfest.ingredients.IngredientRarity;
 import org.example.breadfest.ingredients.IngredientTypes;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +25,6 @@ class CaveGameTest {
 //        CaveGame cave_game_test = new CaveGame();
 //        assertNotNull(cave_game_test);
 //        cave_game_test.fightDinosaur(7);
-
     }
 
 
@@ -43,6 +43,7 @@ class CaveGameTest {
 
         cave_game_test.playerCollectsIngredient(ingredient_test, location_test);
         assertNotNull(cave_game_test);
+        cave_game_test.wipeInventory();
     }
 
     @Test
@@ -147,11 +148,7 @@ class CaveGameTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-    }
-
-    @Test
-    void testGetRoomExitDirections() {
+        test_game.wipeInventory();
 
     }
 
@@ -194,67 +191,142 @@ class CaveGameTest {
 
     @Test
     void isValidIngredientList() {
+        CaveGame test_game = new CaveGame();
+        List<String> valid_ingredients_list_test = new ArrayList<>();
+
+        // Adding ingredients to the list
+        valid_ingredients_list_test.add("Flour");
+        valid_ingredients_list_test.add("Water");
+        valid_ingredients_list_test.add("Salt");
+        valid_ingredients_list_test.add("Yeast");
+
+        assertTrue(test_game.isValidIngredientList(valid_ingredients_list_test));
+
+        List<String> non_valid_ingredients_list_test = new ArrayList<>();
+
+        non_valid_ingredients_list_test.add("Flour");
+        non_valid_ingredients_list_test.add("Water");
+
+        assertFalse(test_game.isValidIngredientList(non_valid_ingredients_list_test));
+        test_game.wipeInventory();
+
     }
 
     @Test
     void bakeIngredientsFromTable() {
+        CaveGame cave_game_test = new CaveGame();
+        assertNotNull(cave_game_test);
+
+        cave_game_test.playerCollectsIngredient(new Ingredient("name_test_1", IngredientTypes.Flour, IngredientRarity.Common), 0);
+        cave_game_test.playerCollectsIngredient(new Ingredient("name_test_2", IngredientTypes.Water, IngredientRarity.Rare), 1);
+
+        String[] common_flour_string_test = {"1", "name_test_1", "Flour"}; // we only need the name to test the function
+        String[] rare_water_string_test = {"1", "name_test_2", "Water"};
+        List<String[]> string_ingredients_test = new ArrayList<>();
+        string_ingredients_test.add(common_flour_string_test);
+        string_ingredients_test.add(rare_water_string_test);
+
+        String[] baked_values_test = cave_game_test.bakeIngredientsFromTable(string_ingredients_test);
+
+        assertEquals(baked_values_test[0], String.valueOf(0)); // assert that the function is capable of recognizing this as an invalid bake
+        cave_game_test.wipeInventory();
     }
 
     @Test
     void removeIngredientFromInventory() {
+        CaveGame cave_game_test = new CaveGame();
+        assertNotNull(cave_game_test);
+        cave_game_test.wipeInventory();
+
+        cave_game_test.playerCollectsIngredient(new Ingredient("name_test_1", IngredientTypes.Flour, IngredientRarity.Common), 0);
+        List<String[]> flour_inventory_test = cave_game_test.getIngredientInventory("Flour");
+        assertEquals(flour_inventory_test.size(),1);
+//
+        cave_game_test.removeIngredientFromInventory("name_test_1");
+        flour_inventory_test = cave_game_test.getIngredientInventory("Flour");
+        assertEquals(flour_inventory_test.size(),0);
+        cave_game_test.wipeInventory();
     }
 
     @Test
-    void testMoveRoom() {
+    void testMoveRoom(){
+        CaveGame cave_game_test = new CaveGame();
+        assertNotNull(cave_game_test);
+
+        int original_patience_test = cave_game_test.getCurrPlayerPatience();
+
+        cave_game_test.moveRoom('N');
+
+        int moved_patience_test = cave_game_test.getCurrPlayerPatience();
+
+        assertNotEquals(original_patience_test, moved_patience_test);
     }
 
     @Test
     void testEnterRoom0() {
+        CaveGame cave_game_test = new CaveGame();
+        assertNotNull(cave_game_test);
+
+        int curr_patience_test = cave_game_test.getCurrPlayerPatience();
+
+        assertNotEquals(curr_patience_test, 0);
+
     }
 
     @Test
     void testGetObjectByLocation() {
-    }
+        CaveGame test_game = new CaveGame();
 
-    @Test
-    void getCurrPlayerPatience() {
+        String[] object = test_game.getObjectByLocation(0);
+        // this should be null since we didn't put anything at location 0
+        assertNull(object);
     }
 
     @Test
     void getCurrPlayerHonor() {
-    }
+        CaveGame test_game = new CaveGame();
 
-    @Test
-    void getDinosaurImageByLocation() {
-    }
-
-    @Test
-    void getIngredientImageByLocation() {
+        int curr_honor_test = test_game.getCurrPlayerHonor();
+        assertEquals(curr_honor_test, 0);
     }
 
     @Test
     void getMaxPlayerPatience() {
+        CaveGame test_game = new CaveGame();
+
+        int max_patience_test = test_game.getMaxPlayerPatience();
+
+        assertNotEquals(max_patience_test, 0);
     }
 
     @Test
-    void getFightersInformation() {
+    void getFightersInformation() throws Exception {
+        CaveGame test_game = new CaveGame();
+
+        String dino_name_test = "dino_test";
+        DinosaurAndDiceTypes dino_type_test = DinosaurAndDiceTypes.Common;
+        Dinosaur dino_test = new Dinosaur(dino_name_test, dino_type_test);
+        test_game.setFightingDinosaur(dino_test);
+
+        String[] fighter_info_test = test_game.getFightersInformation();
+
+        assertEquals(fighter_info_test[0], "Player");
     }
 
     @Test
     void getDieInformation() {
+
     }
 
     @Test
     void fightDinosaur() {
+
     }
 
     @Test
     void stopFight() {
     }
 
-    @Test
-    void getDinoImage() {
-    }
 
     @Test
     void getIngredientImageByString() {
@@ -266,9 +338,12 @@ class CaveGameTest {
 
     @Test
     void regenerateCaveSystem() {
+
+
     }
 
     @Test
     void getPreviousReward() {
+
     }
 }

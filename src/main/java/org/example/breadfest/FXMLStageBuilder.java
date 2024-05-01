@@ -449,7 +449,7 @@ public class FXMLStageBuilder {
         // title
         Label inventory_label = new Label("Ingredient Inventory");
         inventory_label.setLayoutX(25);
-        inventory_label.setLayoutY(100);
+        inventory_label.setLayoutY(25);
         inventory_label.setTextFill(javafx.scene.paint.Color.WHITE);
         inventory_label.setStyle("-fx-font-family: 'Arial Black'; -fx-font-size: 48px;");
         root.getChildren().add(inventory_label);

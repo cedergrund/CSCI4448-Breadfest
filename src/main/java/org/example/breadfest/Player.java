@@ -263,7 +263,7 @@ public class Player {
         return returned_array;
 
     }
-
+    
     public List<String[]> getIngredientInventory(String type) {
 
         List<String[]> ingredient_inventory = new ArrayList<>();
@@ -283,6 +283,13 @@ public class Player {
             ingredient_inventory.add(curr_ingredient_information);
         }
         return ingredient_inventory;
+    }
+
+    public void wipeInventory() {
+        List<String[]> current_inventory = this.getIngredientInventory();
+        for (String[] ingredient : current_inventory){
+            this.removeIngredientFromInventory(ingredient[1]);
+        }
     }
 
     public List<String[]> getIngredientInventory() {
