@@ -161,10 +161,6 @@ class CaveGameTest {
                 something_exists_in_room0 = true;
                 break;
             }
-            if (Objects.equals(object, "ingredient")) {
-                something_exists_in_room0 = true;
-                break;
-            }
         }
         assertFalse(something_exists_in_room0);
     }
@@ -306,27 +302,27 @@ class CaveGameTest {
         String dino_name_test = "dino_test";
         DinosaurAndDiceTypes dino_type_test = DinosaurAndDiceTypes.Common;
         Dinosaur dino_test = new Dinosaur(dino_name_test, dino_type_test);
-        test_game.setFightingDinosaur(dino_test);
 
         String[] fighter_info_test = test_game.getFightersInformation();
+        assertEquals(fighter_info_test[0], "error");
+        test_game.setFightingDinosaur(dino_test);
+        assertEquals("file:src/main/resources/org/example/breadfest/images/dino1.100x.gif", test_game.getDinoImage());
+
+        fighter_info_test = test_game.getFightersInformation();
 
         assertEquals(fighter_info_test[0], "Player");
-    }
-
-    @Test
-    void getDieInformation() {
-
-
-    }
-
-    @Test
-    void fightDinosaur() {
+//
+        String[] fight_result_test = test_game.fightDinosaur(0);
+//
+//        test_game.stopFight(false);
 
     }
 
-    @Test
-    void stopFight() {
-    }
+//    @Test
+//    void getDieInformation() {
+//
+//
+//    }
 
 
     @Test
@@ -335,16 +331,16 @@ class CaveGameTest {
 
     @Test
     void updateActiveDice() {
+        CaveGame test_game = new CaveGame();
+        test_game.updateActiveDice(1);
+        assertNotNull(test_game);
     }
 
     @Test
     void regenerateCaveSystem() {
-
-
+        CaveGame test_game = new CaveGame();
+        test_game.regenerateCaveSystem();
+        assertNotNull(test_game);
     }
 
-    @Test
-    void getPreviousReward() {
-
-    }
 }

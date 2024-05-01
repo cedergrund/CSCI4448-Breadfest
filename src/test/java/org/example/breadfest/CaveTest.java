@@ -43,7 +43,7 @@ class CaveTest {
     @Test
     void move() throws Exception {
         int test_depth = 0;
-        Cave cave_test = new Cave(test_depth);
+        Cave cave_test = Cave.enterRoom0();
         cave_test.generateNeighboringRoomsMap();
         Cave cave_moved_into_test = cave_test.move('N');
         assertEquals(cave_moved_into_test, cave_test.getRoomNeighbor('N'));

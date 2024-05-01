@@ -158,10 +158,6 @@ public class Player {
         return false;
     }
 
-//    private void playerLost(){
-//
-//    }
-
     public String[] attackDinosaur(int die_index_selection){
         // returned by index: 0: dying party (empty if no death), 1:player roll, 2: dino roll, 3: result
 

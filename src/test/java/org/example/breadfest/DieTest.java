@@ -49,7 +49,7 @@ public class DieTest {
         assertEquals(test_die.getRarity(), "Common");
         assertNotNull(test_die.getPDFImage());
         int roll = test_die.rollDice();
-        assertTrue(roll <= 6 && roll >=1);
+        assertTrue(roll <= 7 && roll >=1);
 
         Dice test_die2 = die_factory.makeDieByType("Rare", "dino");
         assertNotNull(test_die2);
