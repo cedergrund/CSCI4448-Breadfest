@@ -32,7 +32,6 @@ public class FXMLCaveApplication {
 
         stage = new FXMLStageBuilder(this, this.stage)
                 .setCaveEntranceBackground()
-                .addWelcomeToBreadfestLabel()
                 .addCaveEntranceButtonAndParticles()
                 .addPlayerWithInventoryButton("Entrance")
                 .addBakingSceneButton("Entrance")
